@@ -7,7 +7,14 @@
 //
 
 #import "AppDelegate.h"
-
+#import "AboutMeHttpHandler.h"
+#import "AppDelegate+utils.h"
+#import "BaseNavigationViewController.h"
+#import "MRJNavigationBar.h"
+#import "MRJLoginViewController.h"
+#import "MRJIntroduceViewController.h"
+#import "LoginRegistResourceManager.h"
+#import "MRJMacros.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +24,35 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [AboutMeHttpHandler checkUpdateWithApiName:api_loginRegist_heart_beat successBlock:^(id obj) {
+        
+    } failedBlock:^(id obj) {
+        
+    }];
+    if (IS_IPHONE_4) {
+        
+    }
+    NSArray *arr = @[[LoginRegistResourceManager introduceImageWithSqueue:1],
+                     [LoginRegistResourceManager introduceImageWithSqueue:2],
+                     [LoginRegistResourceManager introduceImageWithSqueue:3],
+                     [LoginRegistResourceManager introduceImageWithSqueue:4],
+                     [LoginRegistResourceManager introduceImageWithSqueue:5]
+                     ];
+    MRJIntroduceViewController* indroduceVC = [[MRJIntroduceViewController alloc]initWithImageArr:arr];
+    self.window.rootViewController = indroduceVC;
+    
+//    MRJLoginViewController *loginVC = [[MRJLoginViewController alloc]init];
+//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithNavigationBarClass:[MRJNavigationBar class] toolbarClass:[UIToolbar class]];
+//    [nav setViewControllers:@[loginVC] animated:YES];
+//    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
+//    if ([self checkFirstInstall]) {
+//        
+//        
+//        
+//        
+//    }
     return YES;
 }
 
