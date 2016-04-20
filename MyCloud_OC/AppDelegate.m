@@ -30,22 +30,22 @@
     } failedBlock:^(id obj) {
         
     }];
-    if (IS_IPHONE_4) {
-        
-    }
-    NSArray *arr = @[[LoginRegistResourceManager introduceImageWithSqueue:1],
-                     [LoginRegistResourceManager introduceImageWithSqueue:2],
-                     [LoginRegistResourceManager introduceImageWithSqueue:3],
-                     [LoginRegistResourceManager introduceImageWithSqueue:4],
-                     [LoginRegistResourceManager introduceImageWithSqueue:5]
-                     ];
-    MRJIntroduceViewController* indroduceVC = [[MRJIntroduceViewController alloc]initWithImageArr:arr];
-    self.window.rootViewController = indroduceVC;
+//    if (IS_IPHONE_4) {
+//        
+//    }
+//    NSArray *arr = @[[LoginRegistResourceManager introduceImageWithSqueue:1],
+//                     [LoginRegistResourceManager introduceImageWithSqueue:2],
+//                     [LoginRegistResourceManager introduceImageWithSqueue:3],
+//                     [LoginRegistResourceManager introduceImageWithSqueue:4],
+//                     [LoginRegistResourceManager introduceImageWithSqueue:5]
+//                     ];
+//    MRJIntroduceViewController* indroduceVC = [[MRJIntroduceViewController alloc]initWithImageArr:arr];
+//    self.window.rootViewController = indroduceVC;
     
-//    MRJLoginViewController *loginVC = [[MRJLoginViewController alloc]init];
-//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithNavigationBarClass:[MRJNavigationBar class] toolbarClass:[UIToolbar class]];
-//    [nav setViewControllers:@[loginVC] animated:YES];
-//    self.window.rootViewController = nav;
+    MRJLoginViewController *loginVC = [[MRJLoginViewController alloc]init];
+    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithNavigationBarClass:[MRJNavigationBar class] toolbarClass:[UIToolbar class]];
+    [nav setViewControllers:@[loginVC] animated:YES];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
 //    if ([self checkFirstInstall]) {
 //        

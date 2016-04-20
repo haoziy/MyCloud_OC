@@ -10,6 +10,6 @@
 #import "ReactiveCocoa.h"
 #import "Masonry.h"
 @interface BaseViewController : UIViewController
-
+@property(nonatomic,strong)UIScrollView *backScrollView;
 
 @end

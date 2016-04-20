@@ -28,9 +28,17 @@
 
     CGFloat inset  = self.collectionView.bounds.size.width * (6/64.0f);
     inset = floor(inset);
-
-    self.itemSize = CGSizeMake(self.collectionView.bounds.size.width - (2 *inset), self.collectionView.bounds.size.height * 3/4);
-    self.sectionInset = UIEdgeInsetsMake(0,inset, 0,inset);
+//
+//    self.itemSize = CGSizeMake(self.collectionView.bounds.size.width - (2 *inset), self.collectionView.bounds.size.height);
+    self.sectionInset = UIEdgeInsetsMake(inset,inset, inset,inset);
+    
+    self.headerReferenceSize = CGSizeZero;
+    self.minimumLineSpacing = inset;
+    self.minimumInteritemSpacing = 0;
+    self.footerReferenceSize = CGSizeZero;
+    
+    self.itemSize  = CGSizeMake(self.collectionView.frame.size.width-2*inset, self.collectionView.frame.size.height-2*inset);
+    
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 }
 
@@ -182,14 +190,14 @@
     CATransform3D t = CATransform3DIdentity;
     t.m34  = 1.0/-500;
     
-    if (axis)
-    {
-        t = CATransform3DRotate(t,angle, 1, 1, 0);
-    }
-    else
-    {
-        t = CATransform3DRotate(t,angle, -1, 1, 0);
-    }
+//    if (axis)
+//    {
+//        t = CATransform3DRotate(t,angle, 1, 1, 0);
+//    }
+//    else
+//    {
+//        t = CATransform3DRotate(t,angle, -1, 1, 0);
+//    }
     //    t = CATransform3DTranslate(t, 0, height, 0);
     
     return t;

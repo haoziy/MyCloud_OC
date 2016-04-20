@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 
+
 @interface BaseViewController ()
 
 @end
@@ -16,7 +17,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
+    _backScrollView = [[UIScrollView alloc]init];
+    [self.view addSubview:_backScrollView];
+    _backScrollView.showsHorizontalScrollIndicator = NO;
+    _backScrollView.showsVerticalScrollIndicator  = NO;
+    __weak BaseViewController* wealfSelf =  self;
+    [_backScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.insets.mas_equal
+    }];
     // Do any additional setup after loading the view.
 }
 

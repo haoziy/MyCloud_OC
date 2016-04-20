@@ -20,7 +20,10 @@ NSString *const collectionIndetifier = @"mrj_collectionIndetifier";
 
 @implementation MRJIntroduceViewController
 
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
 -(instancetype)initWithImageArr:(NSArray<UIImage*>*)imagesArr;
 {
     self = [super init];
@@ -32,9 +35,17 @@ NSString *const collectionIndetifier = @"mrj_collectionIndetifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    RACSignal *textfSignal = [[[UITextField alloc]init] rac_textSignal];
+    [textfSignal subscribeNext:^(id x) {
+        
+    }];
     
+    RACSignal *signal = [RACSignal combineLatest:@[_introduceImages.rac_sequence] reduce:^id{
+        return nil;
+    }];
+//
     RGCardViewLayout *layout = [[RGCardViewLayout alloc]init];
-    layout.itemSize = CGSizeMake(50, 50);
+    layout.itemSize = CGSizeMake(375 , 667);
     
     collectView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout ];
     collectView.backgroundColor = [UIColor whiteColor];
@@ -55,15 +66,20 @@ NSString *const collectionIndetifier = @"mrj_collectionIndetifier";
 }
 
 #pragma mark -- requiredDelgate method
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section;
 {
-    return 1;
+    return self.introduceImages.count;
 }
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
     MRJIntroduceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionIndetifier forIndexPath:indexPath];
     [self configureCell:cell withIndexPath:indexPath];
+    [cell.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(cell.contentView);
+        make.size.mas_equalTo(cell.contentView);
+    }];
     return cell;
 }
 - (void)configureCell:(MRJIntroduceCollectionViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
@@ -71,9 +87,8 @@ NSString *const collectionIndetifier = @"mrj_collectionIndetifier";
 //    UIView  *subview = [cell.contentView viewWithTag:1];
 //    [subview removeFromSuperview];
     
-    switch (indexPath.section) {
+    switch (indexPath.row) {
         case 0:
-            
             cell.mainLabel.text = @"Glaciers";
             break;
         case 1:
@@ -90,18 +105,22 @@ NSString *const collectionIndetifier = @"mrj_collectionIndetifier";
         default:
             break;
     }
-    cell.imageView.image =  self.introduceImages[indexPath.section];
+    cell.imageView.image =  self.introduceImages[indexPath.row];
 }
 #pragma mark -- optional delegate Method
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return  4;
-}
+//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath;
+//{
+//    return <#expression#>
+//}
+//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+//{
+//    return  self.introduceImages.count;
+//}
 // The view that is returned must be retrieved from a call to -dequeueReusableSupplementaryViewOfKind:withReuseIdentifier:forIndexPath:
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath;
-{
-    return nil;
-}
+//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath;
+//{
+//    return nil;
+//}
 /*
 #pragma mark - Navigation
 
