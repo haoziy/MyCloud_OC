@@ -41,7 +41,6 @@
 //                     ];
 //    MRJIntroduceViewController* indroduceVC = [[MRJIntroduceViewController alloc]initWithImageArr:arr];
 //    self.window.rootViewController = indroduceVC;
-    
     MRJLoginViewController *loginVC = [[MRJLoginViewController alloc]init];
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithNavigationBarClass:[MRJNavigationBar class] toolbarClass:[UIToolbar class]];
     [nav setViewControllers:@[loginVC] animated:YES];

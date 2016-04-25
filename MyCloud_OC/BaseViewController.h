@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ReactiveCocoa.h"
-#import "Masonry.h"
 @interface BaseViewController : UIViewController
-@property(nonatomic,strong)UIScrollView *backScrollView;
+@property(nonatomic,strong)MRJScrollView *backScrollView;
 
 @end

@@ -15,6 +15,16 @@ CGFloat const font_middleTextFontSize = 15.0f;//中号字体
 CGFloat const font_smallTextFontSize = 11.0f;;//小号文本字体
 
 @implementation MRJSizeManager
+
++(CGSize)getSizeWithText:(NSString *)text font:(UIFont *)font{
+    CGSize size = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine attributes:@{NSFontAttributeName:font} context:NULL].size;
+    return size;
+}
+
++(CGSize)getSizeWithText:(NSString *)text font:(UIFont *)font maxSize:(CGSize)maxSize{
+    CGSize size = [text boundingRectWithSize:maxSize options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine attributes:@{NSFontAttributeName:font,} context:NULL].size;
+    return size;
+}
 +(UIFont*)mrjFontOfSize:(CGFloat)size;
 {
     return [UIFont systemFontOfSize:size];
@@ -35,5 +45,25 @@ CGFloat const font_smallTextFontSize = 11.0f;;//小号文本字体
 +(UIFont*)mrjsmallTextFont;
 {
     return [UIFont systemFontOfSize:font_smallTextFontSize];
+}
++(CGFloat)mrjVerticalPadding;
+{
+    return 16;
+}
++(CGFloat)mrjHorizonPaddding;
+{
+    return 16;
+}
++(CGFloat)mrjInputSizeHeight;
+{
+    return 44;
+}
++(CGFloat)mrjButtonCornerRadius;
+{
+    return 5.f;
+}
++(CGFloat)mrjSepritorHeight;//分割线高度
+{
+    return 0.5f;
 }
 @end

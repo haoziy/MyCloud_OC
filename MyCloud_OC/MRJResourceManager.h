@@ -12,4 +12,7 @@
 @interface MRJResourceManager : NSObject
 
 +(UIImage*)imageForKey:(NSString*)key;
+
+//根据颜色得到图片
++(UIImage *)buttonImageFromColor:(UIColor *)color andSize:(CGSize)size;
 @end

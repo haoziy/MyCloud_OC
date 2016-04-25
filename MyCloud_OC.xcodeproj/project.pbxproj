@@ -61,6 +61,15 @@
 		05E4BF331CB4E6010069BDA4 /* GloballaunchImage@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4BF351CB4E6010069BDA4 /* GloballaunchImage@1x.png */; };
 		05E4BF391CB4E60A0069BDA4 /* GloballaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4BF3B1CB4E60A0069BDA4 /* GloballaunchImage@2x.png */; };
 		05E4BF3F1CB4E6120069BDA4 /* GloballaunchImage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4BF411CB4E6120069BDA4 /* GloballaunchImage@3x.png */; };
+		05FBE2441CCDB05A00729845 /* ChoicePrivateModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE2431CCDB05A00729845 /* ChoicePrivateModelView.m */; };
+		05FBE2481CCDB0AF00729845 /* MRJTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE2471CCDB0AF00729845 /* MRJTextField.m */; };
+		05FBE24B1CCDB80500729845 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE24A1CCDB80500729845 /* UIView+Frame.m */; };
+		05FBE24E1CCDE79D00729845 /* MRJTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE24D1CCDE79D00729845 /* MRJTextFieldDelegate.m */; };
+		05FBE2511CCDE81400729845 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE2501CCDE81400729845 /* UIView+Additions.m */; };
+		05FBE2561CCE112700729845 /* MRJScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE2551CCE112700729845 /* MRJScrollView.m */; };
+		05FBE25A1CCE182900729845 /* MRJCheckUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE2591CCE182900729845 /* MRJCheckUtils.m */; };
+		05FBE25D1CCE192C00729845 /* MRJAppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE25C1CCE192C00729845 /* MRJAppUtils.m */; };
+		05FBE2601CCE196400729845 /* MRJStringCheckUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE25F1CCE196400729845 /* MRJStringCheckUtil.m */; };
 		F1CB5E7BA92EE0FD26A182F7 /* libPods-MyCloud_OC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4432037842F65F19A72E859C /* libPods-MyCloud_OC.a */; };
 /* End PBXBuildFile section */
 
@@ -81,7 +90,37 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0518D0C31CC8A3ED00FD0B1D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05315FEC1CC9C43900EA942F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0518D0A91CC8A3ED00FD0B1D /* MRJNetApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRJNetApi.h; sourceTree = "<group>"; };
+		0518D0AB1CC8A3ED00FD0B1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0518D0CB1CC8A85500FD0B1D /* MRJBaseRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRJBaseRequestModel.h; sourceTree = "<group>"; };
+		0518D0CC1CC8A85500FD0B1D /* MRJBaseRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRJBaseRequestModel.m; sourceTree = "<group>"; };
+		0518D0CF1CC8A95600FD0B1D /* MRJBaseResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRJBaseResponseModel.h; sourceTree = "<group>"; };
+		0518D0D01CC8A95600FD0B1D /* MRJBaseResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRJBaseResponseModel.m; sourceTree = "<group>"; };
+		0518D0D31CC8A9E900FD0B1D /* MRJHttpHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRJHttpHandler.h; sourceTree = "<group>"; };
+		0518D0D41CC8A9E900FD0B1D /* MRJHttpHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRJHttpHandler.m; sourceTree = "<group>"; };
 		0528C68F1CB49E3D001C8281 /* MyCloud_OC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCloud_OC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0528C6931CB49E3D001C8281 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0528C6951CB49E3D001C8281 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -214,6 +253,25 @@
 		05E4BF421CB4E6140069BDA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/GloballaunchImage@3x.png"; sourceTree = "<group>"; };
 		05E4BF431CB4E6150069BDA4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/GloballaunchImage@3x.png"; sourceTree = "<group>"; };
 		05E4BF441CB4E6160069BDA4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hant"; path = "zh-Hant.lproj/GloballaunchImage@3x.png"; sourceTree = "<group>"; };
+		05FBE2421CCDB05A00729845 /* ChoicePrivateModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChoicePrivateModelView.h; path = MyCloud_OC/ChoicePrivateModelView.h; sourceTree = "<group>"; };
+		05FBE2431CCDB05A00729845 /* ChoicePrivateModelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChoicePrivateModelView.m; path = MyCloud_OC/ChoicePrivateModelView.m; sourceTree = "<group>"; };
+		05FBE2461CCDB0AF00729845 /* MRJTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJTextField.h; path = MyCloud_OC/MRJTextField.h; sourceTree = "<group>"; };
+		05FBE2471CCDB0AF00729845 /* MRJTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJTextField.m; path = MyCloud_OC/MRJTextField.m; sourceTree = "<group>"; };
+		05FBE2491CCDB80500729845 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Frame.h"; path = "MyCloud_OC/UIView+Frame.h"; sourceTree = "<group>"; };
+		05FBE24A1CCDB80500729845 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Frame.m"; path = "MyCloud_OC/UIView+Frame.m"; sourceTree = "<group>"; };
+		05FBE24C1CCDE79D00729845 /* MRJTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJTextFieldDelegate.h; path = MyCloud_OC/MRJTextFieldDelegate.h; sourceTree = "<group>"; };
+		05FBE24D1CCDE79D00729845 /* MRJTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJTextFieldDelegate.m; path = MyCloud_OC/MRJTextFieldDelegate.m; sourceTree = "<group>"; };
+		05FBE24F1CCDE81400729845 /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Additions.h"; path = "MyCloud_OC/UIView+Additions.h"; sourceTree = "<group>"; };
+		05FBE2501CCDE81400729845 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Additions.m"; path = "MyCloud_OC/UIView+Additions.m"; sourceTree = "<group>"; };
+		05FBE2531CCDE9E300729845 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		05FBE2541CCE112700729845 /* MRJScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJScrollView.h; path = MyCloud_OC/MRJScrollView.h; sourceTree = "<group>"; };
+		05FBE2551CCE112700729845 /* MRJScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJScrollView.m; path = MyCloud_OC/MRJScrollView.m; sourceTree = "<group>"; };
+		05FBE2581CCE182900729845 /* MRJCheckUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJCheckUtils.h; path = MyCloud_OC/MRJCheckUtils.h; sourceTree = "<group>"; };
+		05FBE2591CCE182900729845 /* MRJCheckUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJCheckUtils.m; path = MyCloud_OC/MRJCheckUtils.m; sourceTree = "<group>"; };
+		05FBE25B1CCE192C00729845 /* MRJAppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJAppUtils.h; path = MyCloud_OC/MRJAppUtils.h; sourceTree = "<group>"; };
+		05FBE25C1CCE192C00729845 /* MRJAppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJAppUtils.m; path = MyCloud_OC/MRJAppUtils.m; sourceTree = "<group>"; };
+		05FBE25E1CCE196400729845 /* MRJStringCheckUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJStringCheckUtil.h; path = MyCloud_OC/MRJStringCheckUtil.h; sourceTree = "<group>"; };
+		05FBE25F1CCE196400729845 /* MRJStringCheckUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJStringCheckUtil.m; path = MyCloud_OC/MRJStringCheckUtil.m; sourceTree = "<group>"; };
 		4432037842F65F19A72E859C /* libPods-MyCloud_OC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyCloud_OC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8D73AD043C9DF81F8A71B9B /* Pods-MyCloud_OC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCloud_OC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyCloud_OC/Pods-MyCloud_OC.debug.xcconfig"; sourceTree = "<group>"; };
 		CD87C404C9FF19394CD343FB /* Pods-MyCloud_OC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCloud_OC.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyCloud_OC/Pods-MyCloud_OC.release.xcconfig"; sourceTree = "<group>"; };
@@ -245,9 +303,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0518D0A81CC8A3ED00FD0B1D /* MRJNetApi */ = {
+			isa = PBXGroup;
+			children = (
+				0518D0CB1CC8A85500FD0B1D /* MRJBaseRequestModel.h */,
+				0518D0CC1CC8A85500FD0B1D /* MRJBaseRequestModel.m */,
+				0518D0CF1CC8A95600FD0B1D /* MRJBaseResponseModel.h */,
+				0518D0D01CC8A95600FD0B1D /* MRJBaseResponseModel.m */,
+				0518D0D31CC8A9E900FD0B1D /* MRJHttpHandler.h */,
+				0518D0D41CC8A9E900FD0B1D /* MRJHttpHandler.m */,
+				0518D0A91CC8A3ED00FD0B1D /* MRJNetApi.h */,
+				0518D0AB1CC8A3ED00FD0B1D /* Info.plist */,
+			);
+			path = MRJNetApi;
+			sourceTree = "<group>";
+		};
 		0528C6861CB49E3D001C8281 = {
 			isa = PBXGroup;
 			children = (
+				05FBE2531CCDE9E300729845 /* PrefixHeader.pch */,
 				0528C6FD1CB4A601001C8281 /* Utils */,
 				0528C6D91CB4A3AA001C8281 /* Modules */,
 				0528C6D81CB4A349001C8281 /* BaseClasses */,
@@ -255,6 +329,7 @@
 				0528C6911CB49E3D001C8281 /* MyCloud_OC */,
 				0528C6AB1CB49E3D001C8281 /* MyCloud_OCTests */,
 				0528C6B61CB49E3D001C8281 /* MyCloud_OCUITests */,
+				0518D0A81CC8A3ED00FD0B1D /* MRJNetApi */,
 				0528C6901CB49E3D001C8281 /* Products */,
 				BF5D7471F8018818F32CB262 /* Pods */,
 				7BE3B0D22FCB977F7C1BAC76 /* Frameworks */,
@@ -452,6 +527,8 @@
 		0528C6FD1CB4A601001C8281 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				05FBE2571CCE181100729845 /* Certification */,
+				05FBE2451CCDB09800729845 /* class */,
 				05293F851CB796940064193B /* MRJMacros.h */,
 				05293F591CB759540064193B /* resourceMangager */,
 				059509351CB4FEE3009B3BBA /* appSinglon */,
@@ -645,6 +722,8 @@
 		05293F7D1CB78AC70064193B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				05FBE2421CCDB05A00729845 /* ChoicePrivateModelView.h */,
+				05FBE2431CCDB05A00729845 /* ChoicePrivateModelView.m */,
 				05293F861CB7A2DF0064193B /* RGCardViewLayout.h */,
 				05293F871CB7A2DF0064193B /* RGCardViewLayout.m */,
 				05293F7F1CB78F8D0064193B /* MRJIntroduceCollectionViewCell.h */,
@@ -664,6 +743,13 @@
 				05293F7B1CB788C10064193B /* MRJIntroduceViewController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		05315FDF1CC9C05900EA942F /* frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = frameworks;
 			sourceTree = "<group>";
 		};
 		056FC5981CB5ECBD003F2BCA /* HomeHttpHandler */ = {
@@ -715,9 +801,40 @@
 			path = GlobalImages;
 			sourceTree = "<group>";
 		};
+		05FBE2451CCDB09800729845 /* class */ = {
+			isa = PBXGroup;
+			children = (
+				05FBE2541CCE112700729845 /* MRJScrollView.h */,
+				05FBE2551CCE112700729845 /* MRJScrollView.m */,
+				05FBE24F1CCDE81400729845 /* UIView+Additions.h */,
+				05FBE2501CCDE81400729845 /* UIView+Additions.m */,
+				05FBE24C1CCDE79D00729845 /* MRJTextFieldDelegate.h */,
+				05FBE24D1CCDE79D00729845 /* MRJTextFieldDelegate.m */,
+				05FBE2491CCDB80500729845 /* UIView+Frame.h */,
+				05FBE24A1CCDB80500729845 /* UIView+Frame.m */,
+				05FBE2461CCDB0AF00729845 /* MRJTextField.h */,
+				05FBE2471CCDB0AF00729845 /* MRJTextField.m */,
+			);
+			name = class;
+			sourceTree = "<group>";
+		};
+		05FBE2571CCE181100729845 /* Certification */ = {
+			isa = PBXGroup;
+			children = (
+				05FBE2581CCE182900729845 /* MRJCheckUtils.h */,
+				05FBE2591CCE182900729845 /* MRJCheckUtils.m */,
+				05FBE25B1CCE192C00729845 /* MRJAppUtils.h */,
+				05FBE25C1CCE192C00729845 /* MRJAppUtils.m */,
+				05FBE25E1CCE196400729845 /* MRJStringCheckUtil.h */,
+				05FBE25F1CCE196400729845 /* MRJStringCheckUtil.m */,
+			);
+			name = Certification;
+			sourceTree = "<group>";
+		};
 		7BE3B0D22FCB977F7C1BAC76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05315FDF1CC9C05900EA942F /* frameworks */,
 				4432037842F65F19A72E859C /* libPods-MyCloud_OC.a */,
 			);
 			name = Frameworks;
@@ -745,6 +862,8 @@
 				0528C68D1CB49E3D001C8281 /* Resources */,
 				719C942C6E43380D3323A3F5 /* Embed Pods Frameworks */,
 				86DFD7E8082E0F2ED9BADD0E /* Copy Pods Resources */,
+				0518D0C31CC8A3ED00FD0B1D /* Embed Frameworks */,
+				05315FEC1CC9C43900EA942F /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -930,11 +1049,15 @@
 				05293F761CB75D1B0064193B /* MRJSizeManager.m in Sources */,
 				056961A31CB4B5E300AECAEF /* HttpHandlerApi.m in Sources */,
 				059509381CB4FF2D009B3BBA /* AppDelegate+utils.m in Sources */,
+				05FBE25A1CCE182900729845 /* MRJCheckUtils.m in Sources */,
+				05FBE2561CCE112700729845 /* MRJScrollView.m in Sources */,
+				05FBE24E1CCDE79D00729845 /* MRJTextFieldDelegate.m in Sources */,
 				0528C6F91CB4A569001C8281 /* BaseTableViewCell.m in Sources */,
 				05293F811CB78F8D0064193B /* MRJIntroduceCollectionViewCell.m in Sources */,
 				05293F881CB7A2DF0064193B /* RGCardViewLayout.m in Sources */,
 				05293F1A1CB740FB0064193B /* MRJLoginViewController.m in Sources */,
 				056FC5A11CB6040A003F2BCA /* MRJStoreManager.m in Sources */,
+				05FBE2601CCE196400729845 /* MRJStringCheckUtil.m in Sources */,
 				05293F201CB745450064193B /* NSString+global.m in Sources */,
 				0595093B1CB4FF73009B3BBA /* AppSingleton.m in Sources */,
 				05293F7C1CB788C10064193B /* MRJIntroduceViewController.m in Sources */,
@@ -950,14 +1073,19 @@
 				0528C6FC1CB4A58A001C8281 /* BaseModel.m in Sources */,
 				0528C6ED1CB4A4E1001C8281 /* BaseTabbarViewController.m in Sources */,
 				0528C6E11CB4A427001C8281 /* BaseViewController.m in Sources */,
+				05FBE2511CCDE81400729845 /* UIView+Additions.m in Sources */,
 				056FC59E1CB5ED25003F2BCA /* AboutMeHttpHandler.m in Sources */,
 				0528C7061CB4A731001C8281 /* StringKeyContentValueManager.m in Sources */,
+				05FBE2441CCDB05A00729845 /* ChoicePrivateModelView.m in Sources */,
+				05FBE2481CCDB0AF00729845 /* MRJTextField.m in Sources */,
 				05293F6A1CB75BED0064193B /* DiscoveryResourceManager.m in Sources */,
+				05FBE24B1CCDB80500729845 /* UIView+Frame.m in Sources */,
 				05293F2E1CB750940064193B /* DiscoveryKeyContentValueManager.m in Sources */,
 				05293F791CB75D660064193B /* MRJColorManager.m in Sources */,
 				0528C70C1CB4AC56001C8281 /* BaseRequestModel.m in Sources */,
 				0528C6971CB49E3D001C8281 /* AppDelegate.m in Sources */,
 				05293F341CB751030064193B /* FormsKeyContentValueManager.m in Sources */,
+				05FBE25D1CCE192C00729845 /* MRJAppUtils.m in Sources */,
 				0528C6941CB49E3D001C8281 /* main.m in Sources */,
 				05293F671CB75BD90064193B /* HomeResourceManager.m in Sources */,
 				0528C6E41CB4A464001C8281 /* BaseShowTabbarViewController.m in Sources */,
@@ -1201,11 +1329,19 @@
 			baseConfigurationReference = C8D73AD043C9DF81F8A71B9B /* Pods-MyCloud_OC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				INFOPLIST_FILE = MyCloud_OC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "MRJ.MyCloud-OC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1214,11 +1350,19 @@
 			baseConfigurationReference = CD87C404C9FF19394CD343FB /* Pods-MyCloud_OC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				INFOPLIST_FILE = MyCloud_OC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "MRJ.MyCloud-OC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -16,6 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.navigationBar setBarTintColor:[MRJColorManager mrj_mainThemeColor]];
+    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[MRJColorManager mrj_navigationTextColor],NSFontAttributeName:[MRJSizeManager mrjNavigationFont]}];
     // Do any additional setup after loading the view.
 }
 

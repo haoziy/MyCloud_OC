@@ -17,9 +17,22 @@ extern CGFloat const font_smallTextFontSize;//小号文本字体
 
 
 @interface MRJSizeManager : NSObject
+//根据字符串以及字体大小,返回size
++(CGSize)getSizeWithText:(NSString *)text font:(UIFont *)font;
+
+//根据字符串以及字体大小,最大size,返回实际size
++(CGSize)getSizeWithText:(NSString *)text font:(UIFont *)font maxSize:(CGSize)maxSize;
+
+
+
 +(UIFont*)mrjFontOfSize:(CGFloat)size;
 +(UIFont*)mrjNavigationFont;
 +(UIFont*)mrjMainTextFont;
 +(UIFont*)mrjMiddleTextFont;
 +(UIFont*)mrjsmallTextFont;
++(CGFloat)mrjVerticalPadding;
++(CGFloat)mrjHorizonPaddding;
++(CGFloat)mrjInputSizeHeight;
++(CGFloat)mrjButtonCornerRadius;
++(CGFloat)mrjSepritorHeight;//分割线高度
 @end

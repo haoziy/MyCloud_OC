@@ -23,9 +23,9 @@
     [self.view addSubview:_backScrollView];
     _backScrollView.showsHorizontalScrollIndicator = NO;
     _backScrollView.showsVerticalScrollIndicator  = NO;
-    __weak BaseViewController* wealfSelf =  self;
+//    __weak BaseViewController* wealfSelf =  self;
     [_backScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.insets.mas_equal
+        make.edges.mas_equalTo(UIEdgeInsetsMake(64, 0, 0, 0));
     }];
     // Do any additional setup after loading the view.
 }

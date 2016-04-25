@@ -18,6 +18,4 @@
 //根据颜色码和透明度,取得颜色对象
 +(UIColor *)colorWithHexString:(NSString *)stringToConvert andAlpha:(float)alpha;
 
-//根据颜色对象和size,取得一张image
-+(UIImage *)buttonImageFromColor:(UIColor *)color andSize:(CGSize)size;
 @end

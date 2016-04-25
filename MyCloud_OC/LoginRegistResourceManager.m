@@ -9,6 +9,8 @@
 #import "LoginRegistResourceManager.h"
 #import "MRJMacros.h"
 
+NSString *const login_accountImageName = @"login_account";
+NSString *const login_passwordImageName = @"login_password";
 @implementation LoginRegistResourceManager
 
 
@@ -33,5 +35,12 @@
     str = [NSString stringWithFormat:@"0%ld_%@",squeue,str];
     return [self imageForKey:str];
 }
-
++(UIImage*)accountIconImage;
+{
+    return [self imageForKey:login_accountImageName];
+}
++(UIImage*)passwordIconImage;
+{
+    return [self imageForKey:login_passwordImageName];
+}
 @end

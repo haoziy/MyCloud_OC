@@ -7,6 +7,7 @@
 //
 
 #import "MRJResourceManager.h"
+
 @interface LoginRegistResourceManager : MRJResourceManager
 
 /**
@@ -18,4 +19,17 @@
  */
 +(UIImage*)introduceImageWithSqueue:(NSInteger)squeue;
 
+/**
+ *  登录账号icon
+ *
+ *  @return 返回对应图片
+ */
++(UIImage*)accountIconImage;
+
+/**
+ *  登录密码icon
+ *
+ *  @return 返回图片
+ */
++(UIImage*)passwordIconImage;
 @end

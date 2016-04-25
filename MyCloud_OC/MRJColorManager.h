@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UIColor+mrjColor.h"
 /**
  16进制颜色字符串
  导航栏上文字颜色一种,白色;
@@ -17,7 +18,7 @@
  .....
  **/
 //导航栏字体颜色;
-extern NSString *const color_hex_navgationTextColorString;
+extern NSString *const color_hex_navigationTextColorString;
 
 //文字内容一级文本颜色
 extern NSString *const color_hex_mainTextColorString;
@@ -46,4 +47,14 @@ extern NSString *const color_hex_separatrixColorString;
 
 @interface MRJColorManager : NSObject
 
+
++(UIColor*)mrj_navigationTextColor;
++(UIColor*)mrj_mainTextColor;
++(UIColor*)mrj_secondaryTextColor;
++(UIColor*)mrj_noticeTextColor;
++(UIColor*)mrj_mainThemeColor;
++(UIColor*)mrj_mainBackgroundColor;
++(UIColor*)mrj_alertColor;
++(UIColor*)mrj_plainColor;
++(UIColor*)mrj_separatrixColor;
 @end

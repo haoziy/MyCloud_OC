@@ -48,6 +48,16 @@
                ReferencedContainer = "container:MyCloud_OC.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0518D0AF1CC8A3ED00FD0B1D"
+               BuildableName = "MRJNetApiTests.xctest"
+               BlueprintName = "MRJNetApiTests"
+               ReferencedContainer = "container:MyCloud_OC.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

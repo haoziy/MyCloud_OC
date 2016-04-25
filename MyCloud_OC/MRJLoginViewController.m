@@ -8,15 +8,19 @@
 
 #import "MRJLoginViewController.h"
 #import "LoginRegistStringValueContentManager.h"
-#import "Masonry.h"
+#import "LoginRegistResourceManager.h"
+#import "ChoicePrivateModelView.h"
 
-@interface MRJLoginViewController ()
+
+@interface MRJLoginViewController ()<ChoicePrivateModelViewDelegate>
 {
-    UITextField *ipAddressTF;
-    UITextField *portTF;
-    UITextField *donmainTF;
-    UITextField *loginAccountTF;
-    UITextField *loginPassTF;
+    MRJTextField *ipAddressTF;
+    MRJTextField *portTF;
+    MRJTextField *donmainTF;
+    MRJTextField *loginAccountTF;
+    MRJTextField *loginPassTF;
+    
+    UIButton *loginBtn;
 }
 
 @end
@@ -30,94 +34,100 @@
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-//    NSLog(@"%@",self.backScrollView);
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:[LoginRegistStringValueContentManager loginRegistLanguageValueForKey:language_login_serviceBtnName] style:UIBarButtonItemStylePlain target:self action:@selector(setupPrivateCloudAddress:)];
+    self.navigationItem.rightBarButtonItem.tintColor = [MRJColorManager mrj_navigationTextColor];
+    
     self.title = [LoginRegistStringValueContentManager loginRegistLanguageValueForKey:language_login_title];
-    CGFloat heitght = 32;
-    CGFloat pading = 18;
-    for (int i = 0; i<5; i++) {
-        UITextField *tf = [[UITextField alloc]init];
-        self.backScrollView.backgroundColor = [UIColor grayColor];
+    CGFloat height = [MRJSizeManager mrjInputSizeHeight];
+    CGFloat pading = [MRJSizeManager mrjHorizonPaddding];
+    for (int i = 0; i<2; i++) {
+        UIImageView *img = nil;
+        MRJTextField *tf = [[MRJTextField alloc]init];
         [self.backScrollView addSubview:tf];
-        tf.backgroundColor = [UIColor redColor];
         [tf mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(@((heitght + pading)*i));
-            make.height.mas_equalTo(@(heitght));
+            make.top.mas_equalTo(@((height)*i+pading));
+            make.height.mas_equalTo(@(height));
             make.centerX.mas_equalTo(tf.superview.mas_centerX);
             make.left.mas_equalTo(pading);
             make.right.mas_equalTo(pading);
             
         }];
-        
-        
-        
         if (i==0) {
-            ipAddressTF = tf;
-            tf.placeholder = [LoginRegistStringValueContentManager loginRegistLanguageValueForKey:language_login_ipAddressPlacement];
-        }else if(i==1)
-        {
-            portTF = tf;
-            tf.placeholder = [LoginRegistStringValueContentManager loginRegistLanguageValueForKey:language_login_portPlacement];
-        }
-        else if(i==2)
-        {
-            donmainTF = tf;
-            tf.placeholder = [LoginRegistStringValueContentManager loginRegistLanguageValueForKey:language_login_domainPlacement];
-        }
-        else if(i==3)
-        {
+            img = [[UIImageView alloc]initWithImage:[LoginRegistResourceManager accountIconImage]];
             loginAccountTF = tf;
             tf.placeholder = [LoginRegistStringValueContentManager loginRegistLanguageValueForKey:language_login_accountPlacement];
-        }
-        else
+        }else
         {
+            img = [[UIImageView alloc]initWithImage:[LoginRegistResourceManager passwordIconImage]];
+            
             loginPassTF = tf;
+            tf.secureTextEntry = YES;
             tf.placeholder = [LoginRegistStringValueContentManager loginRegistLanguageValueForKey:language_login_passwordPlacement];
         }
+        
+        
+        
+        [tf addSubview:img];
+        [img mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(img.superview);
+            make.left.mas_equalTo(0);
+        }];
+        tf.startLocation = pading;
     }
     
     UIButton *btn = [[UIButton alloc]init];
-    btn.backgroundColor = [UIColor blueColor];
-    [btn setTitle:@"denglu" forState:UIControlStateNormal];
+    loginBtn = btn;
+    btn.clipsToBounds = YES;
+    
+    [btn setBackgroundImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_secondaryTextColor] andSize:CGSizeMake(SCREEN_WIDTH-pading*2, height)] forState:UIControlStateDisabled];
+
+    [btn setEnabled:NO];
+    [btn setBackgroundImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_mainThemeColor] andSize:CGSizeMake(SCREEN_WIDTH-pading*2, height)] forState:UIControlStateNormal];
+    
+    btn.layer.cornerRadius = [MRJSizeManager mrjButtonCornerRadius];
+    [btn setTitle:[LoginRegistStringValueContentManager loginRegistLanguageValueForKey:language_login_title] forState:UIControlStateNormal];
     [self.backScrollView addSubview:btn];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(loginPassTF.mas_bottom).with.offset(pading*5);
         make.centerX.mas_equalTo(btn.superview);
-        make.height.mas_equalTo(heitght*2);
-//        make.bottom.mas_equalTo(btn.superview.mas_bottom);
+        make.height.mas_equalTo(height);
         make.left.mas_equalTo(pading);
         make.right.mas_equalTo(pading);
     }];
     
     [self.backScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.view);
-        
         // 让scrollview的contentSize随着内容的增多而变化
-        make.bottom.mas_equalTo(btn.mas_bottom).offset(20);
+        make.bottom.mas_equalTo(btn.mas_bottom).offset(-pading);
     }];
-//    [ipAddressTF mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.and.right.and.top.mas_equalTo(@(20));
-//        make.height.mas_equalTo(@(44));
-//    }];
-//    
-//    [portTF mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.and.right.mas_equalTo(ipAddressTF);
-//        make.top.mas_equalTo()
-//        make.height.mas_equalTo(@(44));
-//    }];
+    RACSignal *loginSignal = [loginBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
+
+    [loginSignal subscribeNext:^(id x) {
+        
+    }];
     
+    RACSignal *validUsernameSignal =
+    [loginAccountTF.rac_textSignal
+     map:^id(NSString *text) {
+         return @([MRJStringCheckUtil checkPhoneNumber:text]||[MRJStringCheckUtil isValidateEmail:text]);
+     }];
+    RACSignal *validPassSingal = [loginPassTF.rac_textSignal
+                                  map:^id(NSString *text) {
+                                      return @(text.length>0);
+                                  }];
     
-//    ipAddressTF = [[UITextField alloc]init];
-//    portTF = [[UITextField alloc]init];
-//    donmainTF = [[UITextField alloc]init];
-//    loginAccountTF = [[UITextField alloc]init];
-//    loginPassTF = [[UITextField alloc]init];
-//
-//    [self.view addSubview:ipAddressTF];
-    
+    RACSignal *activeSignal =
+    [RACSignal combineLatest:@[validUsernameSignal,validPassSingal]
+                      reduce:^id(NSNumber *validAccount,NSNumber *validPass){
+        return @([validAccount boolValue]&&[validPass boolValue]);
+    }];
+
+    [activeSignal subscribeNext:^(NSNumber*signupActive){
+        loginBtn.enabled =[signupActive boolValue];
+    }];
     
     
     
@@ -128,7 +138,32 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)setupPrivateCloudAddress:(id)sender
+{
+    ChoicePrivateModelView *v = [[ChoicePrivateModelView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.window.height)];
+    [self.view.window addSubview:v];
+    v.delegate = self;
+    v.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+//    v.ipTextField.text = [APPSinglton shareInstance].myCloudIP;
+//    v.portTextField.text = [APPSinglton shareInstance].myCloudPort;
+//    self.navigationController.navigationBar.userInteractionEnabled = NO;
+//    _bossButton.hidden = YES;
+//    _externalLoginView.hidden = YES;
+//    [self.view addSubview:v];
+}
+-(void)loginPressed:(id)sender
+{
+    
+}
+-(void)cancelOperation:(ChoicePrivateModelView*)view;
+{
+    [view removeFromSuperview];
+    
+}
+-(void)operationCompleted:(ChoicePrivateModelView*)view withResult:(NSData*)data;
+{
+    
+}
 /*
 #pragma mark - Navigation
 
