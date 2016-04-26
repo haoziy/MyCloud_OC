@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BaseTableViewCell;
+@protocol BaseTableViewCellDelegate <NSObject>
+
+-(void)cell:(BaseTableViewCell*)cell operationWithOperation:(id)data;
+
+@end
+
 
 @interface BaseTableViewCell : UITableViewCell
 
+@property(nonatomic,weak)id <BaseTableViewCellDelegate> delegate;
 @end

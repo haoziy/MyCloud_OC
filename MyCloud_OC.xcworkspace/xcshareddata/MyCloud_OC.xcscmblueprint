@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9CCF445FFFAE0A822B6B07FC38506BFB01777B32",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "a0425e3e-4801-0010-827d-cb497de3be2f++178" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9CCF445FFFAE0A822B6B07FC38506BFB01777B32" : 0,
+    "a0425e3e-4801-0010-827d-cb497de3be2f++178" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "441D8438-2CB8-42EC-B1E4-80A77AAF400D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9CCF445FFFAE0A822B6B07FC38506BFB01777B32" : "MyCloud_OC\/",
+    "a0425e3e-4801-0010-827d-cb497de3be2f++178" : "..\/Desktop\/develop"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MyCloud_OC",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MyCloud_OC.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/haoziy\/MyCloud_OC.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9CCF445FFFAE0A822B6B07FC38506BFB01777B32"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.0.254\/mrj",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "a0425e3e-4801-0010-827d-cb497de3be2f++178"
+    }
+  ]
+}

@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+#import "DeBugLog.h"
 
 @interface BaseViewController ()
 
@@ -17,15 +17,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
-    _backScrollView = [[UIScrollView alloc]init];
+    _backScrollView = [[MRJScrollView alloc]init];
     [self.view addSubview:_backScrollView];
     _backScrollView.showsHorizontalScrollIndicator = NO;
     _backScrollView.showsVerticalScrollIndicator  = NO;
-//    __weak BaseViewController* wealfSelf =  self;
     [_backScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(64, 0, 0, 0));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
     // Do any additional setup after loading the view.
 }
@@ -44,5 +43,8 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+-(void)dealloc
+{
+    [DeBugLog debugLog:NSStringFromClass([self class]) line:__LINE__ otherInfo:@"release"];
+}
 @end

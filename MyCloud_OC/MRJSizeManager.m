@@ -66,4 +66,8 @@ CGFloat const font_smallTextFontSize = 11.0f;;//小号文本字体
 {
     return 0.5f;
 }
++(CGFloat)mrjTableHeadHeight;
+{
+    return  27;
+}
 @end

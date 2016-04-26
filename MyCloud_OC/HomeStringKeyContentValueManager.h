@@ -8,6 +8,12 @@
 
 #import "StringKeyContentValueManager.h"
 
+
+extern NSString * const language_homeDeviceManagerTitle;//设备管理标题
+extern NSString * const language_homeDeviceManagerExitCurrentCloudTitle;//设备管理 退出当前私有云标题
+
+extern NSString * const language_homeDeviceManagerConfigNetButtonName;//配置网络按钮名
+extern NSString * const language_homeDeviceManagerDelNetButtonName;//删除网络按钮名
 @interface HomeStringKeyContentValueManager : StringKeyContentValueManager
 
 @end

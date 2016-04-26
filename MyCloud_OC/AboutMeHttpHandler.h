@@ -10,6 +10,13 @@
 
 @interface AboutMeHttpHandler : BaseHttpHandler
 
+/**
+ *  检查更新
+ *
+ *  @param apiName apiName
+ *  @param success successBlock
+ *  @param failed  failedBlock
+ */
 +(void)checkUpdateWithApiName:(ApiNameMap)apiName successBlock:(MRJSuccessBlock) success failedBlock:(MRJFailedBlock)failed;
 
 

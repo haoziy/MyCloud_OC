@@ -23,12 +23,7 @@ typedef NSString* const ApiNameMap;
  //每一个接口需要的参数需要暴露给外部使用,所以推荐使用请求模型来处理;看到请求模型就明白参数需求了
  */
 
-/**
- *  @param nil
- *  @discription 切换云时候的心跳接口;
- *
- */
-extern ApiNameMap api_loginRegist_heart_beat;//切换云心跳测试接口
+
 /**
  *  @param
  *  @discription 登录接口

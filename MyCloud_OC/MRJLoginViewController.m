@@ -10,17 +10,17 @@
 #import "LoginRegistStringValueContentManager.h"
 #import "LoginRegistResourceManager.h"
 #import "ChoicePrivateModelView.h"
-
+#import "LoginRegistHttpHandler.h"
+#import "HomeDeviceManagerViewController.h"
 
 @interface MRJLoginViewController ()<ChoicePrivateModelViewDelegate>
 {
-    MRJTextField *ipAddressTF;
-    MRJTextField *portTF;
-    MRJTextField *donmainTF;
+
     MRJTextField *loginAccountTF;
     MRJTextField *loginPassTF;
     
     UIButton *loginBtn;
+//    ChoicePrivateModelView *choiceServiceAddressV;
 }
 
 @end
@@ -59,6 +59,7 @@
         if (i==0) {
             img = [[UIImageView alloc]initWithImage:[LoginRegistResourceManager accountIconImage]];
             loginAccountTF = tf;
+            tf.text = [AppSingleton shareInstace].lastLoginMobileOrEmail;
             tf.placeholder = [LoginRegistStringValueContentManager loginRegistLanguageValueForKey:language_login_accountPlacement];
         }else
         {
@@ -106,7 +107,21 @@
     RACSignal *loginSignal = [loginBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
 
     [loginSignal subscribeNext:^(id x) {
+        [LoginRegistHttpHandler login_loginWithParams:@{@"":@""} preExecute:^{
+            //
+        } successBlock:^(id obj) {
+            [AppSingleton shareInstace].lastLoginMobileOrEmail = loginAccountTF.text;
         
+            HomeDeviceManagerViewController*  deviceManagerVC = [[HomeDeviceManagerViewController alloc]init];
+            self.navigationController.viewControllers = @[deviceManagerVC];
+            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:deviceManagerVC];
+            [UIApplication sharedApplication].keyWindow.rootViewController = nil;
+            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+        } failedBlock:^(id obj) {
+            HomeDeviceManagerViewController*  deviceManagerVC = [[HomeDeviceManagerViewController alloc]init];
+            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:deviceManagerVC];
+            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+        } ];
     }];
     
     RACSignal *validUsernameSignal =
@@ -140,16 +155,20 @@
 }
 -(void)setupPrivateCloudAddress:(id)sender
 {
-    ChoicePrivateModelView *v = [[ChoicePrivateModelView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.window.height)];
-    [self.view.window addSubview:v];
-    v.delegate = self;
-    v.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-//    v.ipTextField.text = [APPSinglton shareInstance].myCloudIP;
-//    v.portTextField.text = [APPSinglton shareInstance].myCloudPort;
-//    self.navigationController.navigationBar.userInteractionEnabled = NO;
-//    _bossButton.hidden = YES;
-//    _externalLoginView.hidden = YES;
-//    [self.view addSubview:v];
+    [self.view endEditing:YES];
+    ChoicePrivateModelView *choiceServiceAddressV;
+    if (!choiceServiceAddressV)
+    {
+        choiceServiceAddressV = [[ChoicePrivateModelView alloc]init];
+        choiceServiceAddressV.delegate = self;
+        choiceServiceAddressV.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        
+    }
+    [self.view addSubview:choiceServiceAddressV];
+    [choiceServiceAddressV mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+    self.navigationController.navigationBar.userInteractionEnabled = NO;
 }
 -(void)loginPressed:(id)sender
 {
@@ -157,12 +176,14 @@
 }
 -(void)cancelOperation:(ChoicePrivateModelView*)view;
 {
+    self.navigationController.navigationBar.userInteractionEnabled = YES;
     [view removeFromSuperview];
     
 }
 -(void)operationCompleted:(ChoicePrivateModelView*)view withResult:(NSData*)data;
 {
-    
+    self.navigationController.navigationBar.userInteractionEnabled = YES;
+    [view removeFromSuperview];
 }
 /*
 #pragma mark - Navigation
@@ -173,5 +194,8 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+-(void)dealloc
+{
+    NSLog(@"%@ release",[self class]);
+}
 @end

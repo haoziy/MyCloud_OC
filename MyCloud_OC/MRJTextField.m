@@ -51,7 +51,7 @@
     self.borderStyle = UITextBorderStyleNone;
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.leftViewMode = UITextFieldViewModeAlways;
-    
+    self.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _warningEnable = YES;
     _limitEmpty = YES;
     _limitSpace = YES;

@@ -16,6 +16,8 @@ NSString *const global_homeMudels_fileName = @"HomeLanguage";//首页模块的�
 NSString *const global_discoveryMudels_fileName = @"DiscoverLanguage";//发现模块的国际化文件名
 NSString *const global_aboutMudels_fileName = @"AboutMeLanguage";//关于模块的国际化文件名
 NSString *const global_formsMudels_fileName = @"FormsLanguage";//报表模块的国际化文件名
+//通用的等待网络请求提示
+NSString * const language_commen_waitProgressNotice = @"正在加载......";//等待网络请求提示语
 
 +(NSString*)languageValueForKey:(NSString*)key;
 {

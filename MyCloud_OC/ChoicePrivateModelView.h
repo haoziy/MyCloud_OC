@@ -15,9 +15,8 @@
 
 @interface ChoicePrivateModelView : UIView
 @property(nonatomic,copy)NSString *myCloudIP;//私有云的ip
-@property(nonatomic,strong)MRJTextField *ipTextField;
+@property(nonatomic,strong)MRJTextField *serviceAddressTF;
 @property(nonatomic,weak)id<ChoicePrivateModelViewDelegate> delegate;
 @property(nonatomic,copy)NSString *myCloudPort;//私有云端口
-@property(nonatomic,strong)MRJTextField *portTextField;
 
 @end

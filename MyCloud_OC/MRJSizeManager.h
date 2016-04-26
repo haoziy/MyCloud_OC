@@ -35,4 +35,7 @@ extern CGFloat const font_smallTextFontSize;//小号文本字体
 +(CGFloat)mrjInputSizeHeight;
 +(CGFloat)mrjButtonCornerRadius;
 +(CGFloat)mrjSepritorHeight;//分割线高度
++(CGFloat)mrjTableHeadHeight;
+
+
 @end

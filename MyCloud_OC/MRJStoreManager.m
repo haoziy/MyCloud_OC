@@ -9,7 +9,8 @@
 #import "MRJStoreManager.h"
 
 NSString *const store_current_enviornment_key = @"store_current_enviornment_key";//当前环境key
-
+NSString *const store_last_user_input_key = @"store_last_user_input_key";//用户输入环境key
+NSString *const store_last_login_account_key = @"store_last_login_account_key";//上次登录账号key
 @implementation MRJStoreManager
 
 +(void)saveCustomerObject:(id)obj forKey:(NSString *)key
@@ -42,17 +43,16 @@ NSString *const store_current_enviornment_key = @"store_current_enviornment_key"
 }
 
 +(void)saveValue:(id) value forKey:(NSString *)key{
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    if ([value isKindOfClass:[UserEntity class]]) {
-//        NSData *data = [NSKeyedArchiver  archivedDataWithRootObject:value];
-//        [userDefaults setObject:data forKey:key];
-//        [userDefaults synchronize];
-//    }else
-//    {
-//        [userDefaults setObject:value forKey:key];
-//    }
-    
-    
+    NSAssert(key!=nil, @"key值不能为空");
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if ([value isKindOfClass:[NSString class]]) {
+        [userDefaults setObject:value forKey:key];
+    }else
+    {
+        NSData *data = [NSKeyedArchiver  archivedDataWithRootObject:value];
+        [userDefaults setObject:data forKey:key];
+        [userDefaults synchronize];
+    }
 }
 
 +(id)valueWithKey:(NSString *)key{

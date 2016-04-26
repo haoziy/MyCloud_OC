@@ -7,7 +7,8 @@
 //
 
 #import "BaseHiddenTabbarViewController.h"
-
+#import "BaseNavigationViewController.h"
 @interface MRJLoginViewController : BaseHiddenTabbarViewController
 
+@property(nonatomic,weak)BaseNavigationViewController *mainNav;
 @end

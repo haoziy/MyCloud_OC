@@ -15,13 +15,12 @@ extern NSString * const language_login_serviceAddressPlacement;//确定按钮名
 extern NSString * const language_login_confirmBtnName;//确定按钮名
 extern NSString * const language_login_cancelBtnName;//取消按钮名
 
+extern NSString * const language_login_connectServiceSuccessNotice;//连接服务器成功提示
+extern NSString * const language_login_connectServiceFailNotice;//连接服务器地址失败提示
 
 extern NSString * const language_login_accountPlacement;//登录账号占位字符串
-
-extern NSString * const language_login_ipAddressPlacement;//登录界面IP地址输入占位符
-extern NSString * const language_login_portPlacement;//登录界面端口输入占位符
 extern NSString * const language_login_passwordPlacement;//登录界面密码占位符
-extern NSString * const language_login_domainPlacement;//登录界面域名占位符
+
 
 
 

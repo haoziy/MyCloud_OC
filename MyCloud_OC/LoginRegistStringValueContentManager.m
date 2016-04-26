@@ -14,11 +14,9 @@ NSString * const language_login_confirmBtnName = @"确定";//确定按钮名
 NSString * const language_login_cancelBtnName = @"取消";//取消按钮名
 NSString * const language_login_serviceAddressPlacement = @"请输入IP地址:端口号或者域名";//确定按钮名
 NSString * const language_login_accountPlacement = @"请输入邮箱/手机号";//登录账号占位字符串
-
-NSString * const language_login_ipAddressPlacement = @"请输入IP地址";//登录界面IP地址输入占位符
-NSString * const language_login_portPlacement = @"请输入端口号";//登录界面端口输入占位符
+NSString * const language_login_connectServiceSuccessNotice = @"连接成功";//连接服务器成功提示
+NSString * const language_login_connectServiceFailNotice = @"连接私有云服务器失败，请检查服务器地址是否正确，或者手机和服务器是否在同一个网络";//连接服务器地址失败提示
 NSString * const language_login_passwordPlacement = @"请输入密码";//登录界面密码占位符
-NSString * const language_login_domainPlacement = @"请输入域名";//登录界面域名占位符
 @implementation LoginRegistStringValueContentManager
 
 +(NSString*)languageValueForKey:(NSString *)key

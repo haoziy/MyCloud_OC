@@ -9,8 +9,8 @@
 #import "HttpHandlerApi.h"
 #import "AppSingleton.h"
 
-NSString * const api_loginRegist_login = @"login.do";//登录接口,需要的参数细节可以暴露
-NSString * const api_loginRegist_heart_beat = @"heart.do";
+
+
 @implementation HttpHandlerApi
 
 @end
