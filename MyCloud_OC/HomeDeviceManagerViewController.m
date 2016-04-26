@@ -32,17 +32,7 @@
     data = [[NSMutableArray alloc]init];
     searchData = [[NSMutableArray alloc]init];
     searchTable = [[UITableView alloc]init];
-    searchViewController = [[UISearchController alloc]initWithSearchResultsController:nil];
-    [searchViewController.view addSubview:searchTable];
-    [searchTable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
-    }];
-    searchTable.hidden = YES;
-    searchViewController.searchResultsUpdater = self;
-    searchViewController.delegate = self;
-//    searchViewController.searchBar.delegate = self;
-    [searchViewController.searchBar sizeToFit];
-    deviceListTable.tableHeaderView = searchViewController.searchBar;
+
     
     
     
@@ -57,6 +47,17 @@
     [deviceListTable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
+    
+    searchViewController = [[UISearchController alloc]initWithSearchResultsController:nil];
+    [searchViewController.view addSubview:searchTable];
+    [searchTable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+    searchTable.hidden = YES;
+    searchViewController.searchResultsUpdater = self;
+    searchViewController.delegate = self;
+    [searchViewController.searchBar sizeToFit];
+    deviceListTable.tableHeaderView = searchViewController.searchBar;
     [self loadData];
 }
 -(void)loadData
