@@ -240,7 +240,6 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     if (_deviceModel.hardModel)//需要有线的情况
     {
         MRJContainerView *configNetTypeContainer = [[MRJContainerView alloc]init];
-        configNetTypeContainer.backgroundColor = [UIColor redColor];
         [self.backScrollView addSubview:configNetTypeContainer];
         [configNetTypeContainer mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(configNetTypeContainer.superview).offset(0);
@@ -254,6 +253,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         [netTypeButtomV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(netTypeButtomV.superview).offset(0);
             make.height.mas_equalTo(TableHeadHeight);
+            make.width.equalTo(configNetTypeContainer.mas_width);
             make.centerX.mas_equalTo(netTypeButtomV.superview.mas_centerX);
             make.bottom.mas_equalTo(configNetTypeContainer.mas_bottom);
         }];
@@ -264,7 +264,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         [netTypeButtomV addSubview:netTypeLabel];
         [netTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 //             make.left.mas_equalTo(netTypeLabel.superview).offset([MRJSizeManager mrjHorizonPaddding]);
-            make.left.mas_equalTo(netTypeLabel.superview.left);
+            make.left.mas_equalTo(netTypeLabel.superview.left).offset(LEFT_PADDING);
             make.centerY.mas_equalTo(netTypeButtomV.mas_centerY);
         }];
     }
