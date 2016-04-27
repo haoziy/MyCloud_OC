@@ -10,6 +10,10 @@
 
 extern ApiNameMap api_home_get_device_list;//获取设备列表
 
+extern NSString* const key_offLineDeviceKey;//离线设备key
+extern NSString* const key_onLineDeviceKey;//在线线设备key
+
+
 @interface HomeHttpHandler : BaseHttpHandler
 
 

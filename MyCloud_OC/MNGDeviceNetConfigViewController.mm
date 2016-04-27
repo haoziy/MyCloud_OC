@@ -1,10 +1,10 @@
 #import "MNGDeviceNetConfigViewController.h"
 #include "voiceRecog.h"
-
+#import "HomeDeviceManagerViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "HomeHttpHandler.h"
-
+#import "AFNetworkReachabilityManager.h"
 
 static int  baseFrenqueceInConfig = 4000;
 //根据错误编号，获得错误信息，该函数不是必需的
@@ -128,7 +128,14 @@ const char *recorderRecogErrorMsg(int _recogStatus)
 
 @end
 
-
+CGFloat TOP_PADDING = [MRJSizeManager mrjVerticalSpace];
+CGFloat LEFT_PADDING = [MRJSizeManager mrjHorizonPaddding];
+UIFont *MiddleTextFont = [MRJSizeManager mrjMiddleTextFont];
+UIColor *MainTextColor = [MRJColorManager mrj_mainTextColor];
+CGFloat INPUT_HEIGHT = [MRJSizeManager mrjInputSizeHeight];
+UIColor *NavigationTextColor = [MRJColorManager mrj_navigationTextColor];
+CGFloat TableHeadHeight = [MRJSizeManager mrjTableHeadHeight];
+UIColor *SecondaryTextColor = [MRJColorManager mrj_secondaryTextColor];
 @implementation MNGDeviceNetConfigViewController
 
 int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000,17200,17400,17600,17800,18000,18200,18400,18600};
@@ -174,11 +181,6 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         [self popToEnterPlace:@"back"];
     }else if(alertView.tag==300)//成功配置后绑定店铺
     {
-//        ShopListViewControllerUseType type = self.enterWay==DeviceConfigEnteryFromDeviceList?ShopListUseForDeviceListBindDevice:ShopListUseForDeviceDetailBindDevice;
-//        ShopListViewController *shopList = [[ShopListViewController alloc]initWithType:type];
-//        shopList.title = @"绑定店铺";
-//        shopList.deviceModel = _deviceModel;
-//        [self.navigationController safetyPushViewController:shopList animated:YES];
     }else if (alertView.tag==600)
     {
         [self popToEnterPlace:@"back"];
@@ -194,65 +196,51 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 }
 -(void)popToEnterPlace:(NSString*)way
 {
-//    if (self.enterWay==DeviceConfigEnteryFromDeviceDetail) {
+    if (self.enterWay==DeviceConfigEnteryFromDeviceDetail) {
 //        for (UIViewController *vc  in self.navigationController.viewControllers) {
 //            if ([vc isKindOfClass:[DeviceDetailViewController class]]) {
 //                [self.navigationController popToViewController:vc animated:YES];
 //            }
 //        }
-//    }else if (self.enterWay==DeviceConfigEnteryFromDeviceList) {
-//        for (UIViewController *vc  in self.navigationController.viewControllers) {
-//            if ([vc isKindOfClass:[DeviceManageViewController class]]) {
-//                [self.navigationController popToViewController:vc animated:YES];
-//            }
-//        }
-//    }
+    }else if (self.enterWay==DeviceConfigEnteryFromDeviceList) {
+        for (UIViewController *vc  in self.navigationController.viewControllers) {
+            if ([vc isKindOfClass:[HomeDeviceManagerViewController class]]) {
+                [self.navigationController popToViewController:vc animated:YES];
+            }
+        }
+    }
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(beginConfig:)];
-//    [item setTintColor:NavigationTextColor];
-//    self.navigationItem.rightBarButtonItem = item;
-//    totalHight = TOP_PADDING;//默认的高度
-//    scorllView = [[UIScrollView alloc]initWithFrame:self.view.bounds];
-//    scorllView.backgroundColor = self.view.backgroundColor;
-//    self.view = scorllView;
-//    scorllView.contentSize = CGSizeMake(SCREEN_WIDTH, 568);
-//    entity = [UserDefaultsUtils customerObjectWithKey:USER_ENTITY];
-//    latitude = -1;//默认经纬度
-//    longtitude = -1;//默认经纬度
-//    [BMKLocationService setLocationDesiredAccuracy:kCLLocationAccuracyBest];
-//    //指定最小距离更新(米)，默认：kCLDistanceFilterNone
-//    [BMKLocationService setLocationDistanceFilter:100.f];
-//    
-//    //初始化BMKLocationService
-//    locationService = [[BMKLocationService alloc]init];
-//    locationService.delegate = self;
-//    //启动LocationService
-//    [locationService startUserLocationService];
-//
-//    
-//    isCanAssignTask = YES;
-//    user = [UserDefaultsUtils customerObjectWithKey:USER_ENTITY];
-//    messageArr = [NSMutableArray array];
-//    self.title = @"配置网络";
+
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(beginConfig:)];
+    [item setTintColor:[MRJColorManager mrj_navigationTextColor]];
+    self.navigationItem.rightBarButtonItem = item;
+    totalHight = TOP_PADDING;//默认的高度
+    scorllView = [[UIScrollView alloc]initWithFrame:self.view.bounds];
+    scorllView.backgroundColor = self.view.backgroundColor;
+    self.view = scorllView;
+    scorllView.contentSize = CGSizeMake(SCREEN_WIDTH, 568);
+ 
+    isCanAssignTask = YES;
+    messageArr = [NSMutableArray array];
+    self.title = @"配置网络";
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(-20, 20,60, 40)];
     [btn setImage:[UIImage imageNamed:@"arrowleft"] forState:UIControlStateNormal];
     [btn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 45)];
     
     [btn addTarget:self action:@selector(backToLast:) forControlEvents:UIControlEventTouchUpInside];
-
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(calculateSubMarkGateWay:) name:UITextFieldTextDidEndEditingNotification object:nil];
-//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, TOP_PADDING, 100, TableHeadHeight)];
-//    label.textColor = SecondaryTextColor;
-//    label.text =  @"配置网络";
-//    label.font = MiddleTextFont;
-//    [label sizeToFit];
-//    label.x= 20;
-//    label.y=20;
-//    totalHight=label.height+label.y;
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, TOP_PADDING, 100, [MRJSizeManager mrjTableHeadHeight])];
+    label.textColor = [MRJColorManager mrj_secondaryTextColor];
+    label.text =  @"配置网络";
+    label.font = [MRJSizeManager mrjMiddleTextFont];
+    [label sizeToFit];
+    label.x= 20;
+    label.y=20;
+    totalHight=label.height+label.y;
     //是否需要选择配置网络类型(无线/有线)
     if(_deviceModel.hardModel==DeviceHardModelM1Plus)
     {
@@ -275,200 +263,200 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     [self createHoldV];
     
     
-//    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
-//    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-//        networkReachableWayLab = [[UILabel alloc]init];
-//        currentSSID = nil;
-//        for (UIView *v in backV.subviews) {
-//            [v removeFromSuperview];
-//        }
-//        NSString *orginStr=@"请将手机网络切换至设备所连接的Wi-Fi网络";
-//        [confirmConfigBtn removeFromSuperview];
-//        if (status==AFNetworkReachabilityStatusReachableViaWiFi) {
-//            [self fetchSSIDInfo];
-//            if (currentSSID) {
-//                orginStr = [NSString stringWithFormat:@"当前手机Wi-Fi %@",currentSSID];
-//            }
-//        }
-//        CGRect rect = [orginStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-LEFT_PADDING*2, 60) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:MiddleTextFont} context:nil];
-//        networkReachableWayLab.numberOfLines = 0;
-//        networkReachableWayLab.lineBreakMode = NSLineBreakByWordWrapping;
-//        networkReachableWayLab.textColor = MainTextColor;
-//        networkReachableWayLab.font = MiddleTextFont;
-//        networkReachableWayLab.text = orginStr;
-//        networkReachableWayLab.frame = CGRectMake((SCREEN_WIDTH-LEFT_PADDING*2-rect.size.width)/2+LEFT_PADDING, 0, rect.size.width, rect.size.height);
-//        networkReachableWayLab.textAlignment = NSTextAlignmentCenter;
-//        if (confgiNetWorkTypeLanBtn.selected ==YES) {
-//            networkReachableWayLab.hidden = YES;
-//        }else
-//        {
-//            networkReachableWayLab.hidden = NO;
-//        }
-//        [backV addSubview:networkReachableWayLab];
-//        [self createUI];
-//    }];
-//   [manager startMonitoring];
-//    AVAudioSession *mySession = [AVAudioSession sharedInstance];
-//    [mySession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        networkReachableWayLab = [[UILabel alloc]init];
+        currentSSID = nil;
+        for (UIView *v in backV.subviews) {
+            [v removeFromSuperview];
+        }
+        NSString *orginStr=@"请将手机网络切换至设备所连接的Wi-Fi网络";
+        [confirmConfigBtn removeFromSuperview];
+        if (status==AFNetworkReachabilityStatusReachableViaWiFi) {
+            [self fetchSSIDInfo];
+            if (currentSSID) {
+                orginStr = [NSString stringWithFormat:@"当前手机Wi-Fi %@",currentSSID];
+            }
+        }
+        CGRect rect = [orginStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-LEFT_PADDING*2, 60) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:MiddleTextFont} context:nil];
+        networkReachableWayLab.numberOfLines = 0;
+        networkReachableWayLab.lineBreakMode = NSLineBreakByWordWrapping;
+        networkReachableWayLab.textColor = MainTextColor;
+        networkReachableWayLab.font = MiddleTextFont;
+        networkReachableWayLab.text = orginStr;
+        networkReachableWayLab.frame = CGRectMake((SCREEN_WIDTH-LEFT_PADDING*2-rect.size.width)/2+LEFT_PADDING, 0, rect.size.width, rect.size.height);
+        networkReachableWayLab.textAlignment = NSTextAlignmentCenter;
+        if (confgiNetWorkTypeLanBtn.selected ==YES) {
+            networkReachableWayLab.hidden = YES;
+        }else
+        {
+            networkReachableWayLab.hidden = NO;
+        }
+        [backV addSubview:networkReachableWayLab];
+        [self createUI];
+    }];
+   [manager startMonitoring];
+    AVAudioSession *mySession = [AVAudioSession sharedInstance];
+    [mySession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
+
+    
+    int base = baseFrenqueceInConfig;
+    for (int i = 0; i < sizeof(freqs)/sizeof(int); i ++) {
+        freqs[i] = base + i * 200;
+    }
+    
+    recog = [[MyVoiceRecog alloc] init:self vdpriority:VD_MemoryUsePriority];
+    [recog setFreqs:freqs freqCount:sizeof(freqs)/sizeof(int)];
+    
+    player=[[VoicePlayer alloc] init];
+    [player setFreqs:freqs freqCount:sizeof(freqs)/sizeof(int)];
+    [player setVolume:1];
+    [player setPlayerType:VE_SoundPlayer];
+    
+
+
+//    
+    double version = [[UIDevice currentDevice].systemVersion doubleValue];
+    if (version>=7)
+    {
+        [mySession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
+    }    
+    [mySession setActive:YES error:nil];
+    
+    NSString *sn = _deviceModel.imei;
+    if (sn.length>6) {
+        deviceSN = [sn substringFromIndex:sn.length-6];
+    }
 //
-//    
-//    int base = baseFrenqueceInConfig;
-//    for (int i = 0; i < sizeof(freqs)/sizeof(int); i ++) {
-//        freqs[i] = base + i * 200;
-//    }
-//    
-//    recog = [[MyVoiceRecog alloc] init:self vdpriority:VD_MemoryUsePriority];
-//    [recog setFreqs:freqs freqCount:sizeof(freqs)/sizeof(int)];
-//    
-//    player=[[VoicePlayer alloc] init];
-//    [player setFreqs:freqs freqCount:sizeof(freqs)/sizeof(int)];
-//    [player setVolume:1];
-//    [player setPlayerType:VE_SoundPlayer];
-//    
-//
-//
-////    
-//    double version = [[UIDevice currentDevice].systemVersion doubleValue];
-//    if (version>=7)
-//    {
-//        [mySession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
-//    }    
-//    [mySession setActive:YES error:nil];
-//    
-//    NSString *sn = _deviceModel.imei;
-//    if (sn.length>6) {
-//        deviceSN = [sn substringFromIndex:sn.length-6];
-//    }
-//    
 }
 -(void)createHoldV
 {
-//    holdView = [[UIView alloc]initWithFrame:self.view.bounds];
-//    holdView.backgroundColor = [UIColor clearColor];
-//    UIView *processView = [[UIView alloc]initWithFrame:CGRectMake(20, (SCREEN_HEIGHT-200)/2, SCREEN_WIDTH-40, 200)];
+    holdView = [[UIView alloc]initWithFrame:self.view.bounds];
+    holdView.backgroundColor = [UIColor clearColor];
+    UIView *processView = [[UIView alloc]initWithFrame:CGRectMake(20, (SCREEN_HEIGHT-200)/2, SCREEN_WIDTH-40, 200)];
 //    processView.backgroundColor = RGBColor(114, 114, 114, 1);
-//    processView.layer.cornerRadius = 5;
-//    processView.clipsToBounds = YES;
-//    
-//    processNotiLab = [[UILabel alloc]initWithFrame:CGRectMake(20, 30, processView.width-40, 30)];
-//    processNotiLab.text = @"提示";
-//    processNotiLab.font = NavigationTitleFont;
-//    processNotiLab.textColor = ButtonColor;
-//    [processView addSubview:processNotiLab];
-//    
-//    UIView *buttomV = [[UIView alloc]initWithFrame:CGRectMake(20, processNotiLab.height+processNotiLab.y, processView.width-40, processView.height-20-processNotiLab.height-processNotiLab.y)];
-//    buttomV.backgroundColor = NavigationTextColor;
-//    [processView addSubview:buttomV];
-//    
-//    UIView *sepLineV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, buttomV.width, 3)];
-//    sepLineV.backgroundColor = ButtonColor;
-//    [buttomV addSubview:sepLineV];
-//    notificationLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, buttomV.width, 50)];
-//    notificationLab.text = @"";
-//    notificationLab.numberOfLines = 0;
-//    notificationLab.lineBreakMode = NSLineBreakByWordWrapping;
-//    [buttomV addSubview:notificationLab];
-//    
-//    UIView *processBarBgV = [[UIView alloc]initWithFrame:CGRectMake(0, 60, notificationLab.width, 20)];
-//    processBarBgV.layer.cornerRadius = 2;
-//    [buttomV addSubview:processBarBgV];
-//    processBarBgV.backgroundColor  = [UIColor grayColor];
-//    processBar = [[UIView alloc]initWithFrame:CGRectMake(0, 60, 1, 20)];
-//    processBar.backgroundColor = ButtonColor;
-//    [buttomV addSubview:processBar];
-//    
-//    proccessLab = [[UILabel alloc]initWithFrame:CGRectMake(0, buttomV.height-30, processView.width, 30)];
-//    proccessLab.textAlignment = NSTextAlignmentCenter;
-//    proccessLab.text = @"0%";
-//    [buttomV addSubview:proccessLab];
-//    
-//    
-//    [holdView addSubview:processView];
+    processView.layer.cornerRadius = 5;
+    processView.clipsToBounds = YES;
+    
+    processNotiLab = [[UILabel alloc]initWithFrame:CGRectMake(20, 30, processView.width-40, 30)];
+    processNotiLab.text = @"提示";
+    processNotiLab.font = [MRJSizeManager mrjNavigationFont];
+    processNotiLab.textColor = [MRJColorManager mrj_mainThemeColor];
+    [processView addSubview:processNotiLab];
+    
+    UIView *buttomV = [[UIView alloc]initWithFrame:CGRectMake(20, processNotiLab.height+processNotiLab.y, processView.width-40, processView.height-20-processNotiLab.height-processNotiLab.y)];
+    buttomV.backgroundColor = [MRJColorManager mrj_navigationTextColor];
+    [processView addSubview:buttomV];
+    
+    UIView *sepLineV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, buttomV.width, 3)];
+    sepLineV.backgroundColor = [MRJColorManager mrj_mainThemeColor];
+    [buttomV addSubview:sepLineV];
+    notificationLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, buttomV.width, 50)];
+    notificationLab.text = @"";
+    notificationLab.numberOfLines = 0;
+    notificationLab.lineBreakMode = NSLineBreakByWordWrapping;
+    [buttomV addSubview:notificationLab];
+    
+    UIView *processBarBgV = [[UIView alloc]initWithFrame:CGRectMake(0, 60, notificationLab.width, 20)];
+    processBarBgV.layer.cornerRadius = 2;
+    [buttomV addSubview:processBarBgV];
+    processBarBgV.backgroundColor  = [UIColor grayColor];
+    processBar = [[UIView alloc]initWithFrame:CGRectMake(0, 60, 1, 20)];
+    processBar.backgroundColor = [MRJColorManager mrj_mainThemeColor];
+    [buttomV addSubview:processBar];
+    
+    proccessLab = [[UILabel alloc]initWithFrame:CGRectMake(0, buttomV.height-30, processView.width, 30)];
+    proccessLab.textAlignment = NSTextAlignmentCenter;
+    proccessLab.text = @"0%";
+    [buttomV addSubview:proccessLab];
+    
+    
+    [holdView addSubview:processView];
 }
 -(void)createStaticInputV
 {
-//    staticInputView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, backV.width,INPUT_HEIGHT*4+TOP_PADDING)];
-//    staticInputView.backgroundColor = NavigationTextColor;
-//    NSArray *inputItemsArr = @[@"IP地址",@"子网掩码",@"网关",@"DNS"];
-//    for (int x=0; x<inputItemsArr.count; x++) {
-//        MRJTextField *textFiled = [[MRJTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING,x*INPUT_HEIGHT, staticInputView.width-LEFT_PADDING*2,INPUT_HEIGHT)];
-//        textFiled.keyboardType = UIKeyboardTypeDecimalPad;
-//        textFiled.placeholder = [NSString stringWithFormat:@"%@",inputItemsArr[x]];
-//        if (x==0) {
-//            textFiled.text = [APPSinglton shareInstance].wifiStatiConfigIP;
-//            ipAddressTextField = textFiled;
-//        }else if (x==1)
-//        {
-//            textFiled.text = [APPSinglton shareInstance].wifiStatiConfiMask;
-//            subMarkTextField = textFiled;
-//            
-//        }else if (x==2)
-//        {
-//            textFiled.text = [APPSinglton shareInstance].wifiStatiConfigGateWay;
-//            gateWayTextField = textFiled;
-//        }else if (x==3)
-//        {
-//            textFiled.text = [APPSinglton shareInstance].wifiStatiConfigDNS;
-//            DNSTextField = textFiled;
-//        }
-//        [staticInputView addSubview:textFiled];
-//    }
+    staticInputView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, backV.width,INPUT_HEIGHT*4+TOP_PADDING)];
+    staticInputView.backgroundColor = NavigationTextColor;
+    NSArray *inputItemsArr = @[@"IP地址",@"子网掩码",@"网关",@"DNS"];
+    for (int x=0; x<inputItemsArr.count; x++) {
+        MRJTextField *textFiled = [[MRJTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING,x*INPUT_HEIGHT, staticInputView.width-LEFT_PADDING*2,INPUT_HEIGHT)];
+        textFiled.keyboardType = UIKeyboardTypeDecimalPad;
+        textFiled.placeholder = [NSString stringWithFormat:@"%@",inputItemsArr[x]];
+        if (x==0) {
+            textFiled.text = [AppSingleton shareInstace].wifiStatiConfigIP;
+            ipAddressTextField = textFiled;
+        }else if (x==1)
+        {
+            textFiled.text = [AppSingleton shareInstace].wifiStatiConfiMask;
+            subMarkTextField = textFiled;
+            
+        }else if (x==2)
+        {
+            textFiled.text = [AppSingleton shareInstace].wifiStatiConfigGateWay;
+            gateWayTextField = textFiled;
+        }else if (x==3)
+        {
+            textFiled.text = [AppSingleton shareInstace].wifiStatiConfigDNS;
+            DNSTextField = textFiled;
+        }
+        [staticInputView addSubview:textFiled];
+    }
 //    [staticInputView addSubview:[UIView initCellLineViewWithFrame:CGRectMake(0, staticInputView.height-0.5, staticInputView.width, 0.5)]];
 }
 -(void)createNetTypeUI
 {
-//    [confgiNetWorkTypeWifiBtn removeFromSuperview];
-//    [confgiNetWorkTypeLanBtn removeFromSuperview];
-//    confgiNetWorkTypeWifiBtn = nil;
-//    confgiNetWorkTypeLanBtn = nil;
-//    UIView *v = [[UIView alloc]initWithFrame:CGRectMake(0, totalHight, SCREEN_WIDTH, TableHeadHeight)];
-//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(LEFT_PADDING, 0,75, TableHeadHeight)];
-//    label.text = @"网络类型";
-//    label.font = MiddleTextFont;
-//    label.textColor = SecondaryTextColor;
-//    [v addSubview:label];
-//    [self.view addSubview:v];
-//    totalHight+=v.height;
-//    
-//    
-//    //选择网络类型区域
-//    UIView *configTypeV = [[UIView alloc]initWithFrame:CGRectMake(0, totalHight, SCREEN_WIDTH, INPUT_HEIGHT)];
-//    configTypeV.backgroundColor = NavigationTextColor;
+    [confgiNetWorkTypeWifiBtn removeFromSuperview];
+    [confgiNetWorkTypeLanBtn removeFromSuperview];
+    confgiNetWorkTypeWifiBtn = nil;
+    confgiNetWorkTypeLanBtn = nil;
+    UIView *v = [[UIView alloc]initWithFrame:CGRectMake(0, totalHight, SCREEN_WIDTH, TableHeadHeight)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(LEFT_PADDING, 0,75, TableHeadHeight)];
+    label.text = @"网络类型";
+    label.font = MiddleTextFont;
+    label.textColor = SecondaryTextColor;
+    [v addSubview:label];
+    [self.view addSubview:v];
+    totalHight+=v.height;
+    
+    
+    //选择网络类型区域
+    UIView *configTypeV = [[UIView alloc]initWithFrame:CGRectMake(0, totalHight, SCREEN_WIDTH, INPUT_HEIGHT)];
+    configTypeV.backgroundColor = NavigationTextColor;
 //    [configTypeV addSubview:[UIView initCellLineViewWithFrame:CGRectMake(0, 0, configTypeV.width, 0.5)]];
 //    [configTypeV addSubview:[UIView initCellLineViewWithFrame:CGRectMake(0, configTypeV.height-0.5, configTypeV.width, 0.5)]];
-//    confgiNetWorkTypeWifiBtn = [[UIButton alloc]initWithFrame:CGRectMake(20, (INPUT_HEIGHT-15)/2, 15, 15)];
-//    [confgiNetWorkTypeWifiBtn setImage:[UIImage imageNamed:@"select_white"] forState:UIControlStateNormal];
-//    [confgiNetWorkTypeWifiBtn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
-//    [confgiNetWorkTypeWifiBtn addTarget:self action:@selector(choiceNetType:) forControlEvents:UIControlEventTouchUpInside];
-//    typeWifiBtn = [[UIButton alloc]initWithFrame:CGRectMake(confgiNetWorkTypeWifiBtn.width+confgiNetWorkTypeWifiBtn.x+5, (INPUT_HEIGHT-20)/2, (configTypeV.width/2-(confgiNetWorkTypeWifiBtn.width+confgiNetWorkTypeWifiBtn.x)), 20)];
-//    
-//    typeWifiBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//    [typeWifiBtn setTitle:@"Wi-Fi" forState:UIControlStateNormal];
-//    [typeWifiBtn setTitleColor:SecondaryTextColor forState:UIControlStateNormal];
-//    [typeWifiBtn setTitleColor:MainTextColor forState:UIControlStateSelected];
-//    [typeWifiBtn addTarget:self action:@selector(choiceNetType:) forControlEvents:UIControlEventTouchUpInside];
-//    typeWifiBtn.selected = YES;
-//    confgiNetWorkTypeWifiBtn.selected = YES;
-//    [configTypeV addSubview:confgiNetWorkTypeWifiBtn];
-//    [configTypeV addSubview:typeWifiBtn];
-//  
-//    
-//    confgiNetWorkTypeLanBtn = [[UIButton alloc]initWithFrame:CGRectMake(20+configTypeV.width/2, (INPUT_HEIGHT-15)/2, 15, 15)];
-//    [confgiNetWorkTypeLanBtn setImage:[UIImage imageNamed:@"select_white"] forState:UIControlStateNormal];
-//    [confgiNetWorkTypeLanBtn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
-//    [confgiNetWorkTypeLanBtn addTarget:self action:@selector(choiceNetType:) forControlEvents:UIControlEventTouchUpInside];
-//    typeLanBtn = [[UIButton alloc]initWithFrame:CGRectMake((confgiNetWorkTypeLanBtn.width+confgiNetWorkTypeLanBtn.x+5), (INPUT_HEIGHT-20)/2,configTypeV.width/2-(confgiNetWorkTypeLanBtn.width+confgiNetWorkTypeLanBtn.x), 20)];
-//    typeLanBtn.x = confgiNetWorkTypeLanBtn.width+confgiNetWorkTypeLanBtn.x+5;
-//    typeLanBtn.width = configTypeV.width - typeLanBtn.x;
-//    [typeLanBtn setTitleColor:SecondaryTextColor forState:UIControlStateNormal];
-//    [typeLanBtn setTitleColor:MainTextColor forState:UIControlStateSelected];
-//    typeLanBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//    [typeLanBtn setTitle:@"有线网络" forState:UIControlStateNormal];
-//    [typeLanBtn addTarget:self action:@selector(choiceNetType:) forControlEvents:UIControlEventTouchUpInside];
-//    [configTypeV addSubview:confgiNetWorkTypeLanBtn];
-//    [configTypeV addSubview:typeLanBtn];
-//    [self.view addSubview:configTypeV];
-//    totalHight+=(configTypeV.height+10);
+    confgiNetWorkTypeWifiBtn = [[UIButton alloc]initWithFrame:CGRectMake(20, (INPUT_HEIGHT-15)/2, 15, 15)];
+    [confgiNetWorkTypeWifiBtn setImage:[UIImage imageNamed:@"select_white"] forState:UIControlStateNormal];
+    [confgiNetWorkTypeWifiBtn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
+    [confgiNetWorkTypeWifiBtn addTarget:self action:@selector(choiceNetType:) forControlEvents:UIControlEventTouchUpInside];
+    typeWifiBtn = [[UIButton alloc]initWithFrame:CGRectMake(confgiNetWorkTypeWifiBtn.width+confgiNetWorkTypeWifiBtn.x+5, (INPUT_HEIGHT-20)/2, (configTypeV.width/2-(confgiNetWorkTypeWifiBtn.width+confgiNetWorkTypeWifiBtn.x)), 20)];
+    
+    typeWifiBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [typeWifiBtn setTitle:@"Wi-Fi" forState:UIControlStateNormal];
+    [typeWifiBtn setTitleColor:SecondaryTextColor forState:UIControlStateNormal];
+    [typeWifiBtn setTitleColor:MainTextColor forState:UIControlStateSelected];
+    [typeWifiBtn addTarget:self action:@selector(choiceNetType:) forControlEvents:UIControlEventTouchUpInside];
+    typeWifiBtn.selected = YES;
+    confgiNetWorkTypeWifiBtn.selected = YES;
+    [configTypeV addSubview:confgiNetWorkTypeWifiBtn];
+    [configTypeV addSubview:typeWifiBtn];
+  
+    
+    confgiNetWorkTypeLanBtn = [[UIButton alloc]initWithFrame:CGRectMake(20+configTypeV.width/2, (INPUT_HEIGHT-15)/2, 15, 15)];
+    [confgiNetWorkTypeLanBtn setImage:[UIImage imageNamed:@"select_white"] forState:UIControlStateNormal];
+    [confgiNetWorkTypeLanBtn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
+    [confgiNetWorkTypeLanBtn addTarget:self action:@selector(choiceNetType:) forControlEvents:UIControlEventTouchUpInside];
+    typeLanBtn = [[UIButton alloc]initWithFrame:CGRectMake((confgiNetWorkTypeLanBtn.width+confgiNetWorkTypeLanBtn.x+5), (INPUT_HEIGHT-20)/2,configTypeV.width/2-(confgiNetWorkTypeLanBtn.width+confgiNetWorkTypeLanBtn.x), 20)];
+    typeLanBtn.x = confgiNetWorkTypeLanBtn.width+confgiNetWorkTypeLanBtn.x+5;
+    typeLanBtn.width = configTypeV.width - typeLanBtn.x;
+    [typeLanBtn setTitleColor:SecondaryTextColor forState:UIControlStateNormal];
+    [typeLanBtn setTitleColor:MainTextColor forState:UIControlStateSelected];
+    typeLanBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [typeLanBtn setTitle:@"有线网络" forState:UIControlStateNormal];
+    [typeLanBtn addTarget:self action:@selector(choiceNetType:) forControlEvents:UIControlEventTouchUpInside];
+    [configTypeV addSubview:confgiNetWorkTypeLanBtn];
+    [configTypeV addSubview:typeLanBtn];
+    [self.view addSubview:configTypeV];
+    totalHight+=(configTypeV.height+10);
 
 }
 - (void)fetchSSIDInfo {
@@ -498,27 +486,27 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 }
 -(void)calculateSubMarkGateWay:(NSNotification*)note
 {
-//    if (note.object==ipAddressTextField) {
-//        if (subMarkTextField.text.length==0) {
-//            if ([AppUtils isValidatIP:ipAddressTextField.text]) {
-//                subMarkTextField.text = @"255.255.255.0";
-//                NSString *ip = ipAddressTextField.text;
-//                NSMutableString *reverIp = [[NSMutableString alloc]init];//反转后的ip地址
-//                for (NSInteger x=ip.length-1; x>=0; x--) {
-//                    [reverIp appendString:[ip substringWithRange:NSMakeRange(x, 1)]];
-//                }
-//                NSRange rang = [reverIp rangeOfString:@"."];
-//                NSString *str = [reverIp substringFromIndex:rang.location+rang.length];
-//                NSString *reverGateIp = [NSString stringWithFormat:@"1.%@",str];
-//                NSMutableString *gateIp = [[NSMutableString alloc]init];
-//                for (NSInteger x=reverGateIp.length-1; x>=0; x--) {
-//                    [gateIp appendString:[reverGateIp substringWithRange:NSMakeRange(x, 1)]];
-//                }
-//                
-//                gateWayTextField.text = gateIp;
-//            }
-//        }
-//    }
+    if (note.object==ipAddressTextField) {
+        if (subMarkTextField.text.length==0) {
+            if ([MRJCheckUtils isValidatIP:ipAddressTextField.text]) {
+                subMarkTextField.text = @"255.255.255.0";
+                NSString *ip = ipAddressTextField.text;
+                NSMutableString *reverIp = [[NSMutableString alloc]init];//反转后的ip地址
+                for (NSInteger x=ip.length-1; x>=0; x--) {
+                    [reverIp appendString:[ip substringWithRange:NSMakeRange(x, 1)]];
+                }
+                NSRange rang = [reverIp rangeOfString:@"."];
+                NSString *str = [reverIp substringFromIndex:rang.location+rang.length];
+                NSString *reverGateIp = [NSString stringWithFormat:@"1.%@",str];
+                NSMutableString *gateIp = [[NSMutableString alloc]init];
+                for (NSInteger x=reverGateIp.length-1; x>=0; x--) {
+                    [gateIp appendString:[reverGateIp substringWithRange:NSMakeRange(x, 1)]];
+                }
+                
+                gateWayTextField.text = gateIp;
+            }
+        }
+    }
 }
 -(void)createUI
 {
@@ -597,48 +585,48 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 }
 -(void)choiceNetType:(UIButton*)btn
 {
-//    confgiNetWorkTypeWifiBtn.selected = !confgiNetWorkTypeWifiBtn.selected;
-//    confgiNetWorkTypeLanBtn.selected  = !confgiNetWorkTypeLanBtn.selected;
-//    if (confgiNetWorkTypeLanBtn.selected==YES) {
-//        networkReachableWayLab.hidden = YES;
-//        typeLanBtn.selected = YES;
-//        typeWifiBtn.selected = NO;
-//        [networkReachableWayLab removeFromSuperview];
-//        [wifiInputV removeFromSuperview];
-//        wifiInputV.height=0;
-//        ipSetttingV.y = 0;
-//        
-//        ipAddressTextField.text = [APPSinglton shareInstance].lanStatiConfigIP;
-//        subMarkTextField.text = [APPSinglton shareInstance].lanStatiConfiMask;
-//        gateWayTextField.text = [APPSinglton shareInstance].lanStatiConfigGateWay;
-//        DNSTextField.text = [APPSinglton shareInstance].lanStatiConfigDNS;
-//        
-//    }
-//    else
-//    {
-//        networkReachableWayLab.hidden = NO;
-//        ipAddressTextField.text = [APPSinglton shareInstance].wifiStatiConfigIP;
-//        subMarkTextField.text = [APPSinglton shareInstance].wifiStatiConfiMask;
-//        gateWayTextField.text = [APPSinglton shareInstance].wifiStatiConfigGateWay;
-//        DNSTextField.text = [APPSinglton shareInstance].wifiStatiConfigDNS;
-//        typeLanBtn.selected = NO;
-//        typeWifiBtn.selected = YES;
-//        [backV addSubview:networkReachableWayLab];
-//        if(currentSSID)
-//        {
-//            wifiInputV.y = networkReachableWayLab.height+networkReachableWayLab.y;
-//            wifiInputV.height = 40;
-//            [backV addSubview:wifiInputV];
-//        }
-//        ipSetttingV.y = wifiInputV.height+wifiInputV.y;
-//    }
-//   
-//    backV.height = ipSetttingV.y+ipSetttingV.height+20;
-//    staticBtn.selected = NO;
-//    dhcpBtn.selected = YES;
-//    [staticInputView removeFromSuperview];
-//    backV.height = ipSetttingV.height+ipSetttingV.y+20;
-//    confirmConfigBtn.y = backV.height+backV.y+20;
+    confgiNetWorkTypeWifiBtn.selected = !confgiNetWorkTypeWifiBtn.selected;
+    confgiNetWorkTypeLanBtn.selected  = !confgiNetWorkTypeLanBtn.selected;
+    if (confgiNetWorkTypeLanBtn.selected==YES) {
+        networkReachableWayLab.hidden = YES;
+        typeLanBtn.selected = YES;
+        typeWifiBtn.selected = NO;
+        [networkReachableWayLab removeFromSuperview];
+        [wifiInputV removeFromSuperview];
+        wifiInputV.height=0;
+        ipSetttingV.y = 0;
+        
+        ipAddressTextField.text = [AppSingleton shareInstace].lanStatiConfigIP;
+        subMarkTextField.text =  [AppSingleton shareInstace].lanStatiConfiMask;
+        gateWayTextField.text =  [AppSingleton shareInstace].lanStatiConfigGateWay;
+        DNSTextField.text =  [AppSingleton shareInstace].lanStatiConfigDNS;
+        
+    }
+    else
+    {
+        networkReachableWayLab.hidden = NO;
+        ipAddressTextField.text =  [AppSingleton shareInstace].wifiStatiConfigIP;
+        subMarkTextField.text =  [AppSingleton shareInstace].wifiStatiConfiMask;
+        gateWayTextField.text =  [AppSingleton shareInstace].wifiStatiConfigGateWay;
+        DNSTextField.text =  [AppSingleton shareInstace].wifiStatiConfigDNS;
+        typeLanBtn.selected = NO;
+        typeWifiBtn.selected = YES;
+        [backV addSubview:networkReachableWayLab];
+        if(currentSSID)
+        {
+            wifiInputV.y = networkReachableWayLab.height+networkReachableWayLab.y;
+            wifiInputV.height = 40;
+            [backV addSubview:wifiInputV];
+        }
+        ipSetttingV.y = wifiInputV.height+wifiInputV.y;
+    }
+   
+    backV.height = ipSetttingV.y+ipSetttingV.height+20;
+    staticBtn.selected = NO;
+    dhcpBtn.selected = YES;
+    [staticInputView removeFromSuperview];
+    backV.height = ipSetttingV.height+ipSetttingV.y+20;
+    confirmConfigBtn.y = backV.height+backV.y+20;
 }
 #pragma mark --baidu location delegate
 - (void)willStartLocatingUser;

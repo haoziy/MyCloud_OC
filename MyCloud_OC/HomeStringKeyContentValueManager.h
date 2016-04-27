@@ -14,6 +14,7 @@ extern NSString * const language_homeDeviceManagerExitCurrentCloudTitle;//设备
 
 extern NSString * const language_homeDeviceManagerConfigNetButtonName;//配置网络按钮名
 extern NSString * const language_homeDeviceManagerDelNetButtonName;//删除网络按钮名
+extern NSString * const language_homeDeviceManagerSearchDevicePlacement;//搜索设备占位符
 @interface HomeStringKeyContentValueManager : StringKeyContentValueManager
 
 @end

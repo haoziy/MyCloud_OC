@@ -37,5 +37,7 @@ extern CGFloat const font_smallTextFontSize;//小号文本字体
 +(CGFloat)mrjSepritorHeight;//分割线高度
 +(CGFloat)mrjTableHeadHeight;
 
++(CGFloat)mrjVerticalSpace;
+
 
 @end

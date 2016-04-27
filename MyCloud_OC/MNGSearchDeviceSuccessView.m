@@ -28,7 +28,7 @@
         _deviceMacAddress = macAddress;
         
         
-        self.backgroundColor = [MRJColorManager mrj_noticeTextColor];
+        self.backgroundColor = [MRJColorManager mrj_separatrixColor];
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake((self.width-self.width/4)/2, (self.height/2-self.width/4)/2, self.width/4, self.width/4)];
         [btn setImage:[UIImage imageNamed:@"device_mrj"] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];

@@ -51,7 +51,6 @@
 		053701771CCF170500EE215B /* HomeDeviceManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 053701761CCF170500EE215B /* HomeDeviceManagerViewController.m */; };
 		0537017D1CCF178B00EE215B /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537017C1CCF178B00EE215B /* DeviceModel.m */; };
 		053701801CCF17C200EE215B /* DeviceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537017F1CCF17C200EE215B /* DeviceListCell.m */; };
-		053701831CCF384D00EE215B /* NSString+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 053701821CCF384D00EE215B /* NSString+Safe.m */; };
 		053701861CCF69ED00EE215B /* HomeHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 053701851CCF69ED00EE215B /* HomeHttpHandler.m */; };
 		0537018E1CCF6DB500EE215B /* MNGDeviceNetConfigViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 053701891CCF6DB500EE215B /* MNGDeviceNetConfigViewController.mm */; };
 		0537018F1CCF6DB500EE215B /* MNGSearchDeviceForConfigNetViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0537018B1CCF6DB500EE215B /* MNGSearchDeviceForConfigNetViewController.mm */; };
@@ -59,6 +58,10 @@
 		053701971CCF6F0900EE215B /* voicelib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 053701941CCF6F0900EE215B /* voicelib.a */; };
 		056961A31CB4B5E300AECAEF /* HttpHandlerApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 056961A21CB4B5E300AECAEF /* HttpHandlerApi.m */; };
 		056961A61CB4DC6F00AECAEF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 056961A81CB4DC6F00AECAEF /* Launch Screen.storyboard */; };
+		056D69C71CD05ED300ACBB0B /* NSString+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 056D69C31CD05ED300ACBB0B /* NSString+Safe.m */; };
+		056D69C81CD05ED300ACBB0B /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 056D69C41CD05ED300ACBB0B /* NullSafe.m */; };
+		056D69C91CD05ED300ACBB0B /* UINavigationController+safetyPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 056D69C61CD05ED300ACBB0B /* UINavigationController+safetyPush.m */; };
+		056D69CB1CD061BE00ACBB0B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056D69CA1CD061BE00ACBB0B /* MediaPlayer.framework */; };
 		056FC59E1CB5ED25003F2BCA /* AboutMeHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 056FC59D1CB5ED25003F2BCA /* AboutMeHttpHandler.m */; };
 		056FC5A11CB6040A003F2BCA /* MRJStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 056FC5A01CB6040A003F2BCA /* MRJStoreManager.m */; };
 		059509341CB4F09A009B3BBA /* DeBugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 059509331CB4F09A009B3BBA /* DeBugLog.m */; };
@@ -230,8 +233,6 @@
 		0537017C1CCF178B00EE215B /* DeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceModel.m; path = MyCloud_OC/DeviceModel.m; sourceTree = "<group>"; };
 		0537017E1CCF17C200EE215B /* DeviceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceListCell.h; path = MyCloud_OC/DeviceListCell.h; sourceTree = "<group>"; };
 		0537017F1CCF17C200EE215B /* DeviceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceListCell.m; path = MyCloud_OC/DeviceListCell.m; sourceTree = "<group>"; };
-		053701811CCF384D00EE215B /* NSString+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Safe.h"; path = "../../Desktop/develop/Category/NSString+Safe.h"; sourceTree = "<group>"; };
-		053701821CCF384D00EE215B /* NSString+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Safe.m"; path = "../../Desktop/develop/Category/NSString+Safe.m"; sourceTree = "<group>"; };
 		053701841CCF69ED00EE215B /* HomeHttpHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeHttpHandler.h; path = MyCloud_OC/HomeHttpHandler.h; sourceTree = "<group>"; };
 		053701851CCF69ED00EE215B /* HomeHttpHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeHttpHandler.m; path = MyCloud_OC/HomeHttpHandler.m; sourceTree = "<group>"; };
 		053701881CCF6DB500EE215B /* MNGDeviceNetConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNGDeviceNetConfigViewController.h; path = MyCloud_OC/MNGDeviceNetConfigViewController.h; sourceTree = "<group>"; };
@@ -251,6 +252,12 @@
 		056961AA1CB4DC7800AECAEF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Launch Screen.strings"; sourceTree = "<group>"; };
 		056961AC1CB4DC7A00AECAEF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Launch Screen.strings"; sourceTree = "<group>"; };
 		056961AE1CB4DC7B00AECAEF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Launch Screen.strings"; sourceTree = "<group>"; };
+		056D69C21CD05ED300ACBB0B /* NSString+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Safe.h"; path = "safe/NSString+Safe.h"; sourceTree = "<group>"; };
+		056D69C31CD05ED300ACBB0B /* NSString+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Safe.m"; path = "safe/NSString+Safe.m"; sourceTree = "<group>"; };
+		056D69C41CD05ED300ACBB0B /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NullSafe.m; path = safe/NullSafe.m; sourceTree = "<group>"; };
+		056D69C51CD05ED300ACBB0B /* UINavigationController+safetyPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+safetyPush.h"; path = "safe/UINavigationController+safetyPush.h"; sourceTree = "<group>"; };
+		056D69C61CD05ED300ACBB0B /* UINavigationController+safetyPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+safetyPush.m"; path = "safe/UINavigationController+safetyPush.m"; sourceTree = "<group>"; };
+		056D69CA1CD061BE00ACBB0B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		056FC59C1CB5ED25003F2BCA /* AboutMeHttpHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutMeHttpHandler.h; path = MyCloud_OC/AboutMeHttpHandler.h; sourceTree = "<group>"; };
 		056FC59D1CB5ED25003F2BCA /* AboutMeHttpHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutMeHttpHandler.m; path = MyCloud_OC/AboutMeHttpHandler.m; sourceTree = "<group>"; };
 		056FC59F1CB6040A003F2BCA /* MRJStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJStoreManager.h; path = MyCloud_OC/MRJStoreManager.h; sourceTree = "<group>"; };
@@ -303,6 +310,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				056D69CB1CD061BE00ACBB0B /* MediaPlayer.framework in Frameworks */,
 				053701971CCF6F0900EE215B /* voicelib.a in Frameworks */,
 				F1CB5E7BA92EE0FD26A182F7 /* libPods-MyCloud_OC.a in Frameworks */,
 			);
@@ -618,8 +626,11 @@
 		0528C7031CB4A6B2001C8281 /* Safety */ = {
 			isa = PBXGroup;
 			children = (
-				053701811CCF384D00EE215B /* NSString+Safe.h */,
-				053701821CCF384D00EE215B /* NSString+Safe.m */,
+				056D69C21CD05ED300ACBB0B /* NSString+Safe.h */,
+				056D69C31CD05ED300ACBB0B /* NSString+Safe.m */,
+				056D69C41CD05ED300ACBB0B /* NullSafe.m */,
+				056D69C51CD05ED300ACBB0B /* UINavigationController+safetyPush.h */,
+				056D69C61CD05ED300ACBB0B /* UINavigationController+safetyPush.m */,
 			);
 			name = Safety;
 			sourceTree = "<group>";
@@ -919,6 +930,7 @@
 		7BE3B0D22FCB977F7C1BAC76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				056D69CA1CD061BE00ACBB0B /* MediaPlayer.framework */,
 				05315FDF1CC9C05900EA942F /* frameworks */,
 				4432037842F65F19A72E859C /* libPods-MyCloud_OC.a */,
 			);
@@ -1134,6 +1146,7 @@
 				05293F761CB75D1B0064193B /* MRJSizeManager.m in Sources */,
 				053701801CCF17C200EE215B /* DeviceListCell.m in Sources */,
 				056961A31CB4B5E300AECAEF /* HttpHandlerApi.m in Sources */,
+				056D69C91CD05ED300ACBB0B /* UINavigationController+safetyPush.m in Sources */,
 				059509381CB4FF2D009B3BBA /* AppDelegate+utils.m in Sources */,
 				05FBE25A1CCE182900729845 /* MRJCheckUtils.m in Sources */,
 				05FBE2561CCE112700729845 /* MRJScrollView.m in Sources */,
@@ -1167,7 +1180,6 @@
 				053701901CCF6DB500EE215B /* MNGSearchDeviceSuccessView.m in Sources */,
 				0537018F1CCF6DB500EE215B /* MNGSearchDeviceForConfigNetViewController.mm in Sources */,
 				05293F6A1CB75BED0064193B /* DiscoveryResourceManager.m in Sources */,
-				053701831CCF384D00EE215B /* NSString+Safe.m in Sources */,
 				05FBE24B1CCDB80500729845 /* UIView+Frame.m in Sources */,
 				05293F2E1CB750940064193B /* DiscoveryKeyContentValueManager.m in Sources */,
 				05293F791CB75D660064193B /* MRJColorManager.m in Sources */,
@@ -1175,6 +1187,8 @@
 				0528C6971CB49E3D001C8281 /* AppDelegate.m in Sources */,
 				05293F341CB751030064193B /* FormsKeyContentValueManager.m in Sources */,
 				05FBE25D1CCE192C00729845 /* MRJAppUtils.m in Sources */,
+				056D69C81CD05ED300ACBB0B /* NullSafe.m in Sources */,
+				056D69C71CD05ED300ACBB0B /* NSString+Safe.m in Sources */,
 				053701741CCF0AE100EE215B /* LoginRegistHttpHandler.m in Sources */,
 				0528C6941CB49E3D001C8281 /* main.m in Sources */,
 				05293F671CB75BD90064193B /* HomeResourceManager.m in Sources */,

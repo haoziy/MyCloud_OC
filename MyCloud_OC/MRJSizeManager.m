@@ -50,6 +50,10 @@ CGFloat const font_smallTextFontSize = 11.0f;;//小号文本字体
 {
     return 16;
 }
++(CGFloat)mrjVerticalSpace;
+{
+    return 8;
+}
 +(CGFloat)mrjHorizonPaddding;
 {
     return 16;

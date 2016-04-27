@@ -14,6 +14,7 @@ NSString * const language_homeDeviceManagerExitCurrentCloudTitle = @"退出";
 
 NSString * const language_homeDeviceManagerConfigNetButtonName = @"配置网络";//配置网络按钮名
 NSString * const language_homeDeviceManagerDelNetButtonName = @"删除网络";//删除网络按钮名
+NSString * const language_homeDeviceManagerSearchDevicePlacement = @"按名称或序列号搜索设备";//搜索设备占位符
 +(NSString*)languageValueForKey:(NSString *)key
 {
     return [self homeLanguageValueForKey:key];

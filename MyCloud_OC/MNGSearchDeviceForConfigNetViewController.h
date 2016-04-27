@@ -13,7 +13,7 @@
 #include "voiceEncoder.h"
 typedef enum
 {
-    DeviceConfigEnteryFromDeviceList,//从设备列表进入,
+    DeviceConfigEnteryFromDeviceList = 0,//从设备列表进入,
     DeviceConfigEnteryFromDeviceDetail//从设备详情进入
 }DeviceConfigEnteryWay;
 
@@ -23,7 +23,7 @@ typedef enum
     VoicePlayer *sendPlayer;
 }
 
-@property(nonatomic,strong)DeviceModel *deviceModel;
+@property(nonatomic,retain)DeviceModel *deviceModel;
 @property(nonatomic,readonly,assign)DeviceConfigEnteryWay enterWay;
 -(id)initWithEnterWay:(DeviceConfigEnteryWay)enterWay;
 @end

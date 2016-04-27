@@ -54,7 +54,16 @@
                 make.centerY.equalTo(_operationBtn.superview.mas_centerY);
                 make.right.equalTo(_operationBtn.superview.mas_right).mas_offset(-[MRJSizeManager  mrjHorizonPaddding]);
             }];
+            _operationBtn.titleLabel.font = [MRJSizeManager mrjMiddleTextFont];
         }
+        [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView).offset([MRJSizeManager mrjHorizonPaddding]);
+            make.top.equalTo(self.contentView).offset(5);
+        }];
+        [self.detailTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView).offset([MRJSizeManager mrjHorizonPaddding]);
+            make.top.equalTo(self.textLabel.mas_bottom).offset(5);
+        }];
     }
 }
 @end

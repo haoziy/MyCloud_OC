@@ -12,4 +12,5 @@
  **/
 @interface MRJScrollView : UIScrollView
 
+@property(nonatomic,strong)MRJContainerView *contentView;
 @end

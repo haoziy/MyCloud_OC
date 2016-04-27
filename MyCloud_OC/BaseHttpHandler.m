@@ -16,7 +16,7 @@
 +(NSString*)urlForApiName:(NSString*)apiName
 {
     NSAssert(apiName != nil, @"apiName 名字不能为空");
-    return [NSString stringWithFormat:@"%@/%@",[AppSingleton currentEnvironmentBaseURL],apiName];
+    return [NSString stringWithFormat:@"%@%@",[AppSingleton currentEnvironmentBaseURL],apiName];
 }
 
 +(void)baseRequestAFNetWorkApi:(ApiNameMap)apiName method:(HttpRequestType)method andHttpHeader:(NSDictionary *)header parameters:(id)parameters prepareExecute:(MRJPrepareExcute)prepare succeed:(MRJSuccessBlock)succeed failed:(MRJFailedBlock)failed;

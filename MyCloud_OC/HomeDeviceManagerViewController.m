@@ -12,14 +12,20 @@
 #import "MRJLoginViewController.h"
 #import "DeviceListCell.h"
 #import "HomeHttpHandler.h"
+#import "DeviceModel.h"
+#import "MNGSearchDeviceForConfigNetViewController.h"
+NSString* const indentifier_cellIdentifier = @"cell";
+
 @interface HomeDeviceManagerViewController()<UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,UISearchControllerDelegate>
 {
     UITableView *deviceListTable;
     UITableView *searchTable;
-    NSMutableArray *data;
+    NSMutableArray *onLineData;
+    NSMutableArray *offLineData;
     UISearchController *searchViewController;
     NSMutableArray *searchData;
-    
+    NSDictionary *deviceList;
+    NSMutableArray *allDevices;
 }
 
 @end
@@ -29,10 +35,12 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    data = [[NSMutableArray alloc]init];
+    onLineData = [[NSMutableArray alloc]init];
+    offLineData = [[NSMutableArray alloc]init];
+    
     searchData = [[NSMutableArray alloc]init];
     searchTable = [[UITableView alloc]init];
-
+    allDevices = [[NSMutableArray alloc]init];
     
     
     
@@ -51,21 +59,37 @@
     searchViewController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [searchViewController.view addSubview:searchTable];
     [searchTable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(64, 0, 0, 0));
     }];
+    self.definesPresentationContext = YES;
+    searchTable.delegate = self;
+    searchTable.dataSource  = self;
     searchTable.hidden = YES;
     searchViewController.searchResultsUpdater = self;
     searchViewController.delegate = self;
     [searchViewController.searchBar sizeToFit];
+    searchViewController.searchBar.tintColor = [MRJColorManager mrj_mainThemeColor];
+    searchViewController.searchBar.placeholder = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerSearchDevicePlacement];
     deviceListTable.tableHeaderView = searchViewController.searchBar;
+    [deviceListTable setTableFooterView:[[UIView alloc]initWithFrame:CGRectZero]];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self loadData];
 }
 -(void)loadData
 {
-    [HomeHttpHandler getDeviceListParams:@{@"":@""} preExecute:^{
+    NSDictionary *para = @{@"accountId":@"3254"};
+    [HomeHttpHandler getDeviceListParams:para preExecute:^{
         
     } success:^(id obj) {
-        
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            deviceList = obj;
+            offLineData = [obj objectForKey:key_offLineDeviceKey];
+            onLineData = [obj objectForKey:key_onLineDeviceKey];
+            [allDevices removeAllObjects];
+            [allDevices addObjectsFromArray:offLineData];
+            [allDevices addObjectsFromArray:onLineData];
+            [deviceListTable reloadData];
+        }
     } failed:^(id obj) {
         
     }];
@@ -75,37 +99,102 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    if (tableView==searchTable) {
+        return 1;
+    }
+    return [deviceList allKeys].count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
-    return 5;
+    if (tableView==searchTable) {
+        return searchData.count;
+    }
+    
+    if (section==0) {
+        return onLineData.count;
+    }else
+    {
+        return offLineData.count;
+    }
+    return 0;
 }
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
+//-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return [MRJSizeManager mrjInputSizeHeight];
+//}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 48;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    DeviceListCell *cell = (DeviceListCell*)[tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+        cell = [[DeviceListCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:indentifier_cellIdentifier];
     }
-    [cell.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(cell.contentView).mas_offset(200);
-        make.centerY.mas_equalTo(cell.contentView.mas_centerY);
-    }];
-    cell.textLabel.text = @"s";
-    cell.detailTextLabel.text = @"aa";
-    [cell.detailTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(cell.contentView).mas_offset(-200);
-        make.centerY.mas_equalTo(cell.contentView.mas_centerY);
-    }];
+    DeviceModel *model = nil;
+    
+    if (tableView==searchTable) {
+        model = searchData[indexPath.row];
+    }
+    else
+    {
+        if (indexPath.section==0) {
+            model = onLineData[indexPath.row];
+        }else
+        {
+            model = offLineData[indexPath.row];
+        }
+    }
+    cell.deviceModel = model;
+    
     return cell;
+}
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)])
+    {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 #pragma mark --searchViewController delegate
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController;
 {
-    
+    [searchData removeAllObjects];
+    NSLog(@"%@",searchController.searchBar.text);
+    if (searchViewController.searchBar.text.length==0) {
+        searchTable.hidden = YES;
+        
+        [searchTable reloadData];
+        return;
+    }else
+    {
+        for (NSUInteger i = 0; i < [allDevices count]; i ++)
+        {
+            DeviceModel *model = allDevices[i];
+            //在每一个model里查找这个字符串\n，判断有没有
+            if ([model.imei rangeOfString:searchController.searchBar.text options:NSCaseInsensitiveSearch].location != NSNotFound||[model.alias rangeOfString:searchController.searchBar.text options:NSCaseInsensitiveSearch].location != NSNotFound)
+            {
+                [searchData addObject:allDevices[i]];
+                searchTable.hidden = NO;
+            }else
+            {
+            }
+            
+            
+        }
+    }
+    [searchTable reloadData];
 }
 - (void)willPresentSearchController:(UISearchController *)searchController;
 {
@@ -117,11 +206,14 @@
 }
 - (void)willDismissSearchController:(UISearchController *)searchController;
 {
-    
+     
 }
 - (void)didDismissSearchController:(UISearchController *)searchController;
 {
-    
+    [deviceListTable mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+    searchTable.hidden = YES;
 }
 - (void)presentSearchController:(UISearchController *)searchController;
 {
@@ -136,6 +228,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MNGSearchDeviceForConfigNetViewController *searchConfigVC = [[MNGSearchDeviceForConfigNetViewController alloc]initWithEnterWay:DeviceConfigEnteryFromDeviceList];
+    DeviceModel *model = nil;
     
+    if (tableView==searchTable) {
+        model = searchData[indexPath.row];
+    }else
+    {
+        if (indexPath.section==0) {
+            model = onLineData[indexPath.row];
+        }else
+        {
+            model = offLineData[indexPath.row];
+        }
+    }
+    searchConfigVC.deviceModel = model;
+    [self.navigationController safetyPushViewController:searchConfigVC animated:YES];
 }
 @end

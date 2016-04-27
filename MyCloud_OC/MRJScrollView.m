@@ -29,18 +29,14 @@
 }
 -(void)setup
 {
-//    _contentView.constraints.
     self.translatesAutoresizingMaskIntoConstraints = NO;
-//    [self addSubview:_contentView];
-//    NSDictionary *views = NSDictionaryOfVariableBindings(_contentView);
-//    
-//    NSString *vFVL = [NSString stringWithFormat:@"V:|-0-[_contentView(%f)]-0-|",SCREEN_WIDTH];
-//    NSString *hFVL = [NSString stringWithFormat:@"H:|-0-[_contentView(%f)]-0-|",SCREEN_HEIGHT];
-//    NSLayoutFormatOptions ops = NSLayoutFormatAlignAllLeft|NSLayoutFormatAlignAllTop;
-//    NSArray *vConsttraint = [NSLayoutConstraint constraintsWithVisualFormat:vFVL options:ops metrics:nil views:views];
-//    NSArray *hConsttraint = [NSLayoutConstraint constraintsWithVisualFormat:hFVL options:ops metrics:nil views:views];
-//    [self addConstraints:vConsttraint];
-//    [self addConstraints:hConsttraint];
+    _contentView = [[MRJContainerView alloc]init];
+//    _contentView.height = SCREEN_HEIGHT;
+//    _contentView.width = SCREEN_WIDTH;
+    [self addSubview:_contentView];
+    [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
 }
 - (BOOL)touchesShouldCancelInContentView:(UIView *)view
 {
