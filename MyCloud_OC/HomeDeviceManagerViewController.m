@@ -78,6 +78,7 @@ NSString* const indentifier_cellIdentifier = @"cell";
 -(void)loadData
 {
     NSDictionary *para = @{@"accountId":@"3254"};
+    NSString *str = [NSString mrj_sigal_encode:@"{\"username\":\"alex.lo\",\"password\":\"\"}"];
     [HomeHttpHandler getDeviceListParams:para preExecute:^{
         
     } success:^(id obj) {
@@ -91,6 +92,7 @@ NSString* const indentifier_cellIdentifier = @"cell";
             [deviceListTable reloadData];
         }
     } failed:^(id obj) {
+        
         
     }];
 }

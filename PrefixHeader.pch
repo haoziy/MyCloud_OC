@@ -23,7 +23,7 @@
 #import "MRJScrollView.h"
 #import "Masonry.h"
 
-
+#import "NSString+Safe.h"
 #import "ReactiveCocoa.h"
 #import "MRJHttpHandler.h"//http请求
 #import <Foundation/Foundation.h>

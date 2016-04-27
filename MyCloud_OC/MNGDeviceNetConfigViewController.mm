@@ -216,12 +216,13 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(beginConfig:)];
     [item setTintColor:[MRJColorManager mrj_navigationTextColor]];
+    
     self.navigationItem.rightBarButtonItem = item;
     totalHight = TOP_PADDING;//默认的高度
-    scorllView = [[UIScrollView alloc]initWithFrame:self.view.bounds];
-    scorllView.backgroundColor = self.view.backgroundColor;
-    self.view = scorllView;
-    scorllView.contentSize = CGSizeMake(SCREEN_WIDTH, 568);
+//    scorllView = [[UIScrollView alloc]initWithFrame:self.view.bounds];
+//    scorllView.backgroundColor = self.view.backgroundColor;
+//    self.view = scorllView;
+//    scorllView.contentSize = CGSizeMake(SCREEN_WIDTH, 568);
  
     isCanAssignTask = YES;
     messageArr = [NSMutableArray array];
@@ -232,70 +233,117 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     [btn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 45)];
     
     [btn addTarget:self action:@selector(backToLast:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(calculateSubMarkGateWay:) name:UITextFieldTextDidEndEditingNotification object:nil];
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, TOP_PADDING, 100, [MRJSizeManager mrjTableHeadHeight])];
-    label.textColor = [MRJColorManager mrj_secondaryTextColor];
-    label.text =  @"配置网络";
-    label.font = [MRJSizeManager mrjMiddleTextFont];
-    [label sizeToFit];
-    label.x= 20;
-    label.y=20;
-    totalHight=label.height+label.y;
-    //是否需要选择配置网络类型(无线/有线)
-    if(_deviceModel.hardModel==DeviceHardModelM1Plus)
+    
+    //1:网络类型;
+    if (_deviceModel.hardModel)//需要有线的情况
     {
-        [self createNetTypeUI];
-    }else
-    {
-        ///仅仅为了初始化必须选择一种方式
-        confgiNetWorkTypeWifiBtn = [[UIButton alloc]initWithFrame:CGRectMake(20, (40-15)/2, 15, 15)];
-        [confgiNetWorkTypeWifiBtn setImage:[UIImage imageNamed:@"select_white"] forState:UIControlStateNormal];
-        [confgiNetWorkTypeWifiBtn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
-        confgiNetWorkTypeWifiBtn.selected = YES;
-        confgiNetWorkTypeLanBtn = [[UIButton alloc]init];
+        MRJContainerView *configNetTypeContainer = [[MRJContainerView alloc]init];
+        configNetTypeContainer.backgroundColor = [UIColor redColor];
+        [self.backScrollView addSubview:configNetTypeContainer];
+        [configNetTypeContainer mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(configNetTypeContainer.superview).offset(0);
+            make.left.equalTo(configNetTypeContainer.superview.mas_left);
+            make.centerX.equalTo(configNetTypeContainer.superview.mas_centerX);
+        }];
+        
+        MRJContainerView *netTypeButtomV = [[MRJContainerView alloc]init];
+        netTypeButtomV.backgroundColor = [MRJColorManager mrj_mainBackgroundColor];
+        [configNetTypeContainer addSubview:netTypeButtomV];
+        [netTypeButtomV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(netTypeButtomV.superview).offset(0);
+            make.height.mas_equalTo(TableHeadHeight);
+            make.centerX.mas_equalTo(netTypeButtomV.superview.mas_centerX);
+            make.bottom.mas_equalTo(configNetTypeContainer.mas_bottom);
+        }];
+        UILabel *netTypeLabel = [[UILabel alloc]init];
+        netTypeLabel.font = [MRJSizeManager mrjMiddleTextFont];
+        netTypeLabel.text = @"网络类型";
+        netTypeLabel.textColor = [MRJColorManager mrj_secondaryTextColor];
+        [netTypeButtomV addSubview:netTypeLabel];
+        [netTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//             make.left.mas_equalTo(netTypeLabel.superview).offset([MRJSizeManager mrjHorizonPaddding]);
+            make.left.mas_equalTo(netTypeLabel.superview.left);
+            make.centerY.mas_equalTo(netTypeButtomV.mas_centerY);
+        }];
     }
     
-    backV = [[UIView alloc]initWithFrame:CGRectMake(0, totalHight, SCREEN_WIDTH, 200)];
-    [self.view addSubview:backV];
-    //静态地址输入框
-    [self createStaticInputV];
-    //配置过程中的覆盖视图
-    [self createHoldV];
     
     
-    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
-    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        networkReachableWayLab = [[UILabel alloc]init];
-        currentSSID = nil;
-        for (UIView *v in backV.subviews) {
-            [v removeFromSuperview];
-        }
-        NSString *orginStr=@"请将手机网络切换至设备所连接的Wi-Fi网络";
-        [confirmConfigBtn removeFromSuperview];
-        if (status==AFNetworkReachabilityStatusReachableViaWiFi) {
-            [self fetchSSIDInfo];
-            if (currentSSID) {
-                orginStr = [NSString stringWithFormat:@"当前手机Wi-Fi %@",currentSSID];
-            }
-        }
-        CGRect rect = [orginStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-LEFT_PADDING*2, 60) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:MiddleTextFont} context:nil];
-        networkReachableWayLab.numberOfLines = 0;
-        networkReachableWayLab.lineBreakMode = NSLineBreakByWordWrapping;
-        networkReachableWayLab.textColor = MainTextColor;
-        networkReachableWayLab.font = MiddleTextFont;
-        networkReachableWayLab.text = orginStr;
-        networkReachableWayLab.frame = CGRectMake((SCREEN_WIDTH-LEFT_PADDING*2-rect.size.width)/2+LEFT_PADDING, 0, rect.size.width, rect.size.height);
-        networkReachableWayLab.textAlignment = NSTextAlignmentCenter;
-        if (confgiNetWorkTypeLanBtn.selected ==YES) {
-            networkReachableWayLab.hidden = YES;
-        }else
-        {
-            networkReachableWayLab.hidden = NO;
-        }
-        [backV addSubview:networkReachableWayLab];
-        [self createUI];
-    }];
-   [manager startMonitoring];
+    
+    
+    
+    
+    
+    
+    /**
+     原来的代码.先不要动
+     */
+    
+//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, TOP_PADDING, 100, [MRJSizeManager mrjTableHeadHeight])];
+//    label.textColor = [MRJColorManager mrj_secondaryTextColor];
+//    label.text =  @"配置网络";
+//    label.font = [MRJSizeManager mrjMiddleTextFont];
+//    [label sizeToFit];
+//    label.x= 20;
+//    label.y=20;
+//    totalHight=label.height+label.y;
+//    //是否需要选择配置网络类型(无线/有线)
+//    if(_deviceModel.hardModel==DeviceHardModelM1Plus)
+//    {
+//        [self createNetTypeUI];
+//    }else
+//    {
+//        ///仅仅为了初始化必须选择一种方式
+//        confgiNetWorkTypeWifiBtn = [[UIButton alloc]initWithFrame:CGRectMake(20, (40-15)/2, 15, 15)];
+//        [confgiNetWorkTypeWifiBtn setImage:[UIImage imageNamed:@"select_white"] forState:UIControlStateNormal];
+//        [confgiNetWorkTypeWifiBtn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
+//        confgiNetWorkTypeWifiBtn.selected = YES;
+//        confgiNetWorkTypeLanBtn = [[UIButton alloc]init];
+//    }
+//    
+//    backV = [[UIView alloc]initWithFrame:CGRectMake(0, totalHight, SCREEN_WIDTH, 200)];
+//    [self.view addSubview:backV];
+//    //静态地址输入框
+//    [self createStaticInputV];
+//    //配置过程中的覆盖视图
+//    [self createHoldV];
+//    
+//    
+//    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+//    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+//        networkReachableWayLab = [[UILabel alloc]init];
+//        currentSSID = nil;
+//        for (UIView *v in backV.subviews) {
+//            [v removeFromSuperview];
+//        }
+//        NSString *orginStr=@"请将手机网络切换至设备所连接的Wi-Fi网络";
+//        [confirmConfigBtn removeFromSuperview];
+//        if (status==AFNetworkReachabilityStatusReachableViaWiFi) {
+//            [self fetchSSIDInfo];
+//            if (currentSSID) {
+//                orginStr = [NSString stringWithFormat:@"当前手机Wi-Fi %@",currentSSID];
+//            }
+//        }
+//        CGRect rect = [orginStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-LEFT_PADDING*2, 60) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:MiddleTextFont} context:nil];
+//        networkReachableWayLab.numberOfLines = 0;
+//        networkReachableWayLab.lineBreakMode = NSLineBreakByWordWrapping;
+//        networkReachableWayLab.textColor = MainTextColor;
+//        networkReachableWayLab.font = MiddleTextFont;
+//        networkReachableWayLab.text = orginStr;
+//        networkReachableWayLab.frame = CGRectMake((SCREEN_WIDTH-LEFT_PADDING*2-rect.size.width)/2+LEFT_PADDING, 0, rect.size.width, rect.size.height);
+//        networkReachableWayLab.textAlignment = NSTextAlignmentCenter;
+//        if (confgiNetWorkTypeLanBtn.selected ==YES) {
+//            networkReachableWayLab.hidden = YES;
+//        }else
+//        {
+//            networkReachableWayLab.hidden = NO;
+//        }
+//        [backV addSubview:networkReachableWayLab];
+//        [self createUI];
+//    }];
+//   [manager startMonitoring];
     AVAudioSession *mySession = [AVAudioSession sharedInstance];
     [mySession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
 
@@ -866,6 +914,10 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     
     
     
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 - (void) viewWillAppear:(BOOL)animated
 {
