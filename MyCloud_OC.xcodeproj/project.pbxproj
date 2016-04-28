@@ -48,14 +48,23 @@
 		05293F761CB75D1B0064193B /* MRJSizeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05293F751CB75D1B0064193B /* MRJSizeManager.m */; };
 		05293F791CB75D660064193B /* MRJColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05293F781CB75D660064193B /* MRJColorManager.m */; };
 		053701741CCF0AE100EE215B /* LoginRegistHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 053701731CCF0AE100EE215B /* LoginRegistHttpHandler.m */; };
-		053701771CCF170500EE215B /* HomeDeviceManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 053701761CCF170500EE215B /* HomeDeviceManagerViewController.m */; };
 		0537017D1CCF178B00EE215B /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537017C1CCF178B00EE215B /* DeviceModel.m */; };
-		053701801CCF17C200EE215B /* DeviceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537017F1CCF17C200EE215B /* DeviceListCell.m */; };
 		053701861CCF69ED00EE215B /* HomeHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 053701851CCF69ED00EE215B /* HomeHttpHandler.m */; };
-		0537018E1CCF6DB500EE215B /* MNGDeviceNetConfigViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 053701891CCF6DB500EE215B /* MNGDeviceNetConfigViewController.mm */; };
-		0537018F1CCF6DB500EE215B /* MNGSearchDeviceForConfigNetViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0537018B1CCF6DB500EE215B /* MNGSearchDeviceForConfigNetViewController.mm */; };
-		053701901CCF6DB500EE215B /* MNGSearchDeviceSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537018D1CCF6DB500EE215B /* MNGSearchDeviceSuccessView.m */; };
 		053701971CCF6F0900EE215B /* voicelib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 053701941CCF6F0900EE215B /* voicelib.a */; };
+		055D36851CD1E997005FAB0F /* DeviceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D367C1CD1E997005FAB0F /* DeviceDetailViewController.m */; };
+		055D36861CD1E997005FAB0F /* HomeDeviceManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D367E1CD1E997005FAB0F /* HomeDeviceManagerViewController.m */; };
+		055D36871CD1E997005FAB0F /* MNGDeviceNetConfigViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 055D36801CD1E997005FAB0F /* MNGDeviceNetConfigViewController.mm */; };
+		055D36881CD1E997005FAB0F /* MNGSearchDeviceForConfigNetViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 055D36821CD1E997005FAB0F /* MNGSearchDeviceForConfigNetViewController.mm */; };
+		055D36891CD1E997005FAB0F /* MNGSearchDeviceSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D36841CD1E997005FAB0F /* MNGSearchDeviceSuccessView.m */; };
+		055D368C1CD1E9C8005FAB0F /* DeviceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D368B1CD1E9C8005FAB0F /* DeviceListCell.m */; };
+		055D368F1CD1EA7D005FAB0F /* DeviceParameterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D368E1CD1EA7D005FAB0F /* DeviceParameterViewController.m */; };
+		055D36961CD1EAC4005FAB0F /* WLRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D36911CD1EAC4005FAB0F /* WLRangeSlider.m */; };
+		055D36971CD1EAC4005FAB0F /* WLSliderThumbLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D36931CD1EAC4005FAB0F /* WLSliderThumbLayer.m */; };
+		055D36981CD1EAC4005FAB0F /* WLTrackLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D36951CD1EAC4005FAB0F /* WLTrackLayer.m */; };
+		055D369B1CD1EBD1005FAB0F /* DeviceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D369A1CD1EBD1005FAB0F /* DeviceDetailCell.m */; };
+		055D369E1CD1F0AD005FAB0F /* SelectInstallHeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D369D1CD1F0AD005FAB0F /* SelectInstallHeightViewController.m */; };
+		055D36A11CD1F9DB005FAB0F /* MRJBaseTableview.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D36A01CD1F9DB005FAB0F /* MRJBaseTableview.m */; };
+		055D36A41CD20960005FAB0F /* UIButton+MRJButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D36A31CD20960005FAB0F /* UIButton+MRJButton.m */; };
 		056961A31CB4B5E300AECAEF /* HttpHandlerApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 056961A21CB4B5E300AECAEF /* HttpHandlerApi.m */; };
 		056961A61CB4DC6F00AECAEF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 056961A81CB4DC6F00AECAEF /* Launch Screen.storyboard */; };
 		056D69C71CD05ED300ACBB0B /* NSString+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 056D69C31CD05ED300ACBB0B /* NSString+Safe.m */; };
@@ -227,25 +236,43 @@
 		05293F851CB796940064193B /* MRJMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MRJMacros.h; path = MyCloud_OC/MRJMacros.h; sourceTree = "<group>"; };
 		053701721CCF0AE100EE215B /* LoginRegistHttpHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginRegistHttpHandler.h; path = MyCloud_OC/LoginRegistHttpHandler.h; sourceTree = "<group>"; };
 		053701731CCF0AE100EE215B /* LoginRegistHttpHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginRegistHttpHandler.m; path = MyCloud_OC/LoginRegistHttpHandler.m; sourceTree = "<group>"; };
-		053701751CCF170500EE215B /* HomeDeviceManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeDeviceManagerViewController.h; path = MyCloud_OC/HomeDeviceManagerViewController.h; sourceTree = "<group>"; };
-		053701761CCF170500EE215B /* HomeDeviceManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeDeviceManagerViewController.m; path = MyCloud_OC/HomeDeviceManagerViewController.m; sourceTree = "<group>"; };
 		0537017B1CCF178B00EE215B /* DeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceModel.h; path = MyCloud_OC/DeviceModel.h; sourceTree = "<group>"; };
 		0537017C1CCF178B00EE215B /* DeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceModel.m; path = MyCloud_OC/DeviceModel.m; sourceTree = "<group>"; };
-		0537017E1CCF17C200EE215B /* DeviceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceListCell.h; path = MyCloud_OC/DeviceListCell.h; sourceTree = "<group>"; };
-		0537017F1CCF17C200EE215B /* DeviceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceListCell.m; path = MyCloud_OC/DeviceListCell.m; sourceTree = "<group>"; };
 		053701841CCF69ED00EE215B /* HomeHttpHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeHttpHandler.h; path = MyCloud_OC/HomeHttpHandler.h; sourceTree = "<group>"; };
 		053701851CCF69ED00EE215B /* HomeHttpHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeHttpHandler.m; path = MyCloud_OC/HomeHttpHandler.m; sourceTree = "<group>"; };
-		053701881CCF6DB500EE215B /* MNGDeviceNetConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNGDeviceNetConfigViewController.h; path = MyCloud_OC/MNGDeviceNetConfigViewController.h; sourceTree = "<group>"; };
-		053701891CCF6DB500EE215B /* MNGDeviceNetConfigViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MNGDeviceNetConfigViewController.mm; path = MyCloud_OC/MNGDeviceNetConfigViewController.mm; sourceTree = "<group>"; };
-		0537018A1CCF6DB500EE215B /* MNGSearchDeviceForConfigNetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNGSearchDeviceForConfigNetViewController.h; path = MyCloud_OC/MNGSearchDeviceForConfigNetViewController.h; sourceTree = "<group>"; };
-		0537018B1CCF6DB500EE215B /* MNGSearchDeviceForConfigNetViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MNGSearchDeviceForConfigNetViewController.mm; path = MyCloud_OC/MNGSearchDeviceForConfigNetViewController.mm; sourceTree = "<group>"; };
-		0537018C1CCF6DB500EE215B /* MNGSearchDeviceSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNGSearchDeviceSuccessView.h; path = MyCloud_OC/MNGSearchDeviceSuccessView.h; sourceTree = "<group>"; };
-		0537018D1CCF6DB500EE215B /* MNGSearchDeviceSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNGSearchDeviceSuccessView.m; path = MyCloud_OC/MNGSearchDeviceSuccessView.m; sourceTree = "<group>"; };
 		053701921CCF6F0900EE215B /* voiceDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = voiceDecoder.h; path = voiceRecognize/voiceDecoder.h; sourceTree = "<group>"; };
 		053701931CCF6F0900EE215B /* voiceEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = voiceEncoder.h; path = voiceRecognize/voiceEncoder.h; sourceTree = "<group>"; };
 		053701941CCF6F0900EE215B /* voicelib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = voicelib.a; path = voiceRecognize/voicelib.a; sourceTree = "<group>"; };
 		053701951CCF6F0900EE215B /* voicePlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = voicePlay.h; path = voiceRecognize/voicePlay.h; sourceTree = "<group>"; };
 		053701961CCF6F0900EE215B /* voiceRecog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = voiceRecog.h; path = voiceRecognize/voiceRecog.h; sourceTree = "<group>"; };
+		055D367B1CD1E997005FAB0F /* DeviceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceDetailViewController.h; path = MyCloud_OC/HomeManager/DeviceDetailViewController.h; sourceTree = "<group>"; };
+		055D367C1CD1E997005FAB0F /* DeviceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceDetailViewController.m; path = MyCloud_OC/HomeManager/DeviceDetailViewController.m; sourceTree = "<group>"; };
+		055D367D1CD1E997005FAB0F /* HomeDeviceManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeDeviceManagerViewController.h; path = MyCloud_OC/HomeManager/HomeDeviceManagerViewController.h; sourceTree = "<group>"; };
+		055D367E1CD1E997005FAB0F /* HomeDeviceManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeDeviceManagerViewController.m; path = MyCloud_OC/HomeManager/HomeDeviceManagerViewController.m; sourceTree = "<group>"; };
+		055D367F1CD1E997005FAB0F /* MNGDeviceNetConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNGDeviceNetConfigViewController.h; path = MyCloud_OC/HomeManager/MNGDeviceNetConfigViewController.h; sourceTree = "<group>"; };
+		055D36801CD1E997005FAB0F /* MNGDeviceNetConfigViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MNGDeviceNetConfigViewController.mm; path = MyCloud_OC/HomeManager/MNGDeviceNetConfigViewController.mm; sourceTree = "<group>"; };
+		055D36811CD1E997005FAB0F /* MNGSearchDeviceForConfigNetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNGSearchDeviceForConfigNetViewController.h; path = MyCloud_OC/HomeManager/MNGSearchDeviceForConfigNetViewController.h; sourceTree = "<group>"; };
+		055D36821CD1E997005FAB0F /* MNGSearchDeviceForConfigNetViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MNGSearchDeviceForConfigNetViewController.mm; path = MyCloud_OC/HomeManager/MNGSearchDeviceForConfigNetViewController.mm; sourceTree = "<group>"; };
+		055D36831CD1E997005FAB0F /* MNGSearchDeviceSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNGSearchDeviceSuccessView.h; path = MyCloud_OC/HomeManager/MNGSearchDeviceSuccessView.h; sourceTree = "<group>"; };
+		055D36841CD1E997005FAB0F /* MNGSearchDeviceSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNGSearchDeviceSuccessView.m; path = MyCloud_OC/HomeManager/MNGSearchDeviceSuccessView.m; sourceTree = "<group>"; };
+		055D368A1CD1E9C8005FAB0F /* DeviceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceListCell.h; path = MyCloud_OC/HomeManager/DeviceListCell.h; sourceTree = "<group>"; };
+		055D368B1CD1E9C8005FAB0F /* DeviceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceListCell.m; path = MyCloud_OC/HomeManager/DeviceListCell.m; sourceTree = "<group>"; };
+		055D368D1CD1EA7D005FAB0F /* DeviceParameterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceParameterViewController.h; path = MyCloud_OC/HomeManager/DeviceParameterViewController.h; sourceTree = "<group>"; };
+		055D368E1CD1EA7D005FAB0F /* DeviceParameterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceParameterViewController.m; path = MyCloud_OC/HomeManager/DeviceParameterViewController.m; sourceTree = "<group>"; };
+		055D36901CD1EAC4005FAB0F /* WLRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WLRangeSlider.h; path = MyCloud_OC/HomeManager/slider/WLRangeSlider.h; sourceTree = "<group>"; };
+		055D36911CD1EAC4005FAB0F /* WLRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WLRangeSlider.m; path = MyCloud_OC/HomeManager/slider/WLRangeSlider.m; sourceTree = "<group>"; };
+		055D36921CD1EAC4005FAB0F /* WLSliderThumbLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WLSliderThumbLayer.h; path = MyCloud_OC/HomeManager/slider/WLSliderThumbLayer.h; sourceTree = "<group>"; };
+		055D36931CD1EAC4005FAB0F /* WLSliderThumbLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WLSliderThumbLayer.m; path = MyCloud_OC/HomeManager/slider/WLSliderThumbLayer.m; sourceTree = "<group>"; };
+		055D36941CD1EAC4005FAB0F /* WLTrackLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WLTrackLayer.h; path = MyCloud_OC/HomeManager/slider/WLTrackLayer.h; sourceTree = "<group>"; };
+		055D36951CD1EAC4005FAB0F /* WLTrackLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WLTrackLayer.m; path = MyCloud_OC/HomeManager/slider/WLTrackLayer.m; sourceTree = "<group>"; };
+		055D36991CD1EBD1005FAB0F /* DeviceDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceDetailCell.h; path = MyCloud_OC/HomeManager/DeviceDetailCell.h; sourceTree = "<group>"; };
+		055D369A1CD1EBD1005FAB0F /* DeviceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceDetailCell.m; path = MyCloud_OC/HomeManager/DeviceDetailCell.m; sourceTree = "<group>"; };
+		055D369C1CD1F0AD005FAB0F /* SelectInstallHeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectInstallHeightViewController.h; path = MyCloud_OC/HomeManager/SelectInstallHeightViewController.h; sourceTree = "<group>"; };
+		055D369D1CD1F0AD005FAB0F /* SelectInstallHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectInstallHeightViewController.m; path = MyCloud_OC/HomeManager/SelectInstallHeightViewController.m; sourceTree = "<group>"; };
+		055D369F1CD1F9DB005FAB0F /* MRJBaseTableview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJBaseTableview.h; path = MyCloud_OC/MRJBaseTableview.h; sourceTree = "<group>"; };
+		055D36A01CD1F9DB005FAB0F /* MRJBaseTableview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJBaseTableview.m; path = MyCloud_OC/MRJBaseTableview.m; sourceTree = "<group>"; };
+		055D36A21CD20960005FAB0F /* UIButton+MRJButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+MRJButton.h"; path = "MyCloud_OC/UIButton+MRJButton.h"; sourceTree = "<group>"; };
+		055D36A31CD20960005FAB0F /* UIButton+MRJButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+MRJButton.m"; path = "MyCloud_OC/UIButton+MRJButton.m"; sourceTree = "<group>"; };
 		056961A11CB4B5E300AECAEF /* HttpHandlerApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpHandlerApi.h; path = MyCloud_OC/HttpHandlerApi.h; sourceTree = "<group>"; };
 		056961A21CB4B5E300AECAEF /* HttpHandlerApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpHandlerApi.m; path = MyCloud_OC/HttpHandlerApi.m; sourceTree = "<group>"; };
 		056961A71CB4DC6F00AECAEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -536,6 +563,10 @@
 				0528C6F81CB4A569001C8281 /* BaseTableViewCell.m */,
 				05293F1B1CB742D00064193B /* MRJNavigationBar.h */,
 				05293F1C1CB742D00064193B /* MRJNavigationBar.m */,
+				055D369F1CD1F9DB005FAB0F /* MRJBaseTableview.h */,
+				055D36A01CD1F9DB005FAB0F /* MRJBaseTableview.m */,
+				055D36A21CD20960005FAB0F /* UIButton+MRJButton.h */,
+				055D36A31CD20960005FAB0F /* UIButton+MRJButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -805,8 +836,18 @@
 		053701791CCF174400EE215B /* view */ = {
 			isa = PBXGroup;
 			children = (
-				0537017E1CCF17C200EE215B /* DeviceListCell.h */,
-				0537017F1CCF17C200EE215B /* DeviceListCell.m */,
+				055D36901CD1EAC4005FAB0F /* WLRangeSlider.h */,
+				055D36911CD1EAC4005FAB0F /* WLRangeSlider.m */,
+				055D36921CD1EAC4005FAB0F /* WLSliderThumbLayer.h */,
+				055D36931CD1EAC4005FAB0F /* WLSliderThumbLayer.m */,
+				055D36941CD1EAC4005FAB0F /* WLTrackLayer.h */,
+				055D36951CD1EAC4005FAB0F /* WLTrackLayer.m */,
+				055D36831CD1E997005FAB0F /* MNGSearchDeviceSuccessView.h */,
+				055D36841CD1E997005FAB0F /* MNGSearchDeviceSuccessView.m */,
+				055D368A1CD1E9C8005FAB0F /* DeviceListCell.h */,
+				055D368B1CD1E9C8005FAB0F /* DeviceListCell.m */,
+				055D36991CD1EBD1005FAB0F /* DeviceDetailCell.h */,
+				055D369A1CD1EBD1005FAB0F /* DeviceDetailCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -814,9 +855,12 @@
 		0537017A1CCF174800EE215B /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				055D369C1CD1F0AD005FAB0F /* SelectInstallHeightViewController.h */,
+				055D369D1CD1F0AD005FAB0F /* SelectInstallHeightViewController.m */,
+				055D367D1CD1E997005FAB0F /* HomeDeviceManagerViewController.h */,
+				055D367E1CD1E997005FAB0F /* HomeDeviceManagerViewController.m */,
+				055D367A1CD1E8EC005FAB0F /* DeviceDetail */,
 				053701871CCF6D2D00EE215B /* configNet */,
-				053701751CCF170500EE215B /* HomeDeviceManagerViewController.h */,
-				053701761CCF170500EE215B /* HomeDeviceManagerViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -824,12 +868,10 @@
 		053701871CCF6D2D00EE215B /* configNet */ = {
 			isa = PBXGroup;
 			children = (
-				053701881CCF6DB500EE215B /* MNGDeviceNetConfigViewController.h */,
-				053701891CCF6DB500EE215B /* MNGDeviceNetConfigViewController.mm */,
-				0537018A1CCF6DB500EE215B /* MNGSearchDeviceForConfigNetViewController.h */,
-				0537018B1CCF6DB500EE215B /* MNGSearchDeviceForConfigNetViewController.mm */,
-				0537018C1CCF6DB500EE215B /* MNGSearchDeviceSuccessView.h */,
-				0537018D1CCF6DB500EE215B /* MNGSearchDeviceSuccessView.m */,
+				055D367F1CD1E997005FAB0F /* MNGDeviceNetConfigViewController.h */,
+				055D36801CD1E997005FAB0F /* MNGDeviceNetConfigViewController.mm */,
+				055D36811CD1E997005FAB0F /* MNGSearchDeviceForConfigNetViewController.h */,
+				055D36821CD1E997005FAB0F /* MNGSearchDeviceForConfigNetViewController.mm */,
 			);
 			name = configNet;
 			sourceTree = "<group>";
@@ -844,6 +886,17 @@
 				053701961CCF6F0900EE215B /* voiceRecog.h */,
 			);
 			name = voiceRecognize;
+			sourceTree = "<group>";
+		};
+		055D367A1CD1E8EC005FAB0F /* DeviceDetail */ = {
+			isa = PBXGroup;
+			children = (
+				055D368D1CD1EA7D005FAB0F /* DeviceParameterViewController.h */,
+				055D368E1CD1EA7D005FAB0F /* DeviceParameterViewController.m */,
+				055D367B1CD1E997005FAB0F /* DeviceDetailViewController.h */,
+				055D367C1CD1E997005FAB0F /* DeviceDetailViewController.m */,
+			);
+			name = DeviceDetail;
 			sourceTree = "<group>";
 		};
 		056FC5981CB5ECBD003F2BCA /* HomeHttpHandler */ = {
@@ -1144,8 +1197,9 @@
 				05293F5C1CB7598D0064193B /* MRJResourceManager.m in Sources */,
 				0528C6F01CB4A500001C8281 /* BaseModalViewController.m in Sources */,
 				05293F6D1CB75C060064193B /* FormsResourceManager.m in Sources */,
+				055D369B1CD1EBD1005FAB0F /* DeviceDetailCell.m in Sources */,
 				05293F761CB75D1B0064193B /* MRJSizeManager.m in Sources */,
-				053701801CCF17C200EE215B /* DeviceListCell.m in Sources */,
+				055D36971CD1EAC4005FAB0F /* WLSliderThumbLayer.m in Sources */,
 				056961A31CB4B5E300AECAEF /* HttpHandlerApi.m in Sources */,
 				056D69C91CD05ED300ACBB0B /* UINavigationController+safetyPush.m in Sources */,
 				059509381CB4FF2D009B3BBA /* AppDelegate+utils.m in Sources */,
@@ -1154,35 +1208,39 @@
 				05FBE24E1CCDE79D00729845 /* MRJTextFieldDelegate.m in Sources */,
 				0528C6F91CB4A569001C8281 /* BaseTableViewCell.m in Sources */,
 				05293F1A1CB740FB0064193B /* MRJLoginViewController.m in Sources */,
-				0537018E1CCF6DB500EE215B /* MNGDeviceNetConfigViewController.mm in Sources */,
 				056FC5A11CB6040A003F2BCA /* MRJStoreManager.m in Sources */,
 				05FBE2601CCE196400729845 /* MRJStringCheckUtil.m in Sources */,
+				055D36861CD1E997005FAB0F /* HomeDeviceManagerViewController.m in Sources */,
 				05293F201CB745450064193B /* NSString+global.m in Sources */,
+				055D36A41CD20960005FAB0F /* UIButton+MRJButton.m in Sources */,
 				0595093B1CB4FF73009B3BBA /* AppSingleton.m in Sources */,
 				05293F2B1CB74D9F0064193B /* LoginRegistStringValueContentManager.m in Sources */,
 				0528C6EA1CB4A4BB001C8281 /* BaseNavigationViewController.m in Sources */,
+				055D36881CD1E997005FAB0F /* MNGSearchDeviceForConfigNetViewController.mm in Sources */,
+				055D36891CD1E997005FAB0F /* MNGSearchDeviceSuccessView.m in Sources */,
 				0528C7091CB4A865001C8281 /* BaseHttpHandler.m in Sources */,
 				05293F1D1CB742D00064193B /* MRJNavigationBar.m in Sources */,
 				05293F701CB75C1A0064193B /* AbooutResourceManager.m in Sources */,
+				055D36871CD1E997005FAB0F /* MNGDeviceNetConfigViewController.mm in Sources */,
 				05293F731CB75CA30064193B /* UIColor+mrjColor.m in Sources */,
 				0528C6F61CB4A54A001C8281 /* MRJContainerView.m in Sources */,
 				05293F311CB750D10064193B /* AboutKeyContentValueManager.m in Sources */,
 				059509341CB4F09A009B3BBA /* DeBugLog.m in Sources */,
+				055D36A11CD1F9DB005FAB0F /* MRJBaseTableview.m in Sources */,
 				0528C6FC1CB4A58A001C8281 /* BaseModel.m in Sources */,
 				0528C6ED1CB4A4E1001C8281 /* BaseTabbarViewController.m in Sources */,
 				0528C6E11CB4A427001C8281 /* BaseViewController.m in Sources */,
 				05FBE2511CCDE81400729845 /* UIView+Additions.m in Sources */,
-				053701771CCF170500EE215B /* HomeDeviceManagerViewController.m in Sources */,
 				0537017D1CCF178B00EE215B /* DeviceModel.m in Sources */,
 				056FC59E1CB5ED25003F2BCA /* AboutMeHttpHandler.m in Sources */,
 				0528C7061CB4A731001C8281 /* StringKeyContentValueManager.m in Sources */,
 				05FBE2441CCDB05A00729845 /* ChoicePrivateModelView.m in Sources */,
 				05FBE2481CCDB0AF00729845 /* MRJTextField.m in Sources */,
-				053701901CCF6DB500EE215B /* MNGSearchDeviceSuccessView.m in Sources */,
-				0537018F1CCF6DB500EE215B /* MNGSearchDeviceForConfigNetViewController.mm in Sources */,
 				05293F6A1CB75BED0064193B /* DiscoveryResourceManager.m in Sources */,
 				05FBE24B1CCDB80500729845 /* UIView+Frame.m in Sources */,
+				055D36961CD1EAC4005FAB0F /* WLRangeSlider.m in Sources */,
 				05293F2E1CB750940064193B /* DiscoveryKeyContentValueManager.m in Sources */,
+				055D368C1CD1E9C8005FAB0F /* DeviceListCell.m in Sources */,
 				05293F791CB75D660064193B /* MRJColorManager.m in Sources */,
 				0528C70C1CB4AC56001C8281 /* BaseRequestModel.m in Sources */,
 				0528C6971CB49E3D001C8281 /* AppDelegate.m in Sources */,
@@ -1190,9 +1248,13 @@
 				05FBE25D1CCE192C00729845 /* MRJAppUtils.m in Sources */,
 				056D69C81CD05ED300ACBB0B /* NullSafe.m in Sources */,
 				056D69C71CD05ED300ACBB0B /* NSString+Safe.m in Sources */,
+				055D369E1CD1F0AD005FAB0F /* SelectInstallHeightViewController.m in Sources */,
+				055D36981CD1EAC4005FAB0F /* WLTrackLayer.m in Sources */,
 				053701741CCF0AE100EE215B /* LoginRegistHttpHandler.m in Sources */,
 				0528C6941CB49E3D001C8281 /* main.m in Sources */,
 				05293F671CB75BD90064193B /* HomeResourceManager.m in Sources */,
+				055D368F1CD1EA7D005FAB0F /* DeviceParameterViewController.m in Sources */,
+				055D36851CD1E997005FAB0F /* DeviceDetailViewController.m in Sources */,
 				0528C6E41CB4A464001C8281 /* BaseShowTabbarViewController.m in Sources */,
 				05293F641CB75B7B0064193B /* LoginRegistResourceManager.m in Sources */,
 				05293F281CB74B190064193B /* HomeStringKeyContentValueManager.m in Sources */,

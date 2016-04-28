@@ -21,6 +21,8 @@
 #import "MRJContainerView.h"//中间层容器view
 #import "MRJTextField.h"//自定义textFiled
 #import "MRJScrollView.h"
+#import "MRJBaseTableview.h"
+#import "BaseTableViewCell.h"
 #import "Masonry.h"
 
 #import "NSString+Safe.h"

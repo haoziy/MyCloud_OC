@@ -14,12 +14,14 @@
 #import "HomeHttpHandler.h"
 #import "DeviceModel.h"
 #import "MNGSearchDeviceForConfigNetViewController.h"
+#import "MNGDeviceNetConfigViewController.h"
+#import "DeviceDetailViewController.h"
 NSString* const indentifier_cellIdentifier = @"cell";
 
 @interface HomeDeviceManagerViewController()<UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,UISearchControllerDelegate>
 {
-    UITableView *deviceListTable;
-    UITableView *searchTable;
+    MRJBaseTableview *deviceListTable;
+    MRJBaseTableview *searchTable;
     NSMutableArray *onLineData;
     NSMutableArray *offLineData;
     UISearchController *searchViewController;
@@ -39,7 +41,7 @@ NSString* const indentifier_cellIdentifier = @"cell";
     offLineData = [[NSMutableArray alloc]init];
     
     searchData = [[NSMutableArray alloc]init];
-    searchTable = [[UITableView alloc]init];
+    searchTable = [[MRJBaseTableview alloc]init];
     allDevices = [[NSMutableArray alloc]init];
     
     
@@ -48,7 +50,7 @@ NSString* const indentifier_cellIdentifier = @"cell";
     self.title = [HomeStringKeyContentValueManager homeLanguageValueForKey:language_homeDeviceManagerTitle];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:[HomeStringKeyContentValueManager homeLanguageValueForKey:language_homeDeviceManagerExitCurrentCloudTitle] style:UIBarButtonItemStylePlain target:self action:@selector(exitDeviceManager:)];
     self.navigationItem.rightBarButtonItem.tintColor = [MRJColorManager mrj_navigationTextColor];
-    deviceListTable = [[UITableView alloc]init];
+    deviceListTable = [[MRJBaseTableview alloc]init];
     deviceListTable.delegate = self;
     deviceListTable.dataSource  = self;
     [self.view addSubview:deviceListTable];
@@ -59,7 +61,7 @@ NSString* const indentifier_cellIdentifier = @"cell";
     searchViewController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [searchViewController.view addSubview:searchTable];
     [searchTable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(64, 0, 0, 0));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(64, 0, -64, 0));
     }];
     self.definesPresentationContext = YES;
     searchTable.delegate = self;
@@ -151,24 +153,26 @@ NSString* const indentifier_cellIdentifier = @"cell";
         }
     }
     cell.deviceModel = model;
-    
+    if (indexPath.row==0) {
+        cell.isNeedTopSeprator = YES;
+    }
     return cell;
 }
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
-    {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)])
-    {
-        [cell setPreservesSuperviewLayoutMargins:NO];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
-    {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
+//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+//    {
+//        [cell setSeparatorInset:UIEdgeInsetsZero];
+//    }
+//    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)])
+//    {
+//        [cell setPreservesSuperviewLayoutMargins:NO];
+//    }
+//    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+//    {
+//        [cell setLayoutMargins:UIEdgeInsetsZero];
+//    }
+//}
 #pragma mark --searchViewController delegate
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController;
 {
@@ -230,7 +234,9 @@ NSString* const indentifier_cellIdentifier = @"cell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    MNGSearchDeviceForConfigNetViewController *searchConfigVC = [[MNGSearchDeviceForConfigNetViewController alloc]initWithEnterWay:DeviceConfigEnteryFromDeviceList];
+    DeviceDetailViewController *searchConfigVC = [[DeviceDetailViewController alloc]init];
+//    MNGDeviceNetConfigViewController *searchConfigVC = [[MNGDeviceNetConfigViewController alloc]init];
+//    MNGSearchDeviceForConfigNetViewController *searchConfigVC = [[MNGSearchDeviceForConfigNetViewController alloc]initWithEnterWay:DeviceConfigEnteryFromDeviceList];
     DeviceModel *model = nil;
     
     if (tableView==searchTable) {

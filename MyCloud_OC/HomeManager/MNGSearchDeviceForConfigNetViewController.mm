@@ -169,9 +169,7 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
     
     
     self.backScrollView.backgroundColor = [MRJColorManager mrj_mainBackgroundColor];
-    CGFloat TableHeadHeight = [MRJSizeManager mrjTableHeadHeight];
-    CGFloat VERTICAL_SAPCE = [MRJSizeManager mrjVerticalSpace];
-    CGFloat LEFT_PADDING = [MRJSizeManager mrjHorizonPaddding];
+
     UIView *setpButtomV = [[UIView alloc]init];
     setpButtomV.backgroundColor = [MRJColorManager mrj_mainBackgroundColor];
     [self.backScrollView addSubview:setpButtomV];

@@ -11,7 +11,7 @@
 @interface MRJCheckUtils : NSObject
 
 
-
++ (void)showAlertMessage:(NSString *)msg;
 //获取MD5加密后字符串
 + (NSString *)md5FromString:(NSString *)str;
 

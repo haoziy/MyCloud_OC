@@ -34,9 +34,6 @@ NSString * const appSubPath = @"/app/";
 }
 -(void)setup
 {
-    CGFloat INPUT_HEIGHT = [MRJSizeManager mrjInputSizeHeight];
-    CGFloat LEFT_PADDING = [MRJSizeManager mrjHorizonPaddding];
-    CGFloat TOP_PADDING = [MRJSizeManager mrjVerticalPadding];
     //小背景部分
 //    self.backgroundColor = [UIColor clearColor];
     UIView *mainV = [[UIView alloc]init];

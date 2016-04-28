@@ -74,4 +74,8 @@ CGFloat const font_smallTextFontSize = 11.0f;;//小号文本字体
 {
     return  27;
 }
++(CGFloat)mrjHorizonSpace;
+{
+    return 8;
+}
 @end

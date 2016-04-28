@@ -17,8 +17,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor whiteColor];
+    UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(returnFront:)];
+    [self.navigationItem setBackBarButtonItem:item];
+//    [self.navigationController.navigationBar setBarTintColor:NavigationTextColor];
+    [self.navigationController.navigationBar setTintColor:NavigationTextColor];
+    self.view.backgroundColor = [MRJColorManager mrj_mainBackgroundColor];
     _backScrollView = [[MRJScrollView alloc]init];
     [self.view addSubview:_backScrollView];
     _backScrollView.showsHorizontalScrollIndicator = NO;
@@ -32,6 +35,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)returnFront:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

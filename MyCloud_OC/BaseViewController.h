@@ -11,4 +11,5 @@
 @interface BaseViewController : UIViewController
 @property(nonatomic,strong)MRJScrollView *backScrollView;
 
+-(void)returnFront:(id)sender;
 @end

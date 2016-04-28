@@ -8,6 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "UIColor+mrjColor.h"
+
+#define NavigationTextColor [MRJColorManager mrj_navigationTextColor]
+#define SecondaryTextColor  [MRJColorManager mrj_secondaryTextColor]
+#define MainTextColor  [MRJColorManager mrj_mainTextColor]
+#define MainThemeColor [MRJColorManager mrj_mainThemeColor]
+#define SeparatrixColor [MRJColorManager mrj_separatrixColor]
+#define PlainButtonColor [MRJColorManager mrj_plainColor]
+//#define NavigationTextColor [MRJColorManager mrj_navigationTextColor]
+//#define NavigationTextColor [MRJColorManager mrj_navigationTextColor]
+//#define NavigationTextColor [MRJColorManager mrj_navigationTextColor]
+
+
 /**
  16进制颜色字符串
  导航栏上文字颜色一种,白色;
