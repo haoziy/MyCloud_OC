@@ -11,7 +11,7 @@
 #import "UIView+Frame.h"
 #import "UIView+Additions.h"
 #import "DeviceModel.h"
-
+#import "DeviceInstallHeightCell.h"
 
 @implementation SelectInstallHeightViewController
 
@@ -28,10 +28,15 @@
         heightArray = @[@"3.5米以下",@"3.5~3.8米",@"3.8米以上"];
     }
 //    
-//    myTableView = [UITableView initTableViewWithFrame:(CGRect){0,TOP_PADDING,SCREEN_WIDTH,ROW_HEIGHT*3} scrollEnable:NO rowHeight:ROW_HEIGHT];
+    myTableView = [[MRJBaseTableview  alloc]init];
+    myTableView.scrollEnabled = NO;
     myTableView.dataSource = self;
     myTableView.delegate = self;
-    [_mySccrollView addSubview:myTableView];
+    [self.backScrollView removeFromSuperview];
+    [self.view addSubview:myTableView];
+    [myTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -39,25 +44,22 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    static NSString *myCell = @"MyCell";
-//    ShopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:myCell];
-//    if (!cell) {
-//        cell = [[[NSBundle mainBundle] loadNibNamed:@"ShopTableViewCell" owner:self options:nil] lastObject];
-//    }
-//    
-//    cell.backgroundColor = NavigationTextColor;
-//    cell.width = SCREEN_WIDTH;
-//    cell.shopLabel.text = heightArray[indexPath.row];
-//    if ([_deviceModel.installHeight isEqualToString:heightArray[indexPath.row]]) {
-//        cell.ringImageView.image = [UIImage imageNamed:@"select"];
-//    }
-//    
-//    if (indexPath.row ==0) {
-//        [cell.contentView addSubview:[UIView initCellLineViewWithFrame:(CGRect){0,0,SCREEN_WIDTH,CELL_SPERITX_HEIGHT}]];
-//    }
-//    [cell.contentView addSubview:[UIView initCellLineViewWithFrame:(CGRect){0,ROW_HEIGHT-CELL_SPERITX_HEIGHT,SCREEN_WIDTH,CELL_SPERITX_HEIGHT}]];;
-//    return cell;
-    return nil;
+    static NSString *myCell = @"MyCell";
+    DeviceInstallHeightCell *cell = [tableView dequeueReusableCellWithIdentifier:myCell];
+    if (!cell) {
+        cell = [[DeviceInstallHeightCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myCell];
+    }
+    if ([_deviceModel.installHeight isEqualToString:heightArray[indexPath.row]]) {
+        [cell configCellwithTitle:heightArray[indexPath.row] andImage: [UIImage imageNamed:@"select"]];
+    }else
+    {
+        [cell configCellwithTitle:heightArray[indexPath.row] andImage:nil];
+    }
+    
+    if (indexPath.row ==0) {
+        cell.isNeedTopSeprator = YES;
+    }
+    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

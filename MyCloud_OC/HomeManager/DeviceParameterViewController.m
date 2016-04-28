@@ -74,7 +74,7 @@ static const float SLIDE_HEIGHT = 15;
     label.text = @"水平移动左右两个游标,标识店门的左右边界.垂直移动横线,标识门的中心线位置";
     label.textColor = SecondaryTextColor;
     label.numberOfLines = 0;
-    label.preferredMaxLayoutWidth = SCREEN_WIDTH-LEFT_PADDING*2;
+    label.preferredMaxLayoutWidth = MIN(SCREEN_WIDTH, SCREEN_HEIGHT)-LEFT_PADDING*2;
     label.font = [MRJSizeManager mrjsmallTextFont];
     label.textAlignment = NSTextAlignmentCenter;
      [self.backScrollView addSubview:label];
@@ -83,12 +83,9 @@ static const float SLIDE_HEIGHT = 15;
         make.left.mas_equalTo(label.superview).offset(LEFT_PADDING);
         make.centerX.mas_equalTo(label.superview);
     }];
-//    [UILabel initMul tiLineLabelWithFrame:(CGRect){0,table.y+table.height+20,SCREEN_WIDTH-80,40} line:2 font:SmallTextFont textColor:SecondaryTextColor text:@"水平移动左右两个游标,标识店门的左右边界.垂直移动横线,标识门的中心线位置" textAlignment:NSTextAlignmentCenter];
-//    label.centerX = SCREEN_WIDTH/2;
-   
-//    
-    cameraImage = [[UIImageView alloc] initWithFrame:(CGRect){LEFT_PADDING,label.y+label.height+TOP_PADDING,SCREEN_WIDTH-LEFT_PADDING*2,250}];
-    cameraImage.backgroundColor = [UIColor grayColor];
+
+    cameraImage = [[UIImageView alloc] init];
+    cameraImage.backgroundColor = [UIColor whiteColor];
 //    cameraImage.se
 //    [cameraImage sd_setImageWithURL:[NSURL URLWithString:_deviceModel.path]];
     [self.backScrollView addSubview:cameraImage];
@@ -99,7 +96,7 @@ static const float SLIDE_HEIGHT = 15;
     }];
     
     rangeSlider = [[WLRangeSlider alloc]init];
-//                   WithFrame:(CGRect){cameraImage.x,cameraImage.y+(cameraImage.height/2)-SLIDE_HEIGHT,cameraImage.width, SLIDE_HEIGHT}];
+    rangeSlider.backgroundColor = [UIColor redColor];
     rangeSlider.trackHighlightTintColor = MainThemeColor;
     rangeSlider.trackColor = NavigationTextColor;
     rangeSlider.thumbColor = SeparatrixColor;
@@ -111,19 +108,23 @@ static const float SLIDE_HEIGHT = 15;
     rightValue = rangeSlider.rightValue;
     topValue = 250/2;
     
-//    arrowImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrow_left2"]];
-//    arrowImage.origin = CGPointMake(cameraImage.x+cameraImage.width,rangeSlider.y-5);
-//    arrowImage.userInteractionEnabled = YES;
-//    [self.backScrollView addSubview:arrowImage];
+
     [rangeSlider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(cameraImage.mas_left);
         make.centerX.mas_equalTo(cameraImage.mas_centerX);
-        make.centerY.mas_equalTo(cameraImage.centerY);
+        make.centerY.mas_equalTo(cameraImage.mas_centerY);
         make.width.mas_equalTo(cameraImage);
         make.height.mas_equalTo(SLIDE_HEIGHT);
     }];
+    arrowImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrow_left2"]];
+    arrowImage.userInteractionEnabled = YES;
+    [self.backScrollView addSubview:arrowImage];
+    [arrowImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(rangeSlider.mas_centerY);
+        make.left.mas_equalTo(cameraImage.mas_right);
+    }];
     UIPanGestureRecognizer * panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveSliderFrame:)];
-//    [arrowImage addGestureRecognizer:panGestureRecognizer];
+    [arrowImage addGestureRecognizer:panGestureRecognizer];
     
     if (_deviceModel.softVersion) {
         NSArray *tt = [_deviceModel.softVersion componentsSeparatedByString:@"."];
@@ -274,26 +275,25 @@ static const float SLIDE_HEIGHT = 15;
 }
 
 -(void)moveSliderFrame:(UIPanGestureRecognizer *)recognizer{
-//    CGPoint translation = [recognizer translationInView:_myScrollView];
-//    CGFloat padding = recognizer.view.center.y + translation.y;
+    CGPoint translation = [recognizer translationInView:self.backScrollView];
+    CGFloat padding = recognizer.view.center.y + translation.y;
     
-//    if (padding > cameraImage.y+cameraImage.height) {
-//        padding = cameraImage.y+cameraImage.height;
-//    }else if (padding < cameraImage.y){
-//        padding = cameraImage.y;
-//    }
-//    
-//    recognizer.view.centerY = padding;
-//    rangeSlider.y = padding-7;
-////    [recognizer setTranslation:CGPointZero inView:_myScrollView];
-//    topValue = padding-cameraImage.y;
+    if (padding > cameraImage.y+cameraImage.height) {
+        padding = cameraImage.y+cameraImage.height;
+    }else if (padding < cameraImage.y){
+        padding = cameraImage.y;
+    }
+    
+    recognizer.view.centerY = padding;
+    rangeSlider.y = padding-7;
+    [recognizer setTranslation:CGPointZero inView:self.backScrollView];
+    topValue = padding-cameraImage.y;
 }
 
 -(void)modifyInstallHeight:(UIButton *)sender{
-//    SelectInstallHeightViewController *installHeight = [[SelectInstallHeightViewController alloc] initWithNibName:@"SelectInstallHeightViewController" bundle:nil];
-//    installHeight.deviceModel = _deviceModel;
-//    installHeight.delegate = self;
-//    [self.navigationController safetyPushViewController:installHeight animated:YES];
+    SelectInstallHeightViewController *installHeight = [[SelectInstallHeightViewController alloc] init];
+    installHeight.deviceModel = _deviceModel;
+    [self.navigationController safetyPushViewController:installHeight animated:YES];
 }
 
 - (void)excultePara{

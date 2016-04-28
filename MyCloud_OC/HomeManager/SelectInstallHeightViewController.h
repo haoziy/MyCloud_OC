@@ -11,12 +11,11 @@
 
 @interface SelectInstallHeightViewController : BaseHiddenTabbarViewController<UITableViewDataSource,UITableViewDelegate>
 {
-    UITableView *myTableView;
+    MRJBaseTableview *myTableView;
     
     NSArray *heightArray;
 }
 
-@property (weak, nonatomic) IBOutlet UIScrollView *mySccrollView;
 
 @property (nonatomic,strong) DeviceModel *deviceModel;
 

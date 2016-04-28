@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050F33781CD231090076ED63 /* DeviceInstallHeightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F33771CD231090076ED63 /* DeviceInstallHeightCell.m */; };
 		0528C6941CB49E3D001C8281 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528C6931CB49E3D001C8281 /* main.m */; };
 		0528C6971CB49E3D001C8281 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528C6961CB49E3D001C8281 /* AppDelegate.m */; };
 		0528C69F1CB49E3D001C8281 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0528C69E1CB49E3D001C8281 /* Assets.xcassets */; };
@@ -131,6 +132,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		050F33761CD231090076ED63 /* DeviceInstallHeightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceInstallHeightCell.h; path = MyCloud_OC/DeviceInstallHeightCell.h; sourceTree = "<group>"; };
+		050F33771CD231090076ED63 /* DeviceInstallHeightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceInstallHeightCell.m; path = MyCloud_OC/DeviceInstallHeightCell.m; sourceTree = "<group>"; };
 		0518D0A91CC8A3ED00FD0B1D /* MRJNetApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRJNetApi.h; sourceTree = "<group>"; };
 		0518D0AB1CC8A3ED00FD0B1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0518D0CB1CC8A85500FD0B1D /* MRJBaseRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRJBaseRequestModel.h; sourceTree = "<group>"; };
@@ -848,6 +851,8 @@
 				055D368B1CD1E9C8005FAB0F /* DeviceListCell.m */,
 				055D36991CD1EBD1005FAB0F /* DeviceDetailCell.h */,
 				055D369A1CD1EBD1005FAB0F /* DeviceDetailCell.m */,
+				050F33761CD231090076ED63 /* DeviceInstallHeightCell.h */,
+				050F33771CD231090076ED63 /* DeviceInstallHeightCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1219,6 +1224,7 @@
 				055D36881CD1E997005FAB0F /* MNGSearchDeviceForConfigNetViewController.mm in Sources */,
 				055D36891CD1E997005FAB0F /* MNGSearchDeviceSuccessView.m in Sources */,
 				0528C7091CB4A865001C8281 /* BaseHttpHandler.m in Sources */,
+				050F33781CD231090076ED63 /* DeviceInstallHeightCell.m in Sources */,
 				05293F1D1CB742D00064193B /* MRJNavigationBar.m in Sources */,
 				05293F701CB75C1A0064193B /* AbooutResourceManager.m in Sources */,
 				055D36871CD1E997005FAB0F /* MNGDeviceNetConfigViewController.mm in Sources */,
