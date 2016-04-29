@@ -10,8 +10,6 @@
 NSString * const language_login_title = @"登录";
 NSString * const language_login_serviceAddress = @"服务器地址";
 NSString * const language_login_serviceBtnName =  @"服务器";//设置私有云服务器地址按钮名
-NSString * const language_login_confirmBtnName = @"确定";//确定按钮名
-NSString * const language_login_cancelBtnName = @"取消";//取消按钮名
 NSString * const language_login_serviceAddressPlacement = @"请输入IP地址:端口号或者域名";//确定按钮名
 NSString * const language_login_accountPlacement = @"请输入邮箱/手机号";//登录账号占位字符串
 NSString * const language_login_connectServiceSuccessNotice = @"连接成功";//连接服务器成功提示

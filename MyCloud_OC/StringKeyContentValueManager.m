@@ -19,6 +19,10 @@ NSString *const global_formsMudels_fileName = @"FormsLanguage";//报表模块的
 //通用的等待网络请求提示
 NSString * const language_commen_waitProgressNotice = @"正在加载......";//等待网络请求提示语
 
+NSString * const language_commen_cancelBtnName = @"取消";//通用取消按钮名
+NSString * const language_commen_confirmBtnName = @"确定";//通用确定按钮名
+NSString * const language_commen_nextBtnName = @"下一步";//下一步按钮名
+
 +(NSString*)languageValueForKey:(NSString*)key;
 {
     NSAssert(key.length!=0, @"键值不存在");

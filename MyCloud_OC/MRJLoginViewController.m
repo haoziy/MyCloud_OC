@@ -35,6 +35,12 @@
 {
     [super viewDidLayoutSubviews];
 }
+-(void)viewDidAppear:(BOOL)animated
+{
+    if ([AppSingleton currentEnvironmentBaseURL]==nil) {
+        [self setupPrivateCloudAddress:nil];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -114,9 +120,9 @@
         
             HomeDeviceManagerViewController*  deviceManagerVC = [[HomeDeviceManagerViewController alloc]init];
             self.navigationController.viewControllers = @[deviceManagerVC];
-            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:deviceManagerVC];
-            [UIApplication sharedApplication].keyWindow.rootViewController = nil;
-            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+//            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:deviceManagerVC];
+//            [UIApplication sharedApplication].keyWindow.rootViewController = nil;
+//            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
         } failedBlock:^(id obj) {
             HomeDeviceManagerViewController*  deviceManagerVC = [[HomeDeviceManagerViewController alloc]init];
             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:deviceManagerVC];

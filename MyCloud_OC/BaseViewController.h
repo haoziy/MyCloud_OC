@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString * const indentifier_cellIdentifier;
+
 @interface BaseViewController : UIViewController
 @property(nonatomic,strong)MRJScrollView *backScrollView;
 

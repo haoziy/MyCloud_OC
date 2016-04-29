@@ -27,7 +27,12 @@
     }else if ([_deviceModel.lens isEqualToString:@"3"]){
         heightArray = @[@"3.5米以下",@"3.5~3.8米",@"3.8米以上"];
     }
-//    
+    /* 假数据*/
+    else
+    {
+        heightArray = @[@"3.5米以下",@"3.5~3.8米",@"3.8米以上"];
+    }
+//
     myTableView = [[MRJBaseTableview  alloc]init];
     myTableView.scrollEnabled = NO;
     myTableView.dataSource = self;
@@ -49,13 +54,13 @@
     if (!cell) {
         cell = [[DeviceInstallHeightCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myCell];
     }
-    if ([_deviceModel.installHeight isEqualToString:heightArray[indexPath.row]]) {
-        [cell configCellwithTitle:heightArray[indexPath.row] andImage: [UIImage imageNamed:@"select"]];
-    }else
-    {
-        [cell configCellwithTitle:heightArray[indexPath.row] andImage:nil];
-    }
-    
+//    if ([_deviceModel.installHeight isEqualToString:heightArray[indexPath.row]]) {
+//        [cell configCellwithTitle:heightArray[indexPath.row] andImage: [UIImage imageNamed:@"select"]];
+//    }else
+//    {
+//        [cell configCellwithTitle:heightArray[indexPath.row] andImage:nil];
+//    }
+    [cell configCellwithTitle:heightArray[indexPath.row] andImage: [UIImage imageNamed:@"select"]];
     if (indexPath.row ==0) {
         cell.isNeedTopSeprator = YES;
     }
@@ -63,14 +68,10 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    ShopTableViewCell *cell = (ShopTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-//    cell.ringImageView.image = [UIImage imageNamed:@"select"];
-//    
-//    if ([_delegate respondsToSelector:@selector(selectedHeightComplete:)]) {
-//        NSDictionary *obj = @{@"height":heightArray[indexPath.row],@"value":[NSString stringWithFormat:@"%ld",(long)indexPath.row+2]};
-//        [_delegate selectedHeightComplete:obj];
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DeviceInstallHeightCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell configCellwithTitle:heightArray[indexPath.row] andImage: [UIImage imageNamed:@"select"]];
+    [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationFade];
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{

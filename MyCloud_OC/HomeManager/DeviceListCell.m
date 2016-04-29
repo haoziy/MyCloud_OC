@@ -16,7 +16,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _operationBtn = [[UIButton alloc]init];
-        
+        [_operationBtn addTarget:self action:@selector(operaionBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
@@ -64,6 +64,17 @@
             make.left.equalTo(self.contentView).offset([MRJSizeManager mrjHorizonPaddding]);
             make.top.equalTo(self.textLabel.mas_bottom).offset(5);
         }];
+    }
+}
+-(void)operaionBtnPressed:(UIButton*)btn
+{
+    if ([self.mrjDelegate respondsToSelector:@selector(cell:operation:WithData:)]) {
+        if (self.deviceModel.onLine) {
+            [self.mrjDelegate cell:self operation:MRJCellOperationTypeDelete WithData:self.deviceModel];
+        }else
+        {
+            [self.mrjDelegate cell:self operation:MRJCellOperationTypeConfig WithData:self.deviceModel];
+        }
     }
 }
 @end

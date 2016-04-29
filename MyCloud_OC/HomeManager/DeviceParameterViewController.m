@@ -11,8 +11,8 @@
 #import "DeviceModel.h"
 #import "SelectInstallHeightViewController.h"
 #import "UIButton+MRJButton.h"
-
-
+#import "HomeStringKeyContentValueManager.h"
+#import "HomeResourceManager.h"
 static const int totolTimer = 60;
 static const float BASE_WIDTH = 352;
 static const float BASE_HEIGHT = 288;
@@ -51,8 +51,8 @@ static const float SLIDE_HEIGHT = 15;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"设备参数";
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(saveInstallHeight:)];
+    self.title = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamTitle];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[StringKeyContentValueManager languageValueForKey:language_commen_confirmBtnName] style:UIBarButtonItemStylePlain target:self action:@selector(saveInstallHeight:)];
     item.tintColor = NavigationTextColor;
     self.navigationItem.rightBarButtonItem = item;
     
@@ -71,7 +71,7 @@ static const float SLIDE_HEIGHT = 15;
     
 
     UILabel *label = [[UILabel alloc]init];
-    label.text = @"水平移动左右两个游标,标识店门的左右边界.垂直移动横线,标识门的中心线位置";
+    label.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamWidthNoticeText];
     label.textColor = SecondaryTextColor;
     label.numberOfLines = 0;
     label.preferredMaxLayoutWidth = MIN(SCREEN_WIDTH, SCREEN_HEIGHT)-LEFT_PADDING*2;
@@ -116,7 +116,7 @@ static const float SLIDE_HEIGHT = 15;
         make.width.mas_equalTo(cameraImage);
         make.height.mas_equalTo(SLIDE_HEIGHT);
     }];
-    arrowImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrow_left2"]];
+    arrowImage = [[UIImageView alloc]initWithImage:[HomeResourceManager home_deviceParamArrow]];
     arrowImage.userInteractionEnabled = YES;
     [self.backScrollView addSubview:arrowImage];
     [arrowImage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -148,13 +148,13 @@ static const float SLIDE_HEIGHT = 15;
     UILabel *label1 = [[UILabel alloc]init];
     label1.font = MiddleTextFont;
     label1.textColor = MainTextColor;
-    label1.text = @"不清晰?";
+    label1.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamCamaraImageNoticeText];
     [self.backScrollView addSubview:label1];
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(cameraImage.mas_centerX).offset(0);
         make.top.mas_equalTo(cameraImage.mas_bottom).offset(TOP_PADDING);
     }];
-    catchImageBtn = [UIButton mrj_generalBtnTitle:@"抓取实时图片" normalTitleColor:PlainButtonColor highlightTitleColor:SeparatrixColor normalBackImage:nil highlightBackImage:nil];
+    catchImageBtn = [UIButton mrj_generalBtnTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamCaptureCurrentImageButtonName] normalTitleColor:PlainButtonColor highlightTitleColor:SeparatrixColor normalBackImage:nil highlightBackImage:nil];
     catchImageBtn.titleLabel.font = MiddleTextFont;
    [catchImageBtn addTarget:self action:@selector(catchRealTimeImage:) forControlEvents:UIControlEventTouchUpInside];
     [self.backScrollView addSubview:catchImageBtn];
@@ -164,7 +164,7 @@ static const float SLIDE_HEIGHT = 15;
     }];
 
 
-    resetDefaultBtn = [UIButton mrj_generalBtnTitle:@"恢复默认" normalTitleColor:NavigationTextColor highlightTitleColor:SeparatrixColor normalBackImage:[MRJResourceManager buttonImageFromColor:MainThemeColor andSize:CGSizeMake(MIN(SCREEN_WIDTH, SCREEN_HEIGHT)-LEFT_PADDING*2, INPUT_HEIGHT)] highlightBackImage:nil];
+    resetDefaultBtn = [UIButton mrj_generalBtnTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamResetDefaultButtonName]  normalTitleColor:NavigationTextColor highlightTitleColor:SeparatrixColor normalBackImage:[MRJResourceManager buttonImageFromColor:MainThemeColor andSize:CGSizeMake(MIN(SCREEN_WIDTH, SCREEN_HEIGHT)-LEFT_PADDING*2, INPUT_HEIGHT)] highlightBackImage:nil];
     [resetDefaultBtn addTarget:self action:@selector(resetDefaultHeight:) forControlEvents:UIControlEventTouchUpInside];
     [self.backScrollView addSubview:resetDefaultBtn];
     [resetDefaultBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -190,11 +190,11 @@ static const float SLIDE_HEIGHT = 15;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    BaseTableViewCell *cell = (BaseTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+    BaseTableViewCell *cell = (BaseTableViewCell*)[tableView dequeueReusableCellWithIdentifier:indentifier_cellIdentifier];
     if (!cell) {
-        cell = [[BaseTableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+        cell = [[BaseTableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:indentifier_cellIdentifier];
     }
-    [cell configMainTableViewCellStyleWithText:@"安装高度" andDetailText:_deviceModel.installHeight cellSize:CGSizeMake(0, 0) disclosureIndicator:YES selectHighlight:YES];
+    [cell configMainTableViewCellStyleWithText:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightMenuName] andDetailText:_deviceModel.installHeight cellSize:CGSizeMake(0, 0) disclosureIndicator:YES selectHighlight:YES];
     return cell;
 }
 //-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

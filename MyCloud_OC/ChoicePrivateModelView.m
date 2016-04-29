@@ -104,7 +104,7 @@ NSString * const appSubPath = @"/app/";
     [cancelBtn addTarget:self action:@selector(dismiss:) forControlEvents:UIControlEventTouchUpInside];
     [cancelBtn setTitleColor:[MRJColorManager mrj_mainTextColor] forState:UIControlStateNormal];
     [cancelBtn setTitleColor:[MRJColorManager mrj_separatrixColor] forState:UIControlStateHighlighted];
-    [cancelBtn setTitle:[LoginRegistStringValueContentManager languageValueForKey:language_login_cancelBtnName] forState:UIControlStateNormal];
+    [cancelBtn setTitle:[StringKeyContentValueManager languageValueForKey:language_commen_cancelBtnName] forState:UIControlStateNormal];
     [mainV addSubview:cancelBtn];
     [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(seprateV.mas_bottom).offset(1);
@@ -121,7 +121,7 @@ NSString * const appSubPath = @"/app/";
     [confirmBtn setTitleColor:[MRJColorManager mrj_separatrixColor] forState:UIControlStateDisabled];
     [confirmBtn setTitleColor:[MRJColorManager mrj_mainTextColor] forState:UIControlStateNormal];
     [confirmBtn setTitleColor:[MRJColorManager mrj_separatrixColor] forState:UIControlStateHighlighted];
-    [confirmBtn setTitle:[LoginRegistStringValueContentManager languageValueForKey:language_login_confirmBtnName] forState:UIControlStateNormal];
+    [confirmBtn setTitle:[StringKeyContentValueManager languageValueForKey:language_commen_confirmBtnName] forState:UIControlStateNormal];
 
     [confirmBtn addTarget:self action:@selector(confirmTestValid:) forControlEvents:UIControlEventTouchUpInside];
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {

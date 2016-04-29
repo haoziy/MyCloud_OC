@@ -13,7 +13,7 @@
 #import "UIButton+MRJButton.h"
 #import "DeviceParameterViewController.h"
 #import "DeviceDetailCell.h"
-
+#import "HomeStringKeyContentValueManager.h"
 
 
 #import "MNGSearchDeviceForConfigNetViewController.h"
@@ -27,38 +27,45 @@
 }
 
 @end
-
+static NSString *myCell = @"MyCell";
 @implementation DeviceDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"设备详情";
+    self.title = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceDetailTitle];
     defaultStr = @"";
     switch (_deviceModel.hardModel) {
         case DeviceHardModelM1:
-            msgArray = @[@"名称",@"序列号",@"无线MAC",@"有线MAC",@"型号",@"固件版本"];
+            msgArray = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceAliaName],
+                         [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceSnNumber],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceWIFIMacAddress],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceLANMacAddress],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardModel],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardVersion]];
             break;
         case DeviceHardModelM1Plus:
-            msgArray = @[@"名称",@"序列号",@"无线MAC",@"有线MAC",@"型号",@"固件版本"];
+            msgArray = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceAliaName],
+                         [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceSnNumber],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceWIFIMacAddress],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceLANMacAddress],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardModel],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardVersion]];
             break;
         case DeviceHardModelM2:
-            msgArray = @[@"名称",@"序列号",@"无线MAC",@"型号",@"固件版本"];
+            msgArray = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceAliaName],
+                         [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceSnNumber],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceWIFIMacAddress],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardModel],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardVersion]];
             break;
         case DeviceHardModelM2Plus:
-            msgArray = @[@"名称",@"序列号",@"无线MAC",@"型号",@"固件版本"];
+            msgArray = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceAliaName],
+                         [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceSnNumber],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceWIFIMacAddress],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardModel],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardVersion]];
             break;
         case DeviceHardModelM3:
-            msgArray = @[@"名称",@"序列号",@"型号",@"固件版本"];
+            msgArray = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceAliaName],
+                         [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceSnNumber],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardModel],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardVersion]];
             break;
         case DeviceHardModelM4:
-            msgArray = @[@"名称",@"序列号",@"型号",@"固件版本"];
+            msgArray = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceAliaName],
+                         [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceSnNumber],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardModel],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardVersion]];
             break;
         default:
-            msgArray = @[@"名称",@"序列号",@"无线MAC",@"型号",@"固件版本"];
+            msgArray = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceAliaName],
+                         [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceSnNumber],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceWIFIMacAddress],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardModel],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardVersion]];
             break;
     }
-    configArray = @[@"在线状态",@"网络配置",@"设备参数"];
+    configArray = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceOnlineStatus],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceNetConfig],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceParam]];
     
     myTableView = [[MRJBaseTableview alloc]init];
     myTableView.backgroundColor = self.view.backgroundColor;
@@ -76,7 +83,7 @@
 
     reBootBtn = [[UIButton alloc]init];
     reBootBtn.clipsToBounds = YES;
-    [reBootBtn setTitle:@"重启设备" forState:UIControlStateNormal];
+    [reBootBtn setTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceResetButtonName] forState:UIControlStateNormal];
     reBootBtn.backgroundColor = [UIColor redColor];
     reBootBtn.layer.cornerRadius = [MRJSizeManager mrjButtonCornerRadius];
     [reBootBtn setBackgroundImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_mainThemeColor] andSize:CGSizeMake(SCREEN_WIDTH-LEFT_PADDING*2, INPUT_HEIGHT)] forState:UIControlStateNormal];
@@ -90,7 +97,7 @@
     
     [reBootBtn addTarget:self action:@selector(reTurnOnDevice:) forControlEvents:UIControlEventTouchUpInside];
     
-    deleteNetBtn = [UIButton mrj_generalBtnTitle:@"删除网络配置" normalTitleColor:NavigationTextColor highlightTitleColor:[MRJColorManager mrj_separatrixColor] normalBackImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_alertColor] andSize:CGSizeMake(SCREEN_WIDTH-LEFT_PADDING*2, INPUT_HEIGHT)]  highlightBackImage:nil];
+    deleteNetBtn = [UIButton mrj_generalBtnTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceDeleteButtonName] normalTitleColor:NavigationTextColor highlightTitleColor:[MRJColorManager mrj_separatrixColor] normalBackImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_alertColor] andSize:CGSizeMake(SCREEN_WIDTH-LEFT_PADDING*2, INPUT_HEIGHT)]  highlightBackImage:nil];
     [deleteNetBtn addTarget:self action:@selector(deleteNetConfig:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.backScrollView addSubview:deleteNetBtn];
@@ -103,28 +110,7 @@
     [self.backScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(deleteNetBtn.mas_bottom).offset(TOP_PADDING*2);
     }];
-//    ConfBtn = [UIButton initWithBakColor:[UIColor clearColor] colorHighlighted:[UIColor clearColor] text:@"配置网络" size:(CGSize){90,40} tag:-1 cornerRadius:0];
-//    ConfBtn.titleLabel.font = MainTitleFont;
-//    [ConfBtn sizeToFit];
-//    ConfBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-//    [ConfBtn setTitleColor:PlainButtonColor forState:UIControlStateNormal];
-//    [ConfBtn setTitleColor:SeparatrixColor forState:UIControlStateHighlighted];
-//
-//    ssidByOffLineLab = [[UILabel alloc]init];
-//    ssidByOffLineLab.font = Cell_Font;
-//    ssidByOffLineLab.textColor = MainTextColor;
-//    [ConfBtn addTarget:self action:@selector(confNet:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//
-//    __block UIScrollView * scrollView = _myScrollView;
-//    __block DeviceDetailViewController * self_ = self;
-//    [_myScrollView addLegendHeaderWithRefreshingBlock:^{
-//        [AppUtils showProgressMessageWithNotAllowTouch:TEXT_NETWORK_PROCESS];
-//        [self_ loadData];
-//        [scrollView.header endRefreshing];
-//    }];
-//    _myScrollView.header.updatedTimeHidden = YES;
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bindGateComplete:) name:DEVICE_BIND_GATE object:nil];
+
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -249,7 +235,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *myCell = @"MyCell";
+    
     DeviceDetailCell *cell;
     if (!cell) {
         cell = [[DeviceDetailCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:myCell];
@@ -257,31 +243,31 @@
     CGFloat ROW_HEIGHT = [MRJSizeManager mrjInputSizeHeight];
     if (indexPath.section == 0) {
         NSString *text = msgArray[indexPath.row];
-        if ([text isEqualToString:@"名称"]) {
+        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceAliaName]]) {
             [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.alias cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
         }
-        if ([text isEqualToString:@"无线MAC"]) {
+        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceWIFIMacAddress]]) {
             [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.wifi cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
         }
-        if ([text isEqualToString:@"有线MAC"]) {
+        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceLANMacAddress]]) {
             [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.imsi cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
         }
-        if ([text isEqualToString:@"序列号"]) {
+        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceSnNumber]]) {
             [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.imei cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
         }
-        if ([text isEqualToString:@"型号"]) {
+        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardModel]]) {
             [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.displayMode cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
         }
-        if ([text isEqualToString:@"固件版本"]) {
+        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceHardVersion]]) {
             [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.softVersion cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
         }
     }else{
         NSString *text = configArray[indexPath.row];
-        if ([text isEqualToString:@"在线状态"]) {
+        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceOnlineStatus]]) {
             NSString *online = defaultStr;
             [cell configMainTableViewCellStyleWithText:text andDetailText:online cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
         }
-        if ([text isEqualToString:@"网络配置"]) {
+        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceNetConfig]]) {
             switch (_deviceModel.hardModel) {
                 case DeviceHardModelNone://未在划定序列号范围类不支持配置网络
                     [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.netName cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
@@ -408,7 +394,7 @@
                     break;
             }
         }
-        if ([text isEqualToString:@"所在店铺"]) {
+        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceShopName]]) {
             if (_deviceModel.initBind) {
                 [cell configMainTableViewCellStyleWithText:text andDetailText:[NSString stringWithFormat:@"%@(%@)",_deviceModel.shopName,_deviceModel.wayName] cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:YES selectHighlight:YES];
                 [bindBtn removeFromSuperview];
@@ -423,7 +409,7 @@
             }
             
         }
-        if ([text isEqualToString:@"设备参数"]) {
+        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceParam]]) {
             [cell configMainTableViewCellStyleWithText:text andDetailText:nil cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:YES selectHighlight:YES];
         }
         if (indexPath.row==0) {
@@ -477,7 +463,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1) {
         NSString *text = configArray[indexPath.row];
-        if ([text isEqualToString:@"设备参数"]) {
+        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceParam]]) {
             DeviceParameterViewController *devicePara = [[DeviceParameterViewController alloc] init];
             devicePara.deviceModel = _deviceModel;
             [self.navigationController safetyPushViewController:devicePara animated:YES];

@@ -16,9 +16,9 @@
 #import "MNGSearchDeviceForConfigNetViewController.h"
 #import "MNGDeviceNetConfigViewController.h"
 #import "DeviceDetailViewController.h"
-NSString* const indentifier_cellIdentifier = @"cell";
 
-@interface HomeDeviceManagerViewController()<UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,UISearchControllerDelegate>
+
+@interface HomeDeviceManagerViewController()<UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,UISearchControllerDelegate,BaseTableViewCellDelegate>
 {
     MRJBaseTableview *deviceListTable;
     MRJBaseTableview *searchTable;
@@ -122,19 +122,13 @@ NSString* const indentifier_cellIdentifier = @"cell";
     }
     return 0;
 }
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-//-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return [MRJSizeManager mrjInputSizeHeight];
-//}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 48;
+    return 56;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    DeviceListCell *cell = (DeviceListCell*)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+    DeviceListCell *cell = (DeviceListCell*)[tableView dequeueReusableCellWithIdentifier:indentifier_cellIdentifier];
     if (!cell) {
         cell = [[DeviceListCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:indentifier_cellIdentifier];
     }
@@ -156,28 +150,28 @@ NSString* const indentifier_cellIdentifier = @"cell";
     if (indexPath.row==0) {
         cell.isNeedTopSeprator = YES;
     }
+    cell.mrjDelegate = self;
     return cell;
 }
-//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
-//    {
-//        [cell setSeparatorInset:UIEdgeInsetsZero];
-//    }
-//    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)])
-//    {
-//        [cell setPreservesSuperviewLayoutMargins:NO];
-//    }
-//    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
-//    {
-//        [cell setLayoutMargins:UIEdgeInsetsZero];
-//    }
-//}
+#pragma mark --baseCellDelegateMethod
+-(void)cell:(BaseTableViewCell*)cell operation:(MRJCellOperationType)type WithData:(id)data;
+{
+    if (type==MRJCellOperationTypeDelete) {
+        
+    }else
+    {
+//        MNGDeviceNetConfigViewController *searchConfigVC = [[MNGDeviceNetConfigViewController alloc]init];
+                MNGSearchDeviceForConfigNetViewController *searchConfigVC = [[MNGSearchDeviceForConfigNetViewController alloc]initWithEnterWay:DeviceConfigEnteryFromDeviceList];
+        searchConfigVC.deviceModel = data;
+        [self.navigationController safetyPushViewController:searchConfigVC animated:YES];
+    }
+    
+}
+
 #pragma mark --searchViewController delegate
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController;
 {
     [searchData removeAllObjects];
-    NSLog(@"%@",searchController.searchBar.text);
     if (searchViewController.searchBar.text.length==0) {
         searchTable.hidden = YES;
         
@@ -235,8 +229,6 @@ NSString* const indentifier_cellIdentifier = @"cell";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DeviceDetailViewController *searchConfigVC = [[DeviceDetailViewController alloc]init];
-//    MNGDeviceNetConfigViewController *searchConfigVC = [[MNGDeviceNetConfigViewController alloc]init];
-//    MNGSearchDeviceForConfigNetViewController *searchConfigVC = [[MNGSearchDeviceForConfigNetViewController alloc]initWithEnterWay:DeviceConfigEnteryFromDeviceList];
     DeviceModel *model = nil;
     
     if (tableView==searchTable) {

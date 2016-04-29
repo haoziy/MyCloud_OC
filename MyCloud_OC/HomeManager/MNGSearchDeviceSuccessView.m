@@ -8,6 +8,8 @@
 
 #import "MNGSearchDeviceSuccessView.h"
 #import "UIView+Frame.h"
+#import "HomeResourceManager.h"
+#import "HomeStringKeyContentValueManager.h"
 
 @implementation MNGSearchDeviceSuccessView
 
@@ -30,12 +32,12 @@
         
         self.backgroundColor = [MRJColorManager mrj_separatrixColor];
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake((self.width-self.width/4)/2, (self.height/2-self.width/4)/2, self.width/4, self.width/4)];
-        [btn setImage:[UIImage imageNamed:@"device_mrj"] forState:UIControlStateNormal];
+        [btn setImage:[HomeResourceManager home_searchDeviceLogo] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
         
         UILabel *snNumberLablel = [[UILabel alloc]init];
-        snNumberLablel.text =[NSString stringWithFormat:@"序列号:%@",_deviceSnNumber];
+        snNumberLablel.text =[NSString stringWithFormat:@"%@:%@",[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceSnNumber],_deviceSnNumber];
         [snNumberLablel sizeToFit];
         snNumberLablel.textColor = [MRJColorManager mrj_mainTextColor];
         snNumberLablel.x = self.width/8;
@@ -44,7 +46,7 @@
         [self addSubview:snNumberLablel];
         
         UILabel *aliasLabel = [[UILabel alloc]init];
-        aliasLabel.text =[NSString stringWithFormat:@"名称:%@",_deviceAlias];
+        aliasLabel.text =[NSString stringWithFormat:@"%@:%@",[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceAliaName],_deviceAlias];
         [aliasLabel sizeToFit];
         aliasLabel.textColor = [MRJColorManager mrj_mainTextColor];
         aliasLabel.x = self.width/8;
@@ -53,7 +55,7 @@
         [self addSubview:aliasLabel];
         
         UILabel *macLabel = [[UILabel alloc]init];
-        macLabel.text =[NSString stringWithFormat:@"无线MAC:%@",_deviceMacAddress];
+        macLabel.text =[NSString stringWithFormat:@"%@:%@",[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceWIFIMacAddress],_deviceMacAddress];
         [macLabel sizeToFit];
         macLabel.textColor = [MRJColorManager mrj_mainTextColor];
         macLabel.x = self.width/8;

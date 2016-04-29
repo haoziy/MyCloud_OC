@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 #import "DeBugLog.h"
-
+NSString* const indentifier_cellIdentifier = @"cell";
 @interface BaseViewController ()
 
 @end

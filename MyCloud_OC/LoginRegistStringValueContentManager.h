@@ -12,8 +12,6 @@ extern NSString * const language_login_title;//登录标题
 extern NSString * const language_login_serviceBtnName;//设置私有云服务器地址按钮名
 extern NSString * const language_login_serviceAddress;//私有云服务器地址
 extern NSString * const language_login_serviceAddressPlacement;//确定按钮名
-extern NSString * const language_login_confirmBtnName;//确定按钮名
-extern NSString * const language_login_cancelBtnName;//取消按钮名
 
 extern NSString * const language_login_connectServiceSuccessNotice;//连接服务器成功提示
 extern NSString * const language_login_connectServiceFailNotice;//连接服务器地址失败提示

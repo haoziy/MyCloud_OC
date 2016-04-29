@@ -26,6 +26,10 @@ extern NSString *const global_formsMudels_fileName;//报表模块的国际化文
 //通用提示
 extern NSString * const language_commen_waitProgressNotice;//等待网络请求提示语
 
+extern NSString * const language_commen_confirmBtnName;//确定按钮名
+extern NSString * const language_commen_cancelBtnName;//取消按钮名
+extern NSString * const language_commen_nextBtnName;//下一步按钮名
+
 @interface StringKeyContentValueManager : NSObject
 
 +(NSString*)languageValueForKey:(NSString*)key;//

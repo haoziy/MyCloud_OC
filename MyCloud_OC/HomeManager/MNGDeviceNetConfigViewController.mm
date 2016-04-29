@@ -5,7 +5,8 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "HomeHttpHandler.h"
 #import "AFNetworkReachabilityManager.h"
-
+#import "HomeStringKeyContentValueManager.h"
+#import "HomeResourceManager.h"
 static int  baseFrenqueceInConfig = 4000;
 //根据错误编号，获得错误信息，该函数不是必需的
 const char *recorderRecogErrorMsg(int _recogStatus)
@@ -208,17 +209,17 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 {
     [super viewDidLoad];
 
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(beginConfig:)];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[StringKeyContentValueManager languageValueForKey:language_commen_confirmBtnName] style:UIBarButtonItemStylePlain target:self action:@selector(beginConfig:)];
     [item setTintColor:[MRJColorManager mrj_navigationTextColor]];
     
     self.navigationItem.rightBarButtonItem = item;
     totalHight = TOP_PADDING;//默认的高度
     isCanAssignTask = YES;
     messageArr = [NSMutableArray array];
-    self.title = @"配置网络";
+    self.title = [HomeStringKeyContentValueManager homeLanguageValueForKey:language_homeDeviceConfigTitle];
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(-20, 20,60, 40)];
-    [btn setImage:[UIImage imageNamed:@"arrowleft"] forState:UIControlStateNormal];
+    [btn setImage:[HomeResourceManager home_configNetBackIcon] forState:UIControlStateNormal];
     [btn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 45)];
     
     [btn addTarget:self action:@selector(backToLast:) forControlEvents:UIControlEventTouchUpInside];
@@ -236,11 +237,11 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
         [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
             currentSSID = nil;
-            NSString *orginStr=@"请将手机网络切换至设备所连接的Wi-Fi网络";
+            NSString *orginStr=[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigNoWIFINoticeText];
             if (status==AFNetworkReachabilityStatusReachableViaWiFi) {
                 [self fetchSSIDInfo];
                 if (currentSSID) {
-                    orginStr = [NSString stringWithFormat:@"当前手机Wi-Fi %@",currentSSID];
+                    orginStr = [NSString stringWithFormat:@"%@ %@",[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigCurrentWifi],currentSSID];
                     ipSetttingV.hidden = NO;
                     passTextField.hidden = NO;
                 }else
@@ -317,7 +318,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     }];
     UILabel *netTypeLabel = [[UILabel alloc]init];
     netTypeLabel.font = [MRJSizeManager mrjMiddleTextFont];
-    netTypeLabel.text = @"网络类型";
+    netTypeLabel.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigNetTypeTitle];
     netTypeLabel.textColor = [MRJColorManager mrj_secondaryTextColor];
     [netTypeTitleButtomV addSubview:netTypeLabel];
     [netTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -338,25 +339,26 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         UIButton *btn = [[UIButton alloc]init];
         [btn addTarget:self action:@selector(choiceNetType:) forControlEvents:UIControlEventTouchUpInside];
         if (x==0) {
-            [btn setImage:[UIImage imageNamed:@"select_white"] forState:UIControlStateNormal];
-            [btn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
+            
+            [btn setImage:[HomeResourceManager home_configNetUnSelectedBtnImage] forState:UIControlStateNormal];
+            [btn setImage:[HomeResourceManager home_configNetSelectedBtnImage] forState:UIControlStateSelected];
             typeWifiBtn = btn;
             btn.selected = YES;
         }else if(x==1)
         {
-            [btn setTitle:@"WI-FI" forState:UIControlStateNormal];
+            [btn setTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigWifiBtnName] forState:UIControlStateNormal];
             [btn setTitleColor:[MRJColorManager mrj_secondaryTextColor] forState:UIControlStateNormal];
             [btn setTitleColor:[MRJColorManager mrj_mainTextColor] forState:UIControlStateSelected];
             confgiNetWorkTypeWifiBtn = btn;
             btn.selected = YES;
         }else if (x==2)
         {
-            [btn setImage:[UIImage imageNamed:@"select_white"] forState:UIControlStateNormal];
-            [btn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
+            [btn setImage:[HomeResourceManager home_configNetUnSelectedBtnImage] forState:UIControlStateNormal];
+            [btn setImage:[HomeResourceManager home_configNetSelectedBtnImage] forState:UIControlStateSelected];
             typeLanBtn = btn;
         }else
         {
-            [btn setTitle:@"有线网络" forState:UIControlStateNormal];
+            [btn setTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigLANBtnName] forState:UIControlStateNormal];
             [btn setTitleColor:[MRJColorManager mrj_secondaryTextColor] forState:UIControlStateNormal];
             [btn setTitleColor:[MRJColorManager mrj_mainTextColor] forState:UIControlStateSelected];
             
@@ -416,7 +418,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     }];
     
     passTextField = [[MRJTextField alloc]init];
-    passTextField.placeholder = @"Wi-Fi密码";
+    passTextField.placeholder = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigWifiPassPlacement];
     
     
     [wifiInputV addSubview:passTextField];
@@ -438,7 +440,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         make.centerX.mas_equalTo(ipSetttingV.superview.mas_centerX);
     }];
     UILabel *ipsettingTitle = [[UILabel alloc]init];
-    ipsettingTitle.text = @"IP设置";
+    ipsettingTitle.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigIpTitle];
     ipsettingTitle.font = MiddleTextFont;
     ipsettingTitle.textColor = SecondaryTextColor;
     [ipSetttingV addSubview:ipsettingTitle];
@@ -461,25 +463,25 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         UIButton *btn = [[UIButton alloc]init];
         [btn addTarget:self action:@selector(choiceIpType:) forControlEvents:UIControlEventTouchUpInside];
         if (x==0) {
-            [btn setImage:[UIImage imageNamed:@"select_white"] forState:UIControlStateNormal];
-            [btn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
+            [btn setImage:[HomeResourceManager home_configNetUnSelectedBtnImage] forState:UIControlStateNormal];
+            [btn setImage:[HomeResourceManager home_configNetSelectedBtnImage] forState:UIControlStateSelected];
             dhcpBtn = btn;
             btn.selected = YES;
         }else if(x==1)
         {
-            [btn setTitle:@"动态" forState:UIControlStateNormal];
+            [btn setTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigDHCPBtnName]forState:UIControlStateNormal];
             [btn setTitleColor:[MRJColorManager mrj_secondaryTextColor] forState:UIControlStateNormal];
             [btn setTitleColor:[MRJColorManager mrj_mainTextColor] forState:UIControlStateSelected];
             dhcpLab = btn;
             btn.selected = YES;
         }else if (x==2)
         {
-            [btn setImage:[UIImage imageNamed:@"select_white"] forState:UIControlStateNormal];
-            [btn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
+            [btn setImage:[HomeResourceManager home_configNetUnSelectedBtnImage] forState:UIControlStateNormal];
+            [btn setImage:[HomeResourceManager home_configNetSelectedBtnImage] forState:UIControlStateSelected];
             staticBtn = btn;
         }else
         {
-            [btn setTitle:@"静态" forState:UIControlStateNormal];
+            [btn setTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigStaticBtnName] forState:UIControlStateNormal];
             [btn setTitleColor:[MRJColorManager mrj_secondaryTextColor] forState:UIControlStateNormal];
             [btn setTitleColor:[MRJColorManager mrj_mainTextColor] forState:UIControlStateSelected];
             
@@ -524,7 +526,11 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         make.centerX.mas_equalTo(topSepratorLine.superview.mas_centerX);
     }];
     
-    NSArray *inputItemsArr = @[@"IP地址",@"子网掩码",@"网关",@"DNS"];
+    
+    
+    
+    NSArray *inputItemsArr = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigIpAddressPlacement],
+                               [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSubMarkPlacement],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigGateWayPlacement],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigDNSPlacement]];
     for (int x=0; x<inputItemsArr.count; x++) {
         MRJTextField *textFiled = [[MRJTextField alloc]init];
         textFiled.keyboardType = UIKeyboardTypeDecimalPad;

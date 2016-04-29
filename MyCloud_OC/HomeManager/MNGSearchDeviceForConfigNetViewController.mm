@@ -15,6 +15,8 @@
 #import "MNGDeviceNetConfigViewController.h"
 #import "HomeHttpHandler.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "HomeResourceManager.h"
+#import "HomeStringKeyContentValueManager.h"
 
 static int baseFrequence = 4000;
 @interface MNGSearchDeviceForConfigNetViewController ()<MNGSearchDeviceSuccessDelegate>
@@ -87,13 +89,13 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
 
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(-20, 20,60, 40)];
-    [btn setImage:[UIImage imageNamed:@"arrowleft"] forState:UIControlStateNormal];
+    [btn setImage:[HomeResourceManager home_searchBackIcon] forState:UIControlStateNormal];
     [btn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 45)];
     
     [btn addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    self.title = @"搜索设备";
+    self.title = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchTitle];
     messageArr = [NSMutableArray array];
     //    NSString *sn = @"1121409000121";
     NSString *sn = _deviceModel.imei;
@@ -151,10 +153,10 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
                 
                 // We're in a background thread here, so jump to main thread to do UI work.
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[[UIAlertView alloc] initWithTitle:@"麦克风拒绝访问"
-                                                 message:@"麦克风被拒绝访问,您将收不到设备的声音回应,你仍然可以继续配置"
+                    [[[UIAlertView alloc] initWithTitle:[HomeStringKeyContentValueManager  languageValueForKey:language_homeDeviceConfigSeacrchMicrophoneRefuseAccess]
+                                                message:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchMicrophoneRefuseAccessNoticeText]
                                                 delegate:nil
-                                       cancelButtonTitle:@"确定"
+                                       cancelButtonTitle:[StringKeyContentValueManager languageValueForKey:language_commen_confirmBtnName]
                                        otherButtonTitles:nil] show];
                 });
             }
@@ -181,7 +183,7 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
     }];
     
     UILabel *stepLabel = [[UILabel alloc]init];
-    stepLabel.text = @"操作步骤";
+    stepLabel.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchOperationNoticeText];
     stepLabel.font = [MRJSizeManager mrjMiddleTextFont];
     stepLabel.textColor = [MRJColorManager mrj_secondaryTextColor];
     [setpButtomV addSubview:stepLabel];
@@ -189,10 +191,6 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
         make.left.mas_equalTo(stepLabel.superview).offset([MRJSizeManager mrjHorizonPaddding]);
         make.centerY.mas_equalTo(stepLabel.superview.mas_centerY);
     }];
-//    [self.backScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        // 让scrollview的contentSize随着内容的增多而变化
-//        make.bottom.mas_equalTo(setpButtomV.mas_bottom).offset(-VERTICAL_SAPCE);
-//    }];
     UIView *setpOrderButtomV = [[UIView alloc]init];
     setpOrderButtomV.backgroundColor = [MRJColorManager mrj_navigationTextColor];
     [self.backScrollView addSubview:setpOrderButtomV];
@@ -203,7 +201,7 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
         make.centerX.equalTo(setpOrderButtomV.superview.mas_centerX);
         
     }];
-    NSArray *stepsArr = @[@"1.连接设备电源",@"2.等待绿灯快闪",@"3.点击搜索开始搜索设备"];
+    NSArray *stepsArr = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchOperationStepOneNoticeText],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchOperationStepTwoNoticeText],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchOperationStepThreeNoticeText]];
     UILabel *placementLabel=nil;//参照物;
     for (int x=0; x<3; x++)
     {
@@ -242,7 +240,7 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
     
     
     UILabel *tipLabel = [[UILabel alloc]init];
-    tipLabel.text = @"温馨提示";
+    tipLabel.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchGeneralNoticeText];
     tipLabel.font = [MRJSizeManager mrjMiddleTextFont];
     tipLabel.textColor = [MRJColorManager mrj_secondaryTextColor];
     [tipButtomV addSubview:tipLabel];
@@ -260,7 +258,7 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
         make.centerX.equalTo(tipOrderButtomV.superview.mas_centerX);
         make.left.equalTo(tipOrderButtomV.superview);
     }];
-    NSArray *tipsArr = @[@"1.手机不能处于静音模式",@"2.确保手机离设备保持在0.5米以内"];
+    NSArray *tipsArr = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchGeneralOneNoticeText],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchGeneralTwoNoticeText]];
     UILabel *tipPlacementLable;
     for (int x=0; x<tipsArr.count; x++)
     {
@@ -309,9 +307,9 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
         make.size.mas_equalTo(CGSizeMake(80, 80));
         make.center.mas_equalTo(btnButtomV);
     }];
-    [btn setTitle:@"搜索" forState:UIControlStateNormal];
+    [btn setTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchButtonName] forState:UIControlStateNormal];
     [btn setTitleColor:[MRJColorManager mrj_mainTextColor] forState:UIControlStateNormal];
-    [btn setTitle:@"取消" forState:UIControlStateSelected];
+    [btn setTitle:[StringKeyContentValueManager languageValueForKey:language_commen_cancelBtnName]forState:UIControlStateSelected];
     [btn setTitleColor:[MRJColorManager mrj_plainColor] forState:UIControlStateSelected];
     CALayer *buttomLayer = [[CALayer alloc]initWithLayer:btn.layer];
     [btn.layer addSublayer:buttomLayer];
@@ -335,7 +333,7 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
     UILabel *label1 = [[UILabel alloc]init];
     label1.textAlignment = NSTextAlignmentCenter;
     label1.textColor = [MRJColorManager mrj_mainTextColor];
-    NSString *str =[NSString stringWithFormat:@"未搜索到设备"];
+    NSString *str =[NSString stringWithFormat:@"%@",[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchNotFindDeviceNoticeText]];
     label1.text = str;
     [failV addSubview:label1];
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -343,7 +341,7 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
         make.top.mas_equalTo(label1.superview);
     }];
 //
-    NSString *str2 = @"如果在搜索过程中设备发出了声音，也可以点击【下一步】去配置设备网络";
+    NSString *str2 = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchNotFindContinueConfigDeviceNoticeText];
     UILabel *label2 = [[UILabel alloc]init];
     label2.textAlignment = NSTextAlignmentCenter;
     label2.textColor = [MRJColorManager mrj_separatrixColor];
@@ -363,7 +361,7 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
     nextBtn.layer.cornerRadius = [MRJSizeManager mrjButtonCornerRadius];
     nextBtn.clipsToBounds = YES;
     [nextBtn setBackgroundImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_mainThemeColor] andSize:CGSizeMake(100, [MRJSizeManager mrjInputSizeHeight])] forState:UIControlStateNormal];
-    [nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
+    [nextBtn setTitle:[StringKeyContentValueManager languageValueForKey:language_commen_nextBtnName] forState:UIControlStateNormal];
     [nextBtn setTitleColor:[MRJColorManager mrj_navigationTextColor] forState:UIControlStateNormal];
     [nextBtn addTarget:self action:@selector(nextOperation:) forControlEvents:UIControlEventTouchUpInside];
     [failV addSubview:nextBtn];
