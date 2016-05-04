@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class DeviceOperationRule;
 typedef enum {
     DeviceHardModelNone = 0,//未知
     DeviceHardModelM1 = 10,//10 M1
@@ -31,7 +32,12 @@ struct DeviceDetailPara {
 };
 typedef struct DeviceDetailPara DeviceInstallPara;
 
+
 @interface DeviceModel : NSObject
+
+/*
+ 基础信息部分;设备列表返回部分
+ */
 
 //设备ID
 @property (nonatomic,copy) NSString *deviceId;
@@ -41,20 +47,73 @@ typedef struct DeviceDetailPara DeviceInstallPara;
 @property (nonatomic,copy) NSString *alias;
 //是否在线
 @property (nonatomic,assign) BOOL onLine;
-//是否绑定
-@property (nonatomic,assign) BOOL initBind;
+//软件版本
+@property (nonatomic,copy) NSString *softVersion;
+//软件版本 数字型
+@property (nonatomic,assign)NSInteger softVersionInt;
+//权限规则
+@property(nonatomic,strong)DeviceOperationRule *rule;
+///设备硬件型号
+@property (nonatomic,assign,readonly)DeviceHardModel hardModel;
+
+
+
+/**
+ 进阶部分
+ */
+//网关
+@property(nonatomic,copy) NSString *gateway;
+//ip
+@property(nonatomic,copy) NSString *ipAddress;
+//mask
+@property(nonatomic,copy) NSString *mask;
+//masterDNS
+@property(nonatomic,copy) NSString *masterDNS;
+//slaveDns
+@property(nonatomic,copy) NSString *slaveDns;
+//ssid
+@property(nonatomic,copy) NSString *ssid;
+//encrypt
+@property(nonatomic,copy) NSString *encrypt;
+
+//设备MAC地址
+@property (nonatomic,copy) NSString *imsi;
+//设备无线MAC地址
+@property (nonatomic,copy) NSString *wifi;
+//图片路径
+@property (nonatomic,copy) NSString *imagePath;
 //是否配置网络
 @property (nonatomic,assign) BOOL initNetwork;
-//型号ID
-@property (nonatomic,copy) NSString *modeId;
+
+//最后XX时间
+@property(nonatomic,strong) NSDate *lastDataTime;
+@property(nonatomic,strong) NSDate *lastHeart;
+@property(nonatomic,strong) NSDate *lastLogin;
+@property(nonatomic,strong) NSDate *lastReport;
+@property(nonatomic,strong) NSDate *serviceDate;
 //型号名称
 @property (nonatomic,copy) NSString *modeName;
+
+//password
+@property (nonatomic,copy) NSString *password;
+
+//product
+@property (nonatomic,copy) NSString *product;
+
+
+//security
+@property (nonatomic,copy) NSString *security;
+//是否绑定
+@property (nonatomic,assign) BOOL initBind;
+
+//型号ID
+@property (nonatomic,copy) NSString *modeId;
+
 //镜头
 @property (nonatomic,copy) NSString *lens;
 //配置网络名
 @property (nonatomic,copy) NSString *netName;
-//图片路径
-@property (nonatomic,copy) NSString *path;
+
 //绑定店铺ID
 @property (nonatomic,copy) NSString *shopId;
 //绑定店铺名称
@@ -69,18 +128,11 @@ typedef struct DeviceDetailPara DeviceInstallPara;
 @property (nonatomic,copy) NSString *installHeight;
 //绑定ID
 @property (nonatomic,copy) NSString *bindId;
-//软件版本
-@property (nonatomic,copy) NSString *softVersion;
-//软件版本 数字型
-@property (nonatomic,assign)NSInteger softVersionInt;
+
 //m1网络类型
 @property(nonatomic,copy)NSString *netType;
-//设备MAC地址
-@property (nonatomic,copy) NSString *imsi;
-//设备无线MAC地址
-@property (nonatomic,copy) NSString *wifi;
-//设备硬件型号
-@property (nonatomic,assign)DeviceHardModel hardModel;
+
+
 //该设备是否被关联(0未被关联1被当前账户关联2被其他账户关联)
 @property (nonatomic,assign) int falg;
 //关联账号ID
@@ -93,6 +145,23 @@ typedef struct DeviceDetailPara DeviceInstallPara;
 
 @property (nonatomic,assign) DeviceInstallPara installPara;
 
-+ (id)initWithDeviceId:(id)deviceId_ imei:(id)imei_ alias:(id)alias_ onLine:(id)onLine_ initBind:(id)initBind_ initNetwork:(id)initNetwork_ modeId:(id)modeId modeName:(id)modeName_ lens:(id)lens_ netName:(id)netName_ path:(id)path_ shopId:(id)shopId_ shopName:(id)shopName_ wayId:(id)wayId_ wayName:(id)wayName_ height:(id)height_ bindId:(id)bindId_ softVersion:(id)softVersion_ imsi:(id)imsi_ wifi:(id)wifi_;
+//+ (id)initWithDeviceId:(id)deviceId_ imei:(id)imei_ alias:(id)alias_ onLine:(id)onLine_ initBind:(id)initBind_ initNetwork:(id)initNetwork_ modeId:(id)modeId modeName:(id)modeName_ lens:(id)lens_ netName:(id)netName_ path:(id)path_ shopId:(id)shopId_ shopName:(id)shopName_ wayId:(id)wayId_ wayName:(id)wayName_ height:(id)height_ bindId:(id)bindId_ softVersion:(id)softVersion_ imsi:(id)imsi_ wifi:(id)wifi_;
 
+@end
+
+@interface DeviceOperationRule : NSObject
+@property (nonatomic,assign) BOOL allowDel;
+@property (nonatomic,assign) BOOL allowDelAccount;
+@property (nonatomic,assign) BOOL allowDelNet;
+@property (nonatomic,assign) BOOL allowGrap;
+@property (nonatomic,assign) BOOL allowParamAlgorithm;
+@property (nonatomic,assign) BOOL allowParamBase;
+@property (nonatomic,assign) BOOL allowParamCamera;
+@property (nonatomic,assign) BOOL allowQuit;
+@property (nonatomic,assign) BOOL allowRestart;
+@property (nonatomic,assign) BOOL allowServerSetting;
+@property (nonatomic,assign) BOOL allowSetting;
+@property (nonatomic,assign) BOOL allowSettingAccount;
+@property (nonatomic,assign) BOOL allowTransfer;
+@property (nonatomic,assign) BOOL allowUpgrade;
 @end

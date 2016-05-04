@@ -83,4 +83,30 @@
     }
     return [NSString stringWithFormat:@"%ld",(long)result];
 }
++(NSString*)mrj_sigal_encodeWithData:(id)data;
+{
+    if ([NSJSONSerialization isValidJSONObject:data]) {
+        return [MRJCheckUtils md5FromString:[self mrj_sigal_encode:[self dataToJSONString:data]]];
+    }else
+    {
+        return nil;
+    }
+}
+
++ (NSString *)dataToJSONString:(id)theData{
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theData
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    
+    if ([jsonData length] > 0 && error == nil){
+        return  [[NSString alloc] initWithData:jsonData
+                                                  encoding:NSUTF8StringEncoding];
+    }else{
+        return nil;
+    }
+}
+
+
 @end

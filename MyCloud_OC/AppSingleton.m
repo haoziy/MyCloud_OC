@@ -14,6 +14,7 @@
     NSString *privateLastLoginAccount;
     NSString *privateCurrentEnvironment;
     NSString *privateUserInputEnvironment;
+    NSString *privateAccountId;
 }
 
 @end
@@ -42,6 +43,22 @@ NSString * const baseFormURL_normal_environment  = @"http://member.meirenji.cn/l
     if (value.length>0) {
         privateLastLoginAccount = value;
         [MRJStoreManager saveValue:value forKey:store_last_login_account_key];
+    }
+}
+-(void)setAccountId:(NSString *)accountId
+{
+    if (accountId.length>0) {
+        privateAccountId = accountId;
+        [MRJStoreManager saveValue:accountId forKey:store_user_account_id_key];
+    }
+}
+-(NSString*)accountId
+{
+    if (privateAccountId==nil) {
+        return [MRJStoreManager valueWithKey:store_user_account_id_key];
+    }else
+    {
+        return privateAccountId;
     }
 }
 -(NSString*)lastLoginMobileOrEmail

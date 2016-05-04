@@ -113,16 +113,21 @@
     RACSignal *loginSignal = [loginBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
 
     [loginSignal subscribeNext:^(id x) {
-        [LoginRegistHttpHandler login_loginWithParams:@{@"":@""} preExecute:^{
+        [LoginRegistHttpHandler login_loginWithParams:@{@"username":loginAccountTF.text, @"password":loginPassTF.text,@"identify":@"0"} preExecute:^{
             //
         } successBlock:^(id obj) {
-            [AppSingleton shareInstace].lastLoginMobileOrEmail = loginAccountTF.text;
-        
-            HomeDeviceManagerViewController*  deviceManagerVC = [[HomeDeviceManagerViewController alloc]init];
-            self.navigationController.viewControllers = @[deviceManagerVC];
-//            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:deviceManagerVC];
-//            [UIApplication sharedApplication].keyWindow.rootViewController = nil;
-//            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+            if([obj isKindOfClass:[NSDictionary class]])
+            {
+                NSDictionary *dict = (NSDictionary*)obj;
+                if ([dict[request_status_key] integerValue]==0 ) {
+                    [AppSingleton shareInstace].lastLoginMobileOrEmail = loginAccountTF.text;
+                    [AppSingleton shareInstace].accountId = dict[@"data"][@"accountId"];
+                    
+                    HomeDeviceManagerViewController*  deviceManagerVC = [[HomeDeviceManagerViewController alloc]init];
+                    self.navigationController.viewControllers = @[deviceManagerVC];
+                }
+            }
+            
         } failedBlock:^(id obj) {
             HomeDeviceManagerViewController*  deviceManagerVC = [[HomeDeviceManagerViewController alloc]init];
             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:deviceManagerVC];
@@ -133,7 +138,7 @@
     RACSignal *validUsernameSignal =
     [loginAccountTF.rac_textSignal
      map:^id(NSString *text) {
-         return @([MRJStringCheckUtil checkPhoneNumber:text]||[MRJStringCheckUtil isValidateEmail:text]);
+         return @([MRJStringCheckUtil checkPhoneNumber:text]||[MRJStringCheckUtil isValidateEmail:text]||text.length>0);
      }];
     RACSignal *validPassSingal = [loginPassTF.rac_textSignal
                                   map:^id(NSString *text) {

@@ -13,6 +13,13 @@
 #import "DeviceModel.h"
 #import "DeviceInstallHeightCell.h"
 
+@interface SelectInstallHeightViewController()
+{
+    DeviceInstallHeightCell *defaultCell;//已经选中的cell
+}
+
+@end
+
 @implementation SelectInstallHeightViewController
 
 - (void)viewDidLoad {
@@ -25,11 +32,6 @@
     }else if ([_deviceModel.lens isEqualToString:@"2"]){
         heightArray = @[@"3.2米以下",@"3.2~3.4米",@"3.4米以上"];
     }else if ([_deviceModel.lens isEqualToString:@"3"]){
-        heightArray = @[@"3.5米以下",@"3.5~3.8米",@"3.8米以上"];
-    }
-    /* 假数据*/
-    else
-    {
         heightArray = @[@"3.5米以下",@"3.5~3.8米",@"3.8米以上"];
     }
 //
@@ -53,14 +55,14 @@
     DeviceInstallHeightCell *cell = [tableView dequeueReusableCellWithIdentifier:myCell];
     if (!cell) {
         cell = [[DeviceInstallHeightCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myCell];
+        defaultCell = cell;
     }
-//    if ([_deviceModel.installHeight isEqualToString:heightArray[indexPath.row]]) {
-//        [cell configCellwithTitle:heightArray[indexPath.row] andImage: [UIImage imageNamed:@"select"]];
-//    }else
-//    {
-//        [cell configCellwithTitle:heightArray[indexPath.row] andImage:nil];
-//    }
-    [cell configCellwithTitle:heightArray[indexPath.row] andImage: [UIImage imageNamed:@"select"]];
+    if ([_deviceModel.installHeight isEqualToString:heightArray[indexPath.row]]) {
+        [cell configCellwithTitle:heightArray[indexPath.row] andImage: [UIImage imageNamed:@"select"]];
+    }else
+    {
+        [cell configCellwithTitle:heightArray[indexPath.row] andImage:nil];
+    }
     if (indexPath.row ==0) {
         cell.isNeedTopSeprator = YES;
     }
@@ -69,9 +71,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [defaultCell configCellwithTitle:defaultCell.textLabel.text andImage: nil];
     DeviceInstallHeightCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell configCellwithTitle:heightArray[indexPath.row] andImage: [UIImage imageNamed:@"select"]];
-    [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationFade];
+    defaultCell = cell;
+    _deviceModel.height = [NSString stringWithFormat:@"%ld",(long)indexPath.row+1];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{

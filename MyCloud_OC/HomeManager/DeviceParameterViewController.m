@@ -86,8 +86,7 @@ static const float SLIDE_HEIGHT = 15;
 
     cameraImage = [[UIImageView alloc] init];
     cameraImage.backgroundColor = [UIColor whiteColor];
-//    cameraImage.se
-//    [cameraImage sd_setImageWithURL:[NSURL URLWithString:_deviceModel.path]];
+    [cameraImage setImageWithURL:[NSURL URLWithString:_deviceModel.imagePath] options:YYWebImageOptionShowNetworkActivity];
     [self.backScrollView addSubview:cameraImage];
     [cameraImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(MIN(SCREEN_WIDTH, SCREEN_HEIGHT)-LEFT_PADDING*2, 250));
@@ -95,8 +94,7 @@ static const float SLIDE_HEIGHT = 15;
         make.top.mas_equalTo(label.mas_bottom).offset(TOP_PADDING);
     }];
     
-    rangeSlider = [[WLRangeSlider alloc]init];
-    rangeSlider.backgroundColor = [UIColor redColor];
+    rangeSlider = [[WLRangeSlider alloc]initWithFrame:CGRectMake(LEFT_PADDING, 250/2, MIN(SCREEN_WIDTH, SCREEN_HEIGHT)-LEFT_PADDING*2, SLIDE_HEIGHT)];
     rangeSlider.trackHighlightTintColor = MainThemeColor;
     rangeSlider.trackColor = NavigationTextColor;
     rangeSlider.thumbColor = SeparatrixColor;
@@ -125,43 +123,25 @@ static const float SLIDE_HEIGHT = 15;
     }];
     UIPanGestureRecognizer * panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveSliderFrame:)];
     [arrowImage addGestureRecognizer:panGestureRecognizer];
-    
-    if (_deviceModel.softVersion) {
-        NSArray *tt = [_deviceModel.softVersion componentsSeparatedByString:@"."];
-        NSString *ww = [tt componentsJoinedByString:@""];
-        int version = [ww intValue];
-       if( _deviceModel.onLine)
-       {
-//           if (_deviceModel.hardModel>=DeviceHardModelM2||version>=133) {
-//               UILabel *label1 = [UILabel initLabelWithFont:MiddleTextFont textColor:MainTextColor text:@"不清晰?"];
-//               label1.origin = (CGPoint){SCREEN_WIDTH-label1.width-100,cameraImage.y+cameraImage.height+TOP_PADDING};
-//               [_myScrollView addSubview:label1];
-//               
-//               catchImageBtn = [UIButton initTextButtonWithNoBack:@"抓取实时图片" font:MiddleTextFont textColor:PlainButtonColor tag:-1];
-//               catchImageBtn.origin = (CGPoint){label1.x+label1.width+5,label1.y-6};
-//               catchImageBtn.centerY = label1.centerY;
-//               [catchImageBtn addTarget:self action:@selector(catchRealTimeImage:) forControlEvents:UIControlEventTouchUpInside];
-//               [_myScrollView addSubview:catchImageBtn];
-//           }
-       }
+    if (_deviceModel.rule.allowGrap) {
+        UILabel *label1 = [[UILabel alloc]init];
+        label1.font = MiddleTextFont;
+        label1.textColor = MainTextColor;
+        label1.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamCamaraImageNoticeText];
+        [self.backScrollView addSubview:label1];
+        [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(cameraImage.mas_centerX).offset(0);
+            make.top.mas_equalTo(cameraImage.mas_bottom).offset(TOP_PADDING);
+        }];
+        catchImageBtn = [UIButton mrj_generalBtnTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamCaptureCurrentImageButtonName] normalTitleColor:PlainButtonColor highlightTitleColor:SeparatrixColor normalBackImage:nil highlightBackImage:nil];
+        catchImageBtn.titleLabel.font = MiddleTextFont;
+        [catchImageBtn addTarget:self action:@selector(catchRealTimeImage:) forControlEvents:UIControlEventTouchUpInside];
+        [self.backScrollView addSubview:catchImageBtn];
+        [catchImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(label1.mas_right);
+            make.centerY.mas_equalTo(label1.mas_centerY);
+        }];
     }
-    UILabel *label1 = [[UILabel alloc]init];
-    label1.font = MiddleTextFont;
-    label1.textColor = MainTextColor;
-    label1.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamCamaraImageNoticeText];
-    [self.backScrollView addSubview:label1];
-    [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(cameraImage.mas_centerX).offset(0);
-        make.top.mas_equalTo(cameraImage.mas_bottom).offset(TOP_PADDING);
-    }];
-    catchImageBtn = [UIButton mrj_generalBtnTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamCaptureCurrentImageButtonName] normalTitleColor:PlainButtonColor highlightTitleColor:SeparatrixColor normalBackImage:nil highlightBackImage:nil];
-    catchImageBtn.titleLabel.font = MiddleTextFont;
-   [catchImageBtn addTarget:self action:@selector(catchRealTimeImage:) forControlEvents:UIControlEventTouchUpInside];
-    [self.backScrollView addSubview:catchImageBtn];
-    [catchImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(label1.mas_right);
-        make.centerY.mas_equalTo(label1.mas_centerY);
-    }];
 
 
     resetDefaultBtn = [UIButton mrj_generalBtnTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamResetDefaultButtonName]  normalTitleColor:NavigationTextColor highlightTitleColor:SeparatrixColor normalBackImage:[MRJResourceManager buttonImageFromColor:MainThemeColor andSize:CGSizeMake(MIN(SCREEN_WIDTH, SCREEN_HEIGHT)-LEFT_PADDING*2, INPUT_HEIGHT)] highlightBackImage:nil];
@@ -170,12 +150,24 @@ static const float SLIDE_HEIGHT = 15;
     [resetDefaultBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(resetDefaultBtn.superview.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(MIN(SCREEN_WIDTH, SCREEN_HEIGHT)-LEFT_PADDING*2, INPUT_HEIGHT));
-        make.top.mas_equalTo(catchImageBtn.mas_bottom).offset(TOP_PADDING);
+        if (catchImageBtn) {
+            make.top.mas_equalTo(catchImageBtn.mas_bottom).offset(TOP_PADDING);
+        }else
+        {
+            make.top.mas_equalTo(cameraImage.mas_bottom).offset(TOP_PADDING);
+        }
+        
     }];
     [self.backScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(resetDefaultBtn.mas_bottom).offset(TOP_PADDING*2);
     }];
-    [self loadData];
+    
+    
+    [RACObserve(_deviceModel,height) subscribeNext:^(id height){
+//        _deviceModel.installHeight = intstallHeight;
+        [table reloadData];
+    }];
+    
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
@@ -267,6 +259,8 @@ static const float SLIDE_HEIGHT = 15;
         [table reloadData];
     }
 }
+
+
 
 #pragma WLRangeSliderDelegate
 -(void)leftValue:(float)left rightValue:(float)right{

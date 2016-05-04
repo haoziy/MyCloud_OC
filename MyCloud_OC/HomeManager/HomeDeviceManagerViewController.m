@@ -79,8 +79,7 @@
 }
 -(void)loadData
 {
-    NSDictionary *para = @{@"accountId":@"3254"};
-    NSString *str = [NSString mrj_sigal_encode:@"{\"username\":\"alex.lo\",\"password\":\"\"}"];
+    NSDictionary *para = @{@"accountId":[[AppSingleton shareInstace] accountId]==nil?@"":[[AppSingleton shareInstace] accountId]};
     [HomeHttpHandler getDeviceListParams:para preExecute:^{
         
     } success:^(id obj) {
@@ -99,8 +98,43 @@
     }];
 }
 
-
-
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (tableView==searchTable) {
+        return 0;
+    }else
+    {
+        return [MRJSizeManager mrjInputSizeHeight];
+    }
+}
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    if (tableView==searchTable) {
+        return nil;
+    }else
+    {
+        UIView *view = [[UIView alloc]init];
+        
+        UILabel *label = [[UILabel alloc]init];
+        view.backgroundColor = self.view.backgroundColor;
+        label.text = [NSString stringWithFormat:@"%@ %lu台",section==0?@"在线":@"离线",(unsigned long)(section==0?onLineData.count:offLineData.count)];
+        [view addSubview:label];
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(LEFT_PADDING);
+            make.centerY.mas_equalTo(label.superview);
+        }];
+//        view.size = CGSizeMake(tableView.width,[MRJSizeManager mrjInputSizeHeight]);
+//        [label sizeToFit];
+//        label.origin = CGPointMake(LEFT_PADDING,(view.height-label.height)/2);
+        return view;
+        
+    }
+}
+//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+//{
+//    return [MRJSizeManager mrjTableHeadHeight];
+//}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView==searchTable) {
@@ -183,14 +217,10 @@
         {
             DeviceModel *model = allDevices[i];
             //在每一个model里查找这个字符串\n，判断有没有
-            if ([model.imei rangeOfString:searchController.searchBar.text options:NSCaseInsensitiveSearch].location != NSNotFound||[model.alias rangeOfString:searchController.searchBar.text options:NSCaseInsensitiveSearch].location != NSNotFound)
-            {
+            if ((model.imei.length>0&&[model.imei rangeOfString:searchController.searchBar.text options:NSCaseInsensitiveSearch].location != NSNotFound)||(model.alias.length>0&&[model.alias rangeOfString:searchController.searchBar.text options:NSCaseInsensitiveSearch].location != NSNotFound)) {
                 [searchData addObject:allDevices[i]];
                 searchTable.hidden = NO;
-            }else
-            {
             }
-            
             
         }
     }
@@ -243,6 +273,15 @@
         }
     }
     searchConfigVC.deviceModel = model;
+    [RACObserve(searchConfigVC, deviceModel) subscribeNext:^(id x) {
+        if (searchTable.isHidden==NO) {
+            [searchTable reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+        }else
+        {
+           [deviceListTable reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+    }];
     [self.navigationController safetyPushViewController:searchConfigVC animated:YES];
 }
 @end

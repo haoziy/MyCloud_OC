@@ -25,6 +25,10 @@ typedef NS_ENUM(NSInteger, HttpRequestType) {
     HttpRequestDelete = 2,
     HttpRequestPut = 3,
 };
+
+extern NSString * const request_status_key;//http请求keystatus
+extern NSString * const request_data_key;
+
 +(void)baseRequestAFNetWorkApi:(ApiNameMap)apiName method:(HttpRequestType)method andHttpHeader:(NSDictionary *)header parameters:(id)parameters prepareExecute:(MRJPrepareExcute)prepare succeed:(MRJSuccessBlock)succeed failed:(MRJFailedBlock)failed;
 
 

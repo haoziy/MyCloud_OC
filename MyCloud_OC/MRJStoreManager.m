@@ -11,6 +11,8 @@
 NSString *const store_current_enviornment_key = @"store_current_enviornment_key";//当前环境key
 NSString *const store_last_user_input_key = @"store_last_user_input_key";//用户输入环境key
 NSString *const store_last_login_account_key = @"store_last_login_account_key";//上次登录账号key
+NSString *const store_user_account_id_key = @"store_user_account_id_key";//accountId可以
+
 @implementation MRJStoreManager
 
 +(void)saveCustomerObject:(id)obj forKey:(NSString *)key

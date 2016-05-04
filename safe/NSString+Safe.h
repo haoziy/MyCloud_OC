@@ -16,5 +16,7 @@
 
 - (NSString *)safeSubstringFromIndex:(NSUInteger)index;
 +(NSString *)countNumAndChangeformat:(NSString *)num;
-+(NSString*)mrj_sigal_encode:(NSString*)originStr;
+
+
++(NSString*)mrj_sigal_encodeWithData:(id)data;
 @end

@@ -9,7 +9,7 @@
 #import "BaseHttpHandler.h"
 
 extern ApiNameMap api_home_get_device_list;//获取设备列表
-
+extern ApiNameMap api_home_get_device_detail;//设备详情;
 extern NSString* const key_offLineDeviceKey;//离线设备key
 extern NSString* const key_onLineDeviceKey;//在线线设备key
 
@@ -18,4 +18,6 @@ extern NSString* const key_onLineDeviceKey;//在线线设备key
 
 
 +(void)getDeviceListParams:(NSDictionary*)parm preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;
+
++(void)getDeviceDetail:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)success failed:(MRJFailedBlock)failed;
 @end

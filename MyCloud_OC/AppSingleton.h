@@ -20,6 +20,7 @@ extern NSString *const baseFormURL_normal_environment;
 
 +(NSString*)currentEnvironmentBaseURL;
 
+@property(nonatomic,copy)NSString *accountId;//
 @property(nonatomic,copy)NSString *environmentUrl;//当前环境的url;
 @property(nonatomic,copy)NSString *inputEnvironmentURL;//切换私有云时,用户的输入信息;
 @property(nonatomic,copy)NSString *myFormsIP;//如果是私有云的情况下报表中心ip

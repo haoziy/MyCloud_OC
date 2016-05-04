@@ -25,6 +25,11 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _indicatorImgV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrowright"]];
+        
+        _mainTextLabel = [[UILabel alloc]init];
+        _secondTextLabel = [[UILabel alloc]init];
+        [self.contentView addSubview:_mainTextLabel];
+        [self.contentView addSubview:_secondTextLabel];
     }
     return self;
 }
@@ -47,17 +52,17 @@
 -(void)configMainTableViewCellStyleWithText:(NSString*)mainText andDetailText:(NSString*)detailText cellSize:(CGSize)cellSize disclosureIndicator:(BOOL)disclosureIndicator selectHighlight:(BOOL)selectedHighlight;
 {
     [_indicatorImgV removeFromSuperview];
-    self.textLabel.text = mainText;
-    [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    _mainTextLabel.text = mainText;
+    [_mainTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo([MRJSizeManager mrjHorizonPaddding]);
-        make.centerY.mas_equalTo(self.textLabel.superview.mas_centerY);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY);
     }];
     
-    self.detailTextLabel.text = detailText;
+    _secondTextLabel.text = detailText;
     if (detailText.length>0) {
-        [self.detailTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(self.detailTextLabel.superview).offset(-[MRJSizeManager mrjHorizonPaddding]-LEFT_PADDING/2);
-            make.centerY.mas_equalTo(self.textLabel.superview.mas_centerY);
+        [_secondTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(_secondTextLabel.superview).offset(-[MRJSizeManager mrjHorizonPaddding]-LEFT_PADDING/2);
+            make.centerY.mas_equalTo(_secondTextLabel.superview.mas_centerY);
         }];
     }
     

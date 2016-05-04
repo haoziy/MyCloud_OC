@@ -14,7 +14,7 @@
 #import "DeviceParameterViewController.h"
 #import "DeviceDetailCell.h"
 #import "HomeStringKeyContentValueManager.h"
-
+#import "HomeHttpHandler.h"
 
 #import "MNGSearchDeviceForConfigNetViewController.h"
 
@@ -110,100 +110,46 @@ static NSString *myCell = @"MyCell";
     [self.backScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(deleteNetBtn.mas_bottom).offset(TOP_PADDING*2);
     }];
-
+    deleteNetBtn.hidden = YES;
+    reBootBtn.hidden = YES;
+    if (_deviceModel.rule.allowDel&&_deviceModel.rule.allowRestart) {
+        deleteNetBtn.hidden = NO;
+        reBootBtn.hidden = NO;
+    }else if (_deviceModel.rule.allowRestart)
+    {
+        reBootBtn.hidden = NO;
+    }else
+    {
+        deleteNetBtn.hidden = NO;
+        [deleteNetBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(myTableView.mas_bottom).offset(TOP_PADDING);
+            make.left.mas_equalTo(LEFT_PADDING);
+            make.centerX.mas_equalTo(deleteNetBtn.superview.mas_centerX);
+            make.height.mas_equalTo(INPUT_HEIGHT);
+        }];
+    }
     
+    
+    
+
+    [self loadData];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 }
 - (void)loadData{
-//    [DeviceManageHandler myDeviceDetailWithDeviceId:_deviceId Success:^(id obj) {
-//        if ([obj isKindOfClass:[DeviceModel class]]) {
-//            [AppUtils dismissHUD];
-//            [reBootBtn removeFromSuperview];
-//            [deleteNetBtn removeFromSuperview];
-//            _deviceModel = obj;
-//            defaultStr = _deviceModel.onLine?@"在线":@"离线";
-//            switch (_deviceModel.hardModel) {
-//                case DeviceHardModelM1:
-//                    if (_deviceModel.initNetwork&&_deviceModel.onLine&&_deviceModel.softVersionInt>=133)//m1在线,初始化网络,版本大于133
-//                    {
-//                        deleteNetBtn.hidden = NO;
-//                        reBootBtn.hidden = NO;
-//                        [_myScrollView addSubview:reBootBtn];
-//                        [_myScrollView addSubview:deleteNetBtn];
-//                    }else
-//                    {
-//                        reBootBtn.hidden = YES;
-//                        deleteNetBtn.hidden = YES;
-//                    }
-//                    break;
-//                case DeviceHardModelM2://m2/m2s/m1s在线,初始化网络即可
-//                    if (_deviceModel.initNetwork&&_deviceModel.onLine) {
-//                        deleteNetBtn.hidden = NO;
-//                        reBootBtn.hidden = NO;
-//                        [_myScrollView addSubview:reBootBtn];
-//                        [_myScrollView addSubview:deleteNetBtn];
-//                    }else
-//                    {
-//                        reBootBtn.hidden = YES;
-//                        deleteNetBtn.hidden = YES;
-//                    }
-//                    break;
-//                case DeviceHardModelM1Plus:
-//                    if (_deviceModel.initNetwork&&_deviceModel.onLine) {
-//                        deleteNetBtn.hidden = NO;
-//                        reBootBtn.hidden = NO;
-//                        [_myScrollView addSubview:reBootBtn];
-//                        [_myScrollView addSubview:deleteNetBtn];
-//                    }else
-//                    {
-//                        reBootBtn.hidden = YES;
-//                        deleteNetBtn.hidden = YES;
-//                    }
-//                    break;
-//                case DeviceHardModelM2Plus:
-//                    if (_deviceModel.initNetwork&&_deviceModel.onLine) {
-//                        deleteNetBtn.hidden = NO;
-//                        reBootBtn.hidden = NO;
-//                        [_myScrollView addSubview:reBootBtn];
-//                        [_myScrollView addSubview:deleteNetBtn];
-//                    }else
-//                    {
-//                        reBootBtn.hidden = YES;
-//                        deleteNetBtn.hidden = YES;
-//                    }
-//                    break;
-//                case DeviceHardModelM3://M3在线就可以重启
-//                    if (_deviceModel.onLine) {
-//                        reBootBtn.hidden = NO;
-//                        [_myScrollView addSubview:reBootBtn];
-//                    }else
-//                    {
-//                        reBootBtn.hidden = YES;
-//                    }
-//                      deleteNetBtn.hidden = YES;
-//                    break;
-//                case DeviceHardModelM4://M4在线就可以重启
-//                    if (_deviceModel.onLine) {
-//                        reBootBtn.hidden = NO;
-//                        [_myScrollView addSubview:reBootBtn];
-//                    }else
-//                    {
-//                        reBootBtn.hidden = YES;
-//                    }
-//                    deleteNetBtn.hidden = YES;
-//                default:
-//                    break;
-//            }
-//            [myTableView reloadData];
-//        }else{
-//            [AppUtils showErrorMessage:obj];
-//        }
-//    } Failed:^(id obj) {
-//        [AppUtils showErrorMessage:TEXT_SERVER_NOT_RESPOND];
-//    }];
+    [HomeHttpHandler getDeviceDetail:@{@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"accountId":[AppSingleton shareInstace].accountId?[AppSingleton shareInstace].accountId:@""} preExecute:^{
+        
+    } success:^(id obj) {
+        DeviceModel *model = (DeviceModel*)obj;
+        model.imei = @"hhhh";
+        self.deviceModel = model;
+        defaultStr = _deviceModel.onLine?@"在线":@"离线";
+        [myTableView reloadData];
+    } failed:^(id obj) {
+        
+    }];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -412,10 +358,6 @@ static NSString *myCell = @"MyCell";
         if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceParam]]) {
             [cell configMainTableViewCellStyleWithText:text andDetailText:nil cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:YES selectHighlight:YES];
         }
-        if (indexPath.row==0) {
-            [cell.contentView addSubview:[UIView initCellLineViewWithFrame:(CGRect){0,0,SCREEN_WIDTH,CELL_SPERITX_HEIGHT}]];
-        }
-        [cell.contentView addSubview:[UIView initCellLineViewWithFrame:(CGRect){0,ROW_HEIGHT-CELL_SPERITX_HEIGHT,SCREEN_WIDTH,CELL_SPERITX_HEIGHT}]];;
     }
     if (indexPath.row==0) {
         cell.isNeedTopSeprator = YES;

@@ -17,6 +17,7 @@
     if (self) {
         _operationBtn = [[UIButton alloc]init];
         [_operationBtn addTarget:self action:@selector(operaionBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.contentView addSubview:_operationBtn];
     }
     return self;
 }
@@ -26,13 +27,24 @@
     if (deviceModel) {
         _deviceModel = deviceModel;
         
-        self.textLabel.textColor = [MRJColorManager mrj_mainTextColor];
-        self.detailTextLabel.textColor = [MRJColorManager mrj_secondaryTextColor];
-        self.textLabel.font = [MRJSizeManager mrjMainTextFont];
-        self.detailTextLabel.font = [MRJSizeManager mrjMiddleTextFont];
+        self.mainTextLabel.textColor = [MRJColorManager mrj_mainTextColor];
+        self.secondTextLabel.textColor = [MRJColorManager mrj_secondaryTextColor];
+        self.mainTextLabel.font = [MRJSizeManager mrjMainTextFont];
+        self.secondTextLabel.font = [MRJSizeManager mrjMiddleTextFont];
         
-        self.textLabel.text = _deviceModel.alias;
-        self.detailTextLabel.text = _deviceModel.imei;
+        self.mainTextLabel.text = _deviceModel.alias==nil?@"":_deviceModel.alias;
+//        if (self.mainTextLabel.text.length==0) {
+//            [self.contentView addSubview:self.mainTextLabel];
+//        }
+        self.secondTextLabel.text = _deviceModel.imei;
+        [self.mainTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView).offset([MRJSizeManager mrjHorizonPaddding]);
+            make.top.equalTo(self.contentView).offset(5);
+        }];
+        [self.secondTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView).offset([MRJSizeManager mrjHorizonPaddding]);
+            make.top.equalTo(self.contentView.mas_centerY).offset(5);
+        }];
         
         if (deviceModel.hardModel==DeviceHardModelNone||deviceModel.hardModel==
             DeviceHardModelM1) {
@@ -56,14 +68,7 @@
             }];
             _operationBtn.titleLabel.font = [MRJSizeManager mrjMiddleTextFont];
         }
-        [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.contentView).offset([MRJSizeManager mrjHorizonPaddding]);
-            make.top.equalTo(self.contentView).offset(5);
-        }];
-        [self.detailTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.contentView).offset([MRJSizeManager mrjHorizonPaddding]);
-            make.top.equalTo(self.textLabel.mas_bottom).offset(5);
-        }];
+        
     }
 }
 -(void)operaionBtnPressed:(UIButton*)btn
@@ -77,4 +82,10 @@
         }
     }
 }
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+//    NSLog(@"%@",self.mainTextLabel.superview);
+}
+
 @end
