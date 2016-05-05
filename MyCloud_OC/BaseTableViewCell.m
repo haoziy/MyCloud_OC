@@ -59,6 +59,8 @@
     }];
     
     _secondTextLabel.text = detailText;
+    _secondTextLabel.textColor = SecondaryTextColor;
+    
     if (detailText.length>0) {
         [_secondTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(_secondTextLabel.superview).offset(-[MRJSizeManager mrjHorizonPaddding]-LEFT_PADDING/2);

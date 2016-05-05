@@ -13,6 +13,7 @@
 #import "UIButton+MRJButton.h"
 #import "HomeStringKeyContentValueManager.h"
 #import "HomeResourceManager.h"
+#import "HomeHttpHandler.h"
 static const int totolTimer = 60;
 static const float BASE_WIDTH = 352;
 static const float BASE_HEIGHT = 288;
@@ -83,34 +84,43 @@ static const float SLIDE_HEIGHT = 15;
         make.left.mas_equalTo(label.superview).offset(LEFT_PADDING);
         make.centerX.mas_equalTo(label.superview);
     }];
-
+    cameraWith = MIN(SCREEN_WIDTH, SCREEN_HEIGHT)-LEFT_PADDING*2;
+    cameraHeight = 250;
+    
     cameraImage = [[UIImageView alloc] init];
-    cameraImage.backgroundColor = [UIColor whiteColor];
+    cameraImage.backgroundColor = [UIColor grayColor];
     [cameraImage setImageWithURL:[NSURL URLWithString:_deviceModel.imagePath] options:YYWebImageOptionShowNetworkActivity];
     [self.backScrollView addSubview:cameraImage];
     [cameraImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(MIN(SCREEN_WIDTH, SCREEN_HEIGHT)-LEFT_PADDING*2, 250));
+        make.size.mas_equalTo(CGSizeMake(cameraWith, cameraHeight));
         make.centerX.mas_equalTo(cameraImage.superview.centerX);
         make.top.mas_equalTo(label.mas_bottom).offset(TOP_PADDING);
     }];
     
-    rangeSlider = [[WLRangeSlider alloc]initWithFrame:CGRectMake(LEFT_PADDING, 250/2, MIN(SCREEN_WIDTH, SCREEN_HEIGHT)-LEFT_PADDING*2, SLIDE_HEIGHT)];
+    rangeSlider = [[WLRangeSlider alloc]initWithFrame:CGRectMake(LEFT_PADDING,0, cameraWith, SLIDE_HEIGHT)];
     rangeSlider.trackHighlightTintColor = MainThemeColor;
     rangeSlider.trackColor = NavigationTextColor;
     rangeSlider.thumbColor = SeparatrixColor;
     rangeSlider.delegate = self;
-    rangeSlider.leftValue = 0;
-    rangeSlider.rightValue = 1;
-    [self.backScrollView addSubview:rangeSlider];
-    leftValue = rangeSlider.leftValue;
-    rightValue = rangeSlider.rightValue;
-    topValue = 250/2;
+     [self.backScrollView addSubview:rangeSlider];
     
-
+    
+    //左右是比例;
+    leftValue = (float)((float)_deviceModel.installPara.boxleft/(float)BASE_WIDTH);
+    rightValue = (float)((float)_deviceModel.installPara.boxright/(float)BASE_WIDTH);//
+    //上下是实际值
+    topValue = (_deviceModel.installPara.boxtop/(float)BASE_HEIGHT)*cameraHeight;
+    rangeSlider.leftValue = leftValue;
+    rangeSlider.rightValue = rightValue;
+    
+   
+    
+    
+    
     [rangeSlider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(cameraImage.mas_left);
         make.centerX.mas_equalTo(cameraImage.mas_centerX);
-        make.centerY.mas_equalTo(cameraImage.mas_centerY);
+        make.centerY.mas_equalTo(cameraImage.mas_centerY).offset((topValue-cameraHeight/2));
         make.width.mas_equalTo(cameraImage);
         make.height.mas_equalTo(SLIDE_HEIGHT);
     }];
@@ -164,7 +174,6 @@ static const float SLIDE_HEIGHT = 15;
     
     
     [RACObserve(_deviceModel,height) subscribeNext:^(id height){
-//        _deviceModel.installHeight = intstallHeight;
         [table reloadData];
     }];
     
@@ -189,78 +198,6 @@ static const float SLIDE_HEIGHT = 15;
     [cell configMainTableViewCellStyleWithText:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightMenuName] andDetailText:_deviceModel.installHeight cellSize:CGSizeMake(0, 0) disclosureIndicator:YES selectHighlight:YES];
     return cell;
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 0;
-//}
-- (void)loadData{
-//    [DeviceManageHandler deviceParamsDetailWithDeviceId:_deviceModel.deviceId Success:^(id obj) {
-//        if ([obj isKindOfClass:[DeviceModel class]]) {
-//            [AppUtils dismissHUD];
-//            DeviceModel *model = obj;
-//            _deviceModel.installPara = model.installPara;
-//            if ([_deviceModel.lens isEqualToString:@"1"]) {
-//                if (_deviceModel.installPara.height == 0) {
-//                    _deviceModel.installHeight = @"2.6米以下";
-//                }else if (_deviceModel.installPara.height == 1){
-//                    _deviceModel.installHeight = @"2.6~2.8米";
-//                }else if (_deviceModel.installPara.height == 2){
-//                    _deviceModel.installHeight = @"2.8米以上";
-//                }
-//            }else if ([_deviceModel.lens isEqualToString:@"2"]){
-//                if (_deviceModel.installPara.height == 0) {
-//                    _deviceModel.installHeight = @"3.2米以下";
-//                }else if (_deviceModel.installPara.height == 1){
-//                    _deviceModel.installHeight = @"3.2~3.4米";
-//                }else if (_deviceModel.installPara.height == 2){
-//                    _deviceModel.installHeight = @"3.4米以上";
-//                }
-//            }else if ([_deviceModel.lens isEqualToString:@"3"]){
-//                if (_deviceModel.installPara.height == 0) {
-//                    _deviceModel.installHeight = @"3.5米以下";
-//                }else if (_deviceModel.installPara.height == 1){
-//                    _deviceModel.installHeight = @"3.5~3.8米";
-//                }else if (_deviceModel.installPara.height == 2){
-//                    _deviceModel.installHeight = @"3.8米以上";
-//                }
-//            }
-//            if ([_deviceModel.lens isEqualToString:@"1"]) {
-//                heightArray = @[@"2.6米以下",@"2.6~2.8米",@"2.8米以上"];
-//            }else if ([_deviceModel.lens isEqualToString:@"2"]){
-//                heightArray = @[@"3.2米以下",@"3.2~3.4米",@"3.4米以上"];
-//            }else if ([_deviceModel.lens isEqualToString:@"3"]){
-//                heightArray = @[@"3.5米以下",@"3.5~3.8米",@"3.8米以上"];
-//            }
-//            height = [NSString stringWithFormat:@"%d",_deviceModel.installPara.height+2];
-//            rangeSlider.centerY = cameraImage.y+cameraImage.height*(_deviceModel.installPara.topPoint/(float)BASE_HEIGHT);
-//            topValue = rangeSlider.centerY-cameraImage.y;
-//            arrowImage.centerY = rangeSlider.centerY;
-//            rangeSlider.leftValue = (float)((float)_deviceModel.installPara.leftPoint/(float)BASE_WIDTH);
-//            rangeSlider.rightValue = (float)((float)_deviceModel.installPara.rightPoint/(float)BASE_WIDTH);
-//            leftValue = rangeSlider.leftValue;
-//            rightValue = rangeSlider.rightValue;
-//            [table reloadData];
-//            
-//            
-//        }else{
-//            [AppUtils showErrorMessage:obj];
-//        }
-//    } Failed:^(id obj) {
-//        [AppUtils showErrorMessage:TEXT_SERVER_NOT_RESPOND];
-//    }];
-}
-
-#pragma RefreshCallback
--(void)selectedHeightComplete:(id)callback{
-    if ([callback isKindOfClass:[NSDictionary class]]) {
-        _deviceModel.installHeight = callback[@"height"];
-        _deviceModel.height = callback[@"value"];
-        height = _deviceModel.height;
-        [table reloadData];
-    }
-}
-
-
 
 #pragma WLRangeSliderDelegate
 -(void)leftValue:(float)left rightValue:(float)right{
@@ -291,127 +228,37 @@ static const float SLIDE_HEIGHT = 15;
 }
 
 - (void)excultePara{
-    leftPoint = leftValue*cameraImage.width;
-    rightPoint = rightValue*cameraImage.width;
-    leftPoint = leftPoint*(float)BASE_WIDTH/cameraImage.width;
-    rightPoint = (int)((float)rightPoint*(float)BASE_WIDTH/cameraImage.width);
-    
-    topPoint = topValue;
-    bottomPoint = topPoint;
-    topPoint = topPoint*BASE_HEIGHT/cameraImage.height;
-    bottomPoint = bottomPoint*BASE_HEIGHT/cameraImage.height;
-    
-    //如果重合
-    if (rightPoint == leftPoint) {
-        if (rightPoint == BASE_WIDTH) {
-            rightPoint = rightPoint-1;
-            leftPoint = leftPoint-2;
-        }else if (rightPoint == 0){
-            leftPoint = leftPoint+1;
-            rightPoint = rightPoint+2;
-        }else{
-            if (rightPoint == BASE_WIDTH-1) {
-                leftPoint = leftPoint-1;
-            }else{
-                rightPoint = rightPoint+1;
-            }
-        }
-    }
-    else{
-        //不重合
-        if (leftPoint == 0) {
-            leftPoint = 1;
-            if (rightPoint == 1) {
-                rightPoint = rightPoint+1;
-            }
-        }
-        if (rightPoint == BASE_WIDTH) {
-            rightPoint = rightPoint-1;
-            if (leftPoint == rightPoint) {
-                leftPoint = leftPoint-1;
-            }
-        }
-    }
-    if (topPoint == 0) {
-        topPoint = 1;
-    }
-    if (bottomPoint == BASE_HEIGHT) {
-        bottomPoint = bottomPoint-1;
-    }
-    bottomPoint = topPoint;
-    
-    //扩大2/3之后
-    boxLeft = leftPoint-(leftPoint*2/3);
-    boxRight = rightPoint+((BASE_WIDTH-rightPoint)*2/3);
-    boxTop = topPoint-(topPoint*2/3);
-    boxBottom = bottomPoint+((BASE_HEIGHT-bottomPoint)*2/3);
-    
-    if (boxRight == boxLeft) {
-        if (boxRight == BASE_WIDTH) {
-            boxRight = boxRight-1;
-            boxLeft = boxLeft-2;
-        }else if (boxRight == 0){
-            boxLeft = boxLeft+1;
-            boxRight = boxRight+2;
-        }else{
-            if (boxRight == BASE_WIDTH-1) {
-                boxLeft = boxLeft-1;
-            }else{
-                boxRight = boxRight+1;
-            }
-        }
-    }
-    else{
-        if (boxLeft == 0) {
-            boxLeft = 1;
-            if (boxRight == 1) {
-                boxRight = boxRight+1;
-            }
-        }
-        if (boxRight == BASE_WIDTH) {
-            boxRight = boxRight-1;
-            if (boxLeft == boxRight) {
-                boxLeft = boxLeft-1;
-            }
-        }
-    }
-    
-    if (boxTop == 0) {
-        boxTop = 1;
-    }
-    if (boxBottom == BASE_HEIGHT) {
-        boxBottom = boxBottom-1;
-    }
+
 }
 
 -(void)saveInstallHeight:(UIButton *)sender{
-//    if ([UserDefaultsUtils boolValueWithKey:IDENTITY] == YES){
-//        [AppUtils showInfoMessage:@"当前是演示账号不能做提交操作"];
-//        return;
-//    }
-//
-//    [self excultePara];
-//    
-//    UserEntity *entity = [UserDefaultsUtils customerObjectWithKey:USER_ENTITY];
-//    if (height==nil) {
-//        return;
-//    }
-//    NSDictionary *para = @{@"deviceId":_deviceModel.deviceId==nil?@"":_deviceModel.deviceId,@"taskcreateid":entity.accountId==nil?@"":entity.accountId,@"taskcreator":entity.accountId==nil?@"":entity.accountId,@"leftPoint":@((int)leftPoint),@"rightPoint":@((int)rightPoint),@"topPoint":@((int)topPoint),@"bottomPoint":@((int)bottomPoint),@"boxleft":@(boxLeft),@"boxright":@((int)boxRight),@"boxtop":@((int)boxTop),@"boxbottom":@((int)boxBottom),@"direction":@(0),@"height":height,@"init":@(0)};
-//   
-//    [DeviceManageHandler updateDeviceParaWithParaDetail:para Success:^(id obj) {
-//        if ([obj isKindOfClass:[NSDictionary class]]) {
-//            [AppUtils dismissHUD];
-//            
-//            if ([_delegate respondsToSelector:@selector(updateDeviceMsg:)]) {
-//                [_delegate updateDeviceMsg:nil];
-//                [self.navigationController popViewControllerAnimated:YES];
-//            }
-//        }else{
-//            [AppUtils showErrorMessage:obj];
-//        }
-//    } Failed:^(id obj) {
-//        [AppUtils showErrorMessage:TEXT_SERVER_NOT_RESPOND];
-//    }];
+    NSDictionary *dict = @{
+                           @"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",
+                           @"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",
+                           @"boxLeft":@((int)(leftValue*BASE_WIDTH)),
+                           @"boxRight":@((int)(rightValue*BASE_WIDTH)),
+                           @"boxTop": @((int)(topValue/cameraHeight*BASE_HEIGHT)),
+                           @"boxBottom": @((int)(BASE_HEIGHT-topValue/cameraHeight*BASE_HEIGHT)),
+                           @"direction": @(_deviceModel.direction),
+                           @"height": _deviceModel.height,
+                           };
+    _deviceModel.boxLeft = leftValue*BASE_WIDTH;
+    _deviceModel.boxRight = rightValue*BASE_WIDTH;
+    _deviceModel.boxTop = topValue/cameraHeight*BASE_HEIGHT;
+    _deviceModel.boxBottom = BASE_HEIGHT-topValue/cameraHeight*BASE_HEIGHT;
+    [HomeHttpHandler home_saveDeviceParams:dict preExecute:^{
+        
+    } success:^(id obj) {
+        if ([obj[request_status_key]integerValue]==0) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }else
+        {
+            
+        }
+    } failed:^(id obj) {
+        
+    }];
+    
 }
 
 -(void)catchRealTimeImage:(UIButton *)sender{
@@ -466,26 +313,18 @@ static const float SLIDE_HEIGHT = 15;
     
 }
 -(void)resetDefaultHeight:(UIButton *)sender{
-//    if ([UserDefaultsUtils boolValueWithKey:IDENTITY] == YES){
-//        [AppUtils showInfoMessage:@"当前是演示账号不能做提交操作"];
-//        return;
-//    }
-
-    
-    
-    
     rangeSlider.centerY = cameraImage.y+cameraImage.height/2;
     arrowImage.centerY = rangeSlider.centerY;
     rangeSlider.leftValue = 0;
     rangeSlider.rightValue = 1;
     _deviceModel.installHeight = heightArray[1];
     [table reloadData];
-//    installHeightBtn.rightTitle =
+
 
     height = @"3";
     leftValue = 0;
     rightValue = 1;
-    topValue = cameraImage.height/2;
+    topValue = cameraHeight/2;
     [self excultePara];
 }
 

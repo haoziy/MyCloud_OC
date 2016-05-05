@@ -63,12 +63,15 @@
 
 + (void)showProgressMessage:(NSString *) message
 {
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [SVProgressHUD showWithStatus:message];
 }
 
 + (void)showProgressMessageWithNotAllowTouch:(NSString *)message
 {
-    [SVProgressHUD showWithStatus:message maskType:SVProgressHUDMaskTypeClear];
+//    [SVProgressHUD showWithStatus:message maskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleLight];
+    [SVProgressHUD showWithStatus:message];
 }
 
 + (void)showInfoMessage:(NSString *)message

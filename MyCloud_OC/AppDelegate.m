@@ -26,7 +26,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     UIViewController *vc;
-    if ([AppSingleton currentEnvironmentBaseURL]&&[AppSingleton shareInstace].accountId) {
+    if ([AppSingleton currentEnvironmentBaseURL]&&[AppSingleton currentUser].accountId) {
         vc = [[HomeDeviceManagerViewController alloc]init];
     }else
     {

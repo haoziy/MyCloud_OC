@@ -33,9 +33,6 @@
         self.secondTextLabel.font = [MRJSizeManager mrjMiddleTextFont];
         
         self.mainTextLabel.text = _deviceModel.alias==nil?@"":_deviceModel.alias;
-//        if (self.mainTextLabel.text.length==0) {
-//            [self.contentView addSubview:self.mainTextLabel];
-//        }
         self.secondTextLabel.text = _deviceModel.imei;
         [self.mainTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView).offset([MRJSizeManager mrjHorizonPaddding]);

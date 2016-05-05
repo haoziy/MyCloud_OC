@@ -13,7 +13,6 @@
 
 @interface DeviceParameterViewController : BaseHiddenTabbarViewController<WLRangeSliderDelegate>
 {
-//    SelectShopButton *installHeightBtn;
     UIButton *resetDefaultBtn;
     
     UIImageView *cameraImage;
@@ -22,8 +21,10 @@
     UIButton *catchImageBtn;
     
     float leftValue,rightValue,topValue;
-    float leftPoint,rightPoint,topPoint,bottomPoint;
     int boxLeft,boxRight,boxTop,boxBottom;
+    CGFloat cameraWith;
+    CGFloat cameraHeight;
+    
     NSArray *heightArray;
     NSString *height;
     

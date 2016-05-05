@@ -19,16 +19,12 @@ typedef enum {
 }DeviceHardModel;//硬件型号
 
 struct DeviceDetailPara {
-    int boxbottom;
-    int boxleft;
-    int boxright;
     int boxtop;
+    int boxleft;
+    int boxbottom;
+    int boxright;
     int direction;
     int height;
-    int leftPoint;
-    int rightPoint;
-    int topPoint;
-    int bottomPoint;
 };
 typedef struct DeviceDetailPara DeviceInstallPara;
 
@@ -61,6 +57,11 @@ typedef struct DeviceDetailPara DeviceInstallPara;
 /**
  进阶部分
  */
+
+//是否配置网络
+@property (nonatomic,assign) BOOL initNetwork;
+//网络类型
+@property(nonatomic,copy)NSString *netType;
 //网关
 @property(nonatomic,copy) NSString *gateway;
 //ip
@@ -71,10 +72,15 @@ typedef struct DeviceDetailPara DeviceInstallPara;
 @property(nonatomic,copy) NSString *masterDNS;
 //slaveDns
 @property(nonatomic,copy) NSString *slaveDns;
-//ssid
+//ssid wifi ssid
 @property(nonatomic,copy) NSString *ssid;
-//encrypt
+//password 目前的wifi密码
+@property (nonatomic,copy) NSString *password;
+//encrypt 加密方式
 @property(nonatomic,copy) NSString *encrypt;
+//配置网络名
+@property (nonatomic,copy) NSString *netName;
+
 
 //设备MAC地址
 @property (nonatomic,copy) NSString *imsi;
@@ -82,8 +88,7 @@ typedef struct DeviceDetailPara DeviceInstallPara;
 @property (nonatomic,copy) NSString *wifi;
 //图片路径
 @property (nonatomic,copy) NSString *imagePath;
-//是否配置网络
-@property (nonatomic,assign) BOOL initNetwork;
+
 
 //最后XX时间
 @property(nonatomic,strong) NSDate *lastDataTime;
@@ -93,59 +98,37 @@ typedef struct DeviceDetailPara DeviceInstallPara;
 @property(nonatomic,strong) NSDate *serviceDate;
 //型号名称
 @property (nonatomic,copy) NSString *modeName;
-
-//password
-@property (nonatomic,copy) NSString *password;
-
 //product
 @property (nonatomic,copy) NSString *product;
-
-
 //security
 @property (nonatomic,copy) NSString *security;
-//是否绑定
-@property (nonatomic,assign) BOOL initBind;
-
 //型号ID
 @property (nonatomic,copy) NSString *modeId;
-
 //镜头
 @property (nonatomic,copy) NSString *lens;
-//配置网络名
-@property (nonatomic,copy) NSString *netName;
 
-//绑定店铺ID
-@property (nonatomic,copy) NSString *shopId;
-//绑定店铺名称
-@property (nonatomic,copy) NSString *shopName;
-//绑定出入口ID
-@property (nonatomic,copy) NSString *wayId;
-//绑定出入口名
-@property (nonatomic,copy) NSString *wayName;
-//高度
+
+
+//安装参数
+//高度 下标
 @property (nonatomic,copy) NSString *height;
 //安装高度
 @property (nonatomic,copy) NSString *installHeight;
-//绑定ID
-@property (nonatomic,copy) NSString *bindId;
 
-//m1网络类型
-@property(nonatomic,copy)NSString *netType;
+//安装参数
+@property(nonatomic,assign)NSInteger boxBottom;//
+@property(nonatomic,assign)NSInteger boxLeft;//
+@property(nonatomic,assign)NSInteger boxRight;
+@property(nonatomic,assign)NSInteger boxTop;
+@property(nonatomic,assign)NSInteger direction;
 
 
-//该设备是否被关联(0未被关联1被当前账户关联2被其他账户关联)
-@property (nonatomic,assign) int falg;
-//关联账号ID
-@property (nonatomic,copy) NSString *accountId;
-//关联账号名称
-@property (nonatomic,copy) NSString *accountName;
 
 //设备详情页面显示的型号名
 @property (nonatomic,copy) NSString *displayMode;
 
 @property (nonatomic,assign) DeviceInstallPara installPara;
 
-//+ (id)initWithDeviceId:(id)deviceId_ imei:(id)imei_ alias:(id)alias_ onLine:(id)onLine_ initBind:(id)initBind_ initNetwork:(id)initNetwork_ modeId:(id)modeId modeName:(id)modeName_ lens:(id)lens_ netName:(id)netName_ path:(id)path_ shopId:(id)shopId_ shopName:(id)shopName_ wayId:(id)wayId_ wayName:(id)wayName_ height:(id)height_ bindId:(id)bindId_ softVersion:(id)softVersion_ imsi:(id)imsi_ wifi:(id)wifi_;
 
 @end
 

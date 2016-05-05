@@ -12,6 +12,7 @@ NSString *const store_current_enviornment_key = @"store_current_enviornment_key"
 NSString *const store_last_user_input_key = @"store_last_user_input_key";//用户输入环境key
 NSString *const store_last_login_account_key = @"store_last_login_account_key";//上次登录账号key
 NSString *const store_user_account_id_key = @"store_user_account_id_key";//accountId可以
+NSString *const store_user_entity_key = @"store_user_entity_key";//userEntity
 
 @implementation MRJStoreManager
 
@@ -68,6 +69,7 @@ NSString *const store_user_account_id_key = @"store_user_account_id_key";//accou
     }
 }
 
+
 +(BOOL)boolValueWithKey:(NSString *)key
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -80,7 +82,14 @@ NSString *const store_user_account_id_key = @"store_user_account_id_key";//accou
     [userDefaults setBool:value forKey:key];
     [userDefaults synchronize];
 }
-
++(void)saveUserEntity:(id)entity forkey:(NSString*)key;
+{
+    NSAssert(key!=nil, @"key值不能为空");
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [NSKeyedArchiver  archivedDataWithRootObject:entity];
+    [userDefaults setObject:data forKey:key];
+    [userDefaults synchronize];
+}
 +(void)print{
     //    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 }

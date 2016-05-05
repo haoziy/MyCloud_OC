@@ -94,6 +94,23 @@ NSString * const baseFormURL_normal_environment  = @"http://member.meirenji.cn/l
         [MRJStoreManager saveValue:inputEnvironmentURL forKey:store_last_user_input_key];
     }
 }
++(void)saveCurrentUser:(MRJUserModel *)user;
+{
+    [MRJStoreManager saveUserEntity:user forkey:store_user_entity_key];
+}
++(void)deleteCurretnUser;
+{
+    [MRJStoreManager deleteValueWithKey:store_user_entity_key];
+}
+
+-(MRJUserModel*)currentUser
+{
+    return [MRJStoreManager valueWithKey:store_user_entity_key];
+}
++(MRJUserModel*)currentUser;
+{
+    return [AppSingleton shareInstace].currentUser;
+}
 -(NSString*)inputEnvironmentURL
 {
     if (privateUserInputEnvironment) {

@@ -139,11 +139,12 @@ static NSString *myCell = @"MyCell";
     [super viewWillAppear:animated];
 }
 - (void)loadData{
-    [HomeHttpHandler getDeviceDetail:@{@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"accountId":[AppSingleton shareInstace].accountId?[AppSingleton shareInstace].accountId:@""} preExecute:^{
+    [HomeHttpHandler getDeviceDetail:@{@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""} preExecute:^{
         
     } success:^(id obj) {
         DeviceModel *model = (DeviceModel*)obj;
-        model.imei = @"hhhh";
+        DeviceOperationRule *rule = _deviceModel.rule;
+        model.rule = rule;
         self.deviceModel = model;
         defaultStr = _deviceModel.onLine?@"在线":@"离线";
         [myTableView reloadData];
@@ -341,18 +342,6 @@ static NSString *myCell = @"MyCell";
             }
         }
         if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceShopName]]) {
-            if (_deviceModel.initBind) {
-                [cell configMainTableViewCellStyleWithText:text andDetailText:[NSString stringWithFormat:@"%@(%@)",_deviceModel.shopName,_deviceModel.wayName] cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:YES selectHighlight:YES];
-                [bindBtn removeFromSuperview];
-            }else{
-               
-                [cell removeFromSuperview];
-                cell = nil;
-                cell = [[DeviceDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                [cell configMainTableViewCellStyleWithText:text andDetailText:nil cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                bindBtn.origin = (CGPoint){cell.width-bindBtn.width-RIGHT_PADDING*2,(ROW_HEIGHT-ConfBtn.height)/2};
-                [cell.contentView addSubview:bindBtn];
-            }
             
         }
         if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceParam]]) {

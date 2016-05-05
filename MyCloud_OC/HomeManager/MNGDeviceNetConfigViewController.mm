@@ -7,6 +7,7 @@
 #import "AFNetworkReachabilityManager.h"
 #import "HomeStringKeyContentValueManager.h"
 #import "HomeResourceManager.h"
+#import "DeviceDetailViewController.h"
 static int  baseFrenqueceInConfig = 4000;
 //根据错误编号，获得错误信息，该函数不是必需的
 const char *recorderRecogErrorMsg(int _recogStatus)
@@ -109,8 +110,7 @@ const char *recorderRecogErrorMsg(int _recogStatus)
 
     
     MRJContainerView *configNetTypeContainer;//网络类型选择背景;
-    double latitude;//纬度
-    double longtitude;//经度
+
 //    UserEntity *entity;//操作者
     
     UIButton *confgiNetWorkTypeLanBtn;//有线或者wifi;
@@ -147,29 +147,9 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     {
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
         if (buttonIndex==1) {
-            [self.view.window addSubview:holdView];
+            holdView.hidden = NO;
             notificationLab.text =@"正在发送网络参数";
-//            [DeviceManageHandler deviceHeartBeatTestSuccess:^(id obj2) {
-//                if ([obj2 [@"status"] integerValue]==0) {
-//                    [globalTimer invalidate];
-//                    globalTimer = nil;
-//                    globalTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(globalSendMessage) userInfo:nil repeats:YES];
-//                    [allConsumeTimer invalidate];
-//                    allConsumeTimer = nil;
-//                    allConsumeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeUI) userInfo:nil repeats:YES];
-//                    [allConsumeTimer fire];
-//                }else
-//                {
-//                    [holdView removeFromSuperview];
-//                    self.view.userInteractionEnabled = YES;
-//                    [AppUtils showErrorMessage:obj2[@"msg"]];
-//                }
-//                
-//            } Failed:^(id obj) {
-//                [holdView removeFromSuperview];
-//                self.view.userInteractionEnabled = YES;
-//                [AppUtils showErrorMessage:obj];
-//            }];
+            [self startConfig];
         }
     }else if (alertView.tag==200)//成功配置后返回
     {
@@ -192,11 +172,11 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 -(void)popToEnterPlace:(NSString*)way
 {
     if (self.enterWay==DeviceConfigEnteryFromDeviceDetail) {
-//        for (UIViewController *vc  in self.navigationController.viewControllers) {
-//            if ([vc isKindOfClass:[DeviceDetailViewController class]]) {
-//                [self.navigationController popToViewController:vc animated:YES];
-//            }
-//        }
+        for (UIViewController *vc  in self.navigationController.viewControllers) {
+            if ([vc isKindOfClass:[DeviceDetailViewController class]]) {
+                [self.navigationController popToViewController:vc animated:YES];
+            }
+        }
     }else if (self.enterWay==DeviceConfigEnteryFromDeviceList) {
         for (UIViewController *vc  in self.navigationController.viewControllers) {
             if ([vc isKindOfClass:[HomeDeviceManagerViewController class]]) {
@@ -706,84 +686,135 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 -(void)beginConfig:(UIButton*)btn
 {
     [self.view endEditing:YES];
-    if (confgiNetWorkTypeWifiBtn.selected==YES)//wifi配置
-    {
-        int x=0;
-        for(int i=0; i< [currentSSID length];i++){
-            int a = [currentSSID characterAtIndex:i];
-            if( a > 0x4e00 && a < 0x9fff)
+    
+    //支持有线的情况下;
+    if (configNetTypeContainer) {
+        if (confgiNetWorkTypeWifiBtn.selected==YES)//wifi配置
+        {
+            if (![self isCheckSSIDOk])//检查ssid合法性
             {
-                x++;
+                return;
             }
         }
-        if (x>7) {
-            [MRJCheckUtils showAlertMessage:@"设备暂不支持这么多中文的Wi-Fi网络"];
-            return;
-        }
-        NSRange range = [currentSSID rangeOfString:@"&"];
-        if (range.length>0) {
-            [MRJCheckUtils showAlertMessage:@"设备暂不支持特殊字符&的Wi-Fi网络"];
-            return;
-        }
-        if ([currentSSID stringByReplacingOccurrencesOfString:@" " withString:@""].length<1) {
-            [MRJCheckUtils showErrorMessage:@"请将手机网络切换至设备所连接的Wi-Fi网络"];
-            return;
-        }
-    }
-//
-//    
-    NSDictionary *dictStep1;
-    if(staticBtn.selected==YES)//是静态网络
-    {
-        if (![MRJCheckUtils isValidatIP:ipAddressTextField.text]) {
-            [MRJCheckUtils showErrorMessage:@"请输入合法的IP地址"];
-            return;
-        }
-        if (![MRJCheckUtils isValidatIP:subMarkTextField.text]) {
-            [MRJCheckUtils showErrorMessage:@"请输入合法的子网掩码"];
-            return;
-        }
-        if (![MRJCheckUtils isValidatIP:gateWayTextField.text]) {
-            [MRJCheckUtils showErrorMessage:@"请输入合法的网关地址"];
-            return;
-        }
-        if (![MRJCheckUtils isValidatIP:DNSTextField.text]) {
-            [MRJCheckUtils showErrorMessage:@"请输入合法的DNS地址"];
-            return;
-        }
-        if (confgiNetWorkTypeWifiBtn.selected==YES) {
+        NSDictionary *dictStep1;
+        if(staticBtn.selected==YES)//是静态网络
+        {
+            if (![self isCheckStaticConfigInputOk])//检查静态配置输入合法性
+            {
+                return;
+            }
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            if(confgiNetWorkTypeWifiBtn.selected==YES)//无线 静态ip
+            {
+                dictStep1  = @{@"cmd":@"2",@"snNumber":deviceSN,@"content":@"10"};//网络类型/ios/无线静态ip
+            }else //有线 静态
+            {
+                dictStep1  = @{@"cmd":@"2",@"snNumber":deviceSN,@"content":@"12"};//网络类型,ios/有线静态ip
+            }
             
+            totalTimer =  300;
         }else
         {
-           
+            if(confgiNetWorkTypeWifiBtn.selected==YES)//无线dhcp
+            {
+                dictStep1  = @{@"cmd":@"2",@"snNumber":deviceSN,@"content":@"11"};//网络类型/ios/无线DHCP
+            }else //有线 dhcp
+            {
+                dictStep1  = @{@"cmd":@"2",@"snNumber":deviceSN,@"content":@"13"};//网络类型,ios/
+            }
+            totalTimer =  180.f;
         }
-        [[NSUserDefaults standardUserDefaults]synchronize];
-        if(confgiNetWorkTypeWifiBtn.selected==YES)//无线 静态ip
-        {
-            dictStep1  = @{@"cmd":@"2",@"snNumber":deviceSN,@"content":@"10"};//网络类型/ios/无线静态ip
-        }else //有线 静态
-        {
-            dictStep1  = @{@"cmd":@"2",@"snNumber":deviceSN,@"content":@"12"};//网络类型,ios/有线静态ip
+        messageArr = [[NSMutableArray alloc]init];
+        checkTotalTime = 0;
+        index = 0;
+        [messageArr addObject:dictStep1];
+        //ssid和密码
+        if (confgiNetWorkTypeWifiBtn.selected==YES) {
+            NSDictionary *dictStep2 = @{@"cmd":@"0",@"snNumber":deviceSN,@"content":currentSSID};//ssid
+            [messageArr addObject:dictStep2];
+            if(currentSSID.length>7)
+            {
+                NSDictionary *dictStep2_more = @{@"cmd":@"0",@"snNumber":deviceSN,@"content":currentSSID};//ssid
+                [messageArr addObject:dictStep2_more];
+            }
+            NSDictionary *dictStep3 = @{@"cmd":@"1",@"snNumber":deviceSN,@"content":passTextField.text};//密码
+            [messageArr addObject:dictStep3];
+            if(passTextField.text.length>7)
+            {
+                NSDictionary *dictStep3_more = @{@"cmd":@"1",@"snNumber":deviceSN,@"content":passTextField.text};//密码
+                [messageArr addObject:dictStep3_more];
+            }
         }
         
-        totalTimer =  300;
-    }else
+        //是否需要发送ip/gateway/mask/dns等
+        if (staticBtn.selected==YES) {
+            NSDictionary *ipDict = @{@"cmd":@"3",@"snNumber":deviceSN,@"content":ipAddressTextField.text};//ip地址
+            [messageArr addObject:ipDict];
+            
+            NSDictionary *markDict = @{@"cmd":@"4",@"snNumber":deviceSN,@"content":subMarkTextField.text};//子网掩码
+            [messageArr addObject:markDict];
+            
+            NSDictionary *gateDict = @{@"cmd":@"5",@"snNumber":deviceSN,@"content":gateWayTextField.text};//网关
+            [messageArr addObject:gateDict];
+            
+            NSDictionary *dnsDict = @{@"cmd":@"6",@"snNumber":deviceSN,@"content":DNSTextField.text};//dns服务器地址
+            [messageArr addObject:dnsDict];
+        }
+        NSDictionary *endDict = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//结束标识
+        [messageArr addObject:endDict];
+        NSDictionary *endDict_more = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//结束标识
+        [messageArr addObject:endDict_more];
+        
+        //加一倍
+        for (int x=0; x<messageArr.count; x+=2) {
+            NSDictionary *dict = [messageArr[x] mutableCopy];
+            [messageArr insertObject:dict atIndex:x];
+        }
+        MRJUserModel *entity = [AppSingleton currentUser];
+        configLogStr = [NSMutableString stringWithFormat:@"AccountEntity:AccountId=%@,username = %@,mobile = %@,email = %@;Device:deviceId = %@,imei = %@,imsi = %@,ssid = %@,softVersion = %@ Client:mobileSystem = %@,mobileType = %@\n",entity.accountId,entity.userName,entity.mobile,entity.email,_deviceModel.deviceId,_deviceModel.imei,_deviceModel.imsi,currentSSID,_deviceModel.softVersion,[UIDevice currentDevice].systemVersion,[UIDevice currentDevice].machineModelName];
+        if (confgiNetWorkTypeWifiBtn.selected==YES)//配置的是无线
+        {
+            if(passTextField.text.length==0)
+            {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"【Wi-Fi】密码确定为空吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                alert.tag  = 100;
+                [alert show];
+                return;
+            }
+        }
+        
+        [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+        [self.view.window addSubview:holdView];
+        notificationLab.text =@"正在发送网络参数";
+    }
+    else//只支持无线
     {
-        if(confgiNetWorkTypeWifiBtn.selected==YES)//无线dhcp
+        if (![self isCheckSSIDOk])//检查ssid合法性
+        {
+            return;
+        }
+        
+        NSDictionary *dictStep1;
+        if(staticBtn.selected==YES)//是静态网络
+        {
+            if (![self isCheckStaticConfigInputOk])//检查静态配置输入合法性
+            {
+                return;
+            }
+            dictStep1  = @{@"cmd":@"2",@"snNumber":deviceSN,@"content":@"10"};//网络类型/ios/无线静态ip
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            
+            totalTimer =  300;
+        }else
         {
             dictStep1  = @{@"cmd":@"2",@"snNumber":deviceSN,@"content":@"11"};//网络类型/ios/无线DHCP
-        }else //有线 dhcp
-        {
-            dictStep1  = @{@"cmd":@"2",@"snNumber":deviceSN,@"content":@"13"};//网络类型,ios/
+            totalTimer =  200.f;
         }
-        totalTimer =  200.f;
-    }
-    messageArr = [[NSMutableArray alloc]init];
-    checkTotalTime = 0;
-    index = 0;
-    [messageArr addObject:dictStep1];
-    //ssid和密码
-    if (confgiNetWorkTypeWifiBtn.selected==YES) {
+        messageArr = [[NSMutableArray alloc]init];
+        checkTotalTime = 0;
+        index = 0;
+        [messageArr addObject:dictStep1];
+        //ssid和密码
         NSDictionary *dictStep2 = @{@"cmd":@"0",@"snNumber":deviceSN,@"content":currentSSID};//ssid
         [messageArr addObject:dictStep2];
         if(currentSSID.length>7)
@@ -798,72 +829,131 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             NSDictionary *dictStep3_more = @{@"cmd":@"1",@"snNumber":deviceSN,@"content":passTextField.text};//密码
             [messageArr addObject:dictStep3_more];
         }
-    }
-    
-    //是否需要发送ip/gateway/mask/dns等
-    if (staticBtn.selected==YES) {
-        NSDictionary *ipDict = @{@"cmd":@"3",@"snNumber":deviceSN,@"content":ipAddressTextField.text};//ip地址
-        [messageArr addObject:ipDict];
         
-        NSDictionary *markDict = @{@"cmd":@"4",@"snNumber":deviceSN,@"content":subMarkTextField.text};//子网掩码
-        [messageArr addObject:markDict];
+        //是否需要发送ip/gateway/mask/dns等
+        if (staticBtn.selected==YES) {
+            NSDictionary *ipDict = @{@"cmd":@"3",@"snNumber":deviceSN,@"content":ipAddressTextField.text};//ip地址
+            [messageArr addObject:ipDict];
+            
+            NSDictionary *markDict = @{@"cmd":@"4",@"snNumber":deviceSN,@"content":subMarkTextField.text};//子网掩码
+            [messageArr addObject:markDict];
+            
+            NSDictionary *gateDict = @{@"cmd":@"5",@"snNumber":deviceSN,@"content":gateWayTextField.text};//网关
+            [messageArr addObject:gateDict];
+            
+            NSDictionary *dnsDict = @{@"cmd":@"6",@"snNumber":deviceSN,@"content":DNSTextField.text};//dns服务器地址
+            [messageArr addObject:dnsDict];
+        }
+        NSDictionary *endDict = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//结束标识
+        [messageArr addObject:endDict];
+        NSDictionary *endDict_more = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//结束标识
+        [messageArr addObject:endDict_more];
         
-        NSDictionary *gateDict = @{@"cmd":@"5",@"snNumber":deviceSN,@"content":gateWayTextField.text};//网关
-        [messageArr addObject:gateDict];
-        
-        NSDictionary *dnsDict = @{@"cmd":@"6",@"snNumber":deviceSN,@"content":DNSTextField.text};//dns服务器地址
-        [messageArr addObject:dnsDict];
-    }
-    NSDictionary *endDict = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//结束标识
-    [messageArr addObject:endDict];
-    NSDictionary *endDict_more = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//结束标识
-    [messageArr addObject:endDict_more];
-    
-    //加一倍
-    for (int x=0; x<messageArr.count; x+=2) {
-        NSDictionary *dict = [messageArr[x] mutableCopy];
-        [messageArr insertObject:dict atIndex:x];
-    }
-//    configLogStr = [NSMutableString stringWithFormat:@"AccountEntity:AccountId=%@,username = %@,gender = %@,nickName = %@,fullName = %@,appSecret = %@,mobile = %@;Device:deviceId = %@,imei = %@,imsi = %@,ssid = %@,softVersion = %@ Client:mobileSystem = %@,mobileType = %@\n",entity.accountId,entity.username,entity.gender,entity.nickname,entity.fullname,entity.appSecret,entity.mobile,_deviceModel.deviceId,_deviceModel.imei,_deviceModel.imsi,currentSSID,_deviceModel.softVersion,[UIDevice currentDevice].systemVersion,[UIDevice currentDevice].model];
-    if (confgiNetWorkTypeWifiBtn.selected==YES)//配置的是无线
-    {
-        if(passTextField.text.length==0)
+        //加一倍
+        for (int x=0; x<messageArr.count; x+=2) {
+            NSDictionary *dict = [messageArr[x] mutableCopy];
+            [messageArr insertObject:dict atIndex:x];
+        }
+        MRJUserModel *entity = [AppSingleton currentUser];
+            configLogStr = [NSMutableString stringWithFormat:@"AccountEntity:AccountId=%@,username = %@,mobile = %@,email = %@;Device:deviceId = %@,imei = %@,imsi = %@,ssid = %@,softVersion = %@ Client:mobileSystem = %@,mobileType = %@\n",entity.accountId,entity.userName,entity.mobile,entity.email,_deviceModel.deviceId,_deviceModel.imei,_deviceModel.imsi,currentSSID,_deviceModel.softVersion,[UIDevice currentDevice].systemVersion,[UIDevice currentDevice].machineModelName];
+        if (confgiNetWorkTypeWifiBtn.selected==YES)//配置的是无线
         {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"【Wi-Fi】密码确定为空吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            alert.tag  = 100;
-            [alert show];
-            return;
+            if(passTextField.text.length==0)
+            {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"【Wi-Fi】密码确定为空吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                alert.tag  = 100;
+                [alert show];
+                return;
+            }
+        }
+        
+        [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+        [self.view.window addSubview:holdView];
+        notificationLab.text =@"正在发送网络参数";
+    }
+    [self startConfig];
+    
+//
+//
+    
+    
+
+//
+    
+    
+}
+-(void)startConfig
+{
+    NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@""};
+    [HomeHttpHandler home_checkDeviceOnlineStatus:param preExecute:^{
+        
+    } success:^(id obj) {
+        if ([obj[request_status_key] integerValue]==0) {
+            [globalTimer invalidate];
+            globalTimer = nil;
+            globalTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(globalSendMessage) userInfo:nil repeats:YES];
+            [allConsumeTimer invalidate];
+            allConsumeTimer = nil;
+            allConsumeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeUI) userInfo:nil repeats:YES];
+            [allConsumeTimer fire];
+        }else
+        {
+            holdView.hidden = YES;
+            self.view.userInteractionEnabled = YES;
+            //            [AppUtils showErrorMessage:obj2[@"msg"]];
+        }
+    } failed:^(id obj) {
+        holdView.hidden = YES;
+        self.view.userInteractionEnabled = YES;
+        //        [AppUtils showErrorMessage:obj];
+    }];
+}
+#pragma mark --check staticInput
+-(BOOL)isCheckStaticConfigInputOk
+{
+    if (![MRJCheckUtils isValidatIP:ipAddressTextField.text]) {
+        [MRJCheckUtils showErrorMessage:@"请输入合法的IP地址"];
+        return NO;
+    }
+    if (![MRJCheckUtils isValidatIP:subMarkTextField.text]) {
+        [MRJCheckUtils showErrorMessage:@"请输入合法的子网掩码"];
+        return NO;
+    }
+    if (![MRJCheckUtils isValidatIP:gateWayTextField.text]) {
+        [MRJCheckUtils showErrorMessage:@"请输入合法的网关地址"];
+        return NO;
+    }
+    if (![MRJCheckUtils isValidatIP:DNSTextField.text]) {
+        [MRJCheckUtils showErrorMessage:@"请输入合法的DNS地址"];
+        return NO;
+    }
+    return YES;
+}
+#pragma mark --check ssid
+-(BOOL)isCheckSSIDOk
+{
+    int x=0;
+    for(int i=0; i< [currentSSID length];i++){
+        int a = [currentSSID characterAtIndex:i];
+        if( a > 0x4e00 && a < 0x9fff)
+        {
+            x++;
         }
     }
-    
-    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
-    [self.view.window addSubview:holdView];
-    notificationLab.text =@"正在发送网络参数";
-//    [DeviceManageHandler deviceHeartBeatTestSuccess:^(id obj2) {
-//        if ([obj2 [@"status"] integerValue]==0) {
-//            [globalTimer invalidate];
-//            globalTimer = nil;
-//            globalTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(globalSendMessage) userInfo:nil repeats:YES];
-//            [allConsumeTimer invalidate];
-//            allConsumeTimer = nil;
-//            allConsumeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeUI) userInfo:nil repeats:YES];
-//            [allConsumeTimer fire];
-//        }else
-//        {
-//            [holdView removeFromSuperview];
-//            self.view.userInteractionEnabled = YES;
-//            [AppUtils showErrorMessage:obj2[@"msg"]];
-//        }
-//        
-//        
-//    } Failed:^(id obj) {
-//        [holdView removeFromSuperview];
-//        self.view.userInteractionEnabled = YES;
-//        [AppUtils showErrorMessage:obj];
-//    }];
-//    
-    
-    
+    if (x>7) {
+        [MRJCheckUtils showAlertMessage:@"设备暂不支持这么多中文的Wi-Fi网络"];
+        return NO;
+    }
+    NSRange range = [currentSSID rangeOfString:@"&"];
+    if (range.length>0) {
+        [MRJCheckUtils showAlertMessage:@"设备暂不支持特殊字符&的Wi-Fi网络"];
+        return NO;
+    }
+    if ([currentSSID stringByReplacingOccurrencesOfString:@" " withString:@""].length<1) {
+        [MRJCheckUtils showErrorMessage:@"请将手机网络切换至设备所连接的Wi-Fi网络"];
+        return NO;
+    }
+    return YES;
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -1007,7 +1097,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
                     break;
                 case 2:
                 {
-                    cmdType =[NSString stringWithFormat:@"网络类型%@",[[str substringFromIndex:str.length-1] integerValue]==0?@"无线静态":@"无线dhcp"];
+                    cmdType =[NSString stringWithFormat:@"网络类型%@",[[str substringFromIndex:str.length-1] integerValue]==0?@"无线静态":@"无线DHCP"];
                     
                 }
                     break;
@@ -1056,73 +1146,66 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 }
 -(void)checkOnline
 {
-//    if (totalTimer-checkTotalTime>10) {
-//        [DeviceManageHandler myDeviceDetailWithDeviceId:_deviceModel.deviceId Success:^(id obj) {
-//            if ([obj isKindOfClass:[DeviceModel class]]) {
-//                DeviceModel *model = obj;
-//                if (model.onLine) {
-//                    [player stop];
-//                    [allConsumeTimer invalidate];
-//                    allConsumeTimer = nil;
-//                    [checkOnline invalidate];
-//                    checkOnline = nil;
-//                    [globalTimer invalidate];
-//                    globalTimer = nil;
-//                    self.view.userInteractionEnabled = YES;
-//                    [holdView removeFromSuperview];
-//                    [[SQHttpHelper sharedHttpManager]cancelNetworkRequest];
-//                    [DeviceManageHandler deviceUploadNetConfigLogWithAccountId:entity.accountId creator:entity.accountId snNumber:_deviceModel.imei successStatus:@"1" content:configLogStr recode:@""];
-//                    _deviceModel = obj;
-//
-//                    [self dealLogic];
-//                }
-//            }else{
-//                [AppUtils showErrorMessage:obj];
-//            }
-//        } Failed:^(id obj) {
-////            [AppUtils showErrorMessage:TEXT_SERVER_NOT_RESPOND];
-//        }];
-//        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
-//    }else
-//    {
-//        [globalTimer invalidate];
-//        globalTimer = nil;
-//        [checkOnline invalidate];
-//        checkOnline = nil;
-//        [allConsumeTimer invalidate];
-//        allConsumeTimer = nil;
-//        checkTotalTime = 0;
-//        isCanAssignTask = YES;
-//        [holdView removeFromSuperview];
-//        [DeviceManageHandler deviceUploadNetConfigLogWithAccountId:entity.accountId creator:entity.accountId snNumber:_deviceModel.imei successStatus:@"0" content:configLogStr recode:@""];
-//        
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"配置完毕，稍后请查看设备的绿灯状态。如果绿灯常亮，说明配置网络成功。否则，请重新配置。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//        alertView.tag = 600;
-//        [alertView show];
-//        processBar.width = (checkTotalTime/totalTimer)*processNotiLab.width>=processNotiLab.width?processNotiLab.width:(checkTotalTime/totalTimer)*processNotiLab.width;
-//        proccessLab.text = [NSString stringWithFormat:@"%d %%",(int)(((float)checkTotalTime/(float)totalTimer)*100.f)>99?99:(int)(((float)checkTotalTime/(float)totalTimer)*100.f)];
-//        proccessLab.textAlignment = NSTextAlignmentCenter;
-//        self.view.userInteractionEnabled = YES;
-//        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
-//    }
+    if (totalTimer-checkTotalTime>10) {
+        NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@""};
+        [HomeHttpHandler home_checkDeviceOnlineStatus:param preExecute:^{
+            
+        } success:^(id obj) {
+            DeviceModel *model = obj;
+            if (model.onLine) {
+                [player stop];
+                [allConsumeTimer invalidate];
+                allConsumeTimer = nil;
+                [checkOnline invalidate];
+                checkOnline = nil;
+                [globalTimer invalidate];
+                globalTimer = nil;
+                self.view.userInteractionEnabled = YES;
+                [holdView removeFromSuperview];
+                
+                NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"log":configLogStr?configLogStr:@"",@"state":@"1"};
+                [HomeHttpHandler home_uploadConfigLog:param preExecute:nil success:nil failed:nil];
+
+                _deviceModel = obj;
+                
+                [self dealLogic];
+            }
+        } failed:^(id obj) {
+            
+        }];
+        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    }else
+    {
+        [globalTimer invalidate];
+        globalTimer = nil;
+        [checkOnline invalidate];
+        checkOnline = nil;
+        [allConsumeTimer invalidate];
+        allConsumeTimer = nil;
+        checkTotalTime = 0;
+        isCanAssignTask = YES;
+        [holdView removeFromSuperview];
+        NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"log":configLogStr?configLogStr:@"",@"state":@"0"};
+        [HomeHttpHandler home_uploadConfigLog:param preExecute:nil success:nil failed:nil];
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"配置完毕，稍后请查看设备的绿灯状态。如果绿灯常亮，说明配置网络成功。否则，请重新配置。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        alertView.tag = 600;
+        [alertView show];
+        processBar.width = (checkTotalTime/totalTimer)*processNotiLab.width>=processNotiLab.width?processNotiLab.width:(checkTotalTime/totalTimer)*processNotiLab.width;
+        proccessLab.text = [NSString stringWithFormat:@"%d %%",(int)(((float)checkTotalTime/(float)totalTimer)*100.f)>99?99:(int)(((float)checkTotalTime/(float)totalTimer)*100.f)];
+        proccessLab.textAlignment = NSTextAlignmentCenter;
+        self.view.userInteractionEnabled = YES;
+        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    }
     
 }
 -(void)dealLogic//配置后的处理逻辑部分
 {
-//    if (longtitude!=-1&&latitude!=-1) {
-//        [DeviceManageHandler deiceUploadGeoLocationWithsnNumber:_deviceModel.imei latitude:@(latitude) longtitude:@(longtitude) precision:@"1" province:addressDetail.province city:addressDetail.city area:addressDetail.district streetAddress:georesult.address gpsPositionType:@"cellarNet"];
-//    }
-//    if (!_deviceModel.initBind)//未绑定店铺
-//    {
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"现在去绑定店铺" delegate:self cancelButtonTitle:nil otherButtonTitles:@"绑定店铺", nil];
-//        alert.tag = 300;
-//        [alert show];
-//    }else
-//    {
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"配置设备网络成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//        alert.tag = 200;
-//        [alert show];
-//    }
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"配置设备网络成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    alert.tag = 200;
+    [alert show];
+    
     self.view.userInteractionEnabled = YES;
     
    

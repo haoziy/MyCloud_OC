@@ -121,7 +121,8 @@
                 NSDictionary *dict = (NSDictionary*)obj;
                 if ([dict[request_status_key] integerValue]==0 ) {
                     [AppSingleton shareInstace].lastLoginMobileOrEmail = loginAccountTF.text;
-                    [AppSingleton shareInstace].accountId = dict[@"data"][@"accountId"];
+                    MRJUserModel *user = [MRJUserModel modelWithJSON:dict[@"data"]];
+                    [AppSingleton saveCurrentUser:user];
                     
                     HomeDeviceManagerViewController*  deviceManagerVC = [[HomeDeviceManagerViewController alloc]init];
                     self.navigationController.viewControllers = @[deviceManagerVC];

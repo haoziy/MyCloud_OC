@@ -13,9 +13,9 @@ extern NSString *const store_current_enviornment_key;//当前环境key
 extern NSString *const store_last_user_input_key;//用户输入环境key
 extern NSString *const store_last_login_account_key;//上次登录账号key
 
-extern NSString *const store_user_account_id_key;//accountId可以
+extern NSString *const store_user_account_id_key;//accountId
 
-
+extern NSString *const store_user_entity_key;//userEntity
 
 @interface MRJStoreManager : NSObject
 
@@ -34,4 +34,7 @@ extern NSString *const store_user_account_id_key;//accountId可以
 +(void)print;
 
 +(void)deleteValueWithKey:(NSString *)key;
+
++(void)saveUserEntity:(id)entity forkey:(NSString*)key;
+
 @end

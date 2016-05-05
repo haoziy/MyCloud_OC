@@ -78,6 +78,7 @@
 		059509341CB4F09A009B3BBA /* DeBugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 059509331CB4F09A009B3BBA /* DeBugLog.m */; };
 		059509381CB4FF2D009B3BBA /* AppDelegate+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 059509371CB4FF2D009B3BBA /* AppDelegate+utils.m */; };
 		0595093B1CB4FF73009B3BBA /* AppSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0595093A1CB4FF73009B3BBA /* AppSingleton.m */; };
+		05D1EB281CDB4A9900BB3BDD /* MRJUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EB271CDB4A9900BB3BDD /* MRJUserModel.m */; };
 		05E4BF331CB4E6010069BDA4 /* GloballaunchImage@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4BF351CB4E6010069BDA4 /* GloballaunchImage@1x.png */; };
 		05E4BF391CB4E60A0069BDA4 /* GloballaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4BF3B1CB4E60A0069BDA4 /* GloballaunchImage@2x.png */; };
 		05E4BF3F1CB4E6120069BDA4 /* GloballaunchImage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4BF411CB4E6120069BDA4 /* GloballaunchImage@3x.png */; };
@@ -301,6 +302,8 @@
 		059509371CB4FF2D009B3BBA /* AppDelegate+utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+utils.m"; sourceTree = "<group>"; };
 		059509391CB4FF73009B3BBA /* AppSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSingleton.h; path = MyCloud_OC/AppSingleton.h; sourceTree = "<group>"; };
 		0595093A1CB4FF73009B3BBA /* AppSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSingleton.m; path = MyCloud_OC/AppSingleton.m; sourceTree = "<group>"; };
+		05D1EB261CDB4A9900BB3BDD /* MRJUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJUserModel.h; path = MyCloud_OC/MRJUserModel.h; sourceTree = "<group>"; };
+		05D1EB271CDB4A9900BB3BDD /* MRJUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJUserModel.m; path = MyCloud_OC/MRJUserModel.m; sourceTree = "<group>"; };
 		05E4BF341CB4E6010069BDA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = "Base.lproj/GloballaunchImage@1x.png"; sourceTree = "<group>"; };
 		05E4BF361CB4E6030069BDA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/GloballaunchImage@1x.png"; sourceTree = "<group>"; };
 		05E4BF371CB4E6040069BDA4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/GloballaunchImage@1x.png"; sourceTree = "<group>"; };
@@ -599,6 +602,7 @@
 		0528C6FD1CB4A601001C8281 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				05D1EB251CDB4A5A00BB3BDD /* Models */,
 				05FBE2571CCE181100729845 /* Certification */,
 				05FBE2451CCDB09800729845 /* class */,
 				05293F851CB796940064193B /* MRJMacros.h */,
@@ -948,6 +952,15 @@
 			name = appSinglon;
 			sourceTree = "<group>";
 		};
+		05D1EB251CDB4A5A00BB3BDD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				05D1EB261CDB4A9900BB3BDD /* MRJUserModel.h */,
+				05D1EB271CDB4A9900BB3BDD /* MRJUserModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		05E4BF2C1CB4E5930069BDA4 /* GlobalImages */ = {
 			isa = PBXGroup;
 			children = (
@@ -1244,6 +1257,7 @@
 				0537017D1CCF178B00EE215B /* DeviceModel.m in Sources */,
 				056FC59E1CB5ED25003F2BCA /* AboutMeHttpHandler.m in Sources */,
 				0528C7061CB4A731001C8281 /* StringKeyContentValueManager.m in Sources */,
+				05D1EB281CDB4A9900BB3BDD /* MRJUserModel.m in Sources */,
 				05FBE2441CCDB05A00729845 /* ChoicePrivateModelView.m in Sources */,
 				05FBE2481CCDB0AF00729845 /* MRJTextField.m in Sources */,
 				05293F6A1CB75BED0064193B /* DiscoveryResourceManager.m in Sources */,
@@ -1508,7 +1522,6 @@
 			baseConfigurationReference = C8D73AD043C9DF81F8A71B9B /* Pods-MyCloud_OC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Qiao Shen (H7TW862377)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1536,7 +1549,6 @@
 			baseConfigurationReference = CD87C404C9FF19394CD343FB /* Pods-MyCloud_OC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Qiao Shen (H7TW862377)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

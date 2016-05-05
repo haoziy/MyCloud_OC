@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "MRJUserModel.h"
 extern NSString *const baseURL_normal_environment;//正式环境
 extern NSString *const baseURL_inner_environment;//内部测试环境
 extern NSString *const baseURL_develop_environment;//开发环境
@@ -17,10 +17,12 @@ extern NSString *const baseFormURL_normal_environment;
 
 @interface AppSingleton : NSObject
 +(instancetype)shareInstace;
-
++(void)saveCurrentUser:(MRJUserModel*)user;
++(void)deleteCurretnUser;
 +(NSString*)currentEnvironmentBaseURL;
++(MRJUserModel*)currentUser;
 
-@property(nonatomic,copy)NSString *accountId;//
+@property(nonatomic,strong,readonly)MRJUserModel *currentUser;//
 @property(nonatomic,copy)NSString *environmentUrl;//当前环境的url;
 @property(nonatomic,copy)NSString *inputEnvironmentURL;//切换私有云时,用户的输入信息;
 @property(nonatomic,copy)NSString *myFormsIP;//如果是私有云的情况下报表中心ip

@@ -56,6 +56,11 @@
              //                         @"allowUpgrade"]
              };
 }
+-(DeviceInstallPara)installPara
+{
+    struct DeviceDetailPara param = {(int)self.boxTop,(int)self.boxLeft,(int)self.boxBottom,(int)self.boxRight,(int)self.direction,[self.height intValue]};
+    return param;
+}
 -(NSString*)modeName
 {
     switch (self.hardModel) {

@@ -75,14 +75,23 @@
     deviceListTable.tableHeaderView = searchViewController.searchBar;
     [deviceListTable setTableFooterView:[[UIView alloc]initWithFrame:CGRectZero]];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    
+    deviceListTable.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [deviceListTable.mj_header beginRefreshing];
+        [self loadData];
+    }];
+    
     [self loadData];
+    
 }
 -(void)loadData
 {
-    NSDictionary *para = @{@"accountId":[[AppSingleton shareInstace] accountId]==nil?@"":[[AppSingleton shareInstace] accountId]};
+    NSDictionary *para = @{@"accountId":[[AppSingleton currentUser] accountId]==nil?@"":[[AppSingleton currentUser] accountId]};
     [HomeHttpHandler getDeviceListParams:para preExecute:^{
         
     } success:^(id obj) {
+        [deviceListTable.mj_header endRefreshing];
         if ([obj isKindOfClass:[NSDictionary class]]) {
             deviceList = obj;
             offLineData = [obj objectForKey:key_offLineDeviceKey];
@@ -92,9 +101,8 @@
             [allDevices addObjectsFromArray:onLineData];
             [deviceListTable reloadData];
         }
-    } failed:^(id obj) {
-        
-        
+    } failed:^(id obj) { 
+      [deviceListTable.mj_header endRefreshing];
     }];
 }
 
@@ -124,9 +132,6 @@
             make.left.mas_equalTo(LEFT_PADDING);
             make.centerY.mas_equalTo(label.superview);
         }];
-//        view.size = CGSizeMake(tableView.width,[MRJSizeManager mrjInputSizeHeight]);
-//        [label sizeToFit];
-//        label.origin = CGPointMake(LEFT_PADDING,(view.height-label.height)/2);
         return view;
         
     }
@@ -191,7 +196,14 @@
 -(void)cell:(BaseTableViewCell*)cell operation:(MRJCellOperationType)type WithData:(id)data;
 {
     if (type==MRJCellOperationTypeDelete) {
-        
+        DeviceModel *model = data;
+        NSDictionary *param = @{@"deviceId":model.deviceId?model.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
+        [HomeHttpHandler home_deleteNetWorkCMD:param preExecute:^{
+        } success:^(id obj) {
+            
+        } failed:^(id obj) {
+            
+        }];
     }else
     {
 //        MNGDeviceNetConfigViewController *searchConfigVC = [[MNGDeviceNetConfigViewController alloc]init];
@@ -275,9 +287,16 @@
     searchConfigVC.deviceModel = model;
     [RACObserve(searchConfigVC, deviceModel) subscribeNext:^(id x) {
         if (searchTable.isHidden==NO) {
+            searchData[indexPath.row] = x;
             [searchTable reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
         }else
         {
+            if (indexPath.section==0) {
+                onLineData[indexPath.row] = x;
+            }else
+            {
+                offLineData[indexPath.row] = x;
+            }
            [deviceListTable reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
         }
         

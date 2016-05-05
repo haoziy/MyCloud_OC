@@ -34,4 +34,5 @@
 #import "MRJCheckUtils.h"
 #import "MRJStringCheckUtil.h"
 #import "UINavigationController+safetyPush.h"
+#import "MJRefresh.h"
 #endif /* PrefixHeader_pch */
