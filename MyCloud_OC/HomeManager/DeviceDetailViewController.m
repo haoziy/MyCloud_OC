@@ -15,15 +15,17 @@
 #import "DeviceDetailCell.h"
 #import "HomeStringKeyContentValueManager.h"
 #import "HomeHttpHandler.h"
-
+#import "DeviceDetailHasButtonCell.h"
 #import "MNGSearchDeviceForConfigNetViewController.h"
 
 
-
-@interface DeviceDetailViewController ()<UIAlertViewDelegate>
+extern NSString *const notification_device_online_status_key;
+@interface DeviceDetailViewController ()<UIAlertViewDelegate,BaseTableViewCellDelegate>
 {
     NSString *defaultStr;
     UILabel *ssidByOffLineLab;//离线后显示ssid的lab
+    DeviceModel *tempDeviceForDeleteNet;
+    DeviceModel *tempDeviceForReBoot;
 }
 
 @end
@@ -95,7 +97,7 @@ static NSString *myCell = @"MyCell";
         make.height.mas_equalTo(INPUT_HEIGHT);
     }];
     
-    [reBootBtn addTarget:self action:@selector(reTurnOnDevice:) forControlEvents:UIControlEventTouchUpInside];
+    [reBootBtn addTarget:self action:@selector(reBootDevice:) forControlEvents:UIControlEventTouchUpInside];
     
     deleteNetBtn = [UIButton mrj_generalBtnTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceDeleteButtonName] normalTitleColor:NavigationTextColor highlightTitleColor:[MRJColorManager mrj_separatrixColor] normalBackImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_alertColor] andSize:CGSizeMake(SCREEN_WIDTH-LEFT_PADDING*2, INPUT_HEIGHT)]  highlightBackImage:nil];
     [deleteNetBtn addTarget:self action:@selector(deleteNetConfig:) forControlEvents:UIControlEventTouchUpInside];
@@ -112,24 +114,9 @@ static NSString *myCell = @"MyCell";
     }];
     deleteNetBtn.hidden = YES;
     reBootBtn.hidden = YES;
-    if (_deviceModel.rule.allowDel&&_deviceModel.rule.allowRestart) {
-        deleteNetBtn.hidden = NO;
-        reBootBtn.hidden = NO;
-    }else if (_deviceModel.rule.allowRestart)
-    {
-        reBootBtn.hidden = NO;
-    }else
-    {
-        deleteNetBtn.hidden = NO;
-        [deleteNetBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(myTableView.mas_bottom).offset(TOP_PADDING);
-            make.left.mas_equalTo(LEFT_PADDING);
-            make.centerX.mas_equalTo(deleteNetBtn.superview.mas_centerX);
-            make.height.mas_equalTo(INPUT_HEIGHT);
-        }];
-    }
     
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(netWorkStatusChange:) name:notification_device_online_status_key object:nil];
     
 
     [self loadData];
@@ -148,10 +135,30 @@ static NSString *myCell = @"MyCell";
         self.deviceModel = model;
         defaultStr = _deviceModel.onLine?@"在线":@"离线";
         [myTableView reloadData];
+        if (_deviceModel.onLine==YES) {
+            if (_deviceModel.rule.allowDelNet&&_deviceModel.rule.allowRestart) {
+                deleteNetBtn.hidden = NO;
+                reBootBtn.hidden = NO;
+            }else if (_deviceModel.rule.allowRestart)
+            {
+                reBootBtn.hidden = NO;
+            }else
+            {
+                deleteNetBtn.hidden = NO;
+                [deleteNetBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(myTableView.mas_bottom).offset(TOP_PADDING);
+                    make.left.mas_equalTo(LEFT_PADDING);
+                    make.centerX.mas_equalTo(deleteNetBtn.superview.mas_centerX);
+                    make.height.mas_equalTo(INPUT_HEIGHT);
+                }];
+            }
+        }
+        
     } failed:^(id obj) {
         
     }];
 }
+
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -215,134 +222,11 @@ static NSString *myCell = @"MyCell";
             [cell configMainTableViewCellStyleWithText:text andDetailText:online cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
         }
         if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceNetConfig]]) {
-            switch (_deviceModel.hardModel) {
-                case DeviceHardModelNone://未在划定序列号范围类不支持配置网络
-                    [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.netName cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                    break;
-                case DeviceHardModelM1://m1不支持配置网络
-                    [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.netName cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                    break;
-                case DeviceHardModelM3://m3不支持配置网络
-                    [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.netName cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                    break;
-                case DeviceHardModelM4://m4不支持配置网络
-                    [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.netName cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                    break;
-                case DeviceHardModelM2:
-                    if(_deviceModel.onLine)//在线
-                    {
-                        [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.netName cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                    }else
-                    {
-                        if([_deviceModel initNetwork])//绑定网络
-                        {
-                            [cell removeFromSuperview];
-                            cell = nil;
-                            cell = [[DeviceDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                            [cell configMainTableViewCellStyleWithText:text andDetailText:nil cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                            
-                            
-                            ssidByOffLineLab.text = _deviceModel.netName;
-                            ssidByOffLineLab.textColor = SecondaryTextColor;
-                            [ssidByOffLineLab sizeToFit];
-                            CGFloat postion;
-                            if (ssidByOffLineLab.width>90) {
-                                postion = 90;
-                            }else
-                            {
-                                postion = ssidByOffLineLab.width;
-                            }
-                            ConfBtn.origin = (CGPoint){cell.width-ConfBtn.width-RIGHT_PADDING*2,(ROW_HEIGHT-ConfBtn.height)/2};
-                            [cell.contentView addSubview:ConfBtn];
-                            ssidByOffLineLab.frame = CGRectMake(ConfBtn.x-postion, (cell.height-ssidByOffLineLab.height)/2, postion, ssidByOffLineLab.height);
-                            [cell.contentView addSubview:ssidByOffLineLab];
-                        }else
-                        {
-                            [cell configMainTableViewCellStyleWithText:text andDetailText:nil cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                            ConfBtn.origin = (CGPoint){cell.width-ConfBtn.width-RIGHT_PADDING*2,(ROW_HEIGHT-ConfBtn.height)/2};
-                            [cell.contentView addSubview:ConfBtn];
-                        }
-                    }
-                    break;
-                case DeviceHardModelM1Plus:
-                    if(_deviceModel.onLine)//在线
-                    {
-                        [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.netName cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                    }else
-                    {
-                        if([_deviceModel initNetwork])//绑定网络
-                        {
-                            [cell removeFromSuperview];
-                            cell = nil;
-                            cell = [[DeviceDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                            [cell configMainTableViewCellStyleWithText:text andDetailText:nil cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                            
-                            
-                            ssidByOffLineLab.text = _deviceModel.netName;
-                            ssidByOffLineLab.textColor = SecondaryTextColor;
-                            [ssidByOffLineLab sizeToFit];
-                            CGFloat postion;
-                            if (ssidByOffLineLab.width>90) {
-                                postion = 90;
-                            }else
-                            {
-                                postion = ssidByOffLineLab.width;
-                            }
-                            ConfBtn.origin = (CGPoint){cell.width-ConfBtn.width-LEFT_PADDING*2,(ROW_HEIGHT-ConfBtn.height)/2};
-                            [cell.contentView addSubview:ConfBtn];
-                            ssidByOffLineLab.frame = CGRectMake(ConfBtn.x-postion, (cell.height-ssidByOffLineLab.height)/2, postion, ssidByOffLineLab.height);
-                            [cell.contentView addSubview:ssidByOffLineLab];
-                        }else
-                        {
-                            [cell configMainTableViewCellStyleWithText:text andDetailText:nil cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                            ConfBtn.origin = (CGPoint){cell.width-ConfBtn.width-LEFT_PADDING*2,(ROW_HEIGHT-ConfBtn.height)/2};
-                            [cell.contentView addSubview:ConfBtn];
-                        }
-                    }
-                    break;
-                case DeviceHardModelM2Plus:
-                    if(_deviceModel.onLine)//在线
-                    {
-                        [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.netName cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                    }else
-                    {
-                        if([_deviceModel initNetwork])//绑定网络
-                        {
-                            [cell removeFromSuperview];
-                            cell = nil;
-                            cell = [[DeviceDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                            [cell configMainTableViewCellStyleWithText:text andDetailText:nil cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                            
-                            
-                            ssidByOffLineLab.text = _deviceModel.netName;
-                            ssidByOffLineLab.textColor = SecondaryTextColor;
-                            [ssidByOffLineLab sizeToFit];
-                            CGFloat postion;
-                            if (ssidByOffLineLab.width>90) {
-                                postion = 90;
-                            }else
-                            {
-                                postion = ssidByOffLineLab.width;
-                            }
-                            ConfBtn.origin = (CGPoint){cell.width-ConfBtn.width-LEFT_PADDING*2,(ROW_HEIGHT-ConfBtn.height)/2};
-                            [cell.contentView addSubview:ConfBtn];
-                            ssidByOffLineLab.frame = CGRectMake(ConfBtn.x-postion, (cell.height-ssidByOffLineLab.height)/2, postion, ssidByOffLineLab.height);
-                            [cell.contentView addSubview:ssidByOffLineLab];
-                        }else
-                        {
-                            [cell configMainTableViewCellStyleWithText:text andDetailText:nil cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                            ConfBtn.origin = (CGPoint){cell.width-ConfBtn.width-LEFT_PADDING*2,(ROW_HEIGHT-ConfBtn.height)/2};
-                            [cell.contentView addSubview:ConfBtn];
-                        }
-                    }
-                    break;
-                default:
-                    [cell configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.netName cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:NO selectHighlight:NO];
-                    break;
-            }
-        }
-        if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceShopName]]) {
-            
+            DeviceDetailHasButtonCell *cell2 = [[DeviceDetailHasButtonCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"celll2"];
+            cell2.deviceModel = self.deviceModel;
+            [cell2 configMainTableViewCellStyleWithText:text andDetailText:_deviceModel.netName buttonOneName:nil buttonTwoName:nil];
+            cell2.mrjDelegate = self;
+            return cell2;
         }
         if ([text isEqualToString:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceParam]]) {
             [cell configMainTableViewCellStyleWithText:text andDetailText:nil cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:YES selectHighlight:YES];
@@ -353,42 +237,48 @@ static NSString *myCell = @"MyCell";
     }
     return cell;
 }
+#pragma baseCellDelegate
+-(void)cell:(BaseTableViewCell*)cell operation:(MRJCellOperationType)type WithData:(id)data;
+{
+    if (type==MRJCellOperationTypeConfig) {
+        MNGSearchDeviceForConfigNetViewController *searchConfigVC = [[MNGSearchDeviceForConfigNetViewController alloc]initWithEnterWay:DeviceConfigEnteryFromDeviceDetail];
+        searchConfigVC.deviceModel = data;
+        [self.navigationController safetyPushViewController:searchConfigVC animated:YES];
+    }
+}
+#pragma mark -- alertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
-//    if (buttonIndex==1) {
-//        if (alertView.tag==1000) {
-//            UserEntity *entity = [UserDefaultsUtils customerObjectWithKey:USER_ENTITY];
-//            [DeviceManageHandler reStartDeviceWithDeviceId:_deviceModel.deviceId taskCreateId:entity.accountId taskCreator:entity.accountId Success:^(id obj) {
-//                if ([obj isKindOfClass:[NSDictionary class]]) {
-//                    [AppUtils dismissHUD];
-//                    [self loadData];
-//                }else{
-//                    [AppUtils showErrorMessage:obj];
-//                    
-//                }
-//            } Failed:^(id obj) {
-//                [AppUtils showErrorMessage:TEXT_SERVER_NOT_RESPOND];
-//            }];
-//
-//        
-//        }else if (alertView.tag==2000)
-//        {
-//            UserEntity *entity = [UserDefaultsUtils customerObjectWithKey:USER_ENTITY];
-//            [DeviceManageHandler deleteDeviceNetworkWithDeviceId:_deviceModel.deviceId taskCreateId:entity.accountId taskCreator:entity.accountId Success:^(id obj) {
-//                if ([obj isKindOfClass:[NSDictionary class]]) {
-//                    [AppUtils dismissHUD];
-//                    [AppUtils showAlertMessage:@"删除设备网络成功!稍后设备绿灯会快闪"];
-//                    [self loadData];
-//                    
-//                }else{
-//                    [AppUtils showErrorMessage:obj];
-//                }
-//            } Failed:^(id obj) {
-//                [AppUtils showErrorMessage:TEXT_SERVER_NOT_RESPOND];
-//            }];
-//        }
-//        
-//    }
+    if (buttonIndex==1) {
+        if (alertView.tag==1000) {
+            if (buttonIndex==1) {
+                NSDictionary *param = @{@"deviceId":tempDeviceForDeleteNet.deviceId?tempDeviceForDeleteNet.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
+                [HomeHttpHandler home_rebootDeviceCMD:param preExecute:^{
+                } success:^(id obj) {
+                    if ([obj[request_status_key] integerValue]==0) {
+                        [self loadData];
+                    }
+                } failed:^(id obj) {
+                    
+                }];
+            }
+        
+        }else if (alertView.tag==2000)
+        {
+            if (buttonIndex==1) {
+                NSDictionary *param = @{@"deviceId":tempDeviceForDeleteNet.deviceId?tempDeviceForDeleteNet.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
+                [HomeHttpHandler home_deleteNetWorkCMD:param preExecute:^{
+                } success:^(id obj) {
+                    if ([obj[request_status_key] integerValue]==0) {
+                        [self loadData];
+                    }
+                } failed:^(id obj) {
+                    
+                }];
+            }
+        }
+        
+    }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -402,57 +292,25 @@ static NSString *myCell = @"MyCell";
     }
 }
 
-#pragma RefreshCallback
--(void)updateDeviceMsg:(id)callback{
-//    [_delegate updateDeviceMsg:nil];
-    [self loadData];
-}
 
--(void)bindGateComplete:(NSNotification *)notify{
-    [self loadData];
-}
 
--(void)bindShop:(UIButton *)sender{
-    
-//    ShopListViewController *shopListViewController = [[ShopListViewController alloc] initWithType:ShopListUseForDeviceDetailBindDevice];
-//    shopListViewController.title = @"选择店铺";
-//    shopListViewController.deviceModel = _deviceModel;
-//    [self.navigationController safetyPushViewController:shopListViewController animated:YES];
-}
-
--(void)confNet:(UIButton*)sender
-{
-//    if ([UserDefaultsUtils boolValueWithKey:IDENTITY] == YES){
-//        [AppUtils showInfoMessage:@"当前是演示账号不能做提交操作"];
-//        return;
-//    }
-//    MNGSearchDeviceForConfigNetViewController *searchDeviceVC = [[MNGSearchDeviceForConfigNetViewController alloc]initWithEnterWay:DeviceConfigEnteryFromDeviceDetail];
-//    searchDeviceVC.deviceModel = _deviceModel;
-//    [self.navigationController safetyPushViewController:searchDeviceVC animated:YES];
-
-    
-}
-
-- (void)reTurnOnDevice:(UIButton *)sender{
-//    if ([UserDefaultsUtils boolValueWithKey:IDENTITY] == YES){
-//        [AppUtils showInfoMessage:@"当前是演示账号不能做提交操作"];
-//        return;
-//    }
-//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"设备重启需要1-2分钟，确定重启设备?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-//    alert.tag = 1000;
-//    [alert show];
+- (void)reBootDevice:(UIButton *)sender{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"设备重启需要1-2分钟，确定重启设备?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag = 1000;
+    [alert show];
     
 }
 
 - (void)deleteNetConfig:(UIButton *)sender{
-//    if ([UserDefaultsUtils boolValueWithKey:IDENTITY] == YES){
-//        [AppUtils showInfoMessage:@"当前是演示账号不能做提交操作"];
-//        return;
-//    }
-//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"确定删除设备的网络配置?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-//    alert.tag = 2000;
-//    [alert show];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"确定删除设备的网络配置?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag = 2000;
+    [alert show];
     
 }
+-(void)netWorkStatusChange:(NSNotification*)note
+{
+    [self loadData];
+}
+
 
 @end

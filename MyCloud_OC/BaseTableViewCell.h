@@ -15,7 +15,8 @@ typedef NS_ENUM(NSInteger,MRJCellOperationType)
 {
     MRJCellOperationTypeNone = 0,
     MRJCellOperationTypeDelete,//常见的删除网络;
-    MRJCellOperationTypeConfig//配置网络
+    MRJCellOperationTypeConfig,//配置网络
+    MRJCellOperationTypeBindShop//绑定店铺
 };
 
 

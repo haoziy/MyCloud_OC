@@ -82,6 +82,7 @@
 		05E4BF331CB4E6010069BDA4 /* GloballaunchImage@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4BF351CB4E6010069BDA4 /* GloballaunchImage@1x.png */; };
 		05E4BF391CB4E60A0069BDA4 /* GloballaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4BF3B1CB4E60A0069BDA4 /* GloballaunchImage@2x.png */; };
 		05E4BF3F1CB4E6120069BDA4 /* GloballaunchImage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4BF411CB4E6120069BDA4 /* GloballaunchImage@3x.png */; };
+		05F2D4321CDC7CCE0085CDF0 /* DeviceDetailHasButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2D4311CDC7CCE0085CDF0 /* DeviceDetailHasButtonCell.m */; };
 		05FBE2441CCDB05A00729845 /* ChoicePrivateModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE2431CCDB05A00729845 /* ChoicePrivateModelView.m */; };
 		05FBE2481CCDB0AF00729845 /* MRJTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE2471CCDB0AF00729845 /* MRJTextField.m */; };
 		05FBE24B1CCDB80500729845 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE24A1CCDB80500729845 /* UIView+Frame.m */; };
@@ -316,6 +317,8 @@
 		05E4BF421CB4E6140069BDA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/GloballaunchImage@3x.png"; sourceTree = "<group>"; };
 		05E4BF431CB4E6150069BDA4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/GloballaunchImage@3x.png"; sourceTree = "<group>"; };
 		05E4BF441CB4E6160069BDA4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hant"; path = "zh-Hant.lproj/GloballaunchImage@3x.png"; sourceTree = "<group>"; };
+		05F2D4301CDC7CCE0085CDF0 /* DeviceDetailHasButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceDetailHasButtonCell.h; path = MyCloud_OC/DeviceDetailHasButtonCell.h; sourceTree = "<group>"; };
+		05F2D4311CDC7CCE0085CDF0 /* DeviceDetailHasButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceDetailHasButtonCell.m; path = MyCloud_OC/DeviceDetailHasButtonCell.m; sourceTree = "<group>"; };
 		05FBE2421CCDB05A00729845 /* ChoicePrivateModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChoicePrivateModelView.h; path = MyCloud_OC/ChoicePrivateModelView.h; sourceTree = "<group>"; };
 		05FBE2431CCDB05A00729845 /* ChoicePrivateModelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChoicePrivateModelView.m; path = MyCloud_OC/ChoicePrivateModelView.m; sourceTree = "<group>"; };
 		05FBE2461CCDB0AF00729845 /* MRJTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJTextField.h; path = MyCloud_OC/MRJTextField.h; sourceTree = "<group>"; };
@@ -846,20 +849,9 @@
 		053701791CCF174400EE215B /* view */ = {
 			isa = PBXGroup;
 			children = (
-				055D36901CD1EAC4005FAB0F /* WLRangeSlider.h */,
-				055D36911CD1EAC4005FAB0F /* WLRangeSlider.m */,
-				055D36921CD1EAC4005FAB0F /* WLSliderThumbLayer.h */,
-				055D36931CD1EAC4005FAB0F /* WLSliderThumbLayer.m */,
-				055D36941CD1EAC4005FAB0F /* WLTrackLayer.h */,
-				055D36951CD1EAC4005FAB0F /* WLTrackLayer.m */,
-				055D36831CD1E997005FAB0F /* MNGSearchDeviceSuccessView.h */,
-				055D36841CD1E997005FAB0F /* MNGSearchDeviceSuccessView.m */,
-				055D368A1CD1E9C8005FAB0F /* DeviceListCell.h */,
-				055D368B1CD1E9C8005FAB0F /* DeviceListCell.m */,
-				055D36991CD1EBD1005FAB0F /* DeviceDetailCell.h */,
-				055D369A1CD1EBD1005FAB0F /* DeviceDetailCell.m */,
-				050F33761CD231090076ED63 /* DeviceInstallHeightCell.h */,
-				050F33771CD231090076ED63 /* DeviceInstallHeightCell.m */,
+				05F2D42F1CDC7C6B0085CDF0 /* other */,
+				05F2D42E1CDC7C480085CDF0 /* cell */,
+				05F2D42D1CDC76D90085CDF0 /* DeviceParamSlider */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -969,6 +961,43 @@
 				05E4BF411CB4E6120069BDA4 /* GloballaunchImage@3x.png */,
 			);
 			path = GlobalImages;
+			sourceTree = "<group>";
+		};
+		05F2D42D1CDC76D90085CDF0 /* DeviceParamSlider */ = {
+			isa = PBXGroup;
+			children = (
+				055D36901CD1EAC4005FAB0F /* WLRangeSlider.h */,
+				055D36911CD1EAC4005FAB0F /* WLRangeSlider.m */,
+				055D36921CD1EAC4005FAB0F /* WLSliderThumbLayer.h */,
+				055D36931CD1EAC4005FAB0F /* WLSliderThumbLayer.m */,
+				055D36941CD1EAC4005FAB0F /* WLTrackLayer.h */,
+				055D36951CD1EAC4005FAB0F /* WLTrackLayer.m */,
+			);
+			name = DeviceParamSlider;
+			sourceTree = "<group>";
+		};
+		05F2D42E1CDC7C480085CDF0 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				055D368A1CD1E9C8005FAB0F /* DeviceListCell.h */,
+				055D368B1CD1E9C8005FAB0F /* DeviceListCell.m */,
+				055D36991CD1EBD1005FAB0F /* DeviceDetailCell.h */,
+				055D369A1CD1EBD1005FAB0F /* DeviceDetailCell.m */,
+				05F2D4301CDC7CCE0085CDF0 /* DeviceDetailHasButtonCell.h */,
+				05F2D4311CDC7CCE0085CDF0 /* DeviceDetailHasButtonCell.m */,
+				050F33761CD231090076ED63 /* DeviceInstallHeightCell.h */,
+				050F33771CD231090076ED63 /* DeviceInstallHeightCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		05F2D42F1CDC7C6B0085CDF0 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				055D36831CD1E997005FAB0F /* MNGSearchDeviceSuccessView.h */,
+				055D36841CD1E997005FAB0F /* MNGSearchDeviceSuccessView.m */,
+			);
+			name = other;
 			sourceTree = "<group>";
 		};
 		05FBE2451CCDB09800729845 /* class */ = {
@@ -1283,6 +1312,7 @@
 				05293F641CB75B7B0064193B /* LoginRegistResourceManager.m in Sources */,
 				05293F281CB74B190064193B /* HomeStringKeyContentValueManager.m in Sources */,
 				053701861CCF69ED00EE215B /* HomeHttpHandler.m in Sources */,
+				05F2D4321CDC7CCE0085CDF0 /* DeviceDetailHasButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

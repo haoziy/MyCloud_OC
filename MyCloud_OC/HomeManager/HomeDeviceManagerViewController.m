@@ -6,6 +6,7 @@
 //  Copyright © 2016年 laomi. All rights reserved.
 //
 
+
 #import "HomeDeviceManagerViewController.h"
 #import "HomeStringKeyContentValueManager.h"
 #import "BaseNavigationViewController.h"
@@ -16,18 +17,18 @@
 #import "MNGSearchDeviceForConfigNetViewController.h"
 #import "MNGDeviceNetConfigViewController.h"
 #import "DeviceDetailViewController.h"
+NSString * const notification_device_online_status_key = @"notification_device_online_status_key" ;//设备网络状态发生变化
 
-
-@interface HomeDeviceManagerViewController()<UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,UISearchControllerDelegate,BaseTableViewCellDelegate>
+@interface HomeDeviceManagerViewController()<UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,UISearchControllerDelegate,BaseTableViewCellDelegate,UIAlertViewDelegate>
 {
     MRJBaseTableview *deviceListTable;
     MRJBaseTableview *searchTable;
-    NSMutableArray *onLineData;
-    NSMutableArray *offLineData;
     UISearchController *searchViewController;
     NSMutableArray *searchData;
-    NSDictionary *deviceList;
+    NSArray *deviceList;
     NSMutableArray *allDevices;
+    DeviceModel *tempDeviceForDeleteNet;
+    NSIndexPath *tempIndexPathForDeleteNet;
 }
 
 @end
@@ -37,9 +38,6 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    onLineData = [[NSMutableArray alloc]init];
-    offLineData = [[NSMutableArray alloc]init];
-    
     searchData = [[NSMutableArray alloc]init];
     searchTable = [[MRJBaseTableview alloc]init];
     allDevices = [[NSMutableArray alloc]init];
@@ -76,14 +74,14 @@
     [deviceListTable setTableFooterView:[[UIView alloc]initWithFrame:CGRectZero]];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    
+    deviceListTable.backgroundColor = self.view.backgroundColor;
     deviceListTable.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [deviceListTable.mj_header beginRefreshing];
+        [deviceListTable.mj_header endRefreshing];
         [self loadData];
     }];
-    
+    deviceListTable.mj_header.backgroundColor = deviceListTable.backgroundColor;
     [self loadData];
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(netWorkStatusChange:) name:notification_device_online_status_key object:nil];
 }
 -(void)loadData
 {
@@ -92,13 +90,11 @@
         
     } success:^(id obj) {
         [deviceListTable.mj_header endRefreshing];
-        if ([obj isKindOfClass:[NSDictionary class]]) {
+        if ([obj isKindOfClass:[NSArray class]]) {
             deviceList = obj;
-            offLineData = [obj objectForKey:key_offLineDeviceKey];
-            onLineData = [obj objectForKey:key_onLineDeviceKey];
             [allDevices removeAllObjects];
-            [allDevices addObjectsFromArray:offLineData];
-            [allDevices addObjectsFromArray:onLineData];
+            [allDevices addObjectsFromArray:deviceList[0]];
+            [allDevices addObjectsFromArray:deviceList[1]];
             [deviceListTable reloadData];
         }
     } failed:^(id obj) { 
@@ -122,11 +118,12 @@
         return nil;
     }else
     {
+        
         UIView *view = [[UIView alloc]init];
         
         UILabel *label = [[UILabel alloc]init];
         view.backgroundColor = self.view.backgroundColor;
-        label.text = [NSString stringWithFormat:@"%@ %lu台",section==0?@"在线":@"离线",(unsigned long)(section==0?onLineData.count:offLineData.count)];
+        label.text = [NSString stringWithFormat:@"%@ %lu台",section==0?@"在线":@"离线",(unsigned long)(section==0? ((NSArray*)deviceList[0]).count:((NSArray*)deviceList[1]).count)];
         [view addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(LEFT_PADDING);
@@ -136,16 +133,12 @@
         
     }
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    return [MRJSizeManager mrjTableHeadHeight];
-//}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView==searchTable) {
         return 1;
     }
-    return [deviceList allKeys].count;
+    return deviceList.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
@@ -153,13 +146,7 @@
         return searchData.count;
     }
     
-    if (section==0) {
-        return onLineData.count;
-    }else
-    {
-        return offLineData.count;
-    }
-    return 0;
+    return  ((NSArray*)((NSArray*)deviceList[section])).count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -178,12 +165,7 @@
     }
     else
     {
-        if (indexPath.section==0) {
-            model = onLineData[indexPath.row];
-        }else
-        {
-            model = offLineData[indexPath.row];
-        }
+        model = ((NSArray*)((NSArray*)deviceList[indexPath.section]))[indexPath.row];
     }
     cell.deviceModel = model;
     if (indexPath.row==0) {
@@ -192,23 +174,66 @@
     cell.mrjDelegate = self;
     return cell;
 }
-#pragma mark --baseCellDelegateMethod
--(void)cell:(BaseTableViewCell*)cell operation:(MRJCellOperationType)type WithData:(id)data;
+#pragma mark --notifcation callback
+-(void)netWorkStatusChange:(NSNotification*)note
 {
-    if (type==MRJCellOperationTypeDelete) {
-        DeviceModel *model = data;
-        NSDictionary *param = @{@"deviceId":model.deviceId?model.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
+    [self loadData];
+}
+
+#pragma mark --alertViewDelegateMethod
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+    if (buttonIndex==1) {
+        NSDictionary *param = @{@"deviceId":tempDeviceForDeleteNet.deviceId?tempDeviceForDeleteNet.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
         [HomeHttpHandler home_deleteNetWorkCMD:param preExecute:^{
         } success:^(id obj) {
-            
+            if ([obj[request_status_key] integerValue]==0) {
+//                if (searchTable.hidden==NO) {
+//                    DeviceModel *model = searchData[tempIndexPathForDeleteNet.row];
+//                    model.onLine = NO;
+//                    allDevices[tempIndexPathForDeleteNet.row] = model;
+//                    [searchTable reloadRowAtIndexPath:tempIndexPathForDeleteNet withRowAnimation:UITableViewRowAnimationNone];
+//                }else
+//                {
+//                    DeviceModel *model;
+//                    if (tempIndexPathForDeleteNet.section==0) {
+//                        model = onLineData[tempIndexPathForDeleteNet.row];
+//                    }
+//                    model.onLine = NO;
+//                    deviceList[tempIndexPathForDeleteNet.section][tempIndexPathForDeleteNet.row] = model;
+//                    [searchTable reloadRowAtIndexPath:tempIndexPathForDeleteNet withRowAnimation:UITableViewRowAnimationNone];
+//                }
+                [[NSNotificationCenter defaultCenter]postNotificationName:notification_device_online_status_key object:nil];
+            }
         } failed:^(id obj) {
             
         }];
+    }
+}
+#pragma mark --baseCellDelegateMethod
+-(void)cell:(BaseTableViewCell*)cell operation:(MRJCellOperationType)type WithData:(id)data;
+{
+    if (searchTable.hidden == YES) {
+        tempIndexPathForDeleteNet = [deviceListTable indexPathForCell:cell];
     }else
     {
-//        MNGDeviceNetConfigViewController *searchConfigVC = [[MNGDeviceNetConfigViewController alloc]init];
-                MNGSearchDeviceForConfigNetViewController *searchConfigVC = [[MNGSearchDeviceForConfigNetViewController alloc]initWithEnterWay:DeviceConfigEnteryFromDeviceList];
+        tempIndexPathForDeleteNet = [deviceListTable indexPathForCell:cell];
+    }
+    if (type==MRJCellOperationTypeDelete) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"确定删除设备的网络配置?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag = 2000;
+        tempDeviceForDeleteNet = data;
+        [alert show];
+        
+    }else
+    {
+
+        MNGSearchDeviceForConfigNetViewController *searchConfigVC = [[MNGSearchDeviceForConfigNetViewController alloc]initWithEnterWay:DeviceConfigEnteryFromDeviceList];
         searchConfigVC.deviceModel = data;
+        [RACObserve(searchConfigVC,deviceModel.onLine) subscribeNext:^(id x)
+         {
+             [deviceListTable reloadRowAtIndexPath:tempIndexPathForDeleteNet withRowAnimation:UITableViewRowAnimationNone];
+         }];
         [self.navigationController safetyPushViewController:searchConfigVC animated:YES];
     }
     
@@ -277,30 +302,25 @@
         model = searchData[indexPath.row];
     }else
     {
-        if (indexPath.section==0) {
-            model = onLineData[indexPath.row];
-        }else
-        {
-            model = offLineData[indexPath.row];
-        }
+        model = ((NSArray*)((NSArray*)deviceList[indexPath.section]))[indexPath.row];
     }
     searchConfigVC.deviceModel = model;
-    [RACObserve(searchConfigVC, deviceModel) subscribeNext:^(id x) {
-        if (searchTable.isHidden==NO) {
-            searchData[indexPath.row] = x;
-            [searchTable reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-        }else
-        {
-            if (indexPath.section==0) {
-                onLineData[indexPath.row] = x;
-            }else
-            {
-                offLineData[indexPath.row] = x;
-            }
-           [deviceListTable reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-        }
-        
-    }];
+//    [RACObserve(searchConfigVC, deviceModel) subscribeNext:^(id x) {
+//        if (searchTable.isHidden==NO) {
+//            searchData[indexPath.row] = x;
+//            [searchTable reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+//        }else
+//        {
+//            if (indexPath.section==0) {
+//                onLineData[indexPath.row] = x;
+//            }else
+//            {
+//                offLineData[indexPath.row] = x;
+//            }
+//           [deviceListTable reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+//        }
+//        
+//    }];
     [self.navigationController safetyPushViewController:searchConfigVC animated:YES];
 }
 @end

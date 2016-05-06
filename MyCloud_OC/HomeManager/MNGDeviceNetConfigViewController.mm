@@ -185,6 +185,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         }
     }
 }
+#pragma mark --viewDidLoad
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -213,6 +214,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         [self createNetTypeChoiceV];
     }
     [self createIPSettingV];
+    [self createHoldV];
     
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
         [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
@@ -544,47 +546,104 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 }
 -(void)createHoldV
 {
-    holdView = [[UIView alloc]initWithFrame:self.view.bounds];
-    holdView.backgroundColor = [UIColor clearColor];
-    UIView *processView = [[UIView alloc]initWithFrame:CGRectMake(20, (SCREEN_HEIGHT-200)/2, SCREEN_WIDTH-40, 200)];
-//    processView.backgroundColor = RGBColor(114, 114, 114, 1);
+    holdView = [[UIView alloc]init];
+    [self.view addSubview:holdView];
+    holdView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    [holdView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+    
+    
+    UIView *processView = [[UIView alloc]init];
     processView.layer.cornerRadius = 5;
     processView.clipsToBounds = YES;
+    processView.backgroundColor = NavigationTextColor;
+    [holdView addSubview:processView];
+    [processView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(holdView);
+        make.left.mas_equalTo(holdView).offset(LEFT_PADDING);
+        make.right.mas_equalTo(holdView).offset(-LEFT_PADDING);
+    }];
     
-    processNotiLab = [[UILabel alloc]initWithFrame:CGRectMake(20, 30, processView.width-40, 30)];
+    
+    processNotiLab = [[UILabel alloc]init];
     processNotiLab.text = @"提示";
     processNotiLab.font = [MRJSizeManager mrjNavigationFont];
     processNotiLab.textColor = [MRJColorManager mrj_mainThemeColor];
     [processView addSubview:processNotiLab];
     
-    UIView *buttomV = [[UIView alloc]initWithFrame:CGRectMake(20, processNotiLab.height+processNotiLab.y, processView.width-40, processView.height-20-processNotiLab.height-processNotiLab.y)];
+    [processNotiLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(processNotiLab.superview).offset(LEFT_PADDING);
+        make.right.mas_equalTo(processNotiLab.superview).offset(-LEFT_PADDING);
+        make.top.mas_equalTo(0);
+        make.height.mas_equalTo(30);
+    }];
+
+    UIView *sepLineV = [[UIView alloc]init];
+    sepLineV.backgroundColor = [MRJColorManager mrj_mainThemeColor];
+    [processView addSubview:sepLineV];
+    [sepLineV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(sepLineV.superview).offset(LEFT_PADDING);
+        make.right.mas_equalTo(sepLineV.superview).offset(-LEFT_PADDING);
+        make.top.mas_equalTo(processNotiLab.mas_bottom);
+        make.height.mas_equalTo(3);
+    }];
+    
+    UIView *buttomV = [[UIView alloc]init];
     buttomV.backgroundColor = [MRJColorManager mrj_navigationTextColor];
     [processView addSubview:buttomV];
+    [buttomV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(sepLineV.mas_bottom).offset(3);
+        make.bottom.mas_equalTo(buttomV.superview);
+        make.left.mas_equalTo(buttomV.superview);
+        make.right.mas_equalTo(buttomV.superview);
+    }];
+//
     
-    UIView *sepLineV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, buttomV.width, 3)];
-    sepLineV.backgroundColor = [MRJColorManager mrj_mainThemeColor];
-    [buttomV addSubview:sepLineV];
-    notificationLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, buttomV.width, 50)];
-    notificationLab.text = @"";
+    notificationLab = [[UILabel alloc]init];
+    notificationLab.text = @"正在发送网络参数";
     notificationLab.numberOfLines = 0;
     notificationLab.lineBreakMode = NSLineBreakByWordWrapping;
     [buttomV addSubview:notificationLab];
+    [notificationLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(notificationLab.superview);
+        make.left.mas_equalTo(notificationLab.superview).offset(LEFT_PADDING);
+        make.right.mas_equalTo(notificationLab.superview).offset(-LEFT_PADDING);
+    }];
     
-    UIView *processBarBgV = [[UIView alloc]initWithFrame:CGRectMake(0, 60, notificationLab.width, 20)];
+//
+    UIView *processBarBgV = [[UIView alloc]init];
     processBarBgV.layer.cornerRadius = 2;
     [buttomV addSubview:processBarBgV];
+    [processBarBgV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(notificationLab.mas_bottom).offset(3);
+        make.left.mas_equalTo(processBarBgV.superview).offset(LEFT_PADDING);
+        make.right.mas_equalTo(processBarBgV.superview).offset(-LEFT_PADDING);
+        make.height.mas_equalTo(20);
+    }];
+    
     processBarBgV.backgroundColor  = [UIColor grayColor];
-    processBar = [[UIView alloc]initWithFrame:CGRectMake(0, 60, 1, 20)];
+    processBar = [[UIView alloc]init];
     processBar.backgroundColor = [MRJColorManager mrj_mainThemeColor];
     [buttomV addSubview:processBar];
-    
+    [processBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(processBarBgV);
+        make.left.mas_equalTo(processBarBgV);
+        make.width.mas_equalTo(1);
+        make.bottom.mas_equalTo(processBarBgV);
+    }];
+//
     proccessLab = [[UILabel alloc]initWithFrame:CGRectMake(0, buttomV.height-30, processView.width, 30)];
     proccessLab.textAlignment = NSTextAlignmentCenter;
     proccessLab.text = @"0%";
     [buttomV addSubview:proccessLab];
-    
-    
-    [holdView addSubview:processView];
+    [proccessLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(processBarBgV.mas_bottom).offset(4);
+        make.left.mas_equalTo(proccessLab.superview).offset(LEFT_PADDING);
+        make.right.mas_equalTo(proccessLab.superview).offset(-LEFT_PADDING);
+        make.bottom.mas_equalTo(processView.mas_bottom).offset(-4);
+    }];
+    holdView.hidden = YES;
 }
 - (void)fetchSSIDInfo {
     NSArray *ifs = (__bridge_transfer id)CNCopySupportedInterfaces();
@@ -737,11 +796,11 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
                 NSDictionary *dictStep2_more = @{@"cmd":@"0",@"snNumber":deviceSN,@"content":currentSSID};//ssid
                 [messageArr addObject:dictStep2_more];
             }
-            NSDictionary *dictStep3 = @{@"cmd":@"1",@"snNumber":deviceSN,@"content":passTextField.text};//密码
+            NSDictionary *dictStep3 = @{@"cmd":@"1",@"snNumber":deviceSN,@"content":[passTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""]};//密码
             [messageArr addObject:dictStep3];
             if(passTextField.text.length>7)
             {
-                NSDictionary *dictStep3_more = @{@"cmd":@"1",@"snNumber":deviceSN,@"content":passTextField.text};//密码
+                NSDictionary *dictStep3_more = @{@"cmd":@"1",@"snNumber":deviceSN,@"content":[passTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""]};//密码
                 [messageArr addObject:dictStep3_more];
             }
         }
@@ -760,6 +819,11 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             NSDictionary *dnsDict = @{@"cmd":@"6",@"snNumber":deviceSN,@"content":DNSTextField.text};//dns服务器地址
             [messageArr addObject:dnsDict];
         }
+        NSDictionary *domainDict = @{@"cmd":@"a",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@",_serverDomain?_serverDomain:_serverIp]};//授权域名
+        [messageArr addObject:domainDict];
+        NSDictionary *domainDict_more = @{@"cmd":@"a",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@",_serverDomain?_serverDomain:_serverIp]};//长度可能过长,重复添加一条
+        [messageArr addObject:domainDict_more];
+        
         NSDictionary *endDict = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//结束标识
         [messageArr addObject:endDict];
         NSDictionary *endDict_more = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//结束标识
@@ -771,7 +835,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             [messageArr insertObject:dict atIndex:x];
         }
         MRJUserModel *entity = [AppSingleton currentUser];
-        configLogStr = [NSMutableString stringWithFormat:@"AccountEntity:AccountId=%@,username = %@,mobile = %@,email = %@;Device:deviceId = %@,imei = %@,imsi = %@,ssid = %@,softVersion = %@ Client:mobileSystem = %@,mobileType = %@\n",entity.accountId,entity.userName,entity.mobile,entity.email,_deviceModel.deviceId,_deviceModel.imei,_deviceModel.imsi,currentSSID,_deviceModel.softVersion,[UIDevice currentDevice].systemVersion,[UIDevice currentDevice].machineModelName];
+        configLogStr = [NSMutableString stringWithFormat:@"AccountEntity:AccountId=%@,username = %@,mobile = %@,email = %@;Device:deviceId = %@,imei = %@,imsi = %@,ssid = %@,softVersion = %@,deviceModel = %@ Client:mobileSystem = %@,mobileType = %@\n",entity.accountId,entity.userName,entity.mobile,entity.email,_deviceModel.deviceId,_deviceModel.imei,_deviceModel.imsi,currentSSID,_deviceModel.softVersion,_deviceModel.modeName,[UIDevice currentDevice].systemVersion,[UIDevice currentDevice].machineModelName];
         if (confgiNetWorkTypeWifiBtn.selected==YES)//配置的是无线
         {
             if(passTextField.text.length==0)
@@ -822,7 +886,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             NSDictionary *dictStep2_more = @{@"cmd":@"0",@"snNumber":deviceSN,@"content":currentSSID};//ssid
             [messageArr addObject:dictStep2_more];
         }
-        NSDictionary *dictStep3 = @{@"cmd":@"1",@"snNumber":deviceSN,@"content":passTextField.text};//密码
+        NSDictionary *dictStep3 = @{@"cmd":@"1",@"snNumber":deviceSN,@"content":[passTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""]};//密码
         [messageArr addObject:dictStep3];
         if(passTextField.text.length>7)
         {
@@ -844,10 +908,19 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             NSDictionary *dnsDict = @{@"cmd":@"6",@"snNumber":deviceSN,@"content":DNSTextField.text};//dns服务器地址
             [messageArr addObject:dnsDict];
         }
-        NSDictionary *endDict = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//结束标识
+        
+        NSDictionary *domainDict = @{@"cmd":@"a",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@",_serverDomain?_serverDomain:_serverIp]};//授权域名
+        [messageArr addObject:domainDict];
+        NSDictionary *domainDict_more = @{@"cmd":@"a",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@",_serverDomain?_serverDomain:_serverIp]};//长度可能过长,重复添加一条
+        [messageArr addObject:domainDict_more];
+        
+        NSDictionary *endDict = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//授权ip地址
         [messageArr addObject:endDict];
-        NSDictionary *endDict_more = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//结束标识
+        NSDictionary *endDict_more = @{@"cmd":@"8",@"snNumber":deviceSN,@"content":[NSString stringWithFormat:@"%@:%@",_serverIp,_serverPort]};//
         [messageArr addObject:endDict_more];
+        
+        
+        
         
         //加一倍
         for (int x=0; x<messageArr.count; x+=2) {
@@ -855,58 +928,50 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             [messageArr insertObject:dict atIndex:x];
         }
         MRJUserModel *entity = [AppSingleton currentUser];
-            configLogStr = [NSMutableString stringWithFormat:@"AccountEntity:AccountId=%@,username = %@,mobile = %@,email = %@;Device:deviceId = %@,imei = %@,imsi = %@,ssid = %@,softVersion = %@ Client:mobileSystem = %@,mobileType = %@\n",entity.accountId,entity.userName,entity.mobile,entity.email,_deviceModel.deviceId,_deviceModel.imei,_deviceModel.imsi,currentSSID,_deviceModel.softVersion,[UIDevice currentDevice].systemVersion,[UIDevice currentDevice].machineModelName];
-        if (confgiNetWorkTypeWifiBtn.selected==YES)//配置的是无线
+            configLogStr = [NSMutableString stringWithFormat:@"AccountEntity:AccountId=%@,username = %@,mobile = %@,email = %@;Device:deviceId = %@,imei = %@,imsi = %@,ssid = %@,softVersion = %@,deviceModel = %@ Client:mobileSystem = %@,mobileType = %@\n",entity.accountId,entity.userName,entity.mobile,entity.email,_deviceModel.deviceId,_deviceModel.imei,_deviceModel.imsi,currentSSID,_deviceModel.softVersion,_deviceModel.modeName,[UIDevice currentDevice].systemVersion,[UIDevice currentDevice].machineModelName];
+        if(passTextField.text.length==0)
         {
-            if(passTextField.text.length==0)
-            {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"【Wi-Fi】密码确定为空吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-                alert.tag  = 100;
-                [alert show];
-                return;
-            }
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"【Wi-Fi】密码确定为空吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag  = 100;
+            [alert show];
+            return;
         }
-        
-        [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
-        [self.view.window addSubview:holdView];
         notificationLab.text =@"正在发送网络参数";
     }
     [self startConfig];
-    
-//
-//
-    
-    
-
-//
     
     
 }
 -(void)startConfig
 {
-    NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@""};
-    [HomeHttpHandler home_checkDeviceOnlineStatus:param preExecute:^{
-        
-    } success:^(id obj) {
-        if ([obj[request_status_key] integerValue]==0) {
-            [globalTimer invalidate];
-            globalTimer = nil;
-            globalTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(globalSendMessage) userInfo:nil repeats:YES];
-            [allConsumeTimer invalidate];
-            allConsumeTimer = nil;
-            allConsumeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeUI) userInfo:nil repeats:YES];
-            [allConsumeTimer fire];
-        }else
-        {
-            holdView.hidden = YES;
-            self.view.userInteractionEnabled = YES;
-            //            [AppUtils showErrorMessage:obj2[@"msg"]];
-        }
-    } failed:^(id obj) {
-        holdView.hidden = YES;
-        self.view.userInteractionEnabled = YES;
-        //        [AppUtils showErrorMessage:obj];
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    globalTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(globalSendMessage) userInfo:nil repeats:YES];
+    [allConsumeTimer invalidate];
+    allConsumeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeUI) userInfo:nil repeats:YES];
+    [allConsumeTimer fire];
+    holdView.hidden = NO;
+    [holdView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
+    self.view.userInteractionEnabled = NO;
+    self.navigationController.navigationBar.userInteractionEnabled = NO;
+    
+}
+#pragma mark --stopConfig
+-(void)stopConfig
+{
+    [globalTimer invalidate];
+    globalTimer = nil;
+    [checkOnline invalidate];
+    checkOnline = nil;
+    [allConsumeTimer invalidate];
+    allConsumeTimer = nil;
+    checkTotalTime = 0;
+    isCanAssignTask = YES;
+    holdView.hidden = YES;
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    self.view.userInteractionEnabled = YES;
+    self.navigationController.navigationBar.userInteractionEnabled = YES;
 }
 #pragma mark --check staticInput
 -(BOOL)isCheckStaticConfigInputOk
@@ -961,7 +1026,6 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 }
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSLog(@"viewVillAppear");
     [recog start];
     [super viewWillAppear:animated];
 }
@@ -985,6 +1049,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
      [super viewWillDisappear:animated];
     [recog stop];
     [player stop];
+    [self stopConfig];
     recog = nil;
     player = nil;
    
@@ -1013,7 +1078,12 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             
             switch ([dict[@"cmd"] integerValue]) {
                 case 0:
-                    cmdType = @"Wi-Fi ssid";
+                    if ([dict[@"cmd"] isEqualToString:@"a"]) {
+                        cmdType = @"auth 域名命令";
+                    }else
+                    {
+                        cmdType =@"Wi-Fi ssid";
+                    }
                     break;
                 case 1:
                     cmdType = @"Wi-Fi password";
@@ -1055,13 +1125,14 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
                     cmdType = @"app 搜索命令";
                     break;
                 case 8:
-                    cmdType = @"auth 登录命令";
+                    cmdType = @"auth ip端口登录命令";
                     break;
                 default:
                     break;
             }
             [player playString:str playCount:1 muteInterval:0];
-            NSString *log = [NSString stringWithFormat:@"第%ld秒发送第%ld条命令发送内容为%@",(long)checkTotalTime,(long)index+1,cmdType];
+            NSString *log = [NSString stringWithFormat:@"第%ld秒发送第%ld条命令发送命令为%@,内容为%@",(long)checkTotalTime,(long)index+1,cmdType,str];
+            NSLog(@"%@",log);
             [configLogStr appendString:[NSString stringWithFormat:@"%@\n",log]];
             isCanAssignTask = YES;
             index++;
@@ -1090,7 +1161,13 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             
             switch ([dict[@"cmd"] integerValue]) {
                 case 0:
-                    cmdType =@"Wi-Fi ssid";
+                    if ([dict[@"cmd"] isEqualToString:@"a"]) {
+                        cmdType = @"auth 域名命令";
+                    }else
+                    {
+                        cmdType =@"Wi-Fi ssid";
+                    }
+                    
                     break;
                 case 1:
                     cmdType = @"Wi-Fi password";
@@ -1098,7 +1175,6 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
                 case 2:
                 {
                     cmdType =[NSString stringWithFormat:@"网络类型%@",[[str substringFromIndex:str.length-1] integerValue]==0?@"无线静态":@"无线DHCP"];
-                    
                 }
                     break;
                 case 3:
@@ -1120,9 +1196,10 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
                     cmdType = @"auth 登录命令";
                     break;
                 default:
+                    
                     break;
             }
-            NSString *log = [NSString stringWithFormat:@"第%ld秒发送第%ld条命令发送内容为%@",(long)checkTotalTime,(long)index+1,cmdType];
+            NSString *log = [NSString stringWithFormat:@"第%ld秒发送第%ld条命令发送命令为%@,内容为%@",(long)checkTotalTime,(long)index+1,cmdType,str];
             [configLogStr appendString:[NSString stringWithFormat:@"%@\n",log]];
             NSLog(@"%@",log);
             ++index;
@@ -1144,47 +1221,34 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     proccessLab.text = [NSString stringWithFormat:@"%d %%",(int)(((float)checkTotalTime/(float)totalTimer)*100.f)>99?99:(int)(((float)checkTotalTime/(float)totalTimer)*100.f)];
     proccessLab.textAlignment = NSTextAlignmentCenter;
 }
+
 -(void)checkOnline
 {
-    if (totalTimer-checkTotalTime>10) {
+    if (totalTimer-checkTotalTime>10)
+    {
         NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@""};
         [HomeHttpHandler home_checkDeviceOnlineStatus:param preExecute:^{
             
         } success:^(id obj) {
-            DeviceModel *model = obj;
-            if (model.onLine) {
+            if([obj[request_data_key][@"online"] boolValue]==YES)
+            {
+                [[NSNotificationCenter defaultCenter]postNotificationName:notification_device_online_status_key object:nil];
                 [player stop];
-                [allConsumeTimer invalidate];
-                allConsumeTimer = nil;
-                [checkOnline invalidate];
-                checkOnline = nil;
-                [globalTimer invalidate];
-                globalTimer = nil;
-                self.view.userInteractionEnabled = YES;
-                [holdView removeFromSuperview];
-                
+                [self stopConfig];
                 NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"log":configLogStr?configLogStr:@"",@"state":@"1"};
                 [HomeHttpHandler home_uploadConfigLog:param preExecute:nil success:nil failed:nil];
-
-                _deviceModel = obj;
-                
                 [self dealLogic];
+            }else
+            {
+                
             }
+            
         } failed:^(id obj) {
             
         }];
-        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
-    }else
+    }else//配置超时
     {
-        [globalTimer invalidate];
-        globalTimer = nil;
-        [checkOnline invalidate];
-        checkOnline = nil;
-        [allConsumeTimer invalidate];
-        allConsumeTimer = nil;
-        checkTotalTime = 0;
-        isCanAssignTask = YES;
-        [holdView removeFromSuperview];
+        [self stopConfig];
         NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"log":configLogStr?configLogStr:@"",@"state":@"0"};
         [HomeHttpHandler home_uploadConfigLog:param preExecute:nil success:nil failed:nil];
         
@@ -1194,8 +1258,6 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         processBar.width = (checkTotalTime/totalTimer)*processNotiLab.width>=processNotiLab.width?processNotiLab.width:(checkTotalTime/totalTimer)*processNotiLab.width;
         proccessLab.text = [NSString stringWithFormat:@"%d %%",(int)(((float)checkTotalTime/(float)totalTimer)*100.f)>99?99:(int)(((float)checkTotalTime/(float)totalTimer)*100.f)];
         proccessLab.textAlignment = NSTextAlignmentCenter;
-        self.view.userInteractionEnabled = YES;
-        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
     }
     
 }
@@ -1205,10 +1267,6 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"配置设备网络成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
     alert.tag = 200;
     [alert show];
-    
-    self.view.userInteractionEnabled = YES;
-    
-   
 }
 - (void) onRecognizerStart
 {
@@ -1235,12 +1293,12 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 		{
 			vr_decodeString(_result, _data, _dataLen, s, sizeof(s));
 //			printf("string:%s\n", s);
-            msg = [NSString stringWithFormat:@"recognized string:%s", s];
+//            msg = [NSString stringWithFormat:@"recognized string:%s", s];
 		}
 		else
 		{
 //			printf("------------------recognized data:%s\n", _data);
-            msg = [NSString stringWithFormat:@"recognized data:%s", _data];
+//            msg = [NSString stringWithFormat:@"recognized data:%s", _data];
 		}
 	}
 	else

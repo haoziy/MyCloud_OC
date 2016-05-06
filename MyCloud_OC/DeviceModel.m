@@ -77,7 +77,7 @@
         case DeviceHardModelM4:
             return @"M4";
         default:
-            return @"";
+            return @"Mx";
     }
 }
 -(NSString*)installHeight

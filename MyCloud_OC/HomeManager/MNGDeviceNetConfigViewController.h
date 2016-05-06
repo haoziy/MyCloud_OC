@@ -15,7 +15,7 @@
 
 @property(nonatomic,copy)NSString *serverIp;
 @property(nonatomic,copy)NSString *serverPort;
-
+@property(nonatomic,copy)NSString *serverDomain;
 @property(nonatomic,assign)DeviceConfigEnteryWay enterWay;
 - (void) onRecognizerStart;
 - (void) onRecognizerEnd:(int)_result data:(char *)_data dataLen:(int)_dataLen;

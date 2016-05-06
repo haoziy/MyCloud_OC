@@ -118,16 +118,25 @@ NSString * const request_data_key = @"data";//http 请求数据字段
                 
                 if (!error) {
                     if ([NSJSONSerialization isValidJSONObject:responseObject]) {
-                        succeed(responseObject);
+                        if (succeed) {
+                            succeed(responseObject);
+                        }
+                        
                     }else
                     {
-                        id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&error];
-                        succeed(result);
+                        if (succeed) {
+                            id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&error];
+                            succeed(result);
+                        }
+                        
                     }
                     
                 } else {
                     [DeBugLog debugLog:[[NSString stringWithUTF8String:__FILE__] lastPathComponent] line:__LINE__ otherInfo:@"apiName:%@\n%@",url,error.localizedDescription];
-                    failed(error);
+                    if (error) {
+                        failed(error);
+                    }
+                    
                 }
             }] resume];
         }

@@ -17,7 +17,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "HomeResourceManager.h"
 #import "HomeStringKeyContentValueManager.h"
-
+#import "HomeHttpHandler.h"
 static int baseFrequence = 4000;
 @interface MNGSearchDeviceForConfigNetViewController ()<MNGSearchDeviceSuccessDelegate>
 {
@@ -36,8 +36,10 @@ static int baseFrequence = 4000;
     MNGSearchDeviceSuccessView *successV;//成功提示
     UIView *failV;//失败提示
     
+    NSDictionary *authParam;//请求ip和port的参数
     NSString *ipAddress;//为设备配置网络的ip
     NSString *port;//为设备配置网络的端口
+    NSString *domain;//如果是使用域名;域名
     
     CALayer *waveLayer;//动画层
     NSTimer *animationTimer;//动画定时器
@@ -74,18 +76,26 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
     [super viewDidAppear:animated];
 
 }
+-(void)getAuthInfo
+{
+    authParam = @{@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
+    
+    [HomeHttpHandler home_deviceAuth:authParam preExecute:{
+        
+    }success:^(id obj) {
+        if ([obj[request_status_key] integerValue]==0) {
+            ipAddress = obj[request_data_key][@"ip"];
+            port = obj[request_data_key][@"port"];
+            domain = obj[request_data_key][@"url"];
+        }
+    } failed:^(id obj) {
+        
+    }];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [DeviceManageHandler deviceGetServerIpAndPortByImei:_deviceModel.imei Success:^(id obj) {
-//        if ([obj isKindOfClass:[NSDictionary class]]) {
-//            ipAddress = obj[@"ip"];
-//            port = obj[@"port"];
-//        }
-//        
-//    } Failed:^(id obj) {
-//        
-//    }];
+    [self getAuthInfo];
 
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(-20, 20,60, 40)];
@@ -380,89 +390,29 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
 }
 -(void)searchSuccessForNextOperation:(UIView *)view;
 {
-    [successV removeFromSuperview];
-    [view removeFromSuperview];
     [self nextOperation:nil];
 }
 -(void)nextOperation:(id)sender
 {
-//    if(!ipAddress||!port)
-//    {
-////        [MRJCheckUtils showProgressMessageWithNotAllowTouch:@""];
-////        [DeviceManageHandler deviceGetServerIpAndPortByImei:_deviceModel.imei Success:^(id obj) {
-////            if([obj isKindOfClass:[NSDictionary class]])
-////            {
-////                [AppUtils dismissHUD];
-////                ipAddress = obj[@"ip"];
-////                port = obj[@"port"];
-////                if (ipAddress&&port) {
-////                    if ([AFNetworkReachabilityManager sharedManager].reachableViaWiFi) {
-////                        MNGDeviceNetConfigViewController *configVC = [[MNGDeviceNetConfigViewController alloc]init];
-////                        configVC.serverIp = ipAddress;
-////                        configVC.serverPort  = port;
-////                        configVC.enterWay = self.enterWay;
-////                        configVC.deviceModel = _deviceModel;
-////                        [self.navigationController safetyPushViewController:configVC animated:YES];
-////                    }
-////                    else
-////                    {
-////                        [AppUtils showErrorMessage:@"请将手机网络切换至设备所连接的Wi-Fi网络"];
-////                        searchBtn.hidden = NO;
-////                        searchBtn.selected = NO;
-////                        searchBtn.layer.borderColor = [MainTextColor CGColor];
-////                    }
-////                }else
-////                {
-////                    
-////                }
-////            }else
-////            {
-////              [AppUtils showErrorMessage:obj];
-////            }
-////            
-////        } Failed:^(id obj) {
-////            [AppUtils showErrorMessage:obj];
-////        }];
-//    }else
-//    {
-//        if ([AFNetworkReachabilityManager sharedManager].reachableViaWiFi) {
-//            MNGDeviceNetConfigViewController *configVC = [[MNGDeviceNetConfigViewController alloc]init];
-//            configVC.serverIp = ipAddress;
-//            configVC.serverPort = port;
-//            configVC.enterWay = self.enterWay;
-//            configVC.deviceModel = _deviceModel;
-//            [self.navigationController safetyPushViewController:configVC animated:YES];
-//        }
-//        else
-//        {
-//            [MRJCheckUtils showErrorMessage:@"请将手机切换至即将为设备所连接的WI-FI网络"];
-//            searchBtn.hidden = NO;
-//            searchBtn.selected = NO;
-//            searchBtn.layer.borderColor = [[MRJColorManager mrj_mainTextColor] CGColor];
-//        }
-//    }
-//    if ([AFNetworkReachabilityManager sharedManager].reachableViaWiFi) {
-//        MNGDeviceNetConfigViewController *configVC = [[MNGDeviceNetConfigViewController alloc]init];
-//        configVC.serverIp = ipAddress;
-//        configVC.serverPort = port;
-//        configVC.enterWay = self.enterWay;
-//        configVC.deviceModel = _deviceModel;
-//        [self.navigationController safetyPushViewController:configVC animated:YES];
-//    }
-//    else
-//    {
-//        [MRJCheckUtils showErrorMessage:@"请将手机切换至即将为设备所连接的WI-FI网络"];
-//        searchBtn.hidden = NO;
-//        searchBtn.selected = NO;
-//        searchBtn.layer.borderColor = [[MRJColorManager mrj_mainTextColor] CGColor];
-//    }
+    if((ipAddress&&port)||(domain&&port))
+    {
+        [successV removeFromSuperview];
+        MNGDeviceNetConfigViewController *configVC = [[MNGDeviceNetConfigViewController alloc]init];
+        configVC.serverIp = ipAddress;
+        configVC.serverPort = port;
+        configVC.enterWay = self.enterWay;
+        configVC.deviceModel = _deviceModel;
+        [RACObserve(configVC,deviceModel.onLine) subscribeNext:^(id x)
+         {
+//             self.deviceModel.onLine = [x boolValue];
+         }];
+        [self.navigationController safetyPushViewController:configVC animated:YES];
+    }else
+    {
+        [self getAuthInfo];
+    }
+
     
-    MNGDeviceNetConfigViewController *configVC = [[MNGDeviceNetConfigViewController alloc]init];
-    configVC.serverIp = ipAddress;
-    configVC.serverPort = port;
-    configVC.enterWay = self.enterWay;
-    configVC.deviceModel = _deviceModel;
-    [self.navigationController safetyPushViewController:configVC animated:YES];
 }
 - (void) viewWillAppear:(BOOL)animated
 {

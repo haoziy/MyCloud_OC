@@ -14,6 +14,7 @@
 {
     self = [super init];
     if (self) {
+        self.backgroundColor = [MRJColorManager mrj_mainBackgroundColor];
         self.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.rowHeight = INPUT_HEIGHT;

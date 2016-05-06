@@ -28,6 +28,7 @@
         
         _mainTextLabel = [[UILabel alloc]init];
         _secondTextLabel = [[UILabel alloc]init];
+         _secondTextLabel.textColor = SecondaryTextColor;
         [self.contentView addSubview:_mainTextLabel];
         [self.contentView addSubview:_secondTextLabel];
     }
@@ -38,8 +39,8 @@
     CGContextSetStrokeColorWithColor(context, [MRJColorManager mrj_separatrixColor].CGColor);
     CGContextSetLineWidth(context, CELL_SPERITX_HEIGHT*2);
     if (_isNeedTopSeprator) {
-        CGContextMoveToPoint(context, rect.origin.x, rect.origin.y);
-        CGContextAddLineToPoint(context, rect.size.width, rect.origin.y);
+        CGContextMoveToPoint(context, 0, 0);
+        CGContextAddLineToPoint(context, rect.size.width, 0);
         CGContextStrokePath(context);
     }
 
@@ -59,7 +60,7 @@
     }];
     
     _secondTextLabel.text = detailText;
-    _secondTextLabel.textColor = SecondaryTextColor;
+   
     
     if (detailText.length>0) {
         [_secondTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {

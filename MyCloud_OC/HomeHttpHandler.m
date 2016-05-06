@@ -17,7 +17,7 @@ ApiNameMap api_home_catch_current_image_cmd = @"device/grap";//实时抓图命�
 ApiNameMap api_home_get_current_image_url = @"device/img";//获取图像的url;
 ApiNameMap api_home_check_device_online_status = @"device/state";//查询在线状态
 ApiNameMap api_home_upload_config_log = @"device/log";//上传网络配置日志
-APiNameMap api_home_device_auth = @"device/auth";//获取授权地址
+ApiNameMap api_home_device_auth = @"device/auth";//获取授权地址
 NSString* const key_offLineDeviceKey = @"offline";//离线设备key
 NSString* const key_onLineDeviceKey = @"online";//在线线设备key
 
@@ -50,7 +50,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
                 }
             }
         }
-        NSDictionary* parseData = @{@"offline":offlineArr,@"online":onlineArr};
+        NSArray* parseData = @[onlineArr,offlineArr];
         succes(parseData);
         [MRJCheckUtils dismissHUD];
     } failed:^(id obj) {
@@ -87,7 +87,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
     } succeed:^(id obj) {
         succes(obj);
     } failed:^(id obj) {
-        
+        failed(obj);
     }];
 }
 +(void)home_catchImageURL:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
@@ -125,9 +125,15 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
     [self baseRequestAFNetWorkApi:api_home_upload_config_log method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
         
     } succeed:^(id obj) {
-        succes(obj);
+        if(succes)
+        {
+            succes(obj);
+        }
     } failed:^(id obj) {
-        failed(obj);
+        if (failed) {
+           failed(obj); 
+        }
+        
     }];
 }
 +(void)home_deviceAuth:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;

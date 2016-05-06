@@ -23,7 +23,7 @@ typedef enum
     VoicePlayer *sendPlayer;
 }
 
-@property(nonatomic,retain)DeviceModel *deviceModel;
+@property(nonatomic,strong)DeviceModel *deviceModel;
 @property(nonatomic,readonly,assign)DeviceConfigEnteryWay enterWay;
 -(id)initWithEnterWay:(DeviceConfigEnteryWay)enterWay;
 @end

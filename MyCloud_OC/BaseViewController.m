@@ -52,6 +52,7 @@ NSString* const indentifier_cellIdentifier = @"cell";
 */
 -(void)dealloc
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [DeBugLog debugLog:NSStringFromClass([self class]) line:__LINE__ otherInfo:@"release"];
 }
 @end
