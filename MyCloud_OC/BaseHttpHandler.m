@@ -13,6 +13,10 @@
 #import "AppSingleton.h"
 NSString * const request_status_key = @"status";//http请求keystatus
 NSString * const request_data_key = @"data";//http 请求数据字段
+NSString * const request_progress_loading_message = @"loading....";//http请求loading提示语
+NSString * const request_network_notwork_notice_message = @"网络不给力";
+NSString * const request_operation_success_notice_message = @"操作成功";
+NSString * const request_operation_failed_notice_message = @"操作失败";
 @implementation BaseHttpHandler
 
 + (NSString *)getNetWorkStates{
@@ -80,12 +84,17 @@ NSString * const request_data_key = @"data";//http 请求数据字段
 
 +(void)baseRequestAFNetWorkApi:(ApiNameMap)apiName method:(HttpRequestType)method andHttpHeader:(NSDictionary *)header parameters:(id)parameters prepareExecute:(MRJPrepareExcute)prepare succeed:(MRJSuccessBlock)succeed failed:(MRJFailedBlock)failed;
 {
+    prepare();
     NSString *url = [self urlForApiName:apiName];
     AFHTTPSessionManager  * manager = [AFHTTPSessionManager manager];
     //请求参数为json数据
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     //返回的数据格式为json 数据
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    AFHTTPResponseSerializer *jsonSerial = [AFJSONResponseSerializer serializer];
+    ((AFJSONResponseSerializer*)jsonSerial).removesKeysWithNullValues = YES;
+    manager.responseSerializer = jsonSerial;
+    
+   
     
     switch (method) {
         case HttpRequestGet:
@@ -136,6 +145,7 @@ NSString * const request_data_key = @"data";//http 请求数据字段
                     if (error) {
                         failed(error);
                     }
+                    
                     
                 }
             }] resume];

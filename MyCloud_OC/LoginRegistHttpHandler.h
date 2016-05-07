@@ -13,6 +13,8 @@
  *
  */
 extern ApiNameMap api_loginRegist_heart_beat;//切换云心跳测试接口
+
+extern NSString * const request_loginRegist_login_noticeMessage;//提示语
 /**
  *  登录接口
  */

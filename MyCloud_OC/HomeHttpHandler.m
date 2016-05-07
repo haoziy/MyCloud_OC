@@ -35,7 +35,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
 +(void)getDeviceListParams:(NSDictionary*)parm preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkApi:api_home_get_device_list method:HttpRequestPost andHttpHeader:nil parameters:parm prepareExecute:^{
-        [MRJCheckUtils showProgressMessage:@"loading..."];
+        [MRJAppUtils showProgressMessage:request_progress_loading_message];
     } succeed:^(id obj) {
         NSMutableArray *onlineArr = [[NSMutableArray alloc]init];
         NSMutableArray *offlineArr = [[NSMutableArray alloc]init];
@@ -52,72 +52,130 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
         }
         NSArray* parseData = @[onlineArr,offlineArr];
         succes(parseData);
-        [MRJCheckUtils dismissHUD];
+        [MRJAppUtils dismissHUD];
     } failed:^(id obj) {
-         [MRJCheckUtils dismissHUD];
+        if (failed) {
+            failed(obj);
+        }
+         [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
     }];
 }
 +(void)getDeviceDetail:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)success failed:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkApi:api_home_get_device_detail method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        
+        [MRJAppUtils showProgressMessage:request_progress_loading_message];
     } succeed:^(id obj) {
         if ([obj[request_status_key] integerValue]==0) {
             DeviceModel *model = [DeviceModel modelWithJSON:obj[request_data_key]];
             success(model);
+        }else
+        {
+            
         }
+        [MRJAppUtils dismissHUD];
     } failed:^(id obj) {
-        
+        if (failed) {
+            failed(obj);
+        }
     }];
 }
 +(void)home_saveDeviceParams:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkApi:api_home_save_device_params method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        
-    } succeed:^(id obj) {
-        succes(obj);
+        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+    }  succeed:^(id obj) {
+        if ([obj[request_status_key] integerValue]==0)
+        {
+            if (succes) {
+                succes(obj);
+            }
+            [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
+        }else
+        {
+            [MRJAppUtils showErrorMessage:request_operation_failed_notice_message];
+        }
     } failed:^(id obj) {
-        failed(obj);
+        if (failed) {
+            failed(obj);
+        }
     }];
 }
 +(void)home_deleteNetWorkCMD:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkApi:api_home_delete_device_net_cmd method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        
-    } succeed:^(id obj) {
-        succes(obj);
+        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+    }  succeed:^(id obj) {
+        if ([obj[request_status_key] integerValue]==0)
+        {
+            if (succes) {
+                succes(obj);
+            }
+            [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
+        }else
+        {
+            [MRJAppUtils showErrorMessage:request_operation_failed_notice_message];
+        }
     } failed:^(id obj) {
-        failed(obj);
+        if (failed) {
+            failed(obj);
+        }
     }];
 }
 +(void)home_catchImageURL:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
 {
     [self baseRequestAFNetWorkApi:api_home_get_current_image_url method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        
-    } succeed:^(id obj) {
-        
+        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+    }  succeed:^(id obj) {
+        if (succes) {
+            succes(obj);
+        }
     } failed:^(id obj) {
         
+        if (failed) {
+            failed(obj);
+        }
     }];
 }
 +(void)home_rebootDeviceCMD:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
 {
     [self baseRequestAFNetWorkApi:api_home_reboot_device_cmd method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        
-    } succeed:^(id obj) {
-        
+        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+    }  succeed:^(id obj) {
+        if ([obj[request_status_key] integerValue]==0)
+        {
+            if (succes) {
+                succes(obj);
+            }
+            [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
+        }else
+        {
+            [MRJAppUtils showErrorMessage:request_operation_failed_notice_message];
+        }
     } failed:^(id obj) {
-        
+        if (failed) {
+            failed(obj);
+        }
     }];
 }
 +(void)home_captureImageCMD:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
 {
     [self baseRequestAFNetWorkApi:api_home_catch_current_image_cmd method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        
-    } succeed:^(id obj) {
-        
+        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+    }  succeed:^(id obj) {
+        if ([obj[request_status_key] integerValue]==0)
+        {
+            if (succes) {
+                succes(obj);
+            }
+            [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
+        }else
+        {
+            [MRJAppUtils showErrorMessage:request_operation_failed_notice_message];
+        }
     } failed:^(id obj) {
-        
+        if (failed) {
+            failed(obj);
+        }
     }];
 }
 +(void)home_uploadConfigLog:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;
@@ -139,11 +197,16 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
 +(void)home_deviceAuth:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkApi:api_home_device_auth method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        
-    } succeed:^(id obj) {
-        succes(obj);
+        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+    }  succeed:^(id obj) {
+        if (succes) {
+            succes(obj);
+        }
+        [MRJAppUtils dismissHUD];
     } failed:^(id obj) {
-        failed(obj);
+        if (failed) {
+            failed(obj);
+        }
     }];
 }
 @end

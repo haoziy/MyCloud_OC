@@ -32,6 +32,7 @@
     {
         vc = [[MRJLoginViewController alloc]init];
     }
+    [self app_hudSetting];
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

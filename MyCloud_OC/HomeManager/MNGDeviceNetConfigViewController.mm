@@ -230,14 +230,15 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
                 {
                     ipSetttingV.hidden = YES;
                     passTextField.hidden = YES;
+                    staticInputView.hidden = YES;
                 }
                 
             }else
             {
                 ipSetttingV.hidden = YES;
                 passTextField.hidden = YES;
+                staticInputView.hidden = YES;
             }
-            
             networkReachableWayLab.text = orginStr;
             [networkReachableWayLab setNeedsLayout];
         }];
@@ -674,7 +675,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 {
     if (note.object==ipAddressTextField) {
         if (subMarkTextField.text.length==0) {
-            if ([MRJCheckUtils isValidatIP:ipAddressTextField.text]) {
+            if ([MRJAppUtils isValidatIP:ipAddressTextField.text]) {
                 subMarkTextField.text = @"255.255.255.0";
                 NSString *ip = ipAddressTextField.text;
                 NSMutableString *reverIp = [[NSMutableString alloc]init];//反转后的ip地址
@@ -701,9 +702,15 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     confgiNetWorkTypeLanBtn.selected  = !confgiNetWorkTypeLanBtn.selected;
     typeWifiBtn.selected = !typeWifiBtn.selected;
     typeLanBtn.selected = !typeLanBtn.selected;
+    
+    staticBtn.selected = NO;
+    staticLab.selected = NO;
+    dhcpBtn.selected = YES;
+    dhcpLab.selected = YES;
+    staticInputView.hidden  = YES;
     if (typeLanBtn.selected==YES) {
         wifiInputV.hidden = YES;
-        
+        ipSetttingV.hidden = NO;
         [ipSetttingV mas_remakeConstraints:^(MASConstraintMaker *make) {
             if (configNetTypeContainer) {
                 make.top.mas_equalTo(configNetTypeContainer.mas_bottom).offset(0);
@@ -738,7 +745,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             make.right.mas_equalTo(0);
             make.centerX.mas_equalTo(ipSetttingV.superview.mas_centerX);
         }];
-    }
+    } 
     
 }
 #pragma mark --beginCofig
@@ -976,20 +983,20 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 #pragma mark --check staticInput
 -(BOOL)isCheckStaticConfigInputOk
 {
-    if (![MRJCheckUtils isValidatIP:ipAddressTextField.text]) {
-        [MRJCheckUtils showErrorMessage:@"请输入合法的IP地址"];
+    if (![MRJAppUtils isValidatIP:ipAddressTextField.text]) {
+        [MRJAppUtils showErrorMessage:@"请输入合法的IP地址"];
         return NO;
     }
-    if (![MRJCheckUtils isValidatIP:subMarkTextField.text]) {
-        [MRJCheckUtils showErrorMessage:@"请输入合法的子网掩码"];
+    if (![MRJAppUtils isValidatIP:subMarkTextField.text]) {
+        [MRJAppUtils showErrorMessage:@"请输入合法的子网掩码"];
         return NO;
     }
-    if (![MRJCheckUtils isValidatIP:gateWayTextField.text]) {
-        [MRJCheckUtils showErrorMessage:@"请输入合法的网关地址"];
+    if (![MRJAppUtils isValidatIP:gateWayTextField.text]) {
+        [MRJAppUtils showErrorMessage:@"请输入合法的网关地址"];
         return NO;
     }
-    if (![MRJCheckUtils isValidatIP:DNSTextField.text]) {
-        [MRJCheckUtils showErrorMessage:@"请输入合法的DNS地址"];
+    if (![MRJAppUtils isValidatIP:DNSTextField.text]) {
+        [MRJAppUtils showErrorMessage:@"请输入合法的DNS地址"];
         return NO;
     }
     return YES;
@@ -1006,16 +1013,16 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         }
     }
     if (x>7) {
-        [MRJCheckUtils showAlertMessage:@"设备暂不支持这么多中文的Wi-Fi网络"];
+        [MRJAppUtils showAlertMessage:@"设备暂不支持这么多中文的Wi-Fi网络"];
         return NO;
     }
     NSRange range = [currentSSID rangeOfString:@"&"];
     if (range.length>0) {
-        [MRJCheckUtils showAlertMessage:@"设备暂不支持特殊字符&的Wi-Fi网络"];
+        [MRJAppUtils showAlertMessage:@"设备暂不支持特殊字符&的Wi-Fi网络"];
         return NO;
     }
     if ([currentSSID stringByReplacingOccurrencesOfString:@" " withString:@""].length<1) {
-        [MRJCheckUtils showErrorMessage:@"请将手机网络切换至设备所连接的Wi-Fi网络"];
+        [MRJAppUtils showErrorMessage:@"请将手机网络切换至设备所连接的Wi-Fi网络"];
         return NO;
     }
     return YES;

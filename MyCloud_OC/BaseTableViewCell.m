@@ -8,6 +8,14 @@
 
 #import "BaseTableViewCell.h"
 
+@interface BaseTableViewCell()
+{
+    UIView *bottomLine;
+    UIView *topLine;
+}
+
+@end
+
 @implementation BaseTableViewCell
 
 - (void)awakeFromNib {
@@ -31,25 +39,24 @@
          _secondTextLabel.textColor = SecondaryTextColor;
         [self.contentView addSubview:_mainTextLabel];
         [self.contentView addSubview:_secondTextLabel];
+        bottomLine = [[UIView alloc]init];
+        bottomLine.backgroundColor = SeparatrixColor;
+        
+        
+        [self.contentView addSubview:bottomLine];
+        [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.contentView).offset(0);
+            make.height.mas_equalTo(CELL_SPERITX_HEIGHT);
+            make.left.mas_equalTo(self.contentView);
+            make.right.mas_equalTo(self.contentView).offset(0);
+        }];
+        topLine = [[UIView alloc]init];
+        topLine.backgroundColor = SeparatrixColor;
+        
+        
     }
     return self;
 }
-- (void)drawRect:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetStrokeColorWithColor(context, [MRJColorManager mrj_separatrixColor].CGColor);
-    CGContextSetLineWidth(context, CELL_SPERITX_HEIGHT*2);
-    if (_isNeedTopSeprator) {
-        CGContextMoveToPoint(context, 0, 0);
-        CGContextAddLineToPoint(context, rect.size.width, 0);
-        CGContextStrokePath(context);
-    }
-
-   
-    CGContextMoveToPoint(context, rect.origin.x, rect.origin.y+rect.size.height);
-    CGContextAddLineToPoint(context, rect.size.width, rect.origin.y+rect.size.height);
-    CGContextStrokePath(context);
-}
-
 -(void)configMainTableViewCellStyleWithText:(NSString*)mainText andDetailText:(NSString*)detailText cellSize:(CGSize)cellSize disclosureIndicator:(BOOL)disclosureIndicator selectHighlight:(BOOL)selectedHighlight;
 {
     [_indicatorImgV removeFromSuperview];
@@ -86,5 +93,19 @@
     }
      
 }
-
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    [topLine removeFromSuperview];
+    
+    if (_isNeedTopSeprator) {
+        [self.contentView addSubview:topLine];
+        [topLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView);
+            make.height.mas_equalTo(CELL_SPERITX_HEIGHT);
+            make.left.mas_equalTo(self.contentView);
+            make.right.mas_equalTo(self.contentView).offset(0);
+        }];
+    }
+}
 @end

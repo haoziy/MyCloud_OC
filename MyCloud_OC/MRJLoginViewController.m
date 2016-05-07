@@ -114,7 +114,6 @@
 
     [loginSignal subscribeNext:^(id x) {
         [LoginRegistHttpHandler login_loginWithParams:@{@"username":loginAccountTF.text, @"password":loginPassTF.text,@"identify":@"0"} preExecute:^{
-            //
         } successBlock:^(id obj) {
             if([obj isKindOfClass:[NSDictionary class]])
             {

@@ -43,28 +43,29 @@
             make.top.equalTo(self.contentView.mas_centerY).offset(5);
         }];
         
-        if (deviceModel.hardModel==DeviceHardModelNone||deviceModel.hardModel==
-            DeviceHardModelM1) {
-            [_operationBtn removeFromSuperview];
+//        if (deviceModel.hardModel==DeviceHardModelNone||deviceModel.hardModel==
+//            DeviceHardModelM1) {
+//            [_operationBtn removeFromSuperview];
+//        }else
+//        {
+//            
+//        }
+        [self.contentView addSubview:_operationBtn];
+        if(deviceModel.onLine)//在线,删除,红色
+        {
+            [_operationBtn setTitle:[HomeStringKeyContentValueManager homeLanguageValueForKey:language_homeDeviceManagerDelNetButtonName] forState:UIControlStateNormal];
+            [_operationBtn setTitleColor:[MRJColorManager mrj_alertColor] forState:UIControlStateNormal];
         }else
         {
-            [self.contentView addSubview:_operationBtn];
-            if(deviceModel.onLine)//在线,删除,红色
-            {
-                [_operationBtn setTitle:[HomeStringKeyContentValueManager homeLanguageValueForKey:language_homeDeviceManagerDelNetButtonName] forState:UIControlStateNormal];
-                 [_operationBtn setTitleColor:[MRJColorManager mrj_alertColor] forState:UIControlStateNormal];
-            }else
-            {
-                [_operationBtn setTitle:[HomeStringKeyContentValueManager homeLanguageValueForKey:language_homeDeviceManagerConfigNetButtonName] forState:UIControlStateNormal];
-                [_operationBtn setTitleColor:[MRJColorManager mrj_plainColor] forState:UIControlStateNormal];
-            }
-            [_operationBtn setTitleColor:[MRJColorManager mrj_separatrixColor] forState:UIControlStateHighlighted];
-            [_operationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.equalTo(_operationBtn.superview.mas_centerY);
-                make.right.equalTo(_operationBtn.superview.mas_right).mas_offset(-[MRJSizeManager  mrjHorizonPaddding]);
-            }];
-            _operationBtn.titleLabel.font = [MRJSizeManager mrjMiddleTextFont];
+            [_operationBtn setTitle:[HomeStringKeyContentValueManager homeLanguageValueForKey:language_homeDeviceManagerConfigNetButtonName] forState:UIControlStateNormal];
+            [_operationBtn setTitleColor:[MRJColorManager mrj_plainColor] forState:UIControlStateNormal];
         }
+        [_operationBtn setTitleColor:[MRJColorManager mrj_separatrixColor] forState:UIControlStateHighlighted];
+        [_operationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_operationBtn.superview.mas_centerY);
+            make.right.equalTo(_operationBtn.superview.mas_right).mas_offset(-[MRJSizeManager  mrjHorizonPaddding]);
+        }];
+        _operationBtn.titleLabel.font = [MRJSizeManager mrjMiddleTextFont];
         
     }
 }

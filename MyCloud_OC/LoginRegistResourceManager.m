@@ -32,7 +32,7 @@ NSString *const login_passwordImageName = @"login_password";
     }else{
         
     }
-    str = [NSString stringWithFormat:@"0%ld_%@",squeue,str];
+    str = [NSString stringWithFormat:@"0%ld_%@",(long)squeue,str];
     return [self imageForKey:str];
 }
 +(UIImage*)accountIconImage;

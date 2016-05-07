@@ -232,9 +232,7 @@ static NSString *myCell = @"MyCell";
             [cell configMainTableViewCellStyleWithText:text andDetailText:nil cellSize:(CGSize){SCREEN_WIDTH,ROW_HEIGHT} disclosureIndicator:YES selectHighlight:YES];
         }
     }
-    if (indexPath.row==0) {
-        cell.isNeedTopSeprator = YES;
-    }
+    cell.isNeedTopSeprator = indexPath.row==0;
     return cell;
 }
 #pragma baseCellDelegate

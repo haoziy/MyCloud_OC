@@ -27,8 +27,11 @@ typedef NS_ENUM(NSInteger, HttpRequestType) {
 };
 
 extern NSString * const request_status_key;//http请求keystatus
-extern NSString * const request_data_key;
-
+extern NSString * const request_data_key;//http请求keydata
+extern NSString * const request_progress_loading_message;//http请求loading提示语
+extern NSString * const request_network_notwork_notice_message;//没有网络提示语
+extern NSString * const request_operation_success_notice_message;//操作成功提示
+extern NSString * const request_operation_failed_notice_message;//操作不成功提示
 +(void)baseRequestAFNetWorkApi:(ApiNameMap)apiName method:(HttpRequestType)method andHttpHeader:(NSDictionary *)header parameters:(id)parameters prepareExecute:(MRJPrepareExcute)prepare succeed:(MRJSuccessBlock)succeed failed:(MRJFailedBlock)failed;
 
 

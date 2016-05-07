@@ -11,4 +11,6 @@ extern NSString *const login_first_install_key;
 
 @interface AppDelegate (utils)
 -(BOOL)checkFirstInstall;
+
+-(void)app_hudSetting;
 @end

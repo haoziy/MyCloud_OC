@@ -53,6 +53,8 @@
 		0537017D1CCF178B00EE215B /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537017C1CCF178B00EE215B /* DeviceModel.m */; };
 		053701861CCF69ED00EE215B /* HomeHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 053701851CCF69ED00EE215B /* HomeHttpHandler.m */; };
 		053701971CCF6F0900EE215B /* voicelib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 053701941CCF6F0900EE215B /* voicelib.a */; };
+		054BC7C81CDD8AF800D6F972 /* MRJAppUtils+SVProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 054BC7C71CDD8AF800D6F972 /* MRJAppUtils+SVProgress.m */; };
+		054BC7CB1CDD993200D6F972 /* NSNull+_Safe_.m in Sources */ = {isa = PBXBuildFile; fileRef = 054BC7CA1CDD993200D6F972 /* NSNull+_Safe_.m */; };
 		055D36851CD1E997005FAB0F /* DeviceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D367C1CD1E997005FAB0F /* DeviceDetailViewController.m */; };
 		055D36861CD1E997005FAB0F /* HomeDeviceManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D367E1CD1E997005FAB0F /* HomeDeviceManagerViewController.m */; };
 		055D36871CD1E997005FAB0F /* MNGDeviceNetConfigViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 055D36801CD1E997005FAB0F /* MNGDeviceNetConfigViewController.mm */; };
@@ -70,7 +72,6 @@
 		056961A31CB4B5E300AECAEF /* HttpHandlerApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 056961A21CB4B5E300AECAEF /* HttpHandlerApi.m */; };
 		056961A61CB4DC6F00AECAEF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 056961A81CB4DC6F00AECAEF /* Launch Screen.storyboard */; };
 		056D69C71CD05ED300ACBB0B /* NSString+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 056D69C31CD05ED300ACBB0B /* NSString+Safe.m */; };
-		056D69C81CD05ED300ACBB0B /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 056D69C41CD05ED300ACBB0B /* NullSafe.m */; };
 		056D69C91CD05ED300ACBB0B /* UINavigationController+safetyPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 056D69C61CD05ED300ACBB0B /* UINavigationController+safetyPush.m */; };
 		056D69CB1CD061BE00ACBB0B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056D69CA1CD061BE00ACBB0B /* MediaPlayer.framework */; };
 		056FC59E1CB5ED25003F2BCA /* AboutMeHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 056FC59D1CB5ED25003F2BCA /* AboutMeHttpHandler.m */; };
@@ -89,8 +90,7 @@
 		05FBE24E1CCDE79D00729845 /* MRJTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE24D1CCDE79D00729845 /* MRJTextFieldDelegate.m */; };
 		05FBE2511CCDE81400729845 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE2501CCDE81400729845 /* UIView+Additions.m */; };
 		05FBE2561CCE112700729845 /* MRJScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE2551CCE112700729845 /* MRJScrollView.m */; };
-		05FBE25A1CCE182900729845 /* MRJCheckUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE2591CCE182900729845 /* MRJCheckUtils.m */; };
-		05FBE25D1CCE192C00729845 /* MRJAppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE25C1CCE192C00729845 /* MRJAppUtils.m */; };
+		05FBE25A1CCE182900729845 /* MRJAppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE2591CCE182900729845 /* MRJAppUtils.m */; };
 		05FBE2601CCE196400729845 /* MRJStringCheckUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FBE25F1CCE196400729845 /* MRJStringCheckUtil.m */; };
 		F1CB5E7BA92EE0FD26A182F7 /* libPods-MyCloud_OC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4432037842F65F19A72E859C /* libPods-MyCloud_OC.a */; };
 /* End PBXBuildFile section */
@@ -252,6 +252,10 @@
 		053701941CCF6F0900EE215B /* voicelib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = voicelib.a; path = voiceRecognize/voicelib.a; sourceTree = "<group>"; };
 		053701951CCF6F0900EE215B /* voicePlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = voicePlay.h; path = voiceRecognize/voicePlay.h; sourceTree = "<group>"; };
 		053701961CCF6F0900EE215B /* voiceRecog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = voiceRecog.h; path = voiceRecognize/voiceRecog.h; sourceTree = "<group>"; };
+		054BC7C61CDD8AF800D6F972 /* MRJAppUtils+SVProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MRJAppUtils+SVProgress.h"; path = "MyCloud_OC/MRJAppUtils+SVProgress.h"; sourceTree = "<group>"; };
+		054BC7C71CDD8AF800D6F972 /* MRJAppUtils+SVProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MRJAppUtils+SVProgress.m"; path = "MyCloud_OC/MRJAppUtils+SVProgress.m"; sourceTree = "<group>"; };
+		054BC7C91CDD993200D6F972 /* NSNull+_Safe_.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNull+_Safe_.h"; path = "safe/NSNull+_Safe_.h"; sourceTree = "<group>"; };
+		054BC7CA1CDD993200D6F972 /* NSNull+_Safe_.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNull+_Safe_.m"; path = "safe/NSNull+_Safe_.m"; sourceTree = "<group>"; };
 		055D367B1CD1E997005FAB0F /* DeviceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceDetailViewController.h; path = MyCloud_OC/HomeManager/DeviceDetailViewController.h; sourceTree = "<group>"; };
 		055D367C1CD1E997005FAB0F /* DeviceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceDetailViewController.m; path = MyCloud_OC/HomeManager/DeviceDetailViewController.m; sourceTree = "<group>"; };
 		055D367D1CD1E997005FAB0F /* HomeDeviceManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeDeviceManagerViewController.h; path = MyCloud_OC/HomeManager/HomeDeviceManagerViewController.h; sourceTree = "<group>"; };
@@ -288,7 +292,6 @@
 		056961AE1CB4DC7B00AECAEF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Launch Screen.strings"; sourceTree = "<group>"; };
 		056D69C21CD05ED300ACBB0B /* NSString+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Safe.h"; path = "safe/NSString+Safe.h"; sourceTree = "<group>"; };
 		056D69C31CD05ED300ACBB0B /* NSString+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Safe.m"; path = "safe/NSString+Safe.m"; sourceTree = "<group>"; };
-		056D69C41CD05ED300ACBB0B /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NullSafe.m; path = safe/NullSafe.m; sourceTree = "<group>"; };
 		056D69C51CD05ED300ACBB0B /* UINavigationController+safetyPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+safetyPush.h"; path = "safe/UINavigationController+safetyPush.h"; sourceTree = "<group>"; };
 		056D69C61CD05ED300ACBB0B /* UINavigationController+safetyPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+safetyPush.m"; path = "safe/UINavigationController+safetyPush.m"; sourceTree = "<group>"; };
 		056D69CA1CD061BE00ACBB0B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -332,10 +335,8 @@
 		05FBE2531CCDE9E300729845 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		05FBE2541CCE112700729845 /* MRJScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJScrollView.h; path = MyCloud_OC/MRJScrollView.h; sourceTree = "<group>"; };
 		05FBE2551CCE112700729845 /* MRJScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJScrollView.m; path = MyCloud_OC/MRJScrollView.m; sourceTree = "<group>"; };
-		05FBE2581CCE182900729845 /* MRJCheckUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJCheckUtils.h; path = MyCloud_OC/MRJCheckUtils.h; sourceTree = "<group>"; };
-		05FBE2591CCE182900729845 /* MRJCheckUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJCheckUtils.m; path = MyCloud_OC/MRJCheckUtils.m; sourceTree = "<group>"; };
-		05FBE25B1CCE192C00729845 /* MRJAppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJAppUtils.h; path = MyCloud_OC/MRJAppUtils.h; sourceTree = "<group>"; };
-		05FBE25C1CCE192C00729845 /* MRJAppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJAppUtils.m; path = MyCloud_OC/MRJAppUtils.m; sourceTree = "<group>"; };
+		05FBE2581CCE182900729845 /* MRJAppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJAppUtils.h; path = MyCloud_OC/MRJAppUtils.h; sourceTree = "<group>"; };
+		05FBE2591CCE182900729845 /* MRJAppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJAppUtils.m; path = MyCloud_OC/MRJAppUtils.m; sourceTree = "<group>"; };
 		05FBE25E1CCE196400729845 /* MRJStringCheckUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJStringCheckUtil.h; path = MyCloud_OC/MRJStringCheckUtil.h; sourceTree = "<group>"; };
 		05FBE25F1CCE196400729845 /* MRJStringCheckUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJStringCheckUtil.m; path = MyCloud_OC/MRJStringCheckUtil.m; sourceTree = "<group>"; };
 		4432037842F65F19A72E859C /* libPods-MyCloud_OC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyCloud_OC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -672,9 +673,10 @@
 			children = (
 				056D69C21CD05ED300ACBB0B /* NSString+Safe.h */,
 				056D69C31CD05ED300ACBB0B /* NSString+Safe.m */,
-				056D69C41CD05ED300ACBB0B /* NullSafe.m */,
 				056D69C51CD05ED300ACBB0B /* UINavigationController+safetyPush.h */,
 				056D69C61CD05ED300ACBB0B /* UINavigationController+safetyPush.m */,
+				054BC7C91CDD993200D6F972 /* NSNull+_Safe_.h */,
+				054BC7CA1CDD993200D6F972 /* NSNull+_Safe_.m */,
 			);
 			name = Safety;
 			sourceTree = "<group>";
@@ -1020,10 +1022,10 @@
 		05FBE2571CCE181100729845 /* Certification */ = {
 			isa = PBXGroup;
 			children = (
-				05FBE2581CCE182900729845 /* MRJCheckUtils.h */,
-				05FBE2591CCE182900729845 /* MRJCheckUtils.m */,
-				05FBE25B1CCE192C00729845 /* MRJAppUtils.h */,
-				05FBE25C1CCE192C00729845 /* MRJAppUtils.m */,
+				05FBE2581CCE182900729845 /* MRJAppUtils.h */,
+				05FBE2591CCE182900729845 /* MRJAppUtils.m */,
+				054BC7C61CDD8AF800D6F972 /* MRJAppUtils+SVProgress.h */,
+				054BC7C71CDD8AF800D6F972 /* MRJAppUtils+SVProgress.m */,
 				05FBE25E1CCE196400729845 /* MRJStringCheckUtil.h */,
 				05FBE25F1CCE196400729845 /* MRJStringCheckUtil.m */,
 			);
@@ -1245,8 +1247,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0528C6E71CB4A47C001C8281 /* BaseHiddenTabbarViewController.m in Sources */,
+				054BC7C81CDD8AF800D6F972 /* MRJAppUtils+SVProgress.m in Sources */,
 				05293F5C1CB7598D0064193B /* MRJResourceManager.m in Sources */,
 				0528C6F01CB4A500001C8281 /* BaseModalViewController.m in Sources */,
+				054BC7CB1CDD993200D6F972 /* NSNull+_Safe_.m in Sources */,
 				05293F6D1CB75C060064193B /* FormsResourceManager.m in Sources */,
 				055D369B1CD1EBD1005FAB0F /* DeviceDetailCell.m in Sources */,
 				05293F761CB75D1B0064193B /* MRJSizeManager.m in Sources */,
@@ -1254,7 +1258,7 @@
 				056961A31CB4B5E300AECAEF /* HttpHandlerApi.m in Sources */,
 				056D69C91CD05ED300ACBB0B /* UINavigationController+safetyPush.m in Sources */,
 				059509381CB4FF2D009B3BBA /* AppDelegate+utils.m in Sources */,
-				05FBE25A1CCE182900729845 /* MRJCheckUtils.m in Sources */,
+				05FBE25A1CCE182900729845 /* MRJAppUtils.m in Sources */,
 				05FBE2561CCE112700729845 /* MRJScrollView.m in Sources */,
 				05FBE24E1CCDE79D00729845 /* MRJTextFieldDelegate.m in Sources */,
 				0528C6F91CB4A569001C8281 /* BaseTableViewCell.m in Sources */,
@@ -1298,8 +1302,6 @@
 				0528C70C1CB4AC56001C8281 /* BaseRequestModel.m in Sources */,
 				0528C6971CB49E3D001C8281 /* AppDelegate.m in Sources */,
 				05293F341CB751030064193B /* FormsKeyContentValueManager.m in Sources */,
-				05FBE25D1CCE192C00729845 /* MRJAppUtils.m in Sources */,
-				056D69C81CD05ED300ACBB0B /* NullSafe.m in Sources */,
 				056D69C71CD05ED300ACBB0B /* NSString+Safe.m in Sources */,
 				055D369E1CD1F0AD005FAB0F /* SelectInstallHeightViewController.m in Sources */,
 				055D36981CD1EAC4005FAB0F /* WLTrackLayer.m in Sources */,

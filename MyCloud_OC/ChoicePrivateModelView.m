@@ -10,7 +10,7 @@
 #import "UIView+additions.h"
 #import "LoginRegistStringValueContentManager.h"
 #import "LoginRegistHttpHandler.h"
-#import "MRJCheckUtils.h"
+#import "MRJAppUtils.h"
 
 NSString * const httpHeadFlagString = @"http://";
 NSString * const httpsHeadFlagString = @"https://";
@@ -159,16 +159,16 @@ NSString * const appSubPath = @"/app/";
         baseUrl  = [NSString stringWithFormat:@"%@%@%@",httpHeadFlagString,_serviceAddressTF.text,appSubPath];
     }
     [LoginRegistHttpHandler login_checkHeartBeatFullURL:[NSString stringWithFormat:@"%@%@",baseUrl,api_loginRegist_heart_beat] preExecute:^{
-        [MRJCheckUtils showProgressMessageWithNotAllowTouch:language_commen_waitProgressNotice];
+        [MRJAppUtils showProgressMessageWithNotAllowTouch:language_commen_waitProgressNotice];
     } successBlock:^(id obj) {
-        [MRJCheckUtils showSuccessMessage:language_login_connectServiceSuccessNotice];
+        [MRJAppUtils showSuccessMessage:language_login_connectServiceSuccessNotice];
         [AppSingleton shareInstace].inputEnvironmentURL = _serviceAddressTF.text;
         [AppSingleton shareInstace].environmentUrl = baseUrl;
         if ([_delegate respondsToSelector:@selector(operationCompleted:withResult:)]) {
             [_delegate operationCompleted:self withResult:nil];
         }
     } failedBlock:^(id obj) {
-        [MRJCheckUtils showErrorMessage:language_login_connectServiceFailNotice];
+        [MRJAppUtils showErrorMessage:language_login_connectServiceFailNotice];
     }];
 }
 

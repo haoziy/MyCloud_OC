@@ -158,6 +158,7 @@ NSString * const notification_device_online_status_key = @"notification_device_o
     if (!cell) {
         cell = [[DeviceListCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:indentifier_cellIdentifier];
     }
+    cell.isNeedTopSeprator = indexPath.row==0;
     DeviceModel *model = nil;
     
     if (tableView==searchTable) {
@@ -168,9 +169,6 @@ NSString * const notification_device_online_status_key = @"notification_device_o
         model = ((NSArray*)((NSArray*)deviceList[indexPath.section]))[indexPath.row];
     }
     cell.deviceModel = model;
-    if (indexPath.row==0) {
-        cell.isNeedTopSeprator = YES;
-    }
     cell.mrjDelegate = self;
     return cell;
 }

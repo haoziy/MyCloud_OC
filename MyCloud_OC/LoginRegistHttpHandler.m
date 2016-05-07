@@ -10,7 +10,7 @@
 
 NSString * const api_loginRegist_heart_beat = @"connect";
 NSString * const api_loginRegist_login = @"login";//登录接口,需要的参数细节可以暴露
-
+NSString * const request_loginRegist_login_noticeMessage = @"用户名或者密码错误";//
 
 
 @implementation LoginRegistHttpHandler
@@ -28,10 +28,23 @@ NSString * const api_loginRegist_login = @"login";//登录接口,需要的参数
 +(void)login_loginWithParams:(NSDictionary*)param preExecute:(MRJPrepareExcute) preExecute successBlock:(MRJSuccessBlock) success failedBlock:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkApi:api_loginRegist_login method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
+        [MRJAppUtils showProgressMessage:request_progress_loading_message];
     } succeed:^(id obj) {
-        success(obj);
+        if ([obj[request_status_key] integerValue]==0) {
+            if (success) {
+                success(obj);
+            }
+            [MRJAppUtils dismissHUD];
+        }else
+        {
+            [MRJAppUtils showErrorMessage:request_loginRegist_login_noticeMessage];
+        }
+        
+        
     } failed:^(id obj) {
-        failed(obj);
+        if (failed) {
+            failed(obj);
+        }
     }];
 }
 @end

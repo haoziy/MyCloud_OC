@@ -86,7 +86,7 @@
 +(NSString*)mrj_sigal_encodeWithData:(id)data;
 {
     if ([NSJSONSerialization isValidJSONObject:data]) {
-        return [MRJCheckUtils md5FromString:[self mrj_sigal_encode:[self dataToJSONString:data]]];
+        return [MRJAppUtils md5FromString:[self mrj_sigal_encode:[self dataToJSONString:data]]];
     }else
     {
         return nil;

@@ -22,6 +22,7 @@ static const float SLIDE_HEIGHT = 15;
 {
     int consumeTimer;
     MRJBaseTableview *table;
+    NSDictionary *param;
 }
 
 @end
@@ -37,7 +38,6 @@ static const float SLIDE_HEIGHT = 15;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -47,7 +47,6 @@ static const float SLIDE_HEIGHT = 15;
         [timer invalidate];
         timer = nil;
     }
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -133,7 +132,7 @@ static const float SLIDE_HEIGHT = 15;
     }];
     UIPanGestureRecognizer * panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveSliderFrame:)];
     [arrowImage addGestureRecognizer:panGestureRecognizer];
-    if (_deviceModel.rule.allowGrap) {
+    if (_deviceModel.rule.allowGrap&&_deviceModel.onLine) {
         UILabel *label1 = [[UILabel alloc]init];
         label1.font = MiddleTextFont;
         label1.textColor = MainTextColor;
@@ -172,7 +171,7 @@ static const float SLIDE_HEIGHT = 15;
         make.bottom.mas_equalTo(resetDefaultBtn.mas_bottom).offset(TOP_PADDING*2);
     }];
     
-    
+    param = @{@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
     [RACObserve(_deviceModel,height) subscribeNext:^(id height){
         [table reloadData];
     }];
@@ -262,54 +261,52 @@ static const float SLIDE_HEIGHT = 15;
 }
 
 -(void)catchRealTimeImage:(UIButton *)sender{
-//    if ([UserDefaultsUtils boolValueWithKey:IDENTITY] == YES){
-//        [AppUtils showInfoMessage:@"当前是演示账号不能做提交操作"];
-//        return;
-//    }
-//    UserEntity *entity = [UserDefaultsUtils customerObjectWithKey:USER_ENTITY];
-//    [DeviceManageHandler catchRealTimeImageWithDeviceId:_deviceModel.deviceId taskCreateId:entity.accountId taskCreator:entity.accountId Success:^(id obj) {
-//        if ([obj isKindOfClass:[NSDictionary class]]) {
-//            snId = obj[@"result"];
-//            [self getNowImage];
-//            [AppUtils showProgressMessageWithNotAllowTouch:@"正在获取实时图片..."];
-//            [timer invalidate];
-//            timer = nil;
-//            timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(getNowImage) userInfo:nil repeats:YES];
-//            [timer fire];
-//            consumeTimer = 0;
-//        }else{
-//            [AppUtils showErrorMessage:obj];
-//        }
-//    } Failed:^(id obj) {
-//        [AppUtils showErrorMessage:TEXT_SERVER_NOT_RESPOND];
-//    }];
+    
+    [HomeHttpHandler home_captureImageCMD:param preExecute:^{
+        
+    } success:^(id obj) {
+        [self getNowImage];
+        [timer invalidate];
+        timer = nil;
+        timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(getNowImage) userInfo:nil repeats:YES];
+        [timer fire];
+        consumeTimer = 0;
+    } failed:^(id obj) {
+        
+    }];
+
+}
+-(void)stopCatchImage
+{
+    [timer invalidate];
+    timer = nil;
+    consumeTimer = 0;
+    [MRJAppUtils dismissHUD];
 }
 -(void)getNowImage
 {
-//    if (consumeTimer>=totolTimer) {
-//        [AppUtils dismissHUD];
-//        [AppUtils showErrorMessage:@"抓取超时,请重新试试"];
-//        [[SQHttpHelper sharedHttpManager]cancelNetworkRequest];
-//        [timer invalidate];
-//        timer = nil;
-//        consumeTimer = 0;
-//        return;
-//    }
-//    consumeTimer ++;
-//    [DeviceManageHandler getDeviceNowImageWithSnId:snId Success:^(id obj) {
-//        if ([obj isKindOfClass:[NSDictionary class]]) {
-//            NSDictionary *result = obj;
-//            if ([result[@"msg"] isEqualToString:@"成功"]) {
-//                [cameraImage sd_setImageWithURL:[NSURL URLWithString:obj[@"result"]]];
-//                [AppUtils dismissHUD];
-//                [[SQHttpHelper sharedHttpManager]cancelNetworkRequest];
-//                [timer invalidate];
-//                timer = nil;
-//            }
-//        }
-//    } Failed:^(id obj) {
-//        [AppUtils showErrorMessage:obj];
-//    }];
+    if (consumeTimer>=totolTimer) {
+        [self stopCatchImage];
+        return;
+    }
+    consumeTimer ++;
+    [HomeHttpHandler home_catchImageURL:param preExecute:^{
+        
+    } success:^(id obj) {
+        NSString *url = (NSString*)(obj[request_data_key][@"img"]);
+        if (url==nil||[url isEqualToString:_deviceModel.imagePath]) {
+            return ;
+        }else
+        {
+            [cameraImage setImageWithURL:[NSURL URLWithString:url] options:YYWebImageOptionShowNetworkActivity];
+            _deviceModel.imagePath = url;
+            [self stopCatchImage];
+            
+        }
+       
+    } failed:^(id obj) {
+    }];
+    
     
 }
 -(void)resetDefaultHeight:(UIButton *)sender{
