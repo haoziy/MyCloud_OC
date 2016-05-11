@@ -42,6 +42,7 @@ NSString * const request_loginRegist_login_noticeMessage = @"用户名或者密�
         
         
     } failed:^(id obj) {
+        [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
         if (failed) {
             failed(obj);
         }

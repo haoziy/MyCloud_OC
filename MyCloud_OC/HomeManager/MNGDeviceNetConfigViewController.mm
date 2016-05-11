@@ -1181,7 +1181,23 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
                     break;
                 case 2:
                 {
-                    cmdType =[NSString stringWithFormat:@"网络类型%@",[[str substringFromIndex:str.length-1] integerValue]==0?@"无线静态":@"无线DHCP"];
+                    NSInteger cmd = [[str substringFromIndex:str.length-1] integerValue];
+                    switch (cmd) {
+                        case 0:
+                            cmdType = [NSString stringWithFormat:@"网络类型%@",@"无线静态"];
+                            break;
+                        case 1:
+                            cmdType = [NSString stringWithFormat:@"网络类型%@",@"无线DHCP"];
+                            break;
+                        case 2:
+                            cmdType = [NSString stringWithFormat:@"网络类型%@",@"有线静态"];
+                            break;
+                        case 3:
+                            cmdType = [NSString stringWithFormat:@"网络类型%@",@"有线DHCP"];
+                            break;
+                        default:
+                            break;
+                    }
                 }
                     break;
                 case 3:
@@ -1242,7 +1258,12 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
                 [[NSNotificationCenter defaultCenter]postNotificationName:notification_device_online_status_key object:nil];
                 [player stop];
                 [self stopConfig];
-                NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"log":configLogStr?configLogStr:@"",@"state":@"1"};
+                
+                NSData *nsdata = [configLogStr dataUsingEncoding:NSUTF8StringEncoding];
+                
+                // Get NSString from NSData object in Base64
+                NSString *base64Encoded = [nsdata base64EncodedStringWithOptions:0];
+                NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"log":base64Encoded?base64Encoded:@"",@"state":@"1"};
                 [HomeHttpHandler home_uploadConfigLog:param preExecute:nil success:nil failed:nil];
                 [self dealLogic];
             }else
@@ -1256,7 +1277,11 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     }else//配置超时
     {
         [self stopConfig];
-        NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"log":configLogStr?configLogStr:@"",@"state":@"0"};
+        NSData *nsdata = [configLogStr dataUsingEncoding:NSUTF8StringEncoding];
+        
+        // Get NSString from NSData object in Base64
+        NSString *base64Encoded = [nsdata base64EncodedStringWithOptions:0];
+        NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"log":base64Encoded?base64Encoded:@"",@"state":@"0"};
         [HomeHttpHandler home_uploadConfigLog:param preExecute:nil success:nil failed:nil];
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"配置完毕，稍后请查看设备的绿灯状态。如果绿灯常亮，说明配置网络成功。否则，请重新配置。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];

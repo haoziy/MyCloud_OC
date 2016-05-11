@@ -129,9 +129,7 @@
             }
             
         } failedBlock:^(id obj) {
-            HomeDeviceManagerViewController*  deviceManagerVC = [[HomeDeviceManagerViewController alloc]init];
-            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:deviceManagerVC];
-            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+            
         } ];
     }];
     

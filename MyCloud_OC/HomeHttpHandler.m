@@ -119,6 +119,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
         if (failed) {
             failed(obj);
         }
+        [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
     }];
 }
 +(void)home_catchImageURL:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
@@ -126,6 +127,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
     [self baseRequestAFNetWorkApi:api_home_get_current_image_url method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
         [MRJAppUtils showProgressMessage:request_progress_loading_message];
     }  succeed:^(id obj) {
+        [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
         if (succes) {
             succes(obj);
         }
@@ -134,6 +136,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
         if (failed) {
             failed(obj);
         }
+        [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
     }];
 }
 +(void)home_rebootDeviceCMD:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
@@ -155,6 +158,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
         if (failed) {
             failed(obj);
         }
+        [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
     }];
 }
 +(void)home_captureImageCMD:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
@@ -167,7 +171,6 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
             if (succes) {
                 succes(obj);
             }
-            [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
         }else
         {
             [MRJAppUtils showErrorMessage:request_operation_failed_notice_message];
