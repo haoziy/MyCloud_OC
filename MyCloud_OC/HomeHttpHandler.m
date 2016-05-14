@@ -127,7 +127,6 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
     [self baseRequestAFNetWorkApi:api_home_get_current_image_url method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
         [MRJAppUtils showProgressMessage:request_progress_loading_message];
     }  succeed:^(id obj) {
-        [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
         if (succes) {
             succes(obj);
         }

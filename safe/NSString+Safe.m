@@ -74,7 +74,9 @@
 {
     NSInteger result = 0;
     const char *encrypt = "meirenji";
-    const char *data = [originStr UTF8String];
+    NSString *str = [originStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    const char *data = [str UTF8String];
+    
     for (int i = 0,j = 0; i < strlen(data); i++,j++) {
         if (j ==  strlen(encrypt)) {
             j = 0;

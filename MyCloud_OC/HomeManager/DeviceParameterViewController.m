@@ -133,23 +133,26 @@ static const float SLIDE_HEIGHT = 15;
     UIPanGestureRecognizer * panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveSliderFrame:)];
     [arrowImage addGestureRecognizer:panGestureRecognizer];
     if (_deviceModel.rule.allowGrap&&_deviceModel.onLine) {
+        
+        catchImageBtn = [UIButton mrj_generalBtnTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamCaptureCurrentImageButtonName] normalTitleColor:PlainButtonColor highlightTitleColor:SeparatrixColor normalBackImage:nil highlightBackImage:nil];
+        catchImageBtn.titleLabel.font = MiddleTextFont;
+        [catchImageBtn addTarget:self action:@selector(catchRealTimeImage:) forControlEvents:UIControlEventTouchUpInside];
+        [self.backScrollView addSubview:catchImageBtn];
+        [catchImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(cameraImage.mas_bottom).offset(TOP_PADDING);
+            make.right.mas_equalTo(cameraImage.mas_right).offset(0);
+        }];
+        
         UILabel *label1 = [[UILabel alloc]init];
         label1.font = MiddleTextFont;
         label1.textColor = MainTextColor;
         label1.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamCamaraImageNoticeText];
         [self.backScrollView addSubview:label1];
         [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(cameraImage.mas_centerX).offset(0);
-            make.top.mas_equalTo(cameraImage.mas_bottom).offset(TOP_PADDING);
+            make.centerY.mas_equalTo(catchImageBtn);
+            make.right.mas_equalTo(catchImageBtn.mas_left);
         }];
-        catchImageBtn = [UIButton mrj_generalBtnTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamCaptureCurrentImageButtonName] normalTitleColor:PlainButtonColor highlightTitleColor:SeparatrixColor normalBackImage:nil highlightBackImage:nil];
-        catchImageBtn.titleLabel.font = MiddleTextFont;
-        [catchImageBtn addTarget:self action:@selector(catchRealTimeImage:) forControlEvents:UIControlEventTouchUpInside];
-        [self.backScrollView addSubview:catchImageBtn];
-        [catchImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(label1.mas_right);
-            make.centerY.mas_equalTo(label1.mas_centerY);
-        }];
+        
     }
 
 
@@ -287,6 +290,7 @@ static const float SLIDE_HEIGHT = 15;
 {
     if (consumeTimer>=totolTimer) {
         [self stopCatchImage];
+         [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
         return;
     }
     consumeTimer ++;
@@ -300,6 +304,7 @@ static const float SLIDE_HEIGHT = 15;
         {
             [cameraImage setImageWithURL:[NSURL URLWithString:url] options:YYWebImageOptionShowNetworkActivity];
             _deviceModel.imagePath = url;
+            [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
             [self stopCatchImage];
             
         }

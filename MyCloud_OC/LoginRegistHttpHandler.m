@@ -18,6 +18,7 @@ NSString * const request_loginRegist_login_noticeMessage = @"用户名或者密�
 +(void)login_checkHeartBeatFullURL:(NSString*)fullURL preExecute:(MRJPrepareExcute) preExecute successBlock:(MRJSuccessBlock) success failedBlock:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkFullURL:fullURL method:HttpRequestPost andHttpHeader:nil parameters:nil prepareExecute:^{
+        [MRJAppUtils showProgressMessage:request_progress_loading_message];
     } succeed:^(id obj) {
         success(obj);
     } failed:^(id obj) {

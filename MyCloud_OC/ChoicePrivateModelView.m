@@ -161,14 +161,19 @@ NSString * const appSubPath = @"/app/";
     [LoginRegistHttpHandler login_checkHeartBeatFullURL:[NSString stringWithFormat:@"%@%@",baseUrl,api_loginRegist_heart_beat] preExecute:^{
         [MRJAppUtils showProgressMessageWithNotAllowTouch:language_commen_waitProgressNotice];
     } successBlock:^(id obj) {
-        [MRJAppUtils showSuccessMessage:language_login_connectServiceSuccessNotice];
-        [AppSingleton shareInstace].inputEnvironmentURL = _serviceAddressTF.text;
-        [AppSingleton shareInstace].environmentUrl = baseUrl;
-        if ([_delegate respondsToSelector:@selector(operationCompleted:withResult:)]) {
-            [_delegate operationCompleted:self withResult:nil];
+        if ([obj[request_status_key] integerValue]==0 ) {
+            [MRJAppUtils showSuccessMessage:language_login_connectServiceSuccessNotice];
+            [AppSingleton shareInstace].inputEnvironmentURL = _serviceAddressTF.text;
+            [AppSingleton shareInstace].environmentUrl = baseUrl;
+            if ([_delegate respondsToSelector:@selector(operationCompleted:withResult:)]) {
+                [_delegate operationCompleted:self withResult:nil];
+            }
+        }else
+        {
+             [MRJAppUtils showErrorMessage:language_login_connectServiceFailNotice];
         }
+        
     } failedBlock:^(id obj) {
-        [MRJAppUtils showErrorMessage:language_login_connectServiceFailNotice];
     }];
 }
 

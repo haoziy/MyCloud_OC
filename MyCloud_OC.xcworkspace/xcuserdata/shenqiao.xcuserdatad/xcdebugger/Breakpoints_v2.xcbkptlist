@@ -13,22 +13,6 @@
             timestampString = "484299456.779097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "+baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyCloud_OC/BaseHttpHandler.m"
-            timestampString = "484299456.779097"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "106"
             endingLineNumber = "106"
             landmarkName = "+baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
@@ -144,22 +128,6 @@
             startingLineNumber = "18"
             endingLineNumber = "18"
             landmarkName = "+checkUpdateWithApiName:successBlock:failedBlock:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyCloud_OC/BaseHttpHandler.m"
-            timestampString = "484299456.779097"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "+baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -618,13 +586,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/ChoicePrivateModelView.m"
-            timestampString = "483521464.032393"
+            timestampString = "484803168.417948"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "-confirmTestValid:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__43-[ChoicePrivateModelView confirmTestValid:]_block_invoke_2"
+                  moduleName = "MyCloud_OC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/ChoicePrivateModelView.m"
+                  timestampString = "484803168.533543"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
+                  offsetFromSymbolStart = "545">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.199"
+                  moduleName = "MyCloud_OC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/ChoicePrivateModelView.m"
+                  timestampString = "484803168.534124"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
+                  offsetFromSymbolStart = "59">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__43-[ChoicePrivateModelView confirmTestValid:]_block_invoke.201"
+                  moduleName = "MyCloud_OC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/ChoicePrivateModelView.m"
+                  timestampString = "484803168.534284"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "177"
+                  endingLineNumber = "177"
+                  offsetFromSymbolStart = "51">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -822,7 +837,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/MRJLoginViewController.m"
@@ -1338,11 +1353,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295384.063558"
+            timestampString = "484891422.780995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1562,11 +1577,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceListCell.m"
-            timestampString = "484299500.733185"
+            timestampString = "484802828.526823"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "-operaionBtnPressed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1700,28 +1715,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/BaseHttpHandler.m"
-            timestampString = "484299456.779097"
+            timestampString = "484890782.582851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "+baseRequestAFNetWorkFullURL:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyCloud_OC/LoginRegistHttpHandler.m"
-            timestampString = "484283611.208492"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "+login_loginWithParams:preExecute:successBlock:failedBlock:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1748,11 +1747,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/BaseHttpHandler.m"
-            timestampString = "484299456.779097"
+            timestampString = "484890782.582851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "+baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1796,11 +1795,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/BaseHttpHandler.m"
-            timestampString = "484299456.779097"
+            timestampString = "484890782.582851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "+baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1812,11 +1811,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/BaseHttpHandler.m"
-            timestampString = "484299456.779097"
+            timestampString = "484890782.582851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "+baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1828,11 +1827,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "safe/NSString+Safe.m"
-            timestampString = "484024200.31232"
+            timestampString = "484890476.961674"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "+mrj_sigal_encode:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1844,11 +1843,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/BaseHttpHandler.m"
-            timestampString = "484299456.779097"
+            timestampString = "484890782.582851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "+baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1908,11 +1907,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/BaseHttpHandler.m"
-            timestampString = "484299456.779097"
+            timestampString = "484890782.582851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "+baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2036,11 +2035,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceListCell.m"
-            timestampString = "484299500.733185"
+            timestampString = "484802828.526823"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "-layoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
@@ -2068,11 +2067,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295384.063558"
+            timestampString = "484891422.780995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2084,11 +2083,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295384.063558"
+            timestampString = "484891422.780995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
             <Locations>
@@ -2227,11 +2226,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/DeviceModel.m"
-            timestampString = "484107278.318515"
+            timestampString = "484800362.322925"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "-displayMode"
             landmarkType = "5">
          </BreakpointContent>
@@ -2243,11 +2242,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/DeviceModel.m"
-            timestampString = "484107278.318515"
+            timestampString = "484800362.322925"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "-modeName"
             landmarkType = "5">
          </BreakpointContent>
@@ -2291,11 +2290,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295384.063558"
+            timestampString = "484891422.780995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "-saveInstallHeight:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2323,11 +2322,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295384.063558"
+            timestampString = "484891422.780995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "-moveSliderFrame:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2450,11 +2449,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/BaseHttpHandler.m"
-            timestampString = "484299456.779097"
+            timestampString = "484890782.582851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "+baseRequestAFNetWorkFullURL:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2466,11 +2465,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/BaseHttpHandler.m"
-            timestampString = "484299456.779097"
+            timestampString = "484890782.582851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "+baseRequestAFNetWorkFullURL:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2914,11 +2913,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295384.063558"
+            timestampString = "484891422.780995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "-catchRealTimeImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2930,11 +2929,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295384.063558"
+            timestampString = "484891422.780995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "-catchRealTimeImage:"
             landmarkType = "5">
             <Locations>
@@ -2978,11 +2977,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295384.063558"
+            timestampString = "484891422.780995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
             landmarkName = "-catchRealTimeImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2994,11 +2993,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295384.063558"
+            timestampString = "484891696.507004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "-getNowImage"
             landmarkType = "5">
          </BreakpointContent>
@@ -3010,11 +3009,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295384.063558"
+            timestampString = "484891696.507004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "-getNowImage"
             landmarkType = "5">
          </BreakpointContent>
@@ -3042,11 +3041,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/LoginRegistHttpHandler.m"
-            timestampString = "484283611.208492"
+            timestampString = "484889118.16531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "+login_loginWithParams:preExecute:successBlock:failedBlock:"
             landmarkType = "5">
             <Locations>
@@ -3154,11 +3153,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295384.063558"
+            timestampString = "484891696.507004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "-getNowImage"
             landmarkType = "5">
          </BreakpointContent>
@@ -3218,11 +3217,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "484295459.100891"
+            timestampString = "484891422.780995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3266,11 +3265,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/DeviceModel.m"
-            timestampString = "484295624.926517"
+            timestampString = "484800362.322925"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "-installHeight"
             landmarkType = "5">
          </BreakpointContent>
@@ -3527,6 +3526,262 @@
             endingLineNumber = "1184"
             landmarkName = "-globalSendMessage"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/BaseHttpHandler.m"
+            timestampString = "484890782.582851"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "+baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/BaseHttpHandler.m"
+            timestampString = "484890782.582851"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "+baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/HomeHttpHandler.m"
+            timestampString = "484802618.090496"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "+getDeviceListParams:preExecute:success:failed:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[HomeHttpHandler getDeviceListParams:preExecute:success:failed:]"
+                  moduleName = "MyCloud_OC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/HomeHttpHandler.m"
+                  timestampString = "484802684.397005"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "188">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__65+[HomeHttpHandler getDeviceListParams:preExecute:success:failed:]_block_invoke"
+                  moduleName = "MyCloud_OC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/HomeHttpHandler.m"
+                  timestampString = "484802684.397114"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/HomeManager/DeviceListCell.m"
+            timestampString = "484802726.287297"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "-setDeviceModel:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/HomeManager/DeviceListCell.m"
+            timestampString = "484802742.679289"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "-setDeviceModel:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/BaseHttpHandler.m"
+            timestampString = "484890782.582851"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "+baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[BaseHttpHandler baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:]"
+                  moduleName = "MyCloud_OC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/BaseHttpHandler.m"
+                  timestampString = "484889679.524072"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "1563">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__105+[BaseHttpHandler baseRequestAFNetWorkApi:method:andHttpHeader:parameters:prepareExecute:succeed:failed:]_block_invoke.175"
+                  moduleName = "MyCloud_OC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/BaseHttpHandler.m"
+                  timestampString = "484889679.524174"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "103">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "safe/NSString+Safe.m"
+            timestampString = "484890118.959917"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "+mrj_sigal_encode:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "safe/NSString+Safe.m"
+            timestampString = "484890476.961674"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "+mrj_sigal_encodeWithData:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
+            timestampString = "484891422.780995"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "-getNowImage"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
+            timestampString = "484891653.798492"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
+            landmarkName = "-getNowImage"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DeviceParameterViewController getNowImage]"
+                  moduleName = "MyCloud_OC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/HomeManager/DeviceParameterViewController.m"
+                  timestampString = "484891653.801489"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "296"
+                  endingLineNumber = "296"
+                  offsetFromSymbolStart = "109">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__44-[DeviceParameterViewController getNowImage]_block_invoke"
+                  moduleName = "MyCloud_OC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/HomeManager/DeviceParameterViewController.m"
+                  timestampString = "484891653.801631"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "298"
+                  endingLineNumber = "298"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

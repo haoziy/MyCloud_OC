@@ -38,6 +38,8 @@
     return @{@"onLine" : @"online",
              @"modeName":@"mode",
              @"imagePath":@"img",
+             @"wifi":@"wlanMac",
+             @"ssid":@"wlanSsid",
              
              //             @"rule":[DeviceOperationRule className]
              //             @"rule" : @[@"allowDel",

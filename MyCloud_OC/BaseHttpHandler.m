@@ -118,6 +118,8 @@ NSString * const request_operation_failed_notice_message = @"操作失败";
             [req setHTTPMethod:@"POST"];
             NSDictionary *realPara = [self attchBaseParams:(NSDictionary*)parameters];
             [req setValue:[NSString mrj_sigal_encodeWithData:realPara] forHTTPHeaderField:@"signal"];
+            
+            //这里有点区别;由于需要singal签名;设置body里data化的选项要用NSJSONWritingPrettyPrinted;这样会增加可读性,会被添加很多\n换行符;但是服务端的签名算法里;换行符会被干掉;所以在sngal签名的地方,需要删除换行符;
             [req setHTTPBody:[NSJSONSerialization dataWithJSONObject:realPara options:NSJSONWritingPrettyPrinted error:nil]];
         
             
