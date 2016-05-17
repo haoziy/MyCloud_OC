@@ -91,7 +91,7 @@ static NSString *myCell = @"MyCell";
     [reBootBtn setBackgroundImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_mainThemeColor] andSize:CGSizeMake(SCREEN_WIDTH-LEFT_PADDING*2, INPUT_HEIGHT)] forState:UIControlStateNormal];
     [self.backScrollView addSubview:reBootBtn];
     [reBootBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(myTableView.mas_bottom).offset(TOP_PADDING);
+        make.top.mas_equalTo(myTableView.mas_bottom).offset(LEFT_PADDING);
         make.left.mas_equalTo(LEFT_PADDING);
         make.centerX.mas_equalTo(reBootBtn.superview.mas_centerX);
         make.height.mas_equalTo(INPUT_HEIGHT);
@@ -104,7 +104,7 @@ static NSString *myCell = @"MyCell";
     
     [self.backScrollView addSubview:deleteNetBtn];
     [deleteNetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(reBootBtn.mas_bottom).offset(TOP_PADDING);
+        make.top.mas_equalTo(reBootBtn.mas_bottom).offset(LEFT_PADDING);
         make.left.mas_equalTo(LEFT_PADDING);
         make.centerX.mas_equalTo(deleteNetBtn.superview.mas_centerX);
         make.height.mas_equalTo(INPUT_HEIGHT);

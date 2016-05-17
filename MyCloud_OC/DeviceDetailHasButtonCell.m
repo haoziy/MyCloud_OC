@@ -86,7 +86,7 @@
         
         [self.secondTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             if (buttonOne.superview) {
-               make.right.mas_equalTo(buttonOne.mas_bottom).offset(-[MRJSizeManager mrjHorizonSpace]);
+               make.right.mas_equalTo(buttonOne.mas_left).offset(-[MRJSizeManager mrjHorizonSpace]);
             }else
             {
                 make.right.mas_equalTo(self.secondTextLabel.superview).offset(-LEFT_PADDING);
