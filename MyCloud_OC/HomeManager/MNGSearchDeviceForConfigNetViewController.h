@@ -26,4 +26,6 @@ typedef enum
 @property(nonatomic,strong)DeviceModel *deviceModel;
 @property(nonatomic,readonly,assign)DeviceConfigEnteryWay enterWay;
 -(id)initWithEnterWay:(DeviceConfigEnteryWay)enterWay;
+
+-(void)getAuthInfo;
 @end

@@ -74,10 +74,12 @@ NSString * const notification_device_online_status_key = @"notification_device_o
     [deviceListTable setTableFooterView:[[UIView alloc]initWithFrame:CGRectZero]];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    __weak HomeDeviceManagerViewController * weakSelf = self;
+    __weak MRJBaseTableview *weakTable = deviceListTable;
     deviceListTable.backgroundColor = self.view.backgroundColor;
     deviceListTable.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [deviceListTable.mj_header endRefreshing];
-        [self loadData];
+        [weakTable.mj_header endRefreshing];
+        [weakSelf loadData];
     }];
     deviceListTable.mj_header.backgroundColor = deviceListTable.backgroundColor;
     [self loadData];
@@ -228,9 +230,12 @@ NSString * const notification_device_online_status_key = @"notification_device_o
 
         MNGSearchDeviceForConfigNetViewController *searchConfigVC = [[MNGSearchDeviceForConfigNetViewController alloc]initWithEnterWay:DeviceConfigEnteryFromDeviceList];
         searchConfigVC.deviceModel = data;
+        
+        __weak MRJBaseTableview *weakTable = deviceListTable;
+        [searchConfigVC getAuthInfo];
         [RACObserve(searchConfigVC,deviceModel.onLine) subscribeNext:^(id x)
          {
-             [deviceListTable reloadRowAtIndexPath:tempIndexPathForDeleteNet withRowAnimation:UITableViewRowAnimationNone];
+             [weakTable reloadRowAtIndexPath:tempIndexPathForDeleteNet withRowAnimation:UITableViewRowAnimationNone];
          }];
         [self.navigationController safetyPushViewController:searchConfigVC animated:YES];
     }

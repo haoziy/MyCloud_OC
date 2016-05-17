@@ -14,11 +14,12 @@
 #import "HomeStringKeyContentValueManager.h"
 #import "HomeResourceManager.h"
 #import "HomeHttpHandler.h"
+#import "SVProgressHUD.h"
 static const int totolTimer = 60;
 static const float BASE_WIDTH = 352;
 static const float BASE_HEIGHT = 288;
 static const float SLIDE_HEIGHT = 15;
-@interface DeviceParameterViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface DeviceParameterViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
     int consumeTimer;
     MRJBaseTableview *table;
@@ -42,11 +43,8 @@ static const float SLIDE_HEIGHT = 15;
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if(timer)
-    {
-        [timer invalidate];
-        timer = nil;
-    }
+    [timer invalidate];
+    timer = nil;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -113,8 +111,7 @@ static const float SLIDE_HEIGHT = 15;
     rangeSlider.rightValue = rightValue;
     
    
-    
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tttt:) name:SVProgressHUDDidTouchDownInsideNotification object:nil];
     
     [rangeSlider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(cameraImage.mas_left);
@@ -175,8 +172,9 @@ static const float SLIDE_HEIGHT = 15;
     }];
     
     param = @{@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
+    __weak MRJBaseTableview * weakTable = table;
     [RACObserve(_deviceModel,height) subscribeNext:^(id height){
-        [table reloadData];
+        [weakTable reloadData];
     }];
     
 }
@@ -199,6 +197,19 @@ static const float SLIDE_HEIGHT = 15;
     }
     [cell configMainTableViewCellStyleWithText:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightMenuName] andDetailText:_deviceModel.installHeight cellSize:CGSizeMake(0, 0) disclosureIndicator:YES selectHighlight:YES];
     return cell;
+}
+#pragma mark --alertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==1) {
+        [self stopCatchImage];
+    }
+    
+}
+-(void)tttt:(NSNotification*)note
+{
+    UIAlertView* alert =  [[UIAlertView alloc]initWithTitle:@"" message:@"确定取消抓图吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
 }
 
 #pragma WLRangeSliderDelegate
@@ -360,9 +371,8 @@ static const float SLIDE_HEIGHT = 15;
        
     } failed:^(id obj) {
     }];
-    
-    
 }
+
 -(void)resetDefaultHeight:(UIButton *)sender{
     rangeSlider.centerY = cameraImage.y+cameraImage.height/2;
     arrowImage.centerY = rangeSlider.centerY;
@@ -379,6 +389,9 @@ static const float SLIDE_HEIGHT = 15;
     topValue = cameraHeight/2;
     [table reloadData];
 }
-
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 @end

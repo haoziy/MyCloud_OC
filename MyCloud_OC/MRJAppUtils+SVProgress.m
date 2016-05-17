@@ -25,6 +25,7 @@
 
 + (void)showProgressMessage:(NSString *) message
 {
+
     [SVProgressHUD showWithStatus:message];
 }
 

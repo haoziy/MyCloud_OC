@@ -92,7 +92,8 @@
     
     [btn setBackgroundImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_secondaryTextColor] andSize:CGSizeMake(SCREEN_WIDTH-pading*2, height)] forState:UIControlStateDisabled];
 
-    [btn setEnabled:NO];
+//    [btn setEnabled:NO];
+    [btn addTarget:self action:@selector(loginPressed:) forControlEvents:UIControlEventTouchUpInside];
     [btn setBackgroundImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_mainThemeColor] andSize:CGSizeMake(SCREEN_WIDTH-pading*2, height)] forState:UIControlStateNormal];
     
     btn.layer.cornerRadius = [MRJSizeManager mrjButtonCornerRadius];
@@ -110,35 +111,20 @@
         // 让scrollview的contentSize随着内容的增多而变化
         make.bottom.mas_equalTo(btn.mas_bottom).offset(-pading);
     }];
-    RACSignal *loginSignal = [loginBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
+    
+    __weak UIButton *weakLoginBtn = loginBtn;
 
-    [loginSignal subscribeNext:^(id x) {
-        [LoginRegistHttpHandler login_loginWithParams:@{@"username":loginAccountTF.text, @"password":loginPassTF.text,@"identify":@"0"} preExecute:^{
-        } successBlock:^(id obj) {
-            if([obj isKindOfClass:[NSDictionary class]])
-            {
-                NSDictionary *dict = (NSDictionary*)obj;
-                if ([dict[request_status_key] integerValue]==0 ) {
-                    [AppSingleton shareInstace].lastLoginMobileOrEmail = loginAccountTF.text;
-                    MRJUserModel *user = [MRJUserModel modelWithJSON:dict[@"data"]];
-                    [AppSingleton saveCurrentUser:user];
-                    
-                    HomeDeviceManagerViewController*  deviceManagerVC = [[HomeDeviceManagerViewController alloc]init];
-                    self.navigationController.viewControllers = @[deviceManagerVC];
-                }
-            }
-            
-        } failedBlock:^(id obj) {
-            
-        } ];
-    }];
+// 
+    __weak MRJTextField *weakLoginPassTF = loginPassTF;
+     __weak MRJTextField *weakLoginAccountTF = loginAccountTF;
+
     
     RACSignal *validUsernameSignal =
-    [loginAccountTF.rac_textSignal
+    [weakLoginAccountTF.rac_textSignal
      map:^id(NSString *text) {
          return @([MRJStringCheckUtil checkPhoneNumber:text]||[MRJStringCheckUtil isValidateEmail:text]||text.length>0);
      }];
-    RACSignal *validPassSingal = [loginPassTF.rac_textSignal
+    RACSignal *validPassSingal = [weakLoginPassTF.rac_textSignal
                                   map:^id(NSString *text) {
                                       return @(text.length>0);
                                   }];
@@ -149,15 +135,19 @@
         return @([validAccount boolValue]&&[validPass boolValue]);
     }];
 
+
     [activeSignal subscribeNext:^(NSNumber*signupActive){
-        loginBtn.enabled =[signupActive boolValue];
+        weakLoginBtn.enabled =[signupActive boolValue];
     }];
-    
+//
     
     
     // Do any additional setup after loading the view.
 }
-
+-(void)pressed:(UIButton*)btn
+{
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -181,7 +171,24 @@
 }
 -(void)loginPressed:(id)sender
 {
-    
+    [LoginRegistHttpHandler login_loginWithParams:@{@"username":loginAccountTF.text, @"password":loginPassTF.text,@"identify":@"0"} preExecute:^{
+                } successBlock:^(id obj) {
+                    if([obj isKindOfClass:[NSDictionary class]])
+                    {
+                        NSDictionary *dict = (NSDictionary*)obj;
+                        if ([dict[request_status_key] integerValue]==0 ) {
+                            [AppSingleton shareInstace].lastLoginMobileOrEmail = loginAccountTF.text;
+                            MRJUserModel *user = [MRJUserModel modelWithJSON:dict[@"data"]];
+                            [AppSingleton saveCurrentUser:user];
+        
+                            HomeDeviceManagerViewController*  deviceManagerVC = [[HomeDeviceManagerViewController alloc]init];
+                            self.navigationController.viewControllers = @[deviceManagerVC];
+                        }
+                    }
+                    
+                } failedBlock:^(id obj) {
+                    
+                } ];
 }
 -(void)cancelOperation:(ChoicePrivateModelView*)view;
 {
