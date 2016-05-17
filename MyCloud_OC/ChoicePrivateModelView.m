@@ -174,6 +174,7 @@ NSString * const appSubPath = @"/app/";
         }
         
     } failedBlock:^(id obj) {
+        [MRJAppUtils showErrorMessage:language_login_connectServiceFailNotice];
     }];
 }
 

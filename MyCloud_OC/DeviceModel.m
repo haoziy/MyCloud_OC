@@ -40,6 +40,10 @@
              @"imagePath":@"img",
              @"wifi":@"wlanMac",
              @"ssid":@"wlanSsid",
+//             @"rightPoint":@"rightPonit",
+//             @"leftPoint":@"leftPonit",
+//             @"topPoint":@"topPonit",
+//             @"bottomPoint":@"bottomPonit",
              
              //             @"rule":[DeviceOperationRule className]
              //             @"rule" : @[@"allowDel",
@@ -60,7 +64,7 @@
 }
 -(DeviceInstallPara)installPara
 {
-    struct DeviceDetailPara param = {(int)self.boxTop,(int)self.boxLeft,(int)self.boxBottom,(int)self.boxRight,(int)self.direction,[self.height intValue]};
+    struct DeviceDetailPara param = {(CGFloat)self.topPoint,(CGFloat)self.leftPoint,(CGFloat)self.bottomPoint,(CGFloat)self.rightPoint,(int)self.direction,(NSInteger)self.boxTop,(NSInteger)self.boxLeft,(NSInteger)self.boxBottom,(NSInteger)self.boxRight};
     return param;
 }
 -(NSString*)modeName
@@ -114,6 +118,16 @@
         }
     }
     return @"";
+}
+-(NSString*)height
+{
+    if ([_height integerValue]<1) {
+        _height = @"1";
+    }
+    if ([_height integerValue]>3) {
+        _height = @"3";
+    }
+    return _height;
 }
 -(NSString*)displayMode
 {

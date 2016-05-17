@@ -1296,7 +1296,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 -(void)dealLogic//配置后的处理逻辑部分
 {
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"配置设备网络成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"配置设备网络成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
     alert.tag = 200;
     [alert show];
 }

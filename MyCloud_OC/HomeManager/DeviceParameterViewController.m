@@ -105,10 +105,10 @@ static const float SLIDE_HEIGHT = 15;
     
     
     //左右是比例;
-    leftValue = (float)((float)_deviceModel.installPara.boxleft/(float)BASE_WIDTH);
-    rightValue = (float)((float)_deviceModel.installPara.boxright/(float)BASE_WIDTH);//
+    leftValue = (float)(((float)_deviceModel.installPara.leftPoint)/((float)BASE_WIDTH));
+    rightValue = (float)(((float)_deviceModel.installPara.rightPoint)/((float)BASE_WIDTH));//
     //上下是实际值
-    topValue = (_deviceModel.installPara.boxtop/(float)BASE_HEIGHT)*cameraHeight;
+    topValue = (((float)_deviceModel.installPara.topPoint)/((float)BASE_HEIGHT))*cameraHeight;
     rangeSlider.leftValue = leftValue;
     rangeSlider.rightValue = rightValue;
     
@@ -234,20 +234,69 @@ static const float SLIDE_HEIGHT = 15;
 }
 
 -(void)saveInstallHeight:(UIButton *)sender{
+    //计算扩容后的绝对数值和扩容前的数值坐标
+    _deviceModel.leftPoint = rangeSlider.leftValue*BASE_WIDTH;//
+    _deviceModel.rightPoint = rangeSlider.rightValue*BASE_WIDTH;//
+    _deviceModel.topPoint = topValue/cameraHeight*BASE_HEIGHT;
+    _deviceModel.bottomPoint = BASE_HEIGHT-topValue/cameraHeight*BASE_HEIGHT;
+    
+    
+    _deviceModel.boxTop = _deviceModel.topPoint - _deviceModel.topPoint*2/3;
+    _deviceModel.boxBottom = _deviceModel.bottomPoint+(BASE_HEIGHT-_deviceModel.bottomPoint)*2/3;
+    _deviceModel.boxLeft = _deviceModel.leftPoint - _deviceModel.leftPoint*2/3;
+    _deviceModel.boxRight = _deviceModel.rightPoint +(BASE_WIDTH - _deviceModel.rightPoint)*2/3;
+    
+    if (_deviceModel.boxRight == _deviceModel.boxLeft) {
+        if (_deviceModel.boxRight == BASE_WIDTH)//重合与右边界;
+        {
+            _deviceModel.boxRight = _deviceModel.boxRight-1;
+            _deviceModel.boxLeft = _deviceModel.boxLeft-2;
+        }else if (_deviceModel.boxRight == 0)//重合于左边界
+        {
+            _deviceModel.boxLeft = _deviceModel.boxLeft+1;
+            _deviceModel.boxRight = _deviceModel.boxRight+2;
+        }else{
+            _deviceModel.boxRight++;
+            _deviceModel.boxLeft--;
+        }
+    }
+    else{
+        if (_deviceModel.boxLeft == 0) {
+            _deviceModel.boxLeft = 1;
+            if (_deviceModel.boxRight == 1) {
+                _deviceModel.boxRight = _deviceModel.boxRight+1;
+            }
+        }
+        if (_deviceModel.boxRight == BASE_WIDTH) {
+            _deviceModel.boxRight = _deviceModel.boxRight-1;
+            if (_deviceModel.boxLeft == _deviceModel.boxRight) {
+                _deviceModel.boxLeft = _deviceModel.boxLeft-1;
+            }
+        }
+    }
+    
+    if (_deviceModel.boxTop == 0) {
+        _deviceModel.boxTop = 1;
+    }
+    if (_deviceModel.boxBottom == BASE_HEIGHT) {
+        _deviceModel.boxBottom = _deviceModel.boxBottom-1;
+    }
+    
     NSDictionary *dict = @{
                            @"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",
                            @"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",
-                           @"boxLeft":@((int)(leftValue*BASE_WIDTH)),
-                           @"boxRight":@((int)(rightValue*BASE_WIDTH)),
-                           @"boxTop": @((int)(topValue/cameraHeight*BASE_HEIGHT)),
-                           @"boxBottom": @((int)(BASE_HEIGHT-topValue/cameraHeight*BASE_HEIGHT)),
+                           @"topPoint":@((NSInteger)_deviceModel.topPoint),
+                           @"leftPoint":@((NSInteger)_deviceModel.leftPoint),
+                           @"bottomPoint":@((NSInteger)_deviceModel.bottomPoint),
+                           @"rightPoint":@((NSInteger)_deviceModel.rightPoint),
+                           @"boxTop": @((NSInteger)_deviceModel.boxTop),
+                           @"boxLeft":@((NSInteger)_deviceModel.boxLeft),
+                           @"boxBottom": @((NSInteger)_deviceModel.boxBottom),
+                           @"boxRight":@((NSInteger)_deviceModel.boxRight),
                            @"direction": @(_deviceModel.direction),
                            @"height": _deviceModel.height,
                            };
-    _deviceModel.boxLeft = leftValue*BASE_WIDTH;
-    _deviceModel.boxRight = rightValue*BASE_WIDTH;
-    _deviceModel.boxTop = topValue/cameraHeight*BASE_HEIGHT;
-    _deviceModel.boxBottom = BASE_HEIGHT-topValue/cameraHeight*BASE_HEIGHT;
+
     [HomeHttpHandler home_saveDeviceParams:dict preExecute:^{
         
     } success:^(id obj) {
@@ -320,14 +369,15 @@ static const float SLIDE_HEIGHT = 15;
     rangeSlider.leftValue = 0;
     rangeSlider.rightValue = 1;
     _deviceModel.installHeight = heightArray[1];
-    [table reloadData];
+   
 
 
-    height = @"3";
+    height = @"2";
+    _deviceModel.height = height;
     leftValue = 0;
     rightValue = 1;
     topValue = cameraHeight/2;
-    [self excultePara];
+    [table reloadData];
 }
 
 

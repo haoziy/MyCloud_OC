@@ -98,6 +98,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
         if (failed) {
             failed(obj);
         }
+        [MRJAppUtils showErrorMessage:request_operation_failed_notice_message];
     }];
 }
 +(void)home_deleteNetWorkCMD:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;

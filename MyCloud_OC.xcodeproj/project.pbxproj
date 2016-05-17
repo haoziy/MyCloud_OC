@@ -1571,7 +1571,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Private-com.xiaozhou.meirenji";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c989c681-9ee9-4577-8ee3-4a9cc151872d";
+				PROVISIONING_PROFILE = "e0eac3e3-d2c9-41a4-8688-dbd5764de925";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1598,7 +1598,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Private-com.xiaozhou.meirenji";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c989c681-9ee9-4577-8ee3-4a9cc151872d";
+				PROVISIONING_PROFILE = "e0eac3e3-d2c9-41a4-8688-dbd5764de925";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

@@ -19,12 +19,21 @@ typedef enum {
 }DeviceHardModel;//硬件型号
 
 struct DeviceDetailPara {
-    int boxtop;
-    int boxleft;
-    int boxbottom;
-    int boxright;
-    int direction;
-    int height;
+    //扩容前
+    float topPoint;
+    float leftPoint;
+    float bottomPoint;
+    float rightPoint;
+    //安装方向
+    NSInteger direction;
+   
+    //扩容后
+    NSInteger boxtop;
+    NSInteger boxleft;
+    NSInteger boxbottom;
+    NSInteger boxright;
+    
+    
 };
 typedef struct DeviceDetailPara DeviceInstallPara;
 
@@ -116,10 +125,18 @@ typedef struct DeviceDetailPara DeviceInstallPara;
 @property (nonatomic,copy) NSString *installHeight;
 
 //安装参数
+//扩展之后的;是绝对数值
 @property(nonatomic,assign)NSInteger boxBottom;//
 @property(nonatomic,assign)NSInteger boxLeft;//
 @property(nonatomic,assign)NSInteger boxRight;
 @property(nonatomic,assign)NSInteger boxTop;
+
+//扩展之前的;是相对坐标;
+@property(nonatomic,assign)CGFloat bottomPoint;//
+@property(nonatomic,assign)CGFloat leftPoint;//
+@property(nonatomic,assign)CGFloat rightPoint;
+@property(nonatomic,assign)CGFloat topPoint;
+
 @property(nonatomic,assign)NSInteger direction;
 
 

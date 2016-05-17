@@ -13,7 +13,7 @@
 #import "AppSingleton.h"
 NSString * const request_status_key = @"status";//http请求keystatus
 NSString * const request_data_key = @"data";//http 请求数据字段
-NSString * const request_progress_loading_message = @"loading....";//http请求loading提示语
+NSString * const request_progress_loading_message = @"请稍后....";//http请求loading提示语
 NSString * const request_network_notwork_notice_message = @"网络不给力";
 NSString * const request_operation_success_notice_message = @"操作成功";
 NSString * const request_operation_failed_notice_message = @"操作失败";
@@ -159,6 +159,7 @@ NSString * const request_operation_failed_notice_message = @"操作失败";
 }
 +(void)baseRequestAFNetWorkFullURL:(NSString*)fullURL method:(HttpRequestType)method andHttpHeader:(NSDictionary *)header parameters:(id)parameters prepareExecute:(MRJPrepareExcute)prepare succeed:(MRJSuccessBlock)succeed failed:(MRJFailedBlock)failed;
 {
+    prepare();
     NSString *url = fullURL;
     
     AFHTTPSessionManager  * manager = [AFHTTPSessionManager manager];
