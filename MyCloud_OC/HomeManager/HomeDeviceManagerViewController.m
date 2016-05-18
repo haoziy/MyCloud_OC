@@ -18,6 +18,8 @@
 #import "MNGDeviceNetConfigViewController.h"
 #import "DeviceDetailViewController.h"
 NSString * const notification_device_online_status_key = @"notification_device_online_status_key" ;//设备网络状态发生变化
+NSInteger const deletNetAlertTag = 2000;
+NSInteger const exitAlertTag = 3000;
 
 @interface HomeDeviceManagerViewController()<UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,UISearchControllerDelegate,BaseTableViewCellDelegate,UIAlertViewDelegate>
 {
@@ -29,6 +31,8 @@ NSString * const notification_device_online_status_key = @"notification_device_o
     NSMutableArray *allDevices;
     DeviceModel *tempDeviceForDeleteNet;
     NSIndexPath *tempIndexPathForDeleteNet;
+    
+    UILabel *noDataLabel;
 }
 
 @end
@@ -55,6 +59,8 @@ NSString * const notification_device_online_status_key = @"notification_device_o
     [deviceListTable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
+    
+    
     
     searchViewController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [searchViewController.view addSubview:searchTable];
@@ -93,13 +99,17 @@ NSString * const notification_device_online_status_key = @"notification_device_o
     } success:^(id obj) {
         [deviceListTable.mj_header endRefreshing];
         if ([obj isKindOfClass:[NSArray class]]) {
+            deviceListTable.noDataSetView.hidden = YES;
             deviceList = obj;
             [allDevices removeAllObjects];
             [allDevices addObjectsFromArray:deviceList[0]];
             [allDevices addObjectsFromArray:deviceList[1]];
             [deviceListTable reloadData];
+        }else
+        {
+            deviceListTable.noDataSetView.hidden = NO;
         }
-    } failed:^(id obj) { 
+    } failed:^(id obj) {
       [deviceListTable.mj_header endRefreshing];
     }];
 }
@@ -113,6 +123,15 @@ NSString * const notification_device_online_status_key = @"notification_device_o
         return [MRJSizeManager mrjInputSizeHeight];
     }
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section;
+{
+    if (tableView==searchTable) {
+        return 0;
+    }else
+    {
+        return [MRJSizeManager mrjVerticalSpace]*2;
+    }
+}
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     
@@ -124,7 +143,7 @@ NSString * const notification_device_online_status_key = @"notification_device_o
         UIView *view = [[UIView alloc]init];
         
         UILabel *label = [[UILabel alloc]init];
-        view.backgroundColor = self.view.backgroundColor;
+        view.backgroundColor = NavigationTextColor;
         label.text = [NSString stringWithFormat:@"%@ %lu台",section==0?@"在线":@"离线",(unsigned long)(section==0? ((NSArray*)deviceList[0]).count:((NSArray*)deviceList[1]).count)];
         [view addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -183,32 +202,27 @@ NSString * const notification_device_online_status_key = @"notification_device_o
 #pragma mark --alertViewDelegateMethod
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
-    if (buttonIndex==1) {
-        NSDictionary *param = @{@"deviceId":tempDeviceForDeleteNet.deviceId?tempDeviceForDeleteNet.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
-        [HomeHttpHandler home_deleteNetWorkCMD:param preExecute:^{
-        } success:^(id obj) {
-            if ([obj[request_status_key] integerValue]==0) {
-//                if (searchTable.hidden==NO) {
-//                    DeviceModel *model = searchData[tempIndexPathForDeleteNet.row];
-//                    model.onLine = NO;
-//                    allDevices[tempIndexPathForDeleteNet.row] = model;
-//                    [searchTable reloadRowAtIndexPath:tempIndexPathForDeleteNet withRowAnimation:UITableViewRowAnimationNone];
-//                }else
-//                {
-//                    DeviceModel *model;
-//                    if (tempIndexPathForDeleteNet.section==0) {
-//                        model = onLineData[tempIndexPathForDeleteNet.row];
-//                    }
-//                    model.onLine = NO;
-//                    deviceList[tempIndexPathForDeleteNet.section][tempIndexPathForDeleteNet.row] = model;
-//                    [searchTable reloadRowAtIndexPath:tempIndexPathForDeleteNet withRowAnimation:UITableViewRowAnimationNone];
-//                }
-                [[NSNotificationCenter defaultCenter]postNotificationName:notification_device_online_status_key object:nil];
-            }
-        } failed:^(id obj) {
-            
-        }];
+    if (alertView.tag==deletNetAlertTag) {
+        if (buttonIndex==1) {
+            NSDictionary *param = @{@"deviceId":tempDeviceForDeleteNet.deviceId?tempDeviceForDeleteNet.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
+            [HomeHttpHandler home_deleteNetWorkCMD:param preExecute:^{
+            } success:^(id obj) {
+                if ([obj[request_status_key] integerValue]==0) {
+                    [[NSNotificationCenter defaultCenter]postNotificationName:notification_device_online_status_key object:nil];
+                }
+            } failed:^(id obj) {
+                
+            }];
+        }
+    }else if(alertView.tag ==exitAlertTag)
+    {
+        if (buttonIndex==1) {
+            MRJLoginViewController *loginVC = [[MRJLoginViewController alloc]init];
+            self.navigationController.viewControllers = @[loginVC];
+        }
+       
     }
+    
 }
 #pragma mark --baseCellDelegateMethod
 -(void)cell:(BaseTableViewCell*)cell operation:(MRJCellOperationType)type WithData:(id)data;
@@ -221,7 +235,7 @@ NSString * const notification_device_online_status_key = @"notification_device_o
     }
     if (type==MRJCellOperationTypeDelete) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"确定删除设备的网络配置?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        alert.tag = 2000;
+        alert.tag = deletNetAlertTag;
         tempDeviceForDeleteNet = data;
         [alert show];
         
@@ -291,9 +305,10 @@ NSString * const notification_device_online_status_key = @"notification_device_o
 }
 -(void)exitDeviceManager:(id)sender
 {
-    MRJLoginViewController *loginVC = [[MRJLoginViewController alloc]init];
-    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
-    [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"确定要退出吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag = exitAlertTag;
+    [alert show];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
@@ -308,22 +323,6 @@ NSString * const notification_device_online_status_key = @"notification_device_o
         model = ((NSArray*)((NSArray*)deviceList[indexPath.section]))[indexPath.row];
     }
     searchConfigVC.deviceModel = model;
-//    [RACObserve(searchConfigVC, deviceModel) subscribeNext:^(id x) {
-//        if (searchTable.isHidden==NO) {
-//            searchData[indexPath.row] = x;
-//            [searchTable reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-//        }else
-//        {
-//            if (indexPath.section==0) {
-//                onLineData[indexPath.row] = x;
-//            }else
-//            {
-//                offLineData[indexPath.row] = x;
-//            }
-//           [deviceListTable reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-//        }
-//        
-//    }];
     [self.navigationController safetyPushViewController:searchConfigVC animated:YES];
 }
 @end

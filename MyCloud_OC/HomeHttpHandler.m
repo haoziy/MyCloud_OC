@@ -51,7 +51,14 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
             }
         }
         NSArray* parseData = @[onlineArr,offlineArr];
-        succes(parseData);
+        if(onlineArr.count==0&&offlineArr.count==0)
+        {
+            succes(nil);
+        }else
+        {
+            succes(parseData);
+        }
+        
         [MRJAppUtils dismissHUD];
     } failed:^(id obj) {
         if (failed) {

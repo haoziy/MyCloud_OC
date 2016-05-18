@@ -19,13 +19,15 @@
 #import "MNGSearchDeviceForConfigNetViewController.h"
 
 
+NSInteger const rebootBtnTag = 1000;
+NSInteger const delNetBtnTag = 2000;
 extern NSString *const notification_device_online_status_key;
 @interface DeviceDetailViewController ()<UIAlertViewDelegate,BaseTableViewCellDelegate>
 {
     NSString *defaultStr;
     UILabel *ssidByOffLineLab;//离线后显示ssid的lab
-    DeviceModel *tempDeviceForDeleteNet;
-    DeviceModel *tempDeviceForReBoot;
+//    DeviceModel *tempDeviceForDeleteNet;
+//    DeviceModel *tempDeviceForReBoot;
 }
 
 @end
@@ -248,9 +250,9 @@ static NSString *myCell = @"MyCell";
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
     if (buttonIndex==1) {
-        if (alertView.tag==1000) {
+        if (alertView.tag==rebootBtnTag) {
             if (buttonIndex==1) {
-                NSDictionary *param = @{@"deviceId":tempDeviceForDeleteNet.deviceId?tempDeviceForDeleteNet.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
+                NSDictionary *param = @{@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
                 [HomeHttpHandler home_rebootDeviceCMD:param preExecute:^{
                 } success:^(id obj) {
                     if ([obj[request_status_key] integerValue]==0) {
@@ -261,14 +263,16 @@ static NSString *myCell = @"MyCell";
                 }];
             }
         
-        }else if (alertView.tag==2000)
+        }else if (alertView.tag==delNetBtnTag)
         {
             if (buttonIndex==1) {
-                NSDictionary *param = @{@"deviceId":tempDeviceForDeleteNet.deviceId?tempDeviceForDeleteNet.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
+                NSDictionary *param = @{@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@""};
                 [HomeHttpHandler home_deleteNetWorkCMD:param preExecute:^{
                 } success:^(id obj) {
                     if ([obj[request_status_key] integerValue]==0) {
                         [self loadData];
+                        reBootBtn.hidden = YES;
+                        deleteNetBtn.hidden = YES;
                     }
                 } failed:^(id obj) {
                     
@@ -294,14 +298,14 @@ static NSString *myCell = @"MyCell";
 
 - (void)reBootDevice:(UIButton *)sender{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"设备重启需要1-2分钟，确定重启设备?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    alert.tag = 1000;
+    alert.tag = rebootBtnTag;
     [alert show];
     
 }
 
 - (void)deleteNetConfig:(UIButton *)sender{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"确定删除设备的网络配置?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    alert.tag = 2000;
+    alert.tag = delNetBtnTag;
     [alert show];
     
 }

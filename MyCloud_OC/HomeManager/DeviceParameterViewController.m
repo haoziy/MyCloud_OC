@@ -34,17 +34,24 @@ static const float SLIDE_HEIGHT = 15;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 }
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+}
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [timer invalidate];
     timer = nil;
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -55,7 +55,9 @@ extern NSString *const color_hex_plainColorString;
 //分割线颜色
 extern NSString *const color_hex_separatrixColorString;
 
-
+//button选中色
+extern NSString *const color_hex_buttonHighlightColorString;
+//e69900
 
 @interface MRJColorManager : NSObject
 
@@ -69,4 +71,5 @@ extern NSString *const color_hex_separatrixColorString;
 +(UIColor*)mrj_alertColor;
 +(UIColor*)mrj_plainColor;
 +(UIColor*)mrj_separatrixColor;
++(UIColor*)mrj_buttonHighlightColor;
 @end

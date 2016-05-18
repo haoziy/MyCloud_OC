@@ -15,6 +15,7 @@
 - (NSString *)safeSubstringToIndex:(NSUInteger)index;
 
 - (NSString *)safeSubstringFromIndex:(NSUInteger)index;
+
 +(NSString *)countNumAndChangeformat:(NSString *)num;
 
 

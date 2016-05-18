@@ -11,7 +11,7 @@
 /**
  *  设备管理界面
  */
-NSString * const language_homeDeviceManagerTitle = @"设备管理";//设备管理标题
+NSString * const language_homeDeviceManagerTitle = @"设备列表";//设备管理标题
 NSString * const language_homeDeviceManagerExitCurrentCloudTitle = @"退出";
 NSString * const language_homeDeviceManagerConfigNetButtonName = @"配置网络";//配置网络按钮名
 NSString * const language_homeDeviceManagerDelNetButtonName = @"删除网络";//删除网络按钮名

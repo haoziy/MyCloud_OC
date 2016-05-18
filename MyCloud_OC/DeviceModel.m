@@ -39,27 +39,6 @@
              @"modeName":@"mode",
              @"imagePath":@"img",
              @"wifi":@"wlanMac",
-             @"ssid":@"wlanSsid",
-//             @"rightPoint":@"rightPonit",
-//             @"leftPoint":@"leftPonit",
-//             @"topPoint":@"topPonit",
-//             @"bottomPoint":@"bottomPonit",
-             
-             //             @"rule":[DeviceOperationRule className]
-             //             @"rule" : @[@"allowDel",
-             //                         @"allowDelAccount",
-             //                         @"allowDelNet",
-             //                         @"allowGrap",
-             //                         @"allowParamAlgorithm",
-             //                         @"allowParamBase",
-             //                         @"allowParamCamera",
-             //                         @"allowQuit",
-             //                         @"allowRestart",
-             //                         @"allowServerSetting",
-             //                         @"allowSetting",
-             //                         @"allowSettingAccount",
-             //                         @"allowTransfer",
-             //                         @"allowUpgrade"]
              };
 }
 -(DeviceInstallPara)installPara
@@ -128,6 +107,23 @@
         _height = @"3";
     }
     return _height;
+}
+-(NSString*)lens
+{
+    
+    if ([_lens integerValue]==1||[_lens integerValue]==2||[_lens integerValue]==3) {
+        return _lens;
+    }else
+    {
+        if(self.imei.length>3)
+        {
+            return [self.imei substringWithRange:NSMakeRange(2, 1)];
+        }
+        else
+        {
+            return @"";
+        }
+    }
 }
 -(NSString*)displayMode
 {

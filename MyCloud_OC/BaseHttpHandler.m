@@ -143,6 +143,7 @@ NSString * const request_operation_failed_notice_message = @"操作失败";
                     }
                     
                 } else {
+                    [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
                     [DeBugLog debugLog:[[NSString stringWithUTF8String:__FILE__] lastPathComponent] line:__LINE__ otherInfo:@"apiName:%@\n%@",url,error.localizedDescription];
                     if (error) {
                         failed(error);
@@ -196,6 +197,7 @@ NSString * const request_operation_failed_notice_message = @"操作失败";
                     succeed(result);
                 } else {
                     [DeBugLog debugLog:[[NSString stringWithUTF8String:__FILE__] lastPathComponent] line:__LINE__ otherInfo:@"apiName:%@\n%@",url,error.localizedDescription];
+                    
                     failed(error);
                 }
             }] resume];

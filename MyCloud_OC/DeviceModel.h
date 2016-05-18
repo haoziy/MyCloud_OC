@@ -83,6 +83,9 @@ typedef struct DeviceDetailPara DeviceInstallPara;
 @property(nonatomic,copy) NSString *slaveDns;
 //ssid wifi ssid
 @property(nonatomic,copy) NSString *ssid;
+//设备热点名称
+@property(nonatomic,copy)NSString *wlanSsid;
+
 //password 目前的wifi密码
 @property (nonatomic,copy) NSString *password;
 //encrypt 加密方式

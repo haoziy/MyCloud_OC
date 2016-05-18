@@ -10,4 +10,6 @@
 
 @interface MRJBaseTableview : UITableView
 
+@property(nonatomic,copy)NSString* noDataSetString;//没有数据集时显示的内容
+@property(nonatomic,strong)UIView *noDataSetView;//没有数据集暂时的view;
 @end

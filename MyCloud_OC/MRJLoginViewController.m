@@ -90,11 +90,12 @@
     loginBtn = btn;
     btn.clipsToBounds = YES;
     
-    [btn setBackgroundImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_secondaryTextColor] andSize:CGSizeMake(SCREEN_WIDTH-pading*2, height)] forState:UIControlStateDisabled];
+    [btn setBackgroundImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_buttonHighlightColor] andSize:CGSizeMake(SCREEN_WIDTH-pading*2, height)] forState:UIControlStateDisabled];
 
 //    [btn setEnabled:NO];
     [btn addTarget:self action:@selector(loginPressed:) forControlEvents:UIControlEventTouchUpInside];
     [btn setBackgroundImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_mainThemeColor] andSize:CGSizeMake(SCREEN_WIDTH-pading*2, height)] forState:UIControlStateNormal];
+
     
     btn.layer.cornerRadius = [MRJSizeManager mrjButtonCornerRadius];
     [btn setTitle:[LoginRegistStringValueContentManager loginRegistLanguageValueForKey:language_login_title] forState:UIControlStateNormal];
@@ -171,6 +172,10 @@
 }
 -(void)loginPressed:(id)sender
 {
+    if (![AppSingleton currentEnvironmentBaseURL]) {
+         [MRJAppUtils showErrorMessage:@"请设置服务器地址"];
+        return;
+    }
     [LoginRegistHttpHandler login_loginWithParams:@{@"username":loginAccountTF.text, @"password":loginPassTF.text,@"identify":@"0"} preExecute:^{
                 } successBlock:^(id obj) {
                     if([obj isKindOfClass:[NSDictionary class]])
