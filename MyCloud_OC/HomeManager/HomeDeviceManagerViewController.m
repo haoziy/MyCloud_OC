@@ -118,7 +118,7 @@ NSInteger const exitAlertTag = 3000;
 {
     if (tableView==searchTable) {
         return 0;
-    }else
+    }else 
     {
         return [MRJSizeManager mrjInputSizeHeight];
     }
@@ -127,9 +127,12 @@ NSInteger const exitAlertTag = 3000;
 {
     if (tableView==searchTable) {
         return 0;
-    }else
+    }else if(section==0)
     {
         return [MRJSizeManager mrjVerticalSpace]*2;
+    }else
+    {
+        return 0;
     }
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -144,11 +147,20 @@ NSInteger const exitAlertTag = 3000;
         
         UILabel *label = [[UILabel alloc]init];
         view.backgroundColor = NavigationTextColor;
-        label.text = [NSString stringWithFormat:@"%@ %lu台",section==0?@"在线":@"离线",(unsigned long)(section==0? ((NSArray*)deviceList[0]).count:((NSArray*)deviceList[1]).count)];
+        label.text = [NSString stringWithFormat:@"%@ ",section==0?@"在线":@"离线"];
         [view addSubview:label];
+        UILabel *label2 = [[UILabel alloc]init];
+        label2.text = [NSString stringWithFormat:@"%ld台",(unsigned long)(section==0? ((NSArray*)deviceList[0]).count:((NSArray*)deviceList[1]).count)];
+        label2.textColor = SecondaryTextColor;
+        [view addSubview:label2];
+        
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(LEFT_PADDING);
             make.centerY.mas_equalTo(label.superview);
+        }];
+        [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(label.mas_right);
+            make.centerY.mas_equalTo(label2.superview);
         }];
         return view;
         
