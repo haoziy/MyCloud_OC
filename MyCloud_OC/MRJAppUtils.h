@@ -53,14 +53,14 @@
 +(NSMutableArray *)sortArrayWithArray:(NSMutableArray *)array descend:(BOOL)descend;
 
 /********************* Category Utils **********************/
-//根据颜色码取得颜色对象
-+ (UIColor *)colorWithHexString:(NSString *)stringToConvert;
-
-//根据颜色码和透明度,取得颜色对象
-+ (UIColor *)colorWithHexString:(NSString *)stringToConvert andAlpha:(float)alpha;
+////根据颜色码取得颜色对象
+//+ (UIColor *)colorWithHexString:(NSString *)stringToConvert;
+//
+////根据颜色码和透明度,取得颜色对象
+//+ (UIColor *)colorWithHexString:(NSString *)stringToConvert andAlpha:(float)alpha;
 
 //根据颜色对象和size,取得一张image
-+(UIImage *)buttonImageFromColor:(UIColor *)color andSize:(CGSize)size;
+//+(UIImage *)buttonImageFromColor:(UIColor *)color andSize:(CGSize)size;
 
 /********************* Verification Utils **********************/
 //验证手机号码合法性（正则）yes: 合法 no: 非法
