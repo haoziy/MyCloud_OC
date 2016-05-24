@@ -1256,6 +1256,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             if([obj[request_data_key][@"online"] boolValue]==YES)
             {
                 [[NSNotificationCenter defaultCenter]postNotificationName:notification_device_online_status_key object:nil];
+                self.deviceModel.onLine = YES;
                 [player stop];
                 [self stopConfig];
                 

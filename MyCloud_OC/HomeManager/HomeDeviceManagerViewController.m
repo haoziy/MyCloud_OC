@@ -239,12 +239,6 @@ NSInteger const exitAlertTag = 3000;
 #pragma mark --baseCellDelegateMethod
 -(void)cell:(BaseTableViewCell*)cell operation:(MRJCellOperationType)type WithData:(id)data;
 {
-    if (searchTable.hidden == YES) {
-        tempIndexPathForDeleteNet = [deviceListTable indexPathForCell:cell];
-    }else
-    {
-        tempIndexPathForDeleteNet = [deviceListTable indexPathForCell:cell];
-    }
     if (type==MRJCellOperationTypeDelete) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"确定删除设备的网络配置?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = deletNetAlertTag;
@@ -256,14 +250,36 @@ NSInteger const exitAlertTag = 3000;
 
         MNGSearchDeviceForConfigNetViewController *searchConfigVC = [[MNGSearchDeviceForConfigNetViewController alloc]initWithEnterWay:DeviceConfigEnteryFromDeviceList];
         searchConfigVC.deviceModel = data;
-        
-        __weak MRJBaseTableview *weakTable = deviceListTable;
         [searchConfigVC getAuthInfo];
-        [RACObserve(searchConfigVC,deviceModel.onLine) subscribeNext:^(id x)
-         {
-             [weakTable reloadRowAtIndexPath:tempIndexPathForDeleteNet withRowAnimation:UITableViewRowAnimationNone];
-         }];
+        
         [self.navigationController safetyPushViewController:searchConfigVC animated:YES];
+        if (searchTable.hidden == YES) {
+            __weak MRJBaseTableview *weakTable = deviceListTable;
+            __weak NSIndexPath *indexPath = [deviceListTable indexPathForCell:cell];
+            [RACObserve(searchConfigVC,deviceModel.onLine) subscribeNext:^(id x)
+             {
+                 __strong NSIndexPath *strongPath = indexPath;
+                 if(strongPath )
+                 {
+                     [weakTable reloadRowAtIndexPath:strongPath withRowAnimation:UITableViewRowAnimationNone];
+                 }
+                 
+             }];
+            
+        }else
+        {
+            __weak MRJBaseTableview *weakTable = searchTable;
+            __weak NSIndexPath *indexPath =  [searchTable indexPathForCell:cell];
+           
+            [RACObserve(searchConfigVC,deviceModel.onLine) subscribeNext:^(id x)
+             {
+                  __strong NSIndexPath *strongPath = indexPath;
+                 if(strongPath )
+                 {
+                     [weakTable reloadRowAtIndexPath:strongPath withRowAnimation:UITableViewRowAnimationNone];
+                 }
+             }];
+        }
     }
     
 }
