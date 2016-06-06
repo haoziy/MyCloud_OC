@@ -15,6 +15,7 @@ NSString * const language_login_accountPlacement = @"手机号/邮箱";//登录�
 NSString * const language_login_connectServiceSuccessNotice = @"连接成功";//连接服务器成功提示
 NSString * const language_login_connectServiceFailNotice = @"连接私有云服务器失败，请检查服务器地址是否正确，或者手机和服务器是否在同一个网络";//连接服务器地址失败提示
 NSString * const language_login_passwordPlacement = @"密码";//登录界面密码占位符
+NSString * const language_login_noSettingServiceNotice = @"请设置服务器地址";
 @implementation LoginRegistStringValueContentManager
 
 +(NSString*)languageValueForKey:(NSString *)key

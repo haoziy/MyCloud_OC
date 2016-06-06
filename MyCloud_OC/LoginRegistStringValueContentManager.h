@@ -18,7 +18,7 @@ extern NSString * const language_login_connectServiceFailNotice;//连接服务�
 
 extern NSString * const language_login_accountPlacement;//登录账号占位字符串
 extern NSString * const language_login_passwordPlacement;//登录界面密码占位符
-
+extern NSString * const language_login_noSettingServiceNotice;//未设置服务器地址就登录提示
 
 
 

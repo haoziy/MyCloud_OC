@@ -173,7 +173,7 @@
 -(void)loginPressed:(id)sender
 {
     if (![AppSingleton currentEnvironmentBaseURL]) {
-         [MRJAppUtils showErrorMessage:@"请设置服务器地址"];
+         [MRJAppUtils showErrorMessage:language_login_noSettingServiceNotice];
         return;
     }
     [LoginRegistHttpHandler login_loginWithParams:@{@"username":loginAccountTF.text, @"password":loginPassTF.text,@"identify":@"0"} preExecute:^{
