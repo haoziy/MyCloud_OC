@@ -11,6 +11,12 @@
 /**
  *  设备管理界面
  */
+NSString * const language_homeDeviceManagerDeviceOnlineStatusString = @"在线";//设备在线状态 在线
+NSString * const language_homeDeviceManagerDeviceOfflineStatusString = @"离线";//设备离线状态 离线
+NSString * const language_homeDeviceManagerDevicePerMeta = @"台";//设备单位 台
+NSString * const language_homeDeviceManagerDeleNetNotice = @"确定删除设备的网络配置?";//删除网络提示
+NSString * const language_homeDeviceManagerExitLoginNotice  = @"确定要退出吗?";//退出登录提示
+
 NSString * const language_homeDeviceManagerTitle = @"设备列表";//设备管理标题
 NSString * const language_homeDeviceManagerExitCurrentCloudTitle = @"退出";
 NSString * const language_homeDeviceManagerConfigNetButtonName = @"配置网络";//配置网络按钮名
@@ -42,7 +48,7 @@ NSString * const language_homeDeviceParamCaptureCurrentImageButtonName = @"抓�
 NSString * const language_homeDeviceParamResetDefaultButtonName = @"恢复默认";//设置摄像头宽度提示语
 
 NSString * const language_homeDeviceParamInstallHeightMenuName = @"安装高度";//安装高度提示语
-
+NSString * const language_homeDeviceParamCancelCapturePictureNotice = @"确定取消抓图吗?";//取消抓图提示
 
 /**
  *  设备搜索界面
@@ -69,6 +75,10 @@ NSString * const language_homeDeviceConfigSeacrchNotFindContinueConfigDeviceNoti
  */
 NSString * const language_homeDeviceConfigTitle = @"配置网络";//网络配置界面标题
 NSString * const language_homeDeviceConfigNoWIFINoticeText = @"请将手机网络切换至设备所连接的Wi-Fi网络";//网络配置没有wifi提示语
+NSString * const language_homeDeviceConfigWIFINameTooManyChineseChar = @"设备暂不支持这么多中文的Wi-Fi网络";//含有太多中文字符
+NSString * const language_homeDeviceConfigWIFINameContainSpecialCharNotice = @"设备暂不支持特殊字符&的Wi-Fi网络";//wifi含有特殊字符提示
+
+
 NSString * const language_homeDeviceConfigCurrentWifi = @"当前手机Wi-Fi";//网络配置,当前wifi
 
 NSString * const language_homeDeviceConfigNetTypeTitle = @"网络类型";//网络配置,网络类型
@@ -80,9 +90,18 @@ NSString * const language_homeDeviceConfigIpTitle = @"IP设置";//ip标题
 NSString * const language_homeDeviceConfigDHCPBtnName = @"动态";//动态网络按钮名
 NSString * const language_homeDeviceConfigStaticBtnName = @"静态";//静态网络按钮名
 NSString * const language_homeDeviceConfigIpAddressPlacement = @"IP地址";//ip地址placement
+NSString * const language_homeDeviceConfigIpAddressCheckNotice = @"请输入合法的IP地址";//请输入合法ip
 NSString * const language_homeDeviceConfigSubMarkPlacement = @"子网掩码";//子网掩码placement
+NSString * const language_homeDeviceConfigSubMarkCheckNotice = @"请输入合法的子网掩码";//请输入合法子网掩码
 NSString * const language_homeDeviceConfigGateWayPlacement = @"网关";//网关placement
+NSString * const language_homeDeviceConfigNetGatewayCheckNotice = @"请输入合法的网关地址";//请输入合法网关
 NSString * const language_homeDeviceConfigDNSPlacement = @"DNS";//DNSplacement
+NSString * const language_homeDeviceConfigDNSAddressCheckNotice = @"请输入合法的DNS地址";//请输入合法NDS地址
+
+NSString * const language_homeDeviceConfigWIFIEmptyPasswordNotice = @"【Wi-Fi】密码确定为空吗?";//配置过程空密码提示
+NSString * const language_homeDeviceConfigConfigProcessSendParamsNoticeString = @"正在发送网络参数";//配置过程正在发送网络参数提
+NSString * const language_homeDeviceConfigConfigProcessConfigingNet = @"网络参数发送完毕，正在配置设备网络";//网络参数发送完毕正在配置
+
 +(NSString*)languageValueForKey:(NSString *)key
 {
     return [self homeLanguageValueForKey:key];

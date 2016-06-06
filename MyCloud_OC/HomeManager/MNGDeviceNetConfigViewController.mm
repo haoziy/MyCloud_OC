@@ -148,7 +148,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
         if (buttonIndex==1) {
             holdView.hidden = NO;
-            notificationLab.text =@"正在发送网络参数";
+            notificationLab.text = language_homeDeviceConfigConfigProcessSendParamsNoticeString;
             [self startConfig];
         }
     }else if (alertView.tag==200)//成功配置后返回
@@ -568,7 +568,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     
     
     processNotiLab = [[UILabel alloc]init];
-    processNotiLab.text = @"提示";
+    processNotiLab.text = language_commen_noticeStrig;
     processNotiLab.font = [MRJSizeManager mrjNavigationFont];
     processNotiLab.textColor = [MRJColorManager mrj_mainThemeColor];
     [processView addSubview:processNotiLab];
@@ -602,7 +602,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 //
     
     notificationLab = [[UILabel alloc]init];
-    notificationLab.text = @"正在发送网络参数";
+    notificationLab.text = language_homeDeviceConfigConfigProcessSendParamsNoticeString;
     notificationLab.numberOfLines = 0;
     notificationLab.lineBreakMode = NSLineBreakByWordWrapping;
     [buttomV addSubview:notificationLab];
@@ -847,7 +847,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         {
             if(passTextField.text.length==0)
             {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"【Wi-Fi】密码确定为空吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:language_homeDeviceConfigWIFIEmptyPasswordNotice delegate:self cancelButtonTitle:language_commen_cancelBtnName otherButtonTitles:language_commen_confirmBtnName, nil];
                 alert.tag  = 100;
                 [alert show];
                 return;
@@ -856,7 +856,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
         [self.view.window addSubview:holdView];
-        notificationLab.text =@"正在发送网络参数";
+        notificationLab.text = language_homeDeviceConfigConfigProcessSendParamsNoticeString;
     }
     else//只支持无线
     {
@@ -938,12 +938,12 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             configLogStr = [NSMutableString stringWithFormat:@"AccountEntity:AccountId=%@,username = %@,mobile = %@,email = %@;Device:deviceId = %@,imei = %@,imsi = %@,ssid = %@,softVersion = %@,deviceModel = %@ Client:mobileSystem = %@,mobileType = %@\n",entity.accountId,entity.userName,entity.mobile,entity.email,_deviceModel.deviceId,_deviceModel.imei,_deviceModel.imsi,currentSSID,_deviceModel.softVersion,_deviceModel.modeName,[UIDevice currentDevice].systemVersion,[UIDevice currentDevice].machineModelName];
         if(passTextField.text.length==0)
         {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"【Wi-Fi】密码确定为空吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:language_homeDeviceConfigWIFIEmptyPasswordNotice delegate:self cancelButtonTitle:language_commen_cancelBtnName otherButtonTitles:language_commen_confirmBtnName, nil];
             alert.tag  = 100;
             [alert show];
             return;
         }
-        notificationLab.text =@"正在发送网络参数";
+        notificationLab.text = language_homeDeviceConfigConfigProcessSendParamsNoticeString;
     }
     [self startConfig];
     
@@ -984,19 +984,19 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 -(BOOL)isCheckStaticConfigInputOk
 {
     if (![MRJAppUtils isValidatIP:ipAddressTextField.text]) {
-        [MRJAppUtils showErrorMessage:@"请输入合法的IP地址"];
+        [MRJAppUtils showErrorMessage:language_homeDeviceConfigIpAddressCheckNotice];
         return NO;
     }
     if (![MRJAppUtils isValidatIP:subMarkTextField.text]) {
-        [MRJAppUtils showErrorMessage:@"请输入合法的子网掩码"];
+        [MRJAppUtils showErrorMessage:language_homeDeviceConfigSubMarkCheckNotice];
         return NO;
     }
     if (![MRJAppUtils isValidatIP:gateWayTextField.text]) {
-        [MRJAppUtils showErrorMessage:@"请输入合法的网关地址"];
+        [MRJAppUtils showErrorMessage:language_homeDeviceConfigNetGatewayCheckNotice];
         return NO;
     }
     if (![MRJAppUtils isValidatIP:DNSTextField.text]) {
-        [MRJAppUtils showErrorMessage:@"请输入合法的DNS地址"];
+        [MRJAppUtils showErrorMessage:language_homeDeviceConfigDNSAddressCheckNotice];
         return NO;
     }
     return YES;
@@ -1013,16 +1013,16 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         }
     }
     if (x>7) {
-        [MRJAppUtils showAlertMessage:@"设备暂不支持这么多中文的Wi-Fi网络"];
+        [MRJAppUtils showAlertMessage:language_homeDeviceConfigWIFINameTooManyChineseChar];
         return NO;
     }
     NSRange range = [currentSSID rangeOfString:@"&"];
     if (range.length>0) {
-        [MRJAppUtils showAlertMessage:@"设备暂不支持特殊字符&的Wi-Fi网络"];
+        [MRJAppUtils showAlertMessage:language_homeDeviceConfigWIFINameContainSpecialCharNotice];
         return NO;
     }
     if ([currentSSID stringByReplacingOccurrencesOfString:@" " withString:@""].length<1) {
-        [MRJAppUtils showErrorMessage:@"请将手机网络切换至设备所连接的Wi-Fi网络"];
+        [MRJAppUtils showErrorMessage:language_homeDeviceConfigNoWIFINoticeText];
         return NO;
     }
     return YES;
@@ -1150,7 +1150,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         dispatch_after(popTime, dispatch_get_main_queue(), ^{
             if (index==messageArr.count)
             {
-                notificationLab.text =@"网络参数发送完毕，正在配置设备网络";
+                notificationLab.text = language_homeDeviceConfigConfigProcessConfigingNet;
                 index = 0;
                 [checkOnline invalidate];
                 checkOnline = nil;

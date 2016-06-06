@@ -11,6 +11,12 @@
 /**
  *  设备管理界面
  */
+extern NSString * const language_homeDeviceManagerDeviceOnlineStatusString;//设备在线状态 在线
+extern NSString * const language_homeDeviceManagerDeviceOfflineStatusString;//设备离线状态 离线
+extern NSString * const language_homeDeviceManagerDevicePerMeta;//设备单位 台
+extern NSString * const language_homeDeviceManagerDeleNetNotice;//删除网络提示
+extern NSString * const language_homeDeviceManagerExitLoginNotice;//退出登录提示
+
 extern NSString * const language_homeDeviceManagerTitle;//设备管理标题
 extern NSString * const language_homeDeviceManagerExitCurrentCloudTitle;//设备管理 退出当前私有云标题
 extern NSString * const language_homeDeviceManagerConfigNetButtonName;//配置网络按钮名
@@ -41,7 +47,7 @@ extern NSString * const language_homeDeviceParamCamaraImageNoticeText;//图像�
 extern NSString * const language_homeDeviceParamCaptureCurrentImageButtonName;//抓取实时图片提示语
 extern NSString * const language_homeDeviceParamResetDefaultButtonName;//恢复默认按钮名
 extern NSString * const language_homeDeviceParamInstallHeightMenuName;//安装高度提示语
-
+extern NSString * const language_homeDeviceParamCancelCapturePictureNotice;//取消抓图提示
 
 /**
  *  搜索设备
@@ -66,6 +72,11 @@ extern NSString * const language_homeDeviceConfigSeacrchNotFindContinueConfigDev
  */
 extern NSString * const language_homeDeviceConfigTitle;//网络配置界面title
 extern NSString * const language_homeDeviceConfigNoWIFINoticeText;//网络配置没有wifi提示语
+
+extern NSString * const language_homeDeviceConfigWIFINameTooManyChineseChar;
+//含有太多中文字符
+extern NSString * const language_homeDeviceConfigWIFINameContainSpecialCharNotice;
+//wifi含有特殊字符提示
 extern NSString * const language_homeDeviceConfigCurrentWifi;//网络配置,当前wifi
 extern NSString * const language_homeDeviceConfigNetTypeTitle;//网络配置,网络类型
 extern NSString * const language_homeDeviceConfigWifiBtnName;//wifi按钮名称
@@ -76,10 +87,18 @@ extern NSString * const language_homeDeviceConfigDHCPBtnName;//动态网络按�
 extern NSString * const language_homeDeviceConfigStaticBtnName;//静态网络按钮名
 
 extern NSString * const language_homeDeviceConfigIpAddressPlacement;//ip地址placement
+extern NSString * const language_homeDeviceConfigIpAddressCheckNotice;//请输入合法ip
 extern NSString * const language_homeDeviceConfigSubMarkPlacement;//子网掩码placement
+extern NSString * const language_homeDeviceConfigSubMarkCheckNotice;//请输入合法子网掩码
 extern NSString * const language_homeDeviceConfigGateWayPlacement;//网关placement
+extern NSString * const language_homeDeviceConfigNetGatewayCheckNotice;//请输入合法网关
 extern NSString * const language_homeDeviceConfigDNSPlacement;//DNSplacement
+extern NSString * const language_homeDeviceConfigDNSAddressCheckNotice;//请输入合法NDS地址
 
+extern NSString * const language_homeDeviceConfigWIFIEmptyPasswordNotice;//配置过程空密码提示
+extern NSString * const language_homeDeviceConfigConfigProcessSendParamsNoticeString;//配置网络过程中正在发送网络参数
+extern NSString * const language_homeDeviceConfigConfigProcessConfigingNet;
+//网络参数发送完毕正在配置
 
 @interface HomeStringKeyContentValueManager : StringKeyContentValueManager
 

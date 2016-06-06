@@ -147,10 +147,10 @@ NSInteger const exitAlertTag = 3000;
         
         UILabel *label = [[UILabel alloc]init];
         view.backgroundColor = NavigationTextColor;
-        label.text = [NSString stringWithFormat:@"%@ ",section==0?@"在线":@"离线"];
+        label.text = [NSString stringWithFormat:@"%@ ",section==0?language_homeDeviceManagerDeviceOnlineStatusString:language_homeDeviceManagerDeviceOfflineStatusString];
         [view addSubview:label];
         UILabel *label2 = [[UILabel alloc]init];
-        label2.text = [NSString stringWithFormat:@"%ld台",(unsigned long)(section==0? ((NSArray*)deviceList[0]).count:((NSArray*)deviceList[1]).count)];
+        label2.text = [NSString stringWithFormat:@"%ld%@",(unsigned long)(section==0? ((NSArray*)deviceList[0]).count:((NSArray*)deviceList[1]).count),language_homeDeviceManagerDevicePerMeta];
         label2.textColor = SecondaryTextColor;
         [view addSubview:label2];
         
@@ -240,7 +240,7 @@ NSInteger const exitAlertTag = 3000;
 -(void)cell:(BaseTableViewCell*)cell operation:(MRJCellOperationType)type WithData:(id)data;
 {
     if (type==MRJCellOperationTypeDelete) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"确定删除设备的网络配置?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:language_homeDeviceManagerDeleNetNotice delegate:self cancelButtonTitle:language_commen_cancelBtnName otherButtonTitles:language_commen_confirmBtnName, nil];
         alert.tag = deletNetAlertTag;
         tempDeviceForDeleteNet = data;
         [alert show];
@@ -334,7 +334,7 @@ NSInteger const exitAlertTag = 3000;
 -(void)exitDeviceManager:(id)sender
 {
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"确定要退出吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:language_homeDeviceManagerExitLoginNotice delegate:self cancelButtonTitle:language_commen_cancelBtnName otherButtonTitles:language_commen_confirmBtnName, nil];
     alert.tag = exitAlertTag;
     [alert show];
 }

@@ -215,7 +215,7 @@ static const float SLIDE_HEIGHT = 15;
 }
 -(void)tttt:(NSNotification*)note
 {
-    UIAlertView* alert =  [[UIAlertView alloc]initWithTitle:@"" message:@"确定取消抓图吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView* alert =  [[UIAlertView alloc]initWithTitle:@"" message:language_homeDeviceParamCancelCapturePictureNotice delegate:self cancelButtonTitle:language_commen_cancelBtnName otherButtonTitles:language_commen_confirmBtnName, nil];
     [alert show];
 }
 
