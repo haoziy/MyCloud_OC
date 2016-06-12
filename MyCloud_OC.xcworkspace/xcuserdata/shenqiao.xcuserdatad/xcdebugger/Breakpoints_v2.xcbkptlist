@@ -3122,11 +3122,11 @@
                   moduleName = "MyCloud_OC"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/BaseHttpHandler.m"
-                  timestampString = "484889679.524072"
+                  timestampString = "487410148.78989"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "126"
-                  endingLineNumber = "126"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
                   offsetFromSymbolStart = "1563">
                </Location>
                <Location
@@ -3137,11 +3137,11 @@
                   moduleName = "MyCloud_OC"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/BaseHttpHandler.m"
-                  timestampString = "484889679.524174"
+                  timestampString = "487410148.790041"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "128"
-                  endingLineNumber = "128"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
                   offsetFromSymbolStart = "103">
                </Location>
             </Locations>
@@ -3390,7 +3390,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
@@ -4022,6 +4022,54 @@
                   startingLineNumber = "274"
                   endingLineNumber = "274"
                   offsetFromSymbolStart = "1546">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/HomeHttpHandler.m"
+            timestampString = "487394697.313646"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "+getDeviceDetail:preExecute:success:failed:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[HomeHttpHandler getDeviceDetail:preExecute:success:failed:]"
+                  moduleName = "MyCloud_OC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/HomeHttpHandler.m"
+                  timestampString = "487412028.062697"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "188">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__61+[HomeHttpHandler getDeviceDetail:preExecute:success:failed:]_block_invoke"
+                  moduleName = "MyCloud_OC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shenqiao/Documents/MyCloud_OC/MyCloud_OC/HomeHttpHandler.m"
+                  timestampString = "487412028.062815"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "23">
                </Location>
             </Locations>
          </BreakpointContent>
