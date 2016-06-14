@@ -297,14 +297,14 @@ static NSString *myCell = @"MyCell";
 
 
 - (void)reBootDevice:(UIButton *)sender{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"设备重启需要1-2分钟，确定重启设备?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceResetNotice] delegate:self cancelButtonTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_cancelBtnName] otherButtonTitles:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_confirmBtnName], nil];
     alert.tag = rebootBtnTag;
     [alert show];
     
 }
 
 - (void)deleteNetConfig:(UIButton *)sender{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"确定删除设备的网络配置?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeleNetNotice] delegate:self cancelButtonTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_cancelBtnName]  otherButtonTitles:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_confirmBtnName], nil];
     alert.tag = delNetBtnTag;
     [alert show];
     

@@ -23,6 +23,7 @@ extern NSString *const global_homeMudels_fileName;//首页模块的国际化文�
 extern NSString *const global_discoveryMudels_fileName;//发现模块的国际化文件名
 extern NSString *const global_aboutMudels_fileName;//关于模块的国际化文件名
 extern NSString *const global_formsMudels_fileName;//报表模块的国际化文件名
+extern NSString *const global_commonLanguage_fileName;//共同部分国际化文件名
 //通用提示
 extern NSString * const language_commen_waitProgressNotice;//等待网络请求提示语
 
@@ -40,4 +41,5 @@ extern NSString * const language_commen_noticeStrig;//提示
 +(NSString*)discoveryLanguageValueForKey:(NSString*)key;
 +(NSString*)formsLanguageValueForKey:(NSString*)key;
 +(NSString*)aboutLanguageValueForKey:(NSString*)key;
++(NSString*)commonLanguageValueForKey:(NSString*)key;
 @end

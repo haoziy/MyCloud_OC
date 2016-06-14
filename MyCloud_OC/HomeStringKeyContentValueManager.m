@@ -11,6 +11,7 @@
 /**
  *  设备管理界面
  */
+NSString * const language_homeDeviceManagerNoDeviceNotice = @"暂时没有设备";
 NSString * const language_homeDeviceManagerDeviceOnlineStatusString = @"在线";//设备在线状态 在线
 NSString * const language_homeDeviceManagerDeviceOfflineStatusString = @"离线";//设备离线状态 离线
 NSString * const language_homeDeviceManagerDevicePerMeta = @"台";//设备单位 台
@@ -37,6 +38,7 @@ NSString * const language_homeDeviceManagerDeviceNetConfig = @"网络配置";//�
 NSString * const language_homeDeviceManagerDeviceShopName = @"所在店铺";//所在店铺
 NSString * const language_homeDeviceManagerDeviceParam = @"设备参数";//设备参数
 NSString * const language_homeDeviceManagerDeviceResetButtonName = @"重启设备";//重启设备按钮名
+NSString * const language_homeDeviceManagerDeviceResetNotice = @"设备重启需要1-2分钟，确定重启设备?";//重启提示
 NSString * const language_homeDeviceManagerDeviceDeleteButtonName = @"删除网络配置";//删除设备按钮名
 /**
  *  设备参数界面
@@ -101,6 +103,8 @@ NSString * const language_homeDeviceConfigDNSAddressCheckNotice = @"请输入合
 NSString * const language_homeDeviceConfigWIFIEmptyPasswordNotice = @"【Wi-Fi】密码确定为空吗?";//配置过程空密码提示
 NSString * const language_homeDeviceConfigConfigProcessSendParamsNoticeString = @"正在发送网络参数";//配置过程正在发送网络参数提
 NSString * const language_homeDeviceConfigConfigProcessConfigingNet = @"网络参数发送完毕，正在配置设备网络";//网络参数发送完毕正在配置
+NSString * const language_homeDeviceConfigOverNotice = @"配置完毕，稍后请查看设备的绿灯状态。如果绿灯常亮，说明配置网络成功。否则，请重新配置。";
+NSString * const language_homeDeviceConfigSuccesNotice = @"配置设备网络成功" ;//配置成功
 
 +(NSString*)languageValueForKey:(NSString *)key
 {

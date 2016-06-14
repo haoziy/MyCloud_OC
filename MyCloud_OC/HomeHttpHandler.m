@@ -35,7 +35,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
 +(void)getDeviceListParams:(NSDictionary*)parm preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkApi:api_home_get_device_list method:HttpRequestPost andHttpHeader:nil parameters:parm prepareExecute:^{
-        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+        [MRJAppUtils showProgressMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_progress_loading_message]];
     } succeed:^(id obj) {
         NSMutableArray *onlineArr = [[NSMutableArray alloc]init];
         NSMutableArray *offlineArr = [[NSMutableArray alloc]init];
@@ -70,7 +70,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
 +(void)getDeviceDetail:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)success failed:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkApi:api_home_get_device_detail method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+        [MRJAppUtils showProgressMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_progress_loading_message]];
     } succeed:^(id obj) {
         if ([obj[request_status_key] integerValue]==0) {
             DeviceModel *model = [DeviceModel modelWithJSON:obj[request_data_key]];
@@ -89,7 +89,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
 +(void)home_saveDeviceParams:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkApi:api_home_save_device_params method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+        [MRJAppUtils showProgressMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_progress_loading_message]];
     }  succeed:^(id obj) {
         if ([obj[request_status_key] integerValue]==0)
         {
@@ -111,7 +111,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
 +(void)home_deleteNetWorkCMD:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkApi:api_home_delete_device_net_cmd method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+        [MRJAppUtils showProgressMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_progress_loading_message]];
     }  succeed:^(id obj) {
         if ([obj[request_status_key] integerValue]==0)
         {
@@ -133,7 +133,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
 +(void)home_catchImageURL:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
 {
     [self baseRequestAFNetWorkApi:api_home_get_current_image_url method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+        [MRJAppUtils showProgressMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_progress_loading_message]];
     }  succeed:^(id obj) {
         if (succes) {
             succes(obj);
@@ -149,7 +149,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
 +(void)home_rebootDeviceCMD:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
 {
     [self baseRequestAFNetWorkApi:api_home_reboot_device_cmd method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+        [MRJAppUtils showProgressMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_progress_loading_message]];
     }  succeed:^(id obj) {
         if ([obj[request_status_key] integerValue]==0)
         {
@@ -171,7 +171,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
 +(void)home_captureImageCMD:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
 {
     [self baseRequestAFNetWorkApi:api_home_catch_current_image_cmd method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+        [MRJAppUtils showProgressMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_progress_loading_message]];
     }  succeed:^(id obj) {
         if ([obj[request_status_key] integerValue]==0)
         {
@@ -207,7 +207,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
 +(void)home_deviceAuth:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;
 {
     [self baseRequestAFNetWorkApi:api_home_device_auth method:HttpRequestPost andHttpHeader:nil parameters:param prepareExecute:^{
-        [MRJAppUtils showProgressMessage:request_progress_loading_message];
+        [MRJAppUtils showProgressMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_progress_loading_message]];
     }  succeed:^(id obj) {
         if (succes) {
             succes(obj);

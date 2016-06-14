@@ -79,6 +79,7 @@
 		059509341CB4F09A009B3BBA /* DeBugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 059509331CB4F09A009B3BBA /* DeBugLog.m */; };
 		059509381CB4FF2D009B3BBA /* AppDelegate+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 059509371CB4FF2D009B3BBA /* AppDelegate+utils.m */; };
 		0595093B1CB4FF73009B3BBA /* AppSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0595093A1CB4FF73009B3BBA /* AppSingleton.m */; };
+		05CFD8F71D0FFEF70020147F /* commonLanguage.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05CFD8F91D0FFEF70020147F /* commonLanguage.strings */; };
 		05D1EB281CDB4A9900BB3BDD /* MRJUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EB271CDB4A9900BB3BDD /* MRJUserModel.m */; };
 		05E4BF331CB4E6010069BDA4 /* GloballaunchImage@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4BF351CB4E6010069BDA4 /* GloballaunchImage@1x.png */; };
 		05E4BF391CB4E60A0069BDA4 /* GloballaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4BF3B1CB4E60A0069BDA4 /* GloballaunchImage@2x.png */; };
@@ -306,6 +307,10 @@
 		059509371CB4FF2D009B3BBA /* AppDelegate+utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+utils.m"; sourceTree = "<group>"; };
 		059509391CB4FF73009B3BBA /* AppSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSingleton.h; path = MyCloud_OC/AppSingleton.h; sourceTree = "<group>"; };
 		0595093A1CB4FF73009B3BBA /* AppSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSingleton.m; path = MyCloud_OC/AppSingleton.m; sourceTree = "<group>"; };
+		05CFD8F81D0FFEF70020147F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/commonLanguage.strings; sourceTree = "<group>"; };
+		05CFD8FA1D0FFEF90020147F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/commonLanguage.strings; sourceTree = "<group>"; };
+		05CFD8FB1D0FFEFA0020147F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/commonLanguage.strings"; sourceTree = "<group>"; };
+		05CFD8FC1D0FFEFA0020147F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/commonLanguage.strings"; sourceTree = "<group>"; };
 		05D1EB261CDB4A9900BB3BDD /* MRJUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJUserModel.h; path = MyCloud_OC/MRJUserModel.h; sourceTree = "<group>"; };
 		05D1EB271CDB4A9900BB3BDD /* MRJUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJUserModel.m; path = MyCloud_OC/MRJUserModel.m; sourceTree = "<group>"; };
 		05E4BF341CB4E6010069BDA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = "Base.lproj/GloballaunchImage@1x.png"; sourceTree = "<group>"; };
@@ -476,6 +481,7 @@
 				05293F371CB7531B0064193B /* LoginRegistLanguage.strings */,
 				0528C7041CB4A731001C8281 /* StringKeyContentValueManager.h */,
 				0528C7051CB4A731001C8281 /* StringKeyContentValueManager.m */,
+				05CFD8F91D0FFEF70020147F /* commonLanguage.strings */,
 			);
 			name = GlobalLanguage;
 			sourceTree = "<group>";
@@ -1166,6 +1172,7 @@
 				05293F3B1CB7562A0064193B /* AboutMeLanguage.strings in Resources */,
 				05293F351CB7531B0064193B /* LoginRegistLanguage.strings in Resources */,
 				056961A61CB4DC6F00AECAEF /* Launch Screen.storyboard in Resources */,
+				05CFD8F71D0FFEF70020147F /* commonLanguage.strings in Resources */,
 				05E4BF331CB4E6010069BDA4 /* GloballaunchImage@1x.png in Resources */,
 				05293F411CB756310064193B /* FormsLanguage.strings in Resources */,
 				05293F531CB756460064193B /* Info.strings in Resources */,
@@ -1427,6 +1434,17 @@
 			name = "Launch Screen.storyboard";
 			sourceTree = "<group>";
 		};
+		05CFD8F91D0FFEF70020147F /* commonLanguage.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05CFD8F81D0FFEF70020147F /* en */,
+				05CFD8FA1D0FFEF90020147F /* Base */,
+				05CFD8FB1D0FFEFA0020147F /* zh-Hans */,
+				05CFD8FC1D0FFEFA0020147F /* zh-Hant */,
+			);
+			name = commonLanguage.strings;
+			sourceTree = "<group>";
+		};
 		05E4BF351CB4E6010069BDA4 /* GloballaunchImage@1x.png */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1571,7 +1589,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Private-com.xiaozhou.meirenji";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e0eac3e3-d2c9-41a4-8688-dbd5764de925";
+				PROVISIONING_PROFILE = "c989c681-9ee9-4577-8ee3-4a9cc151872d";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1598,7 +1616,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Private-com.xiaozhou.meirenji";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e0eac3e3-d2c9-41a4-8688-dbd5764de925";
+				PROVISIONING_PROFILE = "c989c681-9ee9-4577-8ee3-4a9cc151872d";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

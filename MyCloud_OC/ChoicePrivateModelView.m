@@ -104,7 +104,7 @@ NSString * const appSubPath = @"/app/";
     [cancelBtn addTarget:self action:@selector(dismiss:) forControlEvents:UIControlEventTouchUpInside];
     [cancelBtn setTitleColor:[MRJColorManager mrj_mainTextColor] forState:UIControlStateNormal];
     [cancelBtn setTitleColor:[MRJColorManager mrj_separatrixColor] forState:UIControlStateHighlighted];
-    [cancelBtn setTitle:[StringKeyContentValueManager languageValueForKey:language_commen_cancelBtnName] forState:UIControlStateNormal];
+    [cancelBtn setTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_cancelBtnName] forState:UIControlStateNormal];
     [mainV addSubview:cancelBtn];
     [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(seprateV.mas_bottom).offset(1);
@@ -121,7 +121,7 @@ NSString * const appSubPath = @"/app/";
     [confirmBtn setTitleColor:[MRJColorManager mrj_separatrixColor] forState:UIControlStateDisabled];
     [confirmBtn setTitleColor:[MRJColorManager mrj_mainTextColor] forState:UIControlStateNormal];
     [confirmBtn setTitleColor:[MRJColorManager mrj_separatrixColor] forState:UIControlStateHighlighted];
-    [confirmBtn setTitle:[StringKeyContentValueManager languageValueForKey:language_commen_confirmBtnName] forState:UIControlStateNormal];
+    [confirmBtn setTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_confirmBtnName] forState:UIControlStateNormal];
 
     [confirmBtn addTarget:self action:@selector(confirmTestValid:) forControlEvents:UIControlEventTouchUpInside];
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -159,10 +159,10 @@ NSString * const appSubPath = @"/app/";
         baseUrl  = [NSString stringWithFormat:@"%@%@%@",httpHeadFlagString,_serviceAddressTF.text,appSubPath];
     }
     [LoginRegistHttpHandler login_checkHeartBeatFullURL:[NSString stringWithFormat:@"%@%@",baseUrl,api_loginRegist_heart_beat] preExecute:^{
-        [MRJAppUtils showProgressMessageWithNotAllowTouch:language_commen_waitProgressNotice];
+        [MRJAppUtils showProgressMessageWithNotAllowTouch:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_waitProgressNotice]];
     } successBlock:^(id obj) {
         if ([obj[request_status_key] integerValue]==0 ) {
-            [MRJAppUtils showSuccessMessage:language_login_connectServiceSuccessNotice];
+            [MRJAppUtils showSuccessMessage:[StringKeyContentValueManager loginRegistLanguageValueForKey:language_login_connectServiceSuccessNotice]];
             [AppSingleton shareInstace].inputEnvironmentURL = _serviceAddressTF.text;
             [AppSingleton shareInstace].environmentUrl = baseUrl;
             if ([_delegate respondsToSelector:@selector(operationCompleted:withResult:)]) {
@@ -170,11 +170,11 @@ NSString * const appSubPath = @"/app/";
             }
         }else
         {
-             [MRJAppUtils showErrorMessage:language_login_connectServiceFailNotice];
+             [MRJAppUtils showErrorMessage:[LoginRegistStringValueContentManager languageValueForKey:language_login_connectServiceFailNotice]];
         }
         
     } failedBlock:^(id obj) {
-        [MRJAppUtils showErrorMessage:language_login_connectServiceFailNotice];
+        [MRJAppUtils showErrorMessage:[LoginRegistStringValueContentManager loginRegistLanguageValueForKey:language_login_connectServiceFailNotice]];
     }];
 }
 

@@ -240,7 +240,7 @@ NSInteger const exitAlertTag = 3000;
 -(void)cell:(BaseTableViewCell*)cell operation:(MRJCellOperationType)type WithData:(id)data;
 {
     if (type==MRJCellOperationTypeDelete) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:language_homeDeviceManagerDeleNetNotice delegate:self cancelButtonTitle:language_commen_cancelBtnName otherButtonTitles:language_commen_confirmBtnName, nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:[StringKeyContentValueManager homeLanguageValueForKey: language_homeDeviceManagerDeleNetNotice] delegate:self cancelButtonTitle:[StringKeyContentValueManager commonLanguageValueForKey: language_commen_cancelBtnName]otherButtonTitles:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_confirmBtnName], nil];
         alert.tag = deletNetAlertTag;
         tempDeviceForDeleteNet = data;
         [alert show];
@@ -334,7 +334,7 @@ NSInteger const exitAlertTag = 3000;
 -(void)exitDeviceManager:(id)sender
 {
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:language_homeDeviceManagerExitLoginNotice delegate:self cancelButtonTitle:language_commen_cancelBtnName otherButtonTitles:language_commen_confirmBtnName, nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:[StringKeyContentValueManager homeLanguageValueForKey: language_homeDeviceManagerExitLoginNotice] delegate:self cancelButtonTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_cancelBtnName] otherButtonTitles:[StringKeyContentValueManager commonLanguageValueForKey: language_commen_confirmBtnName], nil];
     alert.tag = exitAlertTag;
     [alert show];
 }

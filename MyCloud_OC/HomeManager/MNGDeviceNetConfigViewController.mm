@@ -148,7 +148,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
         if (buttonIndex==1) {
             holdView.hidden = NO;
-            notificationLab.text = language_homeDeviceConfigConfigProcessSendParamsNoticeString;
+            notificationLab.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigConfigProcessSendParamsNoticeString];
             [self startConfig];
         }
     }else if (alertView.tag==200)//成功配置后返回
@@ -190,7 +190,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 {
     [super viewDidLoad];
 
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[StringKeyContentValueManager languageValueForKey:language_commen_confirmBtnName] style:UIBarButtonItemStylePlain target:self action:@selector(beginConfig:)];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[StringKeyContentValueManager languageValueForKey:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_confirmBtnName]] style:UIBarButtonItemStylePlain target:self action:@selector(beginConfig:)];
     [item setTintColor:[MRJColorManager mrj_navigationTextColor]];
     
     self.navigationItem.rightBarButtonItem = item;
@@ -568,7 +568,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
     
     
     processNotiLab = [[UILabel alloc]init];
-    processNotiLab.text = language_commen_noticeStrig;
+    processNotiLab.text = [StringKeyContentValueManager commonLanguageValueForKey: language_commen_noticeStrig];
     processNotiLab.font = [MRJSizeManager mrjNavigationFont];
     processNotiLab.textColor = [MRJColorManager mrj_mainThemeColor];
     [processView addSubview:processNotiLab];
@@ -602,7 +602,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 //
     
     notificationLab = [[UILabel alloc]init];
-    notificationLab.text = language_homeDeviceConfigConfigProcessSendParamsNoticeString;
+    notificationLab.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigConfigProcessSendParamsNoticeString] ;
     notificationLab.numberOfLines = 0;
     notificationLab.lineBreakMode = NSLineBreakByWordWrapping;
     [buttomV addSubview:notificationLab];
@@ -856,7 +856,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
         [self.view.window addSubview:holdView];
-        notificationLab.text = language_homeDeviceConfigConfigProcessSendParamsNoticeString;
+        notificationLab.text = [HomeStringKeyContentValueManager languageValueForKey: language_homeDeviceConfigConfigProcessSendParamsNoticeString];
     }
     else//只支持无线
     {
@@ -943,7 +943,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             [alert show];
             return;
         }
-        notificationLab.text = language_homeDeviceConfigConfigProcessSendParamsNoticeString;
+        notificationLab.text =  [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigConfigProcessSendParamsNoticeString];
     }
     [self startConfig];
     
@@ -984,19 +984,19 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 -(BOOL)isCheckStaticConfigInputOk
 {
     if (![MRJAppUtils isValidatIP:ipAddressTextField.text]) {
-        [MRJAppUtils showErrorMessage:language_homeDeviceConfigIpAddressCheckNotice];
+        [MRJAppUtils showErrorMessage:[HomeStringKeyContentValueManager languageValueForKey: language_homeDeviceConfigIpAddressCheckNotice]];
         return NO;
     }
     if (![MRJAppUtils isValidatIP:subMarkTextField.text]) {
-        [MRJAppUtils showErrorMessage:language_homeDeviceConfigSubMarkCheckNotice];
+        [MRJAppUtils showErrorMessage:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSubMarkCheckNotice]];
         return NO;
     }
     if (![MRJAppUtils isValidatIP:gateWayTextField.text]) {
-        [MRJAppUtils showErrorMessage:language_homeDeviceConfigNetGatewayCheckNotice];
+        [MRJAppUtils showErrorMessage:[HomeStringKeyContentValueManager languageValueForKey: language_homeDeviceConfigNetGatewayCheckNotice]];
         return NO;
     }
     if (![MRJAppUtils isValidatIP:DNSTextField.text]) {
-        [MRJAppUtils showErrorMessage:language_homeDeviceConfigDNSAddressCheckNotice];
+        [MRJAppUtils showErrorMessage:[HomeStringKeyContentValueManager languageValueForKey: language_homeDeviceConfigDNSAddressCheckNotice]];
         return NO;
     }
     return YES;
@@ -1013,16 +1013,16 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         }
     }
     if (x>7) {
-        [MRJAppUtils showAlertMessage:language_homeDeviceConfigWIFINameTooManyChineseChar];
+        [MRJAppUtils showAlertMessage:[HomeStringKeyContentValueManager languageValueForKey: language_homeDeviceConfigWIFINameTooManyChineseChar]];
         return NO;
     }
     NSRange range = [currentSSID rangeOfString:@"&"];
     if (range.length>0) {
-        [MRJAppUtils showAlertMessage:language_homeDeviceConfigWIFINameContainSpecialCharNotice];
+        [MRJAppUtils showAlertMessage:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigWIFINameContainSpecialCharNotice]];
         return NO;
     }
     if ([currentSSID stringByReplacingOccurrencesOfString:@" " withString:@""].length<1) {
-        [MRJAppUtils showErrorMessage:language_homeDeviceConfigNoWIFINoticeText];
+        [MRJAppUtils showErrorMessage:[HomeStringKeyContentValueManager languageValueForKey: language_homeDeviceConfigNoWIFINoticeText]];
         return NO;
     }
     return YES;
@@ -1150,7 +1150,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         dispatch_after(popTime, dispatch_get_main_queue(), ^{
             if (index==messageArr.count)
             {
-                notificationLab.text = language_homeDeviceConfigConfigProcessConfigingNet;
+                notificationLab.text = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigConfigProcessConfigingNet];
                 index = 0;
                 [checkOnline invalidate];
                 checkOnline = nil;
@@ -1285,7 +1285,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         NSDictionary *param = @{@"accountId":[AppSingleton currentUser].accountId?[AppSingleton currentUser].accountId:@"",@"deviceId":_deviceModel.deviceId?_deviceModel.deviceId:@"",@"log":base64Encoded?base64Encoded:@"",@"state":@"0"};
         [HomeHttpHandler home_uploadConfigLog:param preExecute:nil success:nil failed:nil];
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"配置完毕，稍后请查看设备的绿灯状态。如果绿灯常亮，说明配置网络成功。否则，请重新配置。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigOverNotice] delegate:self cancelButtonTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_confirmBtnName] otherButtonTitles:nil, nil];
         alertView.tag = 600;
         [alertView show];
         processBar.width = (checkTotalTime/totalTimer)*processNotiLab.width>=processNotiLab.width?processNotiLab.width:(checkTotalTime/totalTimer)*processNotiLab.width;
@@ -1297,7 +1297,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
 -(void)dealLogic//配置后的处理逻辑部分
 {
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"配置设备网络成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSuccesNotice] delegate:self cancelButtonTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_confirmBtnName]otherButtonTitles:nil];
     alert.tag = 200;
     [alert show];
 }

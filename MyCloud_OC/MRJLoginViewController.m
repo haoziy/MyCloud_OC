@@ -173,7 +173,7 @@
 -(void)loginPressed:(id)sender
 {
     if (![AppSingleton currentEnvironmentBaseURL]) {
-         [MRJAppUtils showErrorMessage:language_login_noSettingServiceNotice];
+         [MRJAppUtils showErrorMessage:[StringKeyContentValueManager loginRegistLanguageValueForKey:language_login_noSettingServiceNotice]];
         return;
     }
     [LoginRegistHttpHandler login_loginWithParams:@{@"username":loginAccountTF.text, @"password":loginPassTF.text,@"identify":@"0"} preExecute:^{

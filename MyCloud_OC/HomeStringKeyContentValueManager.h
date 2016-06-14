@@ -11,6 +11,7 @@
 /**
  *  设备管理界面
  */
+extern NSString * const language_homeDeviceManagerNoDeviceNotice;//"暂时没有设备"
 extern NSString * const language_homeDeviceManagerDeviceOnlineStatusString;//设备在线状态 在线
 extern NSString * const language_homeDeviceManagerDeviceOfflineStatusString;//设备离线状态 离线
 extern NSString * const language_homeDeviceManagerDevicePerMeta;//设备单位 台
@@ -37,6 +38,7 @@ extern NSString * const language_homeDeviceManagerDeviceNetConfig;//网络配置
 extern NSString * const language_homeDeviceManagerDeviceShopName;//所在店铺
 extern NSString * const language_homeDeviceManagerDeviceParam;//设备参数
 extern NSString * const language_homeDeviceManagerDeviceResetButtonName;//重启设备按钮名
+extern NSString * const language_homeDeviceManagerDeviceResetNotice;//重启设备提示
 extern NSString * const language_homeDeviceManagerDeviceDeleteButtonName;//删除设备按钮名
 /**
  *  设备参数界面
@@ -99,7 +101,8 @@ extern NSString * const language_homeDeviceConfigWIFIEmptyPasswordNotice;//配�
 extern NSString * const language_homeDeviceConfigConfigProcessSendParamsNoticeString;//配置网络过程中正在发送网络参数
 extern NSString * const language_homeDeviceConfigConfigProcessConfigingNet;
 //网络参数发送完毕正在配置
-
+extern NSString * const language_homeDeviceConfigOverNotice;//配置完成/未检测到绿灯提示
+extern NSString * const language_homeDeviceConfigSuccesNotice;//配置成功
 @interface HomeStringKeyContentValueManager : StringKeyContentValueManager
 
 @end

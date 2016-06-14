@@ -7,7 +7,7 @@
 //
 
 #import "MRJBaseTableview.h"
-
+#import "HomeStringKeyContentValueManager.h"
 @implementation MRJBaseTableview
 
 -(instancetype)init
@@ -20,7 +20,7 @@
         self.rowHeight = INPUT_HEIGHT;
         
         UILabel* noDataLabel = [[UILabel alloc]init];
-        noDataLabel.text = @"暂时没有设备";
+        noDataLabel.text =[StringKeyContentValueManager homeLanguageValueForKey:  language_homeDeviceManagerNoDeviceNotice];
         [self addSubview:noDataLabel];
         [noDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(noDataLabel.superview.mas_centerX);

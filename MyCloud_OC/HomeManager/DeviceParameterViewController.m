@@ -57,7 +57,7 @@ static const float SLIDE_HEIGHT = 15;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamTitle];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[StringKeyContentValueManager languageValueForKey:language_commen_confirmBtnName] style:UIBarButtonItemStylePlain target:self action:@selector(saveInstallHeight:)];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[StringKeyContentValueManager languageValueForKey:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_confirmBtnName]] style:UIBarButtonItemStylePlain target:self action:@selector(saveInstallHeight:)];
     item.tintColor = NavigationTextColor;
     self.navigationItem.rightBarButtonItem = item;
     
@@ -215,7 +215,7 @@ static const float SLIDE_HEIGHT = 15;
 }
 -(void)tttt:(NSNotification*)note
 {
-    UIAlertView* alert =  [[UIAlertView alloc]initWithTitle:@"" message:language_homeDeviceParamCancelCapturePictureNotice delegate:self cancelButtonTitle:language_commen_cancelBtnName otherButtonTitles:language_commen_confirmBtnName, nil];
+    UIAlertView* alert =  [[UIAlertView alloc]initWithTitle:@"" message:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamCancelCapturePictureNotice] delegate:self cancelButtonTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_cancelBtnName ] otherButtonTitles:[StringKeyContentValueManager commonLanguageValueForKey: language_commen_confirmBtnName], nil];
     [alert show];
 }
 
