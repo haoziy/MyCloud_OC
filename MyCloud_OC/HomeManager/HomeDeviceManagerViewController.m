@@ -147,10 +147,10 @@ NSInteger const exitAlertTag = 3000;
         
         UILabel *label = [[UILabel alloc]init];
         view.backgroundColor = NavigationTextColor;
-        label.text = [NSString stringWithFormat:@"%@ ",section==0?language_homeDeviceManagerDeviceOnlineStatusString:language_homeDeviceManagerDeviceOfflineStatusString];
+        label.text = [NSString stringWithFormat:@"%@ ",section==0?[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceOnlineStatusString]:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceOfflineStatusString]];
         [view addSubview:label];
         UILabel *label2 = [[UILabel alloc]init];
-        label2.text = [NSString stringWithFormat:@"%ld%@",(unsigned long)(section==0? ((NSArray*)deviceList[0]).count:((NSArray*)deviceList[1]).count),language_homeDeviceManagerDevicePerMeta];
+        label2.text = [NSString stringWithFormat:@"%ld",(unsigned long)(section==0? ((NSArray*)deviceList[0]).count:((NSArray*)deviceList[1]).count)];
         label2.textColor = SecondaryTextColor;
         [view addSubview:label2];
         

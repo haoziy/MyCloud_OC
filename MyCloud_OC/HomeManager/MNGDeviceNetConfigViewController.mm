@@ -847,7 +847,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
         {
             if(passTextField.text.length==0)
             {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:language_homeDeviceConfigWIFIEmptyPasswordNotice delegate:self cancelButtonTitle:language_commen_cancelBtnName otherButtonTitles:language_commen_confirmBtnName, nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigWIFIEmptyPasswordNotice] delegate:self cancelButtonTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_cancelBtnName] otherButtonTitles:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_confirmBtnName], nil];
                 alert.tag  = 100;
                 [alert show];
                 return;
@@ -938,7 +938,7 @@ int freqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000
             configLogStr = [NSMutableString stringWithFormat:@"AccountEntity:AccountId=%@,username = %@,mobile = %@,email = %@;Device:deviceId = %@,imei = %@,imsi = %@,ssid = %@,softVersion = %@,deviceModel = %@ Client:mobileSystem = %@,mobileType = %@\n",entity.accountId,entity.userName,entity.mobile,entity.email,_deviceModel.deviceId,_deviceModel.imei,_deviceModel.imsi,currentSSID,_deviceModel.softVersion,_deviceModel.modeName,[UIDevice currentDevice].systemVersion,[UIDevice currentDevice].machineModelName];
         if(passTextField.text.length==0)
         {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:language_homeDeviceConfigWIFIEmptyPasswordNotice delegate:self cancelButtonTitle:language_commen_cancelBtnName otherButtonTitles:language_commen_confirmBtnName, nil];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigWIFIEmptyPasswordNotice] delegate:self cancelButtonTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_cancelBtnName] otherButtonTitles:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_confirmBtnName], nil];
             alert.tag  = 100;
             [alert show];
             return;

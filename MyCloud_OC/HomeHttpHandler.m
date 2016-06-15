@@ -64,7 +64,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
         if (failed) {
             failed(obj);
         }
-         [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
+         [MRJAppUtils showErrorMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_network_notwork_notice_message]];
     }];
 }
 +(void)getDeviceDetail:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)success failed:(MRJFailedBlock)failed;
@@ -96,16 +96,16 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
             if (succes) {
                 succes(obj);
             }
-            [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
+            [MRJAppUtils showSuccessMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_operation_success_notice_message]];
         }else
         {
-            [MRJAppUtils showErrorMessage:request_operation_failed_notice_message];
+            [MRJAppUtils showErrorMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_operation_failed_notice_message]];
         }
     } failed:^(id obj) {
         if (failed) {
             failed(obj);
         }
-        [MRJAppUtils showErrorMessage:request_operation_failed_notice_message];
+        [MRJAppUtils showErrorMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_operation_failed_notice_message]];
     }];
 }
 +(void)home_deleteNetWorkCMD:(NSDictionary*)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed;
@@ -118,16 +118,16 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
             if (succes) {
                 succes(obj);
             }
-            [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
+            [MRJAppUtils showSuccessMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_operation_success_notice_message]];
         }else
         {
-            [MRJAppUtils showErrorMessage:request_operation_failed_notice_message];
+            [MRJAppUtils showErrorMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_operation_failed_notice_message]];
         }
     } failed:^(id obj) {
         if (failed) {
             failed(obj);
         }
-        [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
+        [MRJAppUtils showErrorMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_network_notwork_notice_message]];
     }];
 }
 +(void)home_catchImageURL:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
@@ -143,7 +143,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
         if (failed) {
             failed(obj);
         }
-        [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
+        [MRJAppUtils showErrorMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_network_notwork_notice_message]];
     }];
 }
 +(void)home_rebootDeviceCMD:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
@@ -156,16 +156,16 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
             if (succes) {
                 succes(obj);
             }
-            [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
+            [MRJAppUtils showSuccessMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_operation_success_notice_message]];
         }else
         {
-            [MRJAppUtils showErrorMessage:request_operation_failed_notice_message];
+            [MRJAppUtils showErrorMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_operation_failed_notice_message]];
         }
     } failed:^(id obj) {
         if (failed) {
             failed(obj);
         }
-        [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
+        [MRJAppUtils showErrorMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_network_notwork_notice_message]];
     }];
 }
 +(void)home_captureImageCMD:(NSDictionary *)param preExecute:(MRJPrepareExcute)preExecute success:(MRJSuccessBlock)succes failed:(MRJFailedBlock)failed
@@ -180,7 +180,7 @@ NSString* const key_onLineDeviceKey = @"online";//在线线设备key
             }
         }else
         {
-            [MRJAppUtils showErrorMessage:request_operation_failed_notice_message];
+            [MRJAppUtils showErrorMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_operation_failed_notice_message]];
         }
     } failed:^(id obj) {
         if (failed) {

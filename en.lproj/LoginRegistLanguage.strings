@@ -7,13 +7,13 @@
 */
 
 "登录" = "Login";
-"服务器地址" = "Service Address";
-"服务器" = "Service";
+"服务器地址" = "Server Address";
+"服务器" = "Server";
 "请输入IP地址:端口号或域名" = "Input IP:Port&Domain";
 "用户名/手机号/邮箱" = "Account/Phone/Email" ;
 "请稍后...." = "Wait....";
 "连接成功" = "Connect Success";
-"连接私有云服务器失败，请检查服务器地址是否正确，或者手机和服务器是否在同一个网络"= "连接私有云服务器失败，请检查服务器地址是否正确，或者手机和服务器是否在同一个网络";
+"连接私有云服务器失败，请检查服务器地址是否正确，或者手机和服务器是否在同一个网络"= "Connect Server Fail,Pls Confirm Server Address is Correct&Whether The Mobile And Server on the Same Network Segment";
 "密码" = "Password";
-"请设置服务器地址" = "No Avialable Service";
+"请设置服务器地址" = "No Avialable Server";
 "用户名或者密码错误" = "Account Or Password Incorrect";

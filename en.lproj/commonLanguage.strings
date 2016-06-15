@@ -5,12 +5,13 @@
   Created by ZEROLEE on 16/6/14.
   Copyright © 2016年 laomi. All rights reserved.
 */
-
+"米" = "M";
 "取消" = "Cancel";//通用取消按钮名
-"确定" = "Confirm";//通用确定按钮名
+"确定" = "OK";//通用确定按钮名
+"保存" = "Save";//保存
 "下一步" = "Next";//下一步按钮名
 "提示" = "Tips";//提示
-"请稍后...." = "Load....";
+"请稍后...." = "Loading....";
 "网络不给力" = "Network Unavailable";
 "操作成功" = "Success";
 "操作失败" = "Failed";

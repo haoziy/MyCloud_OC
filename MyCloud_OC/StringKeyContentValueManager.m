@@ -22,6 +22,7 @@ NSString * const language_commen_waitProgressNotice = @"正在加载......";//�
 
 NSString * const language_commen_cancelBtnName = @"取消";//通用取消按钮名
 NSString * const language_commen_confirmBtnName = @"确定";//通用确定按钮名
+NSString * const language_commen_saveBtnName = @"保存";//通用保存按钮名
 NSString * const language_commen_nextBtnName = @"下一步";//下一步按钮名
 NSString * const language_commen_noticeStrig = @"提示";//提示
 

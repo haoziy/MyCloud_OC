@@ -43,13 +43,24 @@ extern NSString * const language_homeDeviceManagerDeviceDeleteButtonName;//删�
 /**
  *  设备参数界面
  */
+extern NSString * const language_homeDeviceParamInstallHeightBelow2Point6;//安装高度2.6米以下
+extern NSString * const language_homeDeviceParamInstallHeightBelow3Point2;
+extern NSString * const language_homeDeviceParamInstallHeightBelow3Point5;
+extern NSString * const language_homeDevcceParamInstallHeightEqual2Point6To2Point8;
+extern NSString * const language_homeDevcceParamInstallHeightEqual3Point2To3Point4;
+extern NSString * const language_homeDevcceParamInstallHeightEqual3Point5To3Point8;
+extern NSString * const language_homeDeviceParamInstallHeightAbove2Point8;
+extern NSString * const language_homeDeviceParamInstallHeightAbove3Point4;
+extern NSString * const language_homeDeviceParamInstallHeightAbove3Point8;
 extern NSString * const language_homeDeviceParamTitle;//设备参数标题
 extern NSString * const language_homeDeviceParamWidthNoticeText;//设置摄像头宽度提示语
 extern NSString * const language_homeDeviceParamCamaraImageNoticeText;//图像不清晰提示语
 extern NSString * const language_homeDeviceParamCaptureCurrentImageButtonName;//抓取实时图片提示语
 extern NSString * const language_homeDeviceParamResetDefaultButtonName;//恢复默认按钮名
 extern NSString * const language_homeDeviceParamInstallHeightMenuName;//安装高度提示语
+extern NSString * const language_homeDeviceParamSelectInstallHeightTitle;//选择安装高度标题
 extern NSString * const language_homeDeviceParamCancelCapturePictureNotice;//取消抓图提示
+
 
 /**
  *  搜索设备

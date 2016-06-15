@@ -58,7 +58,7 @@ UIKIT_EXTERN NSString *const MJRefreshBackFooterIdleText;
 UIKIT_EXTERN NSString *const MJRefreshBackFooterPullingText;
 UIKIT_EXTERN NSString *const MJRefreshBackFooterRefreshingText;
 UIKIT_EXTERN NSString *const MJRefreshBackFooterNoMoreDataText;
-
+UIKIT_EXTERN NSString *const MJRefreshLastUpdate;
 // 状态检查
 #define MJRefreshCheckState \
 MJRefreshState oldState = self.state; \

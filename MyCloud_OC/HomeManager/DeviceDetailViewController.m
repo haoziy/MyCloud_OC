@@ -135,7 +135,7 @@ static NSString *myCell = @"MyCell";
         DeviceOperationRule *rule = _deviceModel.rule;
         model.rule = rule;
         self.deviceModel = model;
-        defaultStr = _deviceModel.onLine?@"在线":@"离线";
+        defaultStr = _deviceModel.onLine?[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceOnlineStatusString]:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceManagerDeviceOfflineStatusString];
         [myTableView reloadData];
         if (_deviceModel.onLine==YES) {
             if (_deviceModel.rule.allowDelNet&&_deviceModel.rule.allowRestart) {

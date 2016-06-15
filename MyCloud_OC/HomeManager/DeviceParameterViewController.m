@@ -57,7 +57,7 @@ static const float SLIDE_HEIGHT = 15;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamTitle];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[StringKeyContentValueManager languageValueForKey:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_confirmBtnName]] style:UIBarButtonItemStylePlain target:self action:@selector(saveInstallHeight:)];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[StringKeyContentValueManager languageValueForKey:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_saveBtnName]] style:UIBarButtonItemStylePlain target:self action:@selector(saveInstallHeight:)];
     item.tintColor = NavigationTextColor;
     self.navigationItem.rightBarButtonItem = item;
     
@@ -357,7 +357,7 @@ static const float SLIDE_HEIGHT = 15;
 {
     if (consumeTimer>=totolTimer) {
         [self stopCatchImage];
-         [MRJAppUtils showErrorMessage:request_network_notwork_notice_message];
+         [MRJAppUtils showErrorMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_network_notwork_notice_message]];
         return;
     }
     consumeTimer ++;
@@ -371,7 +371,7 @@ static const float SLIDE_HEIGHT = 15;
         {
             [cameraImage setImageWithURL:[NSURL URLWithString:url] options:YYWebImageOptionShowNetworkActivity];
             _deviceModel.imagePath = url;
-            [MRJAppUtils showSuccessMessage:request_operation_success_notice_message];
+            [MRJAppUtils showSuccessMessage:[StringKeyContentValueManager commonLanguageValueForKey:request_operation_success_notice_message]];
             [self stopCatchImage];
             
         }

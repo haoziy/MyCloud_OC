@@ -12,7 +12,7 @@
 #import "UIView+Additions.h"
 #import "DeviceModel.h"
 #import "DeviceInstallHeightCell.h"
-
+#import "HomeStringKeyContentValueManager.h"
 @interface SelectInstallHeightViewController()
 {
     DeviceInstallHeightCell *defaultCell;//已经选中的cell
@@ -25,14 +25,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"选择安装高度";
+    self.title = [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamSelectInstallHeightTitle];
     
     if ([_deviceModel.lens isEqualToString:@"1"]) {
-        heightArray = @[@"2.6米以下",@"2.6~2.8米",@"2.8米以上"];
+        heightArray = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightBelow2Point6],[HomeStringKeyContentValueManager languageValueForKey:language_homeDevcceParamInstallHeightEqual2Point6To2Point8],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightAbove2Point8]];
     }else if ([_deviceModel.lens isEqualToString:@"2"]){
-        heightArray = @[@"3.2米以下",@"3.2~3.4米",@"3.4米以上"];
+        heightArray = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightBelow3Point2],[HomeStringKeyContentValueManager languageValueForKey:language_homeDevcceParamInstallHeightEqual3Point2To3Point4],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightAbove3Point4]];
     }else if ([_deviceModel.lens isEqualToString:@"3"]){
-        heightArray = @[@"3.5米以下",@"3.5~3.8米",@"3.8米以上"];
+        heightArray = @[[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightBelow3Point5],[HomeStringKeyContentValueManager languageValueForKey:language_homeDevcceParamInstallHeightEqual3Point5To3Point8],[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightAbove3Point8]];
     }
 //
     myTableView = [[MRJBaseTableview  alloc]init];

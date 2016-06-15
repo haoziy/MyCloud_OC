@@ -87,7 +87,7 @@
         // 2.格式化日期
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         if ([cmp1 day] == [cmp2 day]) { // 今天
-            formatter.dateFormat = @"今天 HH:mm";
+            formatter.dateFormat = @"HH:mm";
         } else if ([cmp1 year] == [cmp2 year]) { // 今年
             formatter.dateFormat = @"MM-dd HH:mm";
         } else {
@@ -96,9 +96,9 @@
         NSString *time = [formatter stringFromDate:lastUpdatedTime];
         
         // 3.显示日期
-        self.lastUpdatedTimeLabel.text = [NSString stringWithFormat:@"最后更新：%@", time];
+        self.lastUpdatedTimeLabel.text = [NSString stringWithFormat:@"%@：%@",[self mutableLanguageForKey:MJRefreshLastUpdate], time];
     } else {
-        self.lastUpdatedTimeLabel.text = @"最后更新：无记录";
+        self.lastUpdatedTimeLabel.text = [self mutableLanguageForKey:MJRefreshLastUpdate];
     }
 }
 
@@ -108,9 +108,58 @@
     [super prepare];
     
     // 初始化文字
-    [self setTitle:MJRefreshHeaderIdleText forState:MJRefreshStateIdle];
-    [self setTitle:MJRefreshHeaderPullingText forState:MJRefreshStatePulling];
-    [self setTitle:MJRefreshHeaderRefreshingText forState:MJRefreshStateRefreshing];
+    [self setTitle:[self mutableLanguageForKey:MJRefreshHeaderIdleText] forState:MJRefreshStateIdle];
+    [self setTitle:[self mutableLanguageForKey:MJRefreshHeaderPullingText] forState:MJRefreshStatePulling];
+    [self setTitle:[self mutableLanguageForKey:MJRefreshHeaderRefreshingText] forState:MJRefreshStateRefreshing];
+    
+    
+}
+-(NSString*)mutableLanguageForKey:(NSString*)key
+{
+    NSString* str =  [[NSLocale currentLocale] objectForKey:NSLocaleIdentifier];
+    if ([str containsString:@"en"])
+    {
+        if ([key isEqualToString:MJRefreshHeaderIdleText]) {
+            return @"Pull Refresh";
+        }else if ([key isEqualToString:MJRefreshHeaderPullingText])
+        {
+            return @"Loose Refresh Immediately";
+        }else if ([key isEqualToString:MJRefreshHeaderRefreshingText])
+        {
+            return @"Refreshing";
+        }else if([key isEqualToString:MJRefreshAutoFooterIdleText])
+        {
+            return @"Click&Pull Up Load More";
+        }else if ([key isEqualToString:MJRefreshAutoFooterRefreshingText])
+        {
+            return @"Loading More";
+        }else if([key isEqualToString:MJRefreshAutoFooterNoMoreDataText])
+        {
+            return @"Load Completed";
+        }
+        else if ([key isEqualToString:MJRefreshBackFooterIdleText])
+        {
+            return @"Pull Up Load More";
+        }else if([key isEqualToString:MJRefreshBackFooterPullingText])
+        {
+            return @"Loose Load More Immediately";
+        }else if ([key isEqualToString:MJRefreshBackFooterRefreshingText])
+        {
+            return @"Loading More";
+        }else if([key isEqualToString:MJRefreshBackFooterNoMoreDataText])
+        {
+            return @"Load Completed";
+        }else if([key isEqualToString:MJRefreshLastUpdate])
+        {
+            return @"Last Update";
+        }
+        
+        
+        
+    }else
+    {
+        return key;
+    }
 }
 
 - (void)placeSubviews

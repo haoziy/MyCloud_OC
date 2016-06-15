@@ -8,6 +8,7 @@
 
 #import "DeviceDetailHasButtonCell.h"
 #import "UIButton+MRJButton.m"
+#import "HomeStringKeyContentValueManager.h"
 @interface DeviceDetailHasButtonCell()
 {
     UIButton *buttonOne;
@@ -22,8 +23,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        buttonOne = [UIButton mrj_generalBtnTitle:@"配置网络" normalTitleColor:[MRJColorManager mrj_plainColor] highlightTitleColor:[MRJColorManager mrj_separatrixColor] normalBackImage:nil highlightBackImage:nil];
-        buttonTwo = [UIButton mrj_generalBtnTitle:@"绑定店铺" normalTitleColor:[MRJColorManager mrj_plainColor] highlightTitleColor:[MRJColorManager mrj_separatrixColor] normalBackImage:nil highlightBackImage:nil];
+        buttonOne = [UIButton mrj_generalBtnTitle:[HomeStringKeyContentValueManager languageValueForKey:@"配置网络"] normalTitleColor:[MRJColorManager mrj_plainColor] highlightTitleColor:[MRJColorManager mrj_separatrixColor] normalBackImage:nil highlightBackImage:nil];
+        buttonTwo = [UIButton mrj_generalBtnTitle:[HomeStringKeyContentValueManager languageValueForKey:@"绑定店铺"] normalTitleColor:[MRJColorManager mrj_plainColor] highlightTitleColor:[MRJColorManager mrj_separatrixColor] normalBackImage:nil highlightBackImage:nil];
         buttonOne.titleLabel.font = [MRJSizeManager mrjMiddleTextFont];
         buttonTwo.titleLabel.font = [MRJSizeManager mrjMiddleTextFont];
         [buttonOne addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];

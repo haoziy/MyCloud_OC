@@ -291,7 +291,7 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
         label.attributedText = str;
         if(x==1)
         {
-            NSString *targetStr = @"0.5米";
+            NSString *targetStr = [NSString stringWithFormat:@"0.5%@",[StringKeyContentValueManager commonLanguageValueForKey:@"米"]];
             
             [str addAttributes:@{NSForegroundColorAttributeName:[MRJColorManager mrj_mainThemeColor]} range:[origStr rangeOfString:targetStr]];
             label.attributedText = str;
@@ -319,7 +319,7 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
     }];
     [btn setTitle:[HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceConfigSeacrchButtonName] forState:UIControlStateNormal];
     [btn setTitleColor:[MRJColorManager mrj_mainTextColor] forState:UIControlStateNormal];
-    [btn setTitle:[StringKeyContentValueManager languageValueForKey:language_commen_cancelBtnName]forState:UIControlStateSelected];
+    [btn setTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_cancelBtnName]forState:UIControlStateSelected];
     [btn setTitleColor:[MRJColorManager mrj_plainColor] forState:UIControlStateSelected];
     CALayer *buttomLayer = [[CALayer alloc]initWithLayer:btn.layer];
     [btn.layer addSublayer:buttomLayer];
@@ -371,7 +371,7 @@ int otherfreqs[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,
     nextBtn.layer.cornerRadius = [MRJSizeManager mrjButtonCornerRadius];
     nextBtn.clipsToBounds = YES;
     [nextBtn setBackgroundImage:[MRJResourceManager buttonImageFromColor:[MRJColorManager mrj_mainThemeColor] andSize:CGSizeMake(100, [MRJSizeManager mrjInputSizeHeight])] forState:UIControlStateNormal];
-    [nextBtn setTitle:[StringKeyContentValueManager languageValueForKey:language_commen_nextBtnName] forState:UIControlStateNormal];
+    [nextBtn setTitle:[StringKeyContentValueManager commonLanguageValueForKey:language_commen_nextBtnName] forState:UIControlStateNormal];
     [nextBtn setTitleColor:[MRJColorManager mrj_navigationTextColor] forState:UIControlStateNormal];
     [nextBtn addTarget:self action:@selector(nextOperation:) forControlEvents:UIControlEventTouchUpInside];
     [failV addSubview:nextBtn];

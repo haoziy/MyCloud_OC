@@ -8,7 +8,7 @@
 
 #import "DeviceModel.h"
 #import "NSString+Safe.h"
-
+#import "HomeStringKeyContentValueManager.h"
 @implementation DeviceOperationRule
 
 @end
@@ -71,29 +71,29 @@
     if ([self.lens isEqualToString:@"1"]) {
         len = @"18";
         if ([self.height isEqualToString:@"1"]) {
-            return  @"2.6米以下";
+            return   [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightBelow2Point6];
         }else if ([self.height isEqualToString:@"2"]){
-            return  @"2.6~2.8米";
+            return [HomeStringKeyContentValueManager languageValueForKey:language_homeDevcceParamInstallHeightEqual2Point6To2Point8];
         }else if ([self.height isEqualToString:@"3"]){
-            return  @"2.8米以上";
+            return   [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightAbove2Point8];
         }
     }else if ([self.lens isEqualToString:@"2"]){
         len = @"28";
         if ([self.height isEqualToString:@"1"]) {
-            return  @"3.2米以下";
+            return  [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightBelow3Point2];
         }else if ([self.height isEqualToString:@"2"]){
-            return  @"3.2~3.4米";
+            return [HomeStringKeyContentValueManager languageValueForKey:language_homeDevcceParamInstallHeightEqual3Point2To3Point4];
         }else if ([self.height isEqualToString:@"3"]){
-            return  @"3.4米以上";
+            return  [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightAbove3Point4];
         }
     }else if ([self.lens isEqualToString:@"3"]){
         len = @"36";
         if ([self.height isEqualToString:@"1"]) {
-            return  @"3.5米以下";
+            return [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightBelow3Point5];
         }else if ([self.height isEqualToString:@"2"]){
-            return  @"3.5~3.8米";
+            return [HomeStringKeyContentValueManager languageValueForKey:language_homeDevcceParamInstallHeightEqual3Point5To3Point8];
         }else if ([self.height isEqualToString:@"3"]){
-            return  @"3.8米以上";
+            return [HomeStringKeyContentValueManager languageValueForKey:language_homeDeviceParamInstallHeightAbove3Point8];
         }
     }
     return @"";

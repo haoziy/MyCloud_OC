@@ -29,6 +29,7 @@ extern NSString * const language_commen_waitProgressNotice;//等待网络请求�
 
 extern NSString * const language_commen_confirmBtnName;//确定按钮名
 extern NSString * const language_commen_cancelBtnName;//取消按钮名
+extern NSString * const language_commen_saveBtnName;//保存
 extern NSString * const language_commen_nextBtnName;//下一步按钮名
 extern NSString * const language_commen_noticeStrig;//提示
 

@@ -39,7 +39,7 @@
 		05293F411CB756310064193B /* FormsLanguage.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05293F431CB756310064193B /* FormsLanguage.strings */; };
 		05293F471CB756390064193B /* DiscoverLanguage.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05293F491CB756390064193B /* DiscoverLanguage.strings */; };
 		05293F4D1CB7563F0064193B /* HomeLanguage.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05293F4F1CB7563F0064193B /* HomeLanguage.strings */; };
-		05293F531CB756460064193B /* Info.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05293F551CB756460064193B /* Info.strings */; };
+		05293F531CB756460064193B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05293F551CB756460064193B /* InfoPlist.strings */; };
 		05293F5C1CB7598D0064193B /* MRJResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05293F5B1CB7598D0064193B /* MRJResourceManager.m */; };
 		05293F641CB75B7B0064193B /* LoginRegistResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05293F631CB75B7B0064193B /* LoginRegistResourceManager.m */; };
 		05293F671CB75BD90064193B /* HomeResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05293F661CB75BD90064193B /* HomeResourceManager.m */; };
@@ -76,6 +76,7 @@
 		056D69CB1CD061BE00ACBB0B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056D69CA1CD061BE00ACBB0B /* MediaPlayer.framework */; };
 		056FC59E1CB5ED25003F2BCA /* AboutMeHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 056FC59D1CB5ED25003F2BCA /* AboutMeHttpHandler.m */; };
 		056FC5A11CB6040A003F2BCA /* MRJStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 056FC5A01CB6040A003F2BCA /* MRJStoreManager.m */; };
+		058E9A7B1D112EDD00271373 /* other.strings in Resources */ = {isa = PBXBuildFile; fileRef = 058E9A7D1D112EDD00271373 /* other.strings */; };
 		059509341CB4F09A009B3BBA /* DeBugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 059509331CB4F09A009B3BBA /* DeBugLog.m */; };
 		059509381CB4FF2D009B3BBA /* AppDelegate+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 059509371CB4FF2D009B3BBA /* AppDelegate+utils.m */; };
 		0595093B1CB4FF73009B3BBA /* AppSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0595093A1CB4FF73009B3BBA /* AppSingleton.m */; };
@@ -219,10 +220,10 @@
 		05293F501CB756410064193B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HomeLanguage.strings; sourceTree = "<group>"; };
 		05293F511CB756410064193B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HomeLanguage.strings"; sourceTree = "<group>"; };
 		05293F521CB756420064193B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/HomeLanguage.strings"; sourceTree = "<group>"; };
-		05293F541CB756460064193B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Info.strings; sourceTree = "<group>"; };
-		05293F561CB756470064193B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Info.strings; sourceTree = "<group>"; };
-		05293F571CB756480064193B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Info.strings"; sourceTree = "<group>"; };
-		05293F581CB756480064193B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Info.strings"; sourceTree = "<group>"; };
+		05293F541CB756460064193B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		05293F561CB756470064193B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		05293F571CB756480064193B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		05293F581CB756480064193B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		05293F5A1CB7598D0064193B /* MRJResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJResourceManager.h; path = MyCloud_OC/MRJResourceManager.h; sourceTree = "<group>"; };
 		05293F5B1CB7598D0064193B /* MRJResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJResourceManager.m; path = MyCloud_OC/MRJResourceManager.m; sourceTree = "<group>"; };
 		05293F621CB75B7B0064193B /* LoginRegistResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginRegistResourceManager.h; path = MyCloud_OC/LoginRegistResourceManager.h; sourceTree = "<group>"; };
@@ -300,6 +301,10 @@
 		056FC59D1CB5ED25003F2BCA /* AboutMeHttpHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutMeHttpHandler.m; path = MyCloud_OC/AboutMeHttpHandler.m; sourceTree = "<group>"; };
 		056FC59F1CB6040A003F2BCA /* MRJStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRJStoreManager.h; path = MyCloud_OC/MRJStoreManager.h; sourceTree = "<group>"; };
 		056FC5A01CB6040A003F2BCA /* MRJStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRJStoreManager.m; path = MyCloud_OC/MRJStoreManager.m; sourceTree = "<group>"; };
+		058E9A7C1D112EDD00271373 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/other.strings; sourceTree = "<group>"; };
+		058E9A7E1D112EDF00271373 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/other.strings; sourceTree = "<group>"; };
+		058E9A7F1D112EE000271373 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/other.strings"; sourceTree = "<group>"; };
+		058E9A801D112EE100271373 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/other.strings"; sourceTree = "<group>"; };
 		059509311CB4EE1A009B3BBA /* HttpHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpHeader.h; sourceTree = "<group>"; };
 		059509321CB4F09A009B3BBA /* DeBugLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeBugLog.h; path = MyCloud_OC/DeBugLog.h; sourceTree = "<group>"; };
 		059509331CB4F09A009B3BBA /* DeBugLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeBugLog.m; path = MyCloud_OC/DeBugLog.m; sourceTree = "<group>"; };
@@ -473,7 +478,7 @@
 				05293F1E1CB745450064193B /* NSString+global.h */,
 				05293F1F1CB745450064193B /* NSString+global.m */,
 				05E4BF2C1CB4E5930069BDA4 /* GlobalImages */,
-				05293F551CB756460064193B /* Info.strings */,
+				05293F551CB756460064193B /* InfoPlist.strings */,
 				05293F4F1CB7563F0064193B /* HomeLanguage.strings */,
 				05293F491CB756390064193B /* DiscoverLanguage.strings */,
 				05293F431CB756310064193B /* FormsLanguage.strings */,
@@ -482,6 +487,7 @@
 				0528C7041CB4A731001C8281 /* StringKeyContentValueManager.h */,
 				0528C7051CB4A731001C8281 /* StringKeyContentValueManager.m */,
 				05CFD8F91D0FFEF70020147F /* commonLanguage.strings */,
+				058E9A7D1D112EDD00271373 /* other.strings */,
 			);
 			name = GlobalLanguage;
 			sourceTree = "<group>";
@@ -1170,12 +1176,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				05293F3B1CB7562A0064193B /* AboutMeLanguage.strings in Resources */,
+				058E9A7B1D112EDD00271373 /* other.strings in Resources */,
 				05293F351CB7531B0064193B /* LoginRegistLanguage.strings in Resources */,
 				056961A61CB4DC6F00AECAEF /* Launch Screen.storyboard in Resources */,
 				05CFD8F71D0FFEF70020147F /* commonLanguage.strings in Resources */,
 				05E4BF331CB4E6010069BDA4 /* GloballaunchImage@1x.png in Resources */,
 				05293F411CB756310064193B /* FormsLanguage.strings in Resources */,
-				05293F531CB756460064193B /* Info.strings in Resources */,
+				05293F531CB756460064193B /* InfoPlist.strings in Resources */,
 				05293F471CB756390064193B /* DiscoverLanguage.strings in Resources */,
 				0528C69F1CB49E3D001C8281 /* Assets.xcassets in Resources */,
 				05E4BF3F1CB4E6120069BDA4 /* GloballaunchImage@3x.png in Resources */,
@@ -1412,7 +1419,7 @@
 			name = HomeLanguage.strings;
 			sourceTree = "<group>";
 		};
-		05293F551CB756460064193B /* Info.strings */ = {
+		05293F551CB756460064193B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				05293F541CB756460064193B /* Base */,
@@ -1420,7 +1427,7 @@
 				05293F571CB756480064193B /* zh-Hans */,
 				05293F581CB756480064193B /* zh-Hant */,
 			);
-			name = Info.strings;
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		056961A81CB4DC6F00AECAEF /* Launch Screen.storyboard */ = {
@@ -1432,6 +1439,17 @@
 				056961AE1CB4DC7B00AECAEF /* zh-Hant */,
 			);
 			name = "Launch Screen.storyboard";
+			sourceTree = "<group>";
+		};
+		058E9A7D1D112EDD00271373 /* other.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				058E9A7C1D112EDD00271373 /* Base */,
+				058E9A7E1D112EDF00271373 /* en */,
+				058E9A7F1D112EE000271373 /* zh-Hans */,
+				058E9A801D112EE100271373 /* zh-Hant */,
+			);
+			name = other.strings;
 			sourceTree = "<group>";
 		};
 		05CFD8F91D0FFEF70020147F /* commonLanguage.strings */ = {
