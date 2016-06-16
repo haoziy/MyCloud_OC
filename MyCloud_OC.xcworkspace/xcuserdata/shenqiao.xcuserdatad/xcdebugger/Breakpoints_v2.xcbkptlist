@@ -1289,11 +1289,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2051,11 +2051,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
             landmarkName = "-saveInstallHeight:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2067,11 +2067,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2083,11 +2083,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "-moveSliderFrame:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2546,11 +2546,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
             landmarkName = "-catchRealTimeImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2562,11 +2562,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
             landmarkName = "-catchRealTimeImage:"
             landmarkType = "5">
             <Locations>
@@ -2610,11 +2610,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
             landmarkName = "-catchRealTimeImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2626,11 +2626,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
+            startingLineNumber = "366"
+            endingLineNumber = "366"
             landmarkName = "-getNowImage"
             landmarkType = "5">
          </BreakpointContent>
@@ -2642,11 +2642,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
             landmarkName = "-getNowImage"
             landmarkType = "5">
          </BreakpointContent>
@@ -2706,11 +2706,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
+            startingLineNumber = "374"
+            endingLineNumber = "374"
             landmarkName = "-getNowImage"
             landmarkType = "5">
          </BreakpointContent>
@@ -2770,11 +2770,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3186,11 +3186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
+            startingLineNumber = "365"
+            endingLineNumber = "365"
             landmarkName = "-getNowImage"
             landmarkType = "5">
          </BreakpointContent>
@@ -3202,11 +3202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
             landmarkName = "-getNowImage"
             landmarkType = "5">
             <Locations>
@@ -3282,11 +3282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "389"
-            endingLineNumber = "389"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
             landmarkName = "-resetDefaultHeight:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3298,11 +3298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
+            startingLineNumber = "325"
+            endingLineNumber = "325"
             landmarkName = "-saveInstallHeight:"
             landmarkType = "5">
             <Locations>
@@ -3346,11 +3346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
             landmarkName = "-saveInstallHeight:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3362,11 +3362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
             landmarkName = "-saveInstallHeight:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3378,11 +3378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "-saveInstallHeight:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3442,11 +3442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
             landmarkName = "-saveInstallHeight:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3458,11 +3458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
             landmarkName = "-saveInstallHeight:"
             landmarkType = "5">
             <Locations>
@@ -3602,11 +3602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
             landmarkName = "-getNowImage"
             landmarkType = "5">
          </BreakpointContent>
@@ -3618,11 +3618,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "-tttt:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3634,11 +3634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
-            timestampString = "485257255.938714"
+            timestampString = "487739647.510698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "-dealloc"
             landmarkType = "5">
          </BreakpointContent>
@@ -4167,6 +4167,70 @@
             startingLineNumber = "38"
             endingLineNumber = "38"
             landmarkName = "+languageValueIntable:key:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
+            timestampString = "487739074.771339"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
+            timestampString = "487739090.803148"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
+            timestampString = "487739647.510698"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyCloud_OC/HomeManager/DeviceParameterViewController.m"
+            timestampString = "487739647.452875"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

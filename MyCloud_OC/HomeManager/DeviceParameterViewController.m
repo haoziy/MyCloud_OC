@@ -110,10 +110,17 @@ static const float SLIDE_HEIGHT = 15;
     
     
     //左右是比例;
+    if (fabs(_deviceModel.installPara.leftPoint-_deviceModel.installPara.rightPoint)<2.0f) {
+        _deviceModel.rightPoint++;
+        _deviceModel.leftPoint--;
+    }
     leftValue = (float)(((float)_deviceModel.installPara.leftPoint)/((float)BASE_WIDTH));
     rightValue = (float)(((float)_deviceModel.installPara.rightPoint)/((float)BASE_WIDTH));//
     //上下是实际值
     topValue = (((float)_deviceModel.installPara.topPoint)/((float)BASE_HEIGHT))*cameraHeight;
+    if(!(topValue>0&&topValue<BASE_HEIGHT)) {
+        topValue = BASE_HEIGHT/2;
+    }//控制合法性
     rangeSlider.leftValue = leftValue;
     rangeSlider.rightValue = rightValue;
     

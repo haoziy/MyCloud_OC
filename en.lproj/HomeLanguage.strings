@@ -9,14 +9,14 @@
 "在线" = "Online";//设备在线状态 在线
 "离线" = "Offline";//设备离线状态 离线
 "台" = "台";//设备单位 台
-"确定删除设备的网络配置?" = "Sure To Del Net?" ;//删除网络提示
-"确定要退出吗?" = "Sure To Logout?";//退出登录提示
+"确定删除设备的网络配置?" = "Sure to del net?" ;//删除网络提示
+"确定要退出吗?" = "Sure to log out?";//退出登录提示
 
 "设备列表" = "Device List";//设备管理标题
 "退出" = "Log Out";
 "配置网络" = "Config Net";//配置网络按钮名
 "删除网络" = "Del Net" ;//删除网络按钮名
-"按名称或序列号搜索设备" = "Search By Name&SN";//搜索设备占位符
+"按名称或序列号搜索设备" = "Search by name&SN";//搜索设备占位符
 /**
  *  设备详情
  */
@@ -33,7 +33,7 @@
 "设备参数" = "Device Params";//设备参数
 "重启设备" = "Reboot";//重启设备按钮名
 "删除网络配置" = "Del Net";//删除设备按钮名
-"设备重启需要1-2分钟，确定重启设备?" = "Reboot Need 1~2Minute,Sure To Reboot?";
+"设备重启需要1-2分钟，确定重启设备?" = "Reboot need 1~2minute,Sure to reboot?";
 /**
  *  设备参数界面
  */
@@ -47,7 +47,7 @@
 "3.4米以上" = "Above 3.4M";
 "3.8米以上" = "Above 3.8M";
 "设备参数" = "Device Params";//设备参数标题
-"水平移动左右两个游标,标识店门的左右边界.垂直移动横线,标识门的中心线位置" = "Move The  Horizontal Line Marking The Position Of The Door";//设置摄像头宽度提示语
+"水平移动左右两个游标,标识店门的左右边界.垂直移动横线,标识门的中心线位置" = "Move the  horizontal line marking the position of the door";//设置摄像头宽度提示语
 "不清晰?" = "Fuzziness?";//图像不清晰提示语
 "抓取实时图片" = "Capture";//抓取实时图片提示语
 "恢复默认" = "Reset";//设置摄像头宽度提示语
@@ -61,28 +61,28 @@
  */
 "搜索设备" = "Search Device";//设备配置网络搜索界面标题
 "麦克风拒绝访问" = "Mic Refuse Access";//设备搜索界面麦克风拒绝访问提示
-"麦克风被拒绝访问,您将收不到设备的声音回应,你仍然可以继续配置" = "Mic Refuse Access,You Can't Receive Sounds,But You Also Can Continue Config";//麦克风拒绝访问后仍可继续配置提示
+"麦克风被拒绝访问,您将收不到设备的声音回应,你仍然可以继续配置" = "Mic refuse access,you can't receive sounds,but you also can continue config";//麦克风拒绝访问后仍可继续配置提示
 
 "操作步骤" = "Steps";//操作步骤提示
-"1.连接设备电源" = "1.Connect Power";//操作步骤提示1
-"2.等待绿灯快闪" = "2.Waitting Green Light Flash";//操作步骤提示2
-"3.点击搜索开始搜索设备" = "3.OnClick Search Button";//操作步骤提示3
+"1.连接设备电源" = "1.Connect power";//操作步骤提示1
+"2.等待绿灯快闪" = "2.Waitting green light flash";//操作步骤提示2
+"3.点击搜索开始搜索设备" = "3.OnClick search button";//操作步骤提示3
 
 "温馨提示" = "Tips";//温馨提示
-"1.手机不能处于静音模式" = "1.Mobile Is Not Silent Mode";//温馨提示1
-"2.确保手机离设备保持在0.5米以内" = "2.Mobile To Device Within 0.5M";//温馨提示2
+"1.手机不能处于静音模式" = "1.Mobile is not silent mode";//温馨提示1
+"2.确保手机离设备保持在0.5米以内" = "2.Mobile to device within 0.5M";//温馨提示2
 "搜索" = "Search";//搜索设备按钮名字
 
-"未搜索到设备" = "NotFound Device";//搜索设备未收到提示语
-"如果在搜索过程中设备发出了声音，也可以点击【下一步】去配置设备网络" = "If The Device Sound,Try OnClick【Next】To Config";//搜索设备未收到提示语
+"未搜索到设备" = "Not found device";//搜索设备未收到提示语
+"如果在搜索过程中设备发出了声音，也可以点击【下一步】去配置设备网络" = "If the device sounds,try onclick【Next】to config";//搜索设备未收到提示语
 
 /**
  *  设备配网界面
  */
 "配置网络" = "Config Net";//网络配置界面标题
-"请将手机网络切换至设备所连接的Wi-Fi网络" = "Connect Mobile To Same Wifi Of The Device";//网络配置没有wifi提示语
-"设备暂不支持这么多中文的Wi-Fi网络" = "Too Much Chinese Char";//含有太多中文字符
-"设备暂不支持特殊字符&的Wi-Fi网络" = "Unsupport Char of '&'";//wifi含有特殊字符提示
+"请将手机网络切换至设备所连接的Wi-Fi网络" = "Connect mobile to same Wifi of the device";//网络配置没有wifi提示语
+"设备暂不支持这么多中文的Wi-Fi网络" = "Too much Chinese char";//含有太多中文字符
+"设备暂不支持特殊字符&的Wi-Fi网络" = "Unsupport char of '&'";//wifi含有特殊字符提示
 
 
 "当前手机Wi-Fi" = "Current Wi-Fi";//网络配置,当前wifi
@@ -100,12 +100,12 @@
 "子网掩码" = "Sub Mask";//子网掩码placement
 "请输入合法的子网掩码" = "Illegal Sub Mask";//请输入合法子网掩码
 "网关" = "GateWay";//网关placement
-"请输入合法的网关地址" = "Illegal GateWay";//请输入合法网关
+"请输入合法的网关地址" = "Illegal gateWay";//请输入合法网关
 "DNS" = "DNS";//DNSplacement
 "请输入合法的DNS地址" = "Illegal DNS";//请输入合法NDS地址
 
-"Wi-Fi密码确定为空吗?" = "WiFi Password Empty?";//配置过程空密码提示
-"正在发送网络参数" = "Sending Network Params";//配置过程正在发送网络参数提
-"网络参数发送完毕，正在配置设备网络" = "Params Send Completed，Configing";//网络参数发送完毕正在配置
-"配置完毕，稍后请查看设备的绿灯状态。如果绿灯常亮，说明配置网络成功。否则，请重新配置。" = "Config Complete,Pls Check Green Light Status,If Steady, Config Success ,OtherWise Try Again";
-"配置设备网络成功" = "Config Success";
+"Wi-Fi密码确定为空吗?" = "WiFi password empty?";//配置过程空密码提示
+"正在发送网络参数" = "Sending network params";//配置过程正在发送网络参数提
+"网络参数发送完毕，正在配置设备网络" = "Params send completed，configing";//网络参数发送完毕正在配置
+"配置完毕，稍后请查看设备的绿灯状态。如果绿灯常亮，说明配置网络成功。否则，请重新配置。" = "Config complete,Pls check green light status,If steady, config success ,otherwise try again";
+"配置设备网络成功" = "Config success";
