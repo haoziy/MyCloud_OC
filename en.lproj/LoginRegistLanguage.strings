@@ -12,7 +12,7 @@
 "请输入IP地址:端口号或域名" = "Input IP:port&domain";
 "用户名/手机号/邮箱" = "Account/Mobile/Email" ;
 "请稍后...." = "Wait....";
-"连接成功" = "Connect success";
+"连接成功" = "Connect successfull";
 "连接私有云服务器失败，请检查服务器地址是否正确，或者手机和服务器是否在同一个网络"= "Connect server fail,Pls confirm server address is correct&whether the mobile and server on the same network segment";
 "密码" = "Password";
 "请设置服务器地址" = "No avialable server";

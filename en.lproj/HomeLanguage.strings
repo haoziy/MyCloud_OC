@@ -9,8 +9,8 @@
 "在线" = "Online";//设备在线状态 在线
 "离线" = "Offline";//设备离线状态 离线
 "台" = "台";//设备单位 台
-"确定删除设备的网络配置?" = "Sure to del net?" ;//删除网络提示
-"确定要退出吗?" = "Sure to log out?";//退出登录提示
+"确定删除设备的网络配置?" = "Sure to Del net?" ;//删除网络提示
+"确定要退出吗?" = "Sure to logout?";//退出登录提示
 
 "设备列表" = "Device List";//设备管理标题
 "退出" = "Log Out";
@@ -23,7 +23,7 @@
 "设备详情" = "Device Detail";//设备详情标题
 "序列号" = "SN";//设备序列号
 "名称" = "Alias";//设备别名
-"无线MAC" = "WIFI-MAC";//设备无线mac
+"无线MAC" = "WiFi-MAC";//设备无线mac
 "有线MAC" = "LAN-MAC";//有线MAC
 "型号" = "Model";//设备型号
 "固件版本" = "Firmware";//固件版本
@@ -33,7 +33,7 @@
 "设备参数" = "Device Params";//设备参数
 "重启设备" = "Reboot";//重启设备按钮名
 "删除网络配置" = "Del Net";//删除设备按钮名
-"设备重启需要1-2分钟，确定重启设备?" = "Reboot need 1~2minute,Sure to reboot?";
+"设备重启需要1-2分钟，确定重启设备?" = "Reboot need 1~2 minutes,Sure to reboot?";
 /**
  *  设备参数界面
  */
@@ -54,7 +54,7 @@
 
 "安装高度" = "Install Height";//安装高度提示语
 "选择安装高度" = "Select Install Height";
-"确定取消抓图吗?" = "Sure Cancel Capture?";//取消抓图提示
+"确定取消抓图吗?" = "Sure cancel capture?";//取消抓图提示
 
 /**
  *  设备搜索界面
